@@ -1,0 +1,36 @@
+{
+    "name": "kanvas/Libraries",
+    "description": "List of Kanvas Packages to help you build faster apps.",
+    "homepage": "http://kanvas.dev",
+    "keywords": [
+        "saas",
+        "social",
+        "feeds",
+    ],
+    "license": "MIT",
+    "authors": [{
+        "name": "kaioken",
+        "email": "max@mctekk.com"
+    }],
+    "type": "project",
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-asserts": "^1.2",
+        "codeception/module-filesystem": "^1.0",
+        "codeception/module-phalcon": "^1.0",
+        "codeception/verify": "*",
+        "fzaninotto/faker": "^1.9",
+        "odan/phinx-migrations-generator": "^4",
+        "phpunit/phpunit": "^9",
+        "squizlabs/php_codesniffer": "1.*",
+        "symfony/var-dumper": "^4.3@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kanvas\\Libraries\\": "src/"
+        }
+    }
+}
