@@ -1,4 +1,4 @@
-Kanvas Libraries
+Kanvas Packages
 ============
 
 [![Latest Stable Version](https://poser.pugx.org/gino-pane/composer-package-template/v/stable)](https://packagist.org/packages/gino-pane/composer-package-template)
