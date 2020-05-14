@@ -4,6 +4,7 @@
 # Project specific
 vendor
 build
+.env
 
 # OS specific
 .DS_Store
