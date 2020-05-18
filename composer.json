@@ -26,7 +26,8 @@
         "fzaninotto/faker": "^1.9",
         "odan/phinx-migrations-generator": "^4",
         "squizlabs/php_codesniffer": "1.*",
-        "symfony/var-dumper": "^4.3@dev"
+        "symfony/var-dumper": "^4.3@dev",
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {

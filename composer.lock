@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "674d2d25b18a45c304568ca6bf2b0d87",
+    "content-hash": "04bf398c934edbc52cfc725849ab6e71",
     "packages": [
         {
             "name": "phpoption/phpoption",
@@ -3829,12 +3829,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "429e96b40ffa376b77e34e793cd8d47e636e2923"
+                "reference": "17bb563a352e55fe5633d2b7dea7f75fcf9733c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/429e96b40ffa376b77e34e793cd8d47e636e2923",
-                "reference": "429e96b40ffa376b77e34e793cd8d47e636e2923",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/17bb563a352e55fe5633d2b7dea7f75fcf9733c7",
+                "reference": "17bb563a352e55fe5633d2b7dea7f75fcf9733c7",
                 "shasum": ""
             },
             "require": {
@@ -3897,7 +3897,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2020-05-08T10:39:41+00:00"
+            "time": "2020-05-16T10:07:46+00:00"
         },
         {
             "name": "symfony/yaml",
