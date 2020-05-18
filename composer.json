@@ -14,7 +14,8 @@
     }],
     "type": "project",
     "require": {
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "vlucas/phpdotenv": "^4.1"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
@@ -24,7 +25,6 @@
         "codeception/verify": "*",
         "fzaninotto/faker": "^1.9",
         "odan/phinx-migrations-generator": "^4",
-        "phpunit/phpunit": "^9",
         "squizlabs/php_codesniffer": "1.*",
         "symfony/var-dumper": "^4.3@dev"
     },
