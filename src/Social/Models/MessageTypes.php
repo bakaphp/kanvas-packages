@@ -13,6 +13,37 @@ class MessageTypes extends BaseModel
     public $templates_plura;
 
     /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->setSource('message_types');
+
+        $this->hasMany(
+            'id',
+            Messages::class,
+            'message_types_id',
+            [
+                'alias' => 'messages',
+                'params' => [
+                    'conditions' => 'is_deleted = 0'
+                ]
+            ]
+        );
+
+        $this->hasMany(
+            'id',
+            AppModuleMessage::class,
+            'message_types_id',
+            [
+                'alias' => 'appModules'
+            ]
+        );
+    }
+    
+    /**
      * Returns table name mapped in the model.
      *
      * @return string

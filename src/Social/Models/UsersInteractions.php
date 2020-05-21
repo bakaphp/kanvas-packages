@@ -11,6 +11,27 @@ class UsersInteractions extends BaseModel
     public $interactions_id;
 
     /**
+     * Initialize relationshit after fetch
+     * since we need entity_namespace info.
+     *
+     * @return void
+     */
+    public function afterFetch()
+    {
+        $this->hasOne(
+            'entity_id',
+            $this->entity_namespace,
+            'id',
+            [
+                'alias' => 'entityData',
+                'params' => [
+                    'conditions' => 'is_deleted = 0'
+                ]
+            ]
+        );
+    }
+    
+    /**
      * Returns table name mapped in the model.
      *
      * @return string

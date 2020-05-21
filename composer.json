@@ -8,10 +8,12 @@
         "feeds"
     ],
     "license": "MIT",
-    "authors": [{
-        "name": "kaioken",
-        "email": "max@mctekk.com"
-    }],
+    "authors": [
+        {
+            "name": "kaioken",
+            "email": "max@mctekk.com"
+        }
+    ],
     "type": "project",
     "require": {
         "php": ">=7.2",
