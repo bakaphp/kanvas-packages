@@ -10,6 +10,25 @@ class Interactions extends BaseModel
     public $icon;
 
     /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->setSource('interactions');
+
+        $this->hasMany(
+            'id',
+            UsersInteractions::class,
+            'interactions_id',
+            [
+                'alias' => 'usersInteractions'
+            ]
+        );
+    }
+    
+    /**
      * Returns table name mapped in the model.
      *
      * @return string

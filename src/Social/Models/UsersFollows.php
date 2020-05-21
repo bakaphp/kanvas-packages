@@ -9,6 +9,25 @@ class UsersFollows extends BaseModel
     public $entity_id;
     public $entity_namespace;
 
+
+    /**
+     * Initialize relationshit after fetch
+     * since we need entity_namespace info.
+     *
+     * @return void
+     */
+    public function afterFetch()
+    {
+        $this->hasOne(
+            'entity_id',
+            $this->entity_namespace,
+            'id',
+            [
+                'alias' => 'entityData'
+            ]
+        );
+    }
+    
     /**
      * Returns table name mapped in the model.
      *
