@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Kanvas\Packages\Social\Contract\Interfaces\UserInterface;
+use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Models\UserMessages;
 
 class Feeds
 {
@@ -16,9 +17,9 @@ class Feeds
      * @param array $message
      * @param array $object contains the entity object + its id.
      * @param string $distribution
-     * @return void
+     * @return UserMessages
      */
-    public static function create(UserInterface $user, string $verb, array $message = [], array $object, string $distribution = 'profile')
+    public static function create(UserInterface $user, string $verb, array $message = [], array $object, string $distribution = 'profile'): UserMessages
     {
     }
 
