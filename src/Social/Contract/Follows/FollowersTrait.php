@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Traits;
+namespace Kanvas\Packages\Social\Contract\Follows;
 
-use Kanvas\Packages\Social\Contract\Traits\InteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 
 trait FollowersTrait
 {
