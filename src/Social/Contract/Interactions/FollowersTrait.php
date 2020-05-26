@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Follows;
+namespace Kanvas\Packages\Social\Contract\Interactions;
 
 use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 
