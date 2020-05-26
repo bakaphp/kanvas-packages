@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contract\Traits;
 
-use Kanvas\Packages\Social\Contract\Interfaces\UserInterface;
-use Kanvas\Packages\Social\Contract\Interfaces\InteractionTypesInterface;
+use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contract\Interactions\InteractionTypesInterface;
 
 trait InteractionsTrait
 {
