@@ -39,9 +39,9 @@ class MessageTypes
      * Delete an existing message type
      *
      * @param string $uuid
-     * @return void
+     * @return bool
      */
-    public static function delete(string $uuid)
+    public static function delete(string $uuid): bool
     {
         $messageType = MessageTypesModel::findFirstOrFail($uuid);
         return $messageType->deleteOrFail();
@@ -57,14 +57,12 @@ class MessageTypes
      */
     public static function getTypeByVerb(string $verb): MessageTypesModel
     {
-        $messageType = MessageTypesModel::findFirst([
+        return MessageTypesModel::findFirst([
             'conditions' => 'verb = :verb: AND apps_id :currentAppId: AND is_deleted = 0',
             'bind' => [
                 'verb' => $verb,
                 'currentAppId' => Di::getDefault()->get('app')->getId()
             ]
         ]);
-
-        return $messageType;
     }
 }
