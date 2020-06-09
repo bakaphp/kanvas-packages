@@ -28,21 +28,6 @@ class Channels extends BaseModel
                 'alias' => 'messages'
             ]
         );
-
-        $this->hasOne(
-            'id',
-            UsersFollows::class,
-            'entity_id',
-            [
-                'alias' => 'follow',
-                'params' => [
-                    'conditions' => 'entity_namespace = :namespace:',
-                    'bind' => [
-                        'namespace' => get_class($this)
-                    ]
-                ]
-            ]
-        );
     }
 
     /**
@@ -53,5 +38,21 @@ class Channels extends BaseModel
     public function getSource()
     {
         return 'channels';
+    }
+
+    /**
+     * Get Channel by name
+     *
+     * @param string $channelName
+     * @return self
+     */
+    public static function getByName(string $channelName): self
+    {
+        return self::findFirstOrFail([
+            'conditions' => 'name = :channelName: AND is_deleted = 0',
+            'bind'=> [
+                'channelName' => $channelName
+            ]
+        ]);
     }
 }
