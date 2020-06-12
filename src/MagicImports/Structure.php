@@ -4,7 +4,7 @@ namespace Kanvas\Packages\MagicImports;
 
 use Phalcon\DI\Injectable;
 use Phalcon\Mvc\Model;
-use Kanvas\Package\MagicImports\Contracts\ColumnsInterface;
+use Kanvas\Packages\MagicImports\Contracts\ColumnsInterface;
 use Phalcon\Mvc\Model\Relation;
 
 /**
