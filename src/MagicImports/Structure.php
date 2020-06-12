@@ -1,6 +1,6 @@
 <?php 
 
-namespace Kanvas\Package\MagicImports;
+namespace Kanvas\Packages\MagicImports;
 
 use Phalcon\DI\Injectable;
 use Phalcon\Mvc\Model;

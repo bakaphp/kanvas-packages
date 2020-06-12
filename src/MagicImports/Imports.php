@@ -1,8 +1,8 @@
 <?php 
 
-namespace Kanvas\Package\MagicImports;
+namespace Kanvas\Packages\MagicImports;
 
-use Kanvas\Package\MagicImports\Contracts\ColumnsInterface;
+use Kanvas\Packages\MagicImports\Contracts\ColumnsInterface;
 use Phalcon\DI\Injectable;
 use ReflectionClass;
 use Exception;

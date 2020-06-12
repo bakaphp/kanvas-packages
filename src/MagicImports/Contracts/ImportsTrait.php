@@ -1,9 +1,9 @@
 <?php 
 
-namespace Kanvas\Package\MagicImports\Contracts;
+namespace Kanvas\Packages\MagicImports\Contracts;
 
-use Kanvas\Package\MagicImports\Structure;
-use Kanvas\Package\MagicImports\Imports;
+use Kanvas\Packages\MagicImports\Structure;
+use Kanvas\Packages\MagicImports\Imports;
 use Exception;
 
 trait ImportsTrait

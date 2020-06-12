@@ -1,6 +1,6 @@
 <?php 
 
-namespace Kanvas\Package\MagicImports\Contracts;
+namespace Kanvas\Packages\MagicImports\Contracts;
 
 interface ColumnsInterface
 {
