@@ -33,7 +33,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Kanvas\\Libraries\\": "src/"
+            "Kanvas\\Libraries\\": "src/",
+            "Kanvas\\Packages\\MagicImports\\": "src/MagicImports/"
         }
     }
 }
