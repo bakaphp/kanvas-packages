@@ -65,14 +65,4 @@ class Feeds
     public static function delete(string $uuid)
     {
     }
-
-    /**
-     * To be describe
-     *
-     * @param string $message
-     * @return void
-     */
-    public static function comment(string $message)
-    {
-    }
 }
