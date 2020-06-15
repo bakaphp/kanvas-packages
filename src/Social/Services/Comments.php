@@ -20,21 +20,17 @@ class Comments
      */
     public static function add(string $messageId, string $message): MessageComments
     {
-        try {
-            $message = Messages::getByIdOrFail($messageId);
+        $message = Messages::getByIdOrFail($messageId);
 
-            $comment = new MessageComments();
-            $comment->message_id = $message->getId();
-            $comment->apps_id = Di::getDefault()->get('app')->getId();
-            $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
-            $comment->users_id = Di::getDefault()->get('userData')->getId();
-            $comment->message = $message;
-            $comment->saveOrFail();
+        $comment = new MessageComments();
+        $comment->message_id = $message->getId();
+        $comment->apps_id = Di::getDefault()->get('app')->getId();
+        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
+        $comment->users_id = Di::getDefault()->get('userData')->getId();
+        $comment->message = $message;
+        $comment->saveOrFail();
 
-            return $comment;
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
+        return $comment;
     }
 
     /**
