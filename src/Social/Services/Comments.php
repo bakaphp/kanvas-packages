@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Exception;
-use Gewaer\Models\Comments as CommentsModel;
+use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Phalcon\Di;
 
@@ -16,14 +16,14 @@ class Comments
      *
      * @param string $messageId
      * @param string $message
-     * @return CommentsModel
+     * @return MessageComments
      */
-    public static function add(string $messageId, string $message): CommentsModel
+    public static function add(string $messageId, string $message): MessageComments
     {
         try {
             $message = Messages::getByIdOrFail($messageId);
 
-            $comment = new CommentsModel();
+            $comment = new MessageComments();
             $comment->message_id = $message->getId();
             $comment->apps_id = Di::getDefault()->get('app')->getId();
             $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
@@ -42,11 +42,11 @@ class Comments
      *
      * @param string $commentId
      * @param string $message
-     * @return CommentsModel
+     * @return MessageComments
      */
-    public static function edit(string $commentId, string $message): CommentsModel
+    public static function edit(string $commentId, string $message): MessageComments
     {
-        $comment = CommentsModel::getByIdOrFail($commentId);
+        $comment = MessageComments::getByIdOrFail($commentId);
         $comment->message = $message;
         $comment->updateOrFail();
 
@@ -61,7 +61,7 @@ class Comments
      */
     public static function delete(string $commentId): bool
     {
-        $comment = CommentsModel::getByIdOrFail($commentId);
+        $comment = MessageComments::getByIdOrFail($commentId);
         return (bool) $comment->softDelete();
     }
 }
