@@ -99,7 +99,12 @@ class Structure extends Injectable implements ColumnsInterface
         return $this->raw;
     }
 
-    public function setRelationships($classBase, $x = true)
+    /**
+     * Set model relationships
+     * @param string $classBase
+     * @param boolean 
+     */
+    public function setRelationships($classBase, $recursive = true) : array
     {
         $relationships = [];
         /**
@@ -124,7 +129,7 @@ class Structure extends Injectable implements ColumnsInterface
             /**
              * @todo fixed
              */
-            if($x && $classBase != $relationshipName){
+            if($recursive && $classBase != $relationshipName){
                 $relationshipFromRelationship = $this->setRelationships($relationshipName, false);
                 $externalRelationship = isset($this->relationship[end($relationshipClass)]) ? $this->relationship[end($relationshipClass)] : [];
 

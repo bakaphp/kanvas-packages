@@ -4,6 +4,7 @@ namespace Kanvas\Packages\MagicImports\Contracts;
 
 use Kanvas\Packages\MagicImports\Structure;
 use Kanvas\Packages\MagicImports\Imports;
+use Phalcon\Http\Response;
 use Exception;
 
 trait ImportsTrait
@@ -11,7 +12,7 @@ trait ImportsTrait
     /**
      * @return Phalcon\Http\Response
      */
-    public function structure()
+    public function structure() : Response
     {
         $structure = isset($this->structure) ? $this->structure : new Structure($this->model);
         $array = $structure->getStructure();

@@ -45,7 +45,7 @@ class Imports extends Injectable
      * process data from array
      * @param array $data
      */
-    public function processData(array $data)
+    public function processData(array $data) : array
     {
         $processData = $this->structureData($data);
 
@@ -79,7 +79,7 @@ class Imports extends Injectable
      * @param array $modelData
      * @return array $models
      */
-    public function save(array $modelData)
+    public function save(array $modelData) : array
     {
         $return = [];
         foreach ($modelData as $model => $data) {
@@ -225,7 +225,12 @@ class Imports extends Injectable
         return $returns;
     }
 
-    public function getClassName($obj)
+    /**
+     * get the class name from object
+     * @param class $obj
+     * @return string
+     */
+    public function getClassName($obj) : string
     {
         /**
          * Get namespace and class name
@@ -235,7 +240,12 @@ class Imports extends Injectable
         return end($class);
     }
 
-    public function getReturn($models)
+    /**
+     * Format array from frontend
+     * @param array $models
+     * @return array
+     */
+    public function getReturn($models) : array
     {
         $return = [];
 

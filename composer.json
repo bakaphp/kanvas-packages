@@ -34,8 +34,7 @@
     "autoload": {
         "psr-4": {
             "Kanvas\\Libraries\\": "src/",
-            "Kanvas\\Packages\\MagicImports\\": "src/MagicImports/",
-            "Kanvas\\Packages\\MagicImports\\Contracts\\": "src/MagicImports/Contracts/"
+            "Kanvas\\Packages\\": "src/"
         }
     }
 }
