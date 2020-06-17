@@ -39,10 +39,10 @@ trait InteractionsTrait
      * Undocumented function
      *
      * @param string $action
-     * @param UserInterface $user
+     * @param ModelInterface $user
      * @return void
      */
-    public function getInteractions(string $action, UserInterface $user)
+    public function getInteractions(string $action, ModelInterface $entity)
     {
     }
 
