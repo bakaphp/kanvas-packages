@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contract\Interactions;
 
+use Kanvas\Packages\Social\Contract\Events\EventManagerAwareTrait;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Models\BaseModel;
 
 trait InteractionsTrait
 {
+    use EventManagerAwareTrait;
+    
     /**
      * Undocumented function
      *
@@ -15,8 +19,9 @@ trait InteractionsTrait
      * @param UserInterface $user
      * @return void
      */
-    public function interact(string $action, UserInterface $user)
+    public function interact(string $action, BaseModel $entity)
     {
+        $this->fire("socialUser:{$action}", $entity);
     }
 
     /**
