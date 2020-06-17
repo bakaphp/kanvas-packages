@@ -8,7 +8,7 @@ use Phalcon\Mvc\ModelInterface;
 
 interface UserInterface
 {
-    public function getDefaultCompany(): ModelInterface;
+    public function getDefaultCompany();
 
     public function getId(): int;
 }
