@@ -18,12 +18,12 @@ class Comments
      * @param string $message
      * @return MessageComments
      */
-    public static function add(string $messageId, string $message): MessageComments
+    public static function add(int $messageId, string $message): MessageComments
     {
-        $message = Messages::getByIdOrFail($messageId);
+        $messageData = Messages::getByIdOrFail($messageId);
 
         $comment = new MessageComments();
-        $comment->message_id = $message->getId();
+        $comment->message_id = $messageData->getId();
         $comment->apps_id = Di::getDefault()->get('app')->getId();
         $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
         $comment->users_id = Di::getDefault()->get('userData')->getId();
