@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\Social\Providers;
 
 use Kanvas\Packages\Social\EventsManager;
+use Kanvas\Packages\Social\Listener\Users;
 use Phalcon\Di\ServiceProviderInterface;
 use Phalcon\DiInterface;
 
@@ -18,6 +19,7 @@ class EventsManagerProvider implements ServiceProviderInterface
      * @var array
      */
     protected $listeners = [
+        'socialUser' => Users::class
     ];
 
     /**
