@@ -2,6 +2,8 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Phalcon\Di;
+
 class MessageComments extends BaseModel
 {
     public $id;
@@ -11,6 +13,7 @@ class MessageComments extends BaseModel
     public $users_id;
     public $message;
     public $reactions_count;
+    public $parent_id;
 
     /**
      * Initialize method for model.
@@ -72,5 +75,36 @@ class MessageComments extends BaseModel
     public function getSource()
     {
         return 'message_comments';
+    }
+
+    /**
+     * Create a comment for a message
+     *
+     * @param string $messageId
+     * @param string $message
+     * @return MessageComments
+     */
+    public function reply(string $message): MessageComments
+    {
+        $comment = new MessageComments();
+        $comment->message_id = $this->message_id;
+        $comment->apps_id = Di::getDefault()->get('app')->getId();
+        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
+        $comment->users_id = Di::getDefault()->get('userData')->getId();
+        $comment->message = $message;
+        $comment->parent_id = $this->getParentId();
+        $comment->saveOrFail();
+
+        return $comment;
+    }
+
+    /**
+     * Return the id of the parent in case that comment is a reply
+     *
+     * @return integer
+     */
+    public function getParentId(): int
+    {
+        return $this->parent_id == 0 ? $this->getId() : $this->parent_id;
     }
 }
