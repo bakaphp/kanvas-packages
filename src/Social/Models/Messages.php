@@ -2,6 +2,8 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Phalcon\Di;
+
 class Messages extends BaseModel
 {
     public $id;
@@ -136,5 +138,25 @@ class Messages extends BaseModel
         $channelMessage->users_id = $this->users_id;
         $channelMessage->channel_id = Channels::getByName($distribution)->getId();
         $channelMessage->saveOrFail();
+    }
+
+    /**
+     * Create a comment for a message
+     *
+     * @param string $messageId
+     * @param string $message
+     * @return MessageComments
+     */
+    public function comment(string $message): MessageComments
+    {
+        $comment = new MessageComments();
+        $comment->message_id = $this->getId();
+        $comment->apps_id = Di::getDefault()->get('app')->getId();
+        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
+        $comment->users_id = Di::getDefault()->get('userData')->getId();
+        $comment->message = $message;
+        $comment->saveOrFail();
+
+        return $comment;
     }
 }

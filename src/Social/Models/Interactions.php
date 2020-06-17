@@ -6,8 +6,14 @@ class Interactions extends BaseModel
 {
     public $id;
     public $name;
-    public $title;
     public $icon;
+
+    const LIKE = 1;
+    const SAVE = 2;
+    const COMMENT = 3;
+    const REPLIED = 4;
+    const FOLLOWING = 5;
+    const FOLLOWERS = 6;
 
     /**
      * Initialize method for model.
@@ -36,5 +42,16 @@ class Interactions extends BaseModel
     public function getSource()
     {
         return 'interactions';
+    }
+
+    /**
+     * Verify if the interacion is a comment/reply
+     *
+     * @param integer $interactionId
+     * @return boolean
+     */
+    public static function isComment(int $interactionId): bool
+    {
+        return $interactionId == self::COMMENT && $interactionId == self::REPLIED;
     }
 }
