@@ -58,7 +58,7 @@ class MessageTypes
     public static function getTypeByVerb(string $verb): MessageTypesModel
     {
         return MessageTypesModel::findFirst([
-            'conditions' => 'verb = :verb: AND apps_id :currentAppId: AND is_deleted = 0',
+            'conditions' => 'verb = :verb: AND apps_id = :currentAppId: AND is_deleted = 0',
             'bind' => [
                 'verb' => $verb,
                 'currentAppId' => Di::getDefault()->get('app')->getId()
