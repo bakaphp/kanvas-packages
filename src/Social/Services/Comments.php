@@ -22,15 +22,7 @@ class Comments
     {
         $messageData = Messages::getByIdOrFail($messageId);
 
-        $comment = new MessageComments();
-        $comment->message_id = $messageData->getId();
-        $comment->apps_id = Di::getDefault()->get('app')->getId();
-        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
-        $comment->users_id = Di::getDefault()->get('userData')->getId();
-        $comment->message = $message;
-        $comment->saveOrFail();
-
-        return $comment;
+        return $messageData->comment($message);
     }
 
     /**
