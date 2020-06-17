@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Exception;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
-use Phalcon\Di;
 
 class Comments
 {
     /**
      * Create a comment for a message
      *
-     * @param string $messageId
+     * @param int $messageId
      * @param string $message
      * @return MessageComments
      */
@@ -51,5 +49,19 @@ class Comments
     {
         $comment = MessageComments::getByIdOrFail($commentId);
         return (bool) $comment->softDelete();
+    }
+
+    /**
+     * Reply a comment by its Id
+     *
+     * @param int $commentId
+     * @param string $message
+     * @return MessageComments
+     */
+    public static function reply(int $commentId, string $message): MessageComments
+    {
+        $comment = MessageComments::getByIdOrFail($commentId);
+        
+        return $comment->reply($message);
     }
 }
