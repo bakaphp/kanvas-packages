@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
-use Kanvas\Packages\Social\Models\BaseModel;
 use Kanvas\Packages\Social\Models\Interactions as InteractionsModel;
 use Kanvas\Packages\Social\Models\UsersInteractions;
+use Phalcon\Mvc\ModelInterface;
 
 class Interactions
 {
     /**
      * Create an interaction of a user and a entity.
      *
-     * @param BaseModel $entity
+     * @param ModelInterface $entity
      * @param integer $interactionId
      * @return UsersInteractions
      */
-    public static function add(UserInterface $user, BaseModel $entity, int $interactionId): bool
+    public static function add(UserInterface $user, ModelInterface $entity, int $interactionId): bool
     {
         $interaction = $entity->getInteraction([
             'conditions' => 'users_id = :user_id: AND interactions_id = :interaction_id:',

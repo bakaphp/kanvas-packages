@@ -6,7 +6,7 @@ namespace Kanvas\Packages\Social\Contract\Interactions;
 
 use Kanvas\Packages\Social\Contract\Events\EventManagerAwareTrait;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
-use Kanvas\Packages\Social\Models\BaseModel;
+use Phalcon\Mvc\ModelInterface;
 
 trait InteractionsTrait
 {
@@ -19,7 +19,7 @@ trait InteractionsTrait
      * @param UserInterface $user
      * @return void
      */
-    public function interact(string $action, BaseModel $entity)
+    public function interact(string $action, ModelInterface $entity): void
     {
         $this->fire("socialUser:{$action}", $entity);
     }
