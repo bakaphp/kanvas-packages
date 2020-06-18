@@ -2,10 +2,15 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Phalcon\Di;
 
 class Messages extends BaseModel
 {
+    use TotalInteractionsTrait {
+        getInteractionStorageKey as protected parentGetInteractionStorageKey;
+    }
+
     public $id;
     public $apps_id;
     public $companies_id;
@@ -158,5 +163,18 @@ class Messages extends BaseModel
         $comment->saveOrFail();
 
         return $comment;
+    }
+
+    /**
+     * Get the interaction key.
+     *
+     * @return string
+     */
+    protected function getInteractionStorageKey(): string
+    {
+        if (!is_null($this->interaction_type_id)) {
+            return $this->parentGetInteractionStorageKey() . '-' . $this->interaction_type_id;
+        }
+        return $this->parentGetInteractionStorageKey();
     }
 }
