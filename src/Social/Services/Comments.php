@@ -10,6 +10,19 @@ use Kanvas\Packages\Social\Models\Messages;
 class Comments
 {
     /**
+     * Get a comment by its ID
+     *
+     * @param integer $uuid
+     * @return MessageComments
+     */
+    public static function get(int $uuid): MessageComments
+    {
+        $comment = MessageComments::getByIdOrFail($uuid);
+
+        return $comment;
+    }
+
+    /**
      * Create a comment for a message
      *
      * @param int $messageId

@@ -10,6 +10,20 @@ use Phalcon\Di;
 
 class MessageTypes
 {
+
+    /**
+     * Return a Message object by its id
+     *
+     * @param integer $uuid
+     * @return MessageTypesModel
+     */
+    public static function get(int $uuid): MessageTypesModel
+    {
+        $messageType = MessageTypesModel::getByIdOrFail($uuid);
+        
+        return $messageType;
+    }
+
     /**
      * Create a new MessageTypes
      *
