@@ -7,6 +7,7 @@ use Phalcon\DI\Injectable;
 use ReflectionClass;
 use Exception;
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\ModelInterface;
 
 /**
  * Class Structure
@@ -92,7 +93,7 @@ class Imports extends Injectable
                 $obj->saveOrFail();
             }
             
-            $return[$this->getClassName($obj)] = $obj;
+            $return[\Baka\getShortClassName($obj)] = $obj;
         }
         return $return;
     }
@@ -124,7 +125,7 @@ class Imports extends Injectable
      * @param array $maps
      * @return array $processData
      */
-    public function getStructureData($raw, $maps): array
+    public function getStructureData(array $raw, array $maps): array
     {
         $processData = [];
 
@@ -181,7 +182,7 @@ class Imports extends Injectable
      * @param array $relationships
      * @return array $returns
      */
-    public function saveRelationships($models, Model $model, $relationships) : array
+    public function saveRelationships($models, ModelInterface $model, $relationships) : array
     {
         $returns = [];
         foreach ($models as $class => $obj) {
@@ -199,12 +200,12 @@ class Imports extends Injectable
                 case 1:
                     $model->{$primaryKey} = $obj->{$relationshipsKey};
                     $model->save();
-                    $returns[$this->getClassName($model)] = $model;
+                    $returns[\Baka\getShortClassName($model)] = $model;
                 break;
                 case 2:
                     $obj->{$relationshipsKey} = $model->{$primaryKey};
                     $obj->save();
-                    $returns[$this->getClassName($obj)] = $obj;
+                    $returns[\Baka\getShortClassName($obj)] = $obj;
                 break;
                 case 3:
                     $intermediateModel = $relationships[$className]['intermediateModel'];
@@ -214,7 +215,7 @@ class Imports extends Injectable
                     $newObj->{$intermediateFields} = $model->{$primaryKey};
                     $newObj->{$intermediateReferencedField} = $obj->{$relationshipsKey};
                     $newObj->save();
-                    $returns[$this->getClassName($newObj)] = $newObj;
+                    $returns[\Baka\getShortClassName($newObj)] = $newObj;
                 break;
                 default:
                     throw new Exception("Error Processing Request", 1);
@@ -223,21 +224,6 @@ class Imports extends Injectable
         }
 
         return $returns;
-    }
-
-    /**
-     * get the class name from object
-     * @param class $obj
-     * @return string
-     */
-    public function getClassName($obj) : string
-    {
-        /**
-         * Get namespace and class name
-         */
-        $class = explode("\\",get_class($obj));
-
-        return end($class);
     }
 
     /**

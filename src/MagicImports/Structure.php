@@ -6,6 +6,7 @@ use Phalcon\DI\Injectable;
 use Phalcon\Mvc\Model;
 use Kanvas\Packages\MagicImports\Contracts\ColumnsInterface;
 use Phalcon\Mvc\Model\Relation;
+use Phalcon\Mvc\ModelInterface;
 
 /**
  * Class Structure
@@ -104,7 +105,7 @@ class Structure extends Injectable implements ColumnsInterface
      * @param string $classBase
      * @param boolean 
      */
-    public function setRelationships($classBase, $recursive = true) : array
+    public function setRelationships(string $classBase, $recursive = true) : array
     {
         $relationships = [];
         /**
@@ -144,7 +145,7 @@ class Structure extends Injectable implements ColumnsInterface
      * @param Phalcon\Mvc\Model $model
      * @return array $raw
      */
-    public function setStructure(Model $model): array
+    public function setStructure(ModelInterface $model): array
     {
         $raw = [];
         
