@@ -12,6 +12,20 @@ use Phalcon\Di;
 
 class Feeds
 {
+
+    /**
+     * Return a Message object by its id
+     *
+     * @param integer $uuid
+     * @return Messages
+     */
+    public static function get(int $uuid): Messages
+    {
+        $message = Messages::getByIdOrFail($uuid);
+        
+        return $message;
+    }
+
     /**
      * To be describe
      *

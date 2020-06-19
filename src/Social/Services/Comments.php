@@ -10,13 +10,26 @@ use Kanvas\Packages\Social\Models\Messages;
 class Comments
 {
     /**
+     * Get a comment by its ID
+     *
+     * @param string $uuid
+     * @return MessageComments
+     */
+    public static function get(string $uuid): MessageComments
+    {
+        $comment = MessageComments::getByIdOrFail($uuid);
+
+        return $comment;
+    }
+
+    /**
      * Create a comment for a message
      *
-     * @param int $messageId
+     * @param string $messageId
      * @param string $message
      * @return MessageComments
      */
-    public static function add(int $messageId, string $message): MessageComments
+    public static function add(string $messageId, string $message): MessageComments
     {
         $messageData = Messages::getByIdOrFail($messageId);
 
@@ -54,11 +67,11 @@ class Comments
     /**
      * Reply a comment by its Id
      *
-     * @param int $commentId
+     * @param string $commentId
      * @param string $message
      * @return MessageComments
      */
-    public static function reply(int $commentId, string $message): MessageComments
+    public static function reply(string $commentId, string $message): MessageComments
     {
         $comment = MessageComments::getByIdOrFail($commentId);
         
