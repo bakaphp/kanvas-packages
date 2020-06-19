@@ -53,7 +53,7 @@ class Structure extends Injectable implements ColumnsInterface
      * @param array $fields
      * @param array $relationship
      */
-    function __construct(Model $model, $fields = [], $relationship = [])
+    function __construct(ModelInterface $model, $fields = [], $relationship = [])
     {
         $this->model = $model; 
         $this->fields = $fields;
