@@ -12,10 +12,10 @@ class Comments
     /**
      * Get a comment by its ID
      *
-     * @param integer $uuid
+     * @param string $uuid
      * @return MessageComments
      */
-    public static function get(int $uuid): MessageComments
+    public static function get(string $uuid): MessageComments
     {
         $comment = MessageComments::getByIdOrFail($uuid);
 
@@ -67,11 +67,11 @@ class Comments
     /**
      * Reply a comment by its Id
      *
-     * @param int $commentId
+     * @param string $commentId
      * @param string $message
      * @return MessageComments
      */
-    public static function reply(int $commentId, string $message): MessageComments
+    public static function reply(string $commentId, string $message): MessageComments
     {
         $comment = MessageComments::getByIdOrFail($commentId);
         
