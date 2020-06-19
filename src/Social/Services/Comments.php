@@ -25,11 +25,11 @@ class Comments
     /**
      * Create a comment for a message
      *
-     * @param int $messageId
+     * @param string $messageId
      * @param string $message
      * @return MessageComments
      */
-    public static function add(int $messageId, string $message): MessageComments
+    public static function add(string $messageId, string $message): MessageComments
     {
         $messageData = Messages::getByIdOrFail($messageId);
 

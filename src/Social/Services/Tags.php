@@ -15,10 +15,10 @@ class Tags
     /**
      * Get a Tag by its ID
      *
-     * @param integer $uuid
+     * @param string $uuid
      * @return TagsModel
      */
-    public static function get(int $uuid): TagsModel
+    public static function get(string $uuid): TagsModel
     {
         $tag = TagsModel::getByIdOrFail($uuid);
 

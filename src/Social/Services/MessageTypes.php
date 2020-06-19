@@ -14,10 +14,10 @@ class MessageTypes
     /**
      * Return a Message object by its id
      *
-     * @param integer $uuid
+     * @param string $uuid
      * @return MessageTypesModel
      */
-    public static function get(int $uuid): MessageTypesModel
+    public static function get(string $uuid): MessageTypesModel
     {
         $messageType = MessageTypesModel::getByIdOrFail($uuid);
         
