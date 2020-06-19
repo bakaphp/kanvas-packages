@@ -182,7 +182,7 @@ class Imports extends Injectable
      * @param array $relationships
      * @return array $returns
      */
-    public function saveRelationships($models, ModelInterface $model, $relationships) : array
+    public function saveRelationships(array $models, ModelInterface $model, $relationships) : array
     {
         $returns = [];
         foreach ($models as $class => $obj) {
@@ -231,7 +231,7 @@ class Imports extends Injectable
      * @param array $models
      * @return array
      */
-    public function getReturn($models) : array
+    public function getReturn(array $models) : array
     {
         $return = [];
 

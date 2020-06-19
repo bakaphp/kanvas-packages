@@ -23,7 +23,7 @@ trait ImportsTrait
     /**
      * @return Phalcon\Http\Response
      */
-    public function import()
+    public function import() : Response
     {
         $post = $this->request->getPostData();
 
