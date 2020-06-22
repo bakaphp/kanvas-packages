@@ -81,7 +81,7 @@ class Interactions
 
 
     /**
-     * Return the ID correspondent to the feedType and
+     * Return the ID correspondent to the interaction type and
      * throws and exception if doesnt exist.
      *
      * @param string $interactionName

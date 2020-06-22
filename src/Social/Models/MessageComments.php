@@ -132,7 +132,7 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * Undocumented function
+     * WIP delete the interaction of the comment
      *
      * @param string $action
      * @param UserInterface $user
