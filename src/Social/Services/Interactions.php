@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
+use Exception;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Interactions as InteractionsModel;
 use Kanvas\Packages\Social\Models\UsersInteractions;
@@ -40,7 +41,7 @@ class Interactions
             $interaction->created_at = date('Y-m-d H:i:s');
             $interaction->saveOrFail();
         }
-
+        $interaction->increment();
         return (bool) $interaction->is_deleted;
     }
 
@@ -75,6 +76,44 @@ class Interactions
             $interaction->is_deleted = 1;
             $interaction->saveOrFail();
             $interaction->decrese();
+        }
+    }
+
+
+    /**
+     * Return the ID correspondent to the feedType and
+     * throws and exception if doesnt exist.
+     *
+     * @param string $interactionName
+     * @throws Exception
+     * @return integer
+     */
+    public static function getInteractionIdByName(string $interactionName): int
+    {
+        switch ($interactionName) {
+            case 'like':
+                return InteractionsModel::LIKE;
+                break;
+
+            case 'save':
+                return InteractionsModel::SAVE;
+                break;
+
+            case 'comment':
+                return InteractionsModel::COMMENT;
+                break;
+
+            case 'following':
+                return InteractionsModel::FOLLOWING;
+                break;
+
+            case 'followers':
+                return InteractionsModel::FOLLOWERS;
+                break;
+                
+            default:
+                throw new Exception('Interaction name not found');
+                break;
         }
     }
 }
