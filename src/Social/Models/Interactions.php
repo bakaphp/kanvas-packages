@@ -52,6 +52,6 @@ class Interactions extends BaseModel
      */
     public static function isComment(int $interactionId): bool
     {
-        return $interactionId == self::COMMENT && $interactionId == self::REPLIED;
+        return $interactionId == self::COMMENT || $interactionId == self::REPLIED;
     }
 }
