@@ -2,10 +2,15 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Phalcon\Di;
 
 class Messages extends BaseModel
 {
+    use TotalInteractionsTrait;
+    use InteractionsTrait;
+
     public $id;
     public $apps_id;
     public $companies_id;
@@ -58,9 +63,25 @@ class Messages extends BaseModel
             [
                 'alias' => 'interactions',
                 'params' => [
-                    'conditions' => 'entity_namespace = :namespace:',
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
                     'bind' => [
                         'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
+
+        $this->hasOne(
+            'id',
+            UsersInteractions::class,
+            'entity_id',
+            [
+                'alias' => 'interaction',
+                'params' => [
+                    'conditions' => 'entity_id = :entityId: AND entity_namespace = :namespace:',
+                    'bind' => [
+                        'namespace' => get_class($this),
+                        'entityId' => $this->id
                     ]
                 ]
             ]

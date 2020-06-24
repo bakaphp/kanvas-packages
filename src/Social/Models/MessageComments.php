@@ -2,10 +2,19 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
+use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Phalcon\Di;
 
 class MessageComments extends BaseModel
 {
+    use CustomTotalInteractionsTrait;
+
+    use InteractionsTrait {
+        deleteInteraction as public parentDeleteInteraction;
+    }
+
     public $id;
     public $message_id;
     public $apps_id;
@@ -106,5 +115,20 @@ class MessageComments extends BaseModel
     public function getParentId(): int
     {
         return $this->parent_id == 0 ? $this->getId() : $this->parent_id;
+    }
+
+    /**
+     * WIP delete the interaction of the comment
+     *
+     * @param string $action
+     * @param UserInterface $user
+     * @return void
+     */
+    public function deleteInteraction(string $action, UserInterface $user): void
+    {
+        $interaction = $this->getInteractionByUser($action, $user);
+        if ($interaction) {
+            Interactions::removeInteraction($interaction);
+        }
     }
 }

@@ -2,8 +2,12 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
+
 class Tags extends BaseModel
 {
+    use CustomTotalInteractionsTrait;
+
     public $id;
     public $apps_id;
     public $companies_id;
