@@ -124,7 +124,7 @@ class MessageComments extends BaseModel
      * @param UserInterface $user
      * @return void
      */
-    public function deleteInteraction(string $action, UserInterface $user)
+    public function deleteInteraction(string $action, UserInterface $user): void
     {
         $interaction = $this->getInteractionByUser($action, $user);
         if ($interaction) {
