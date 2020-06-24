@@ -2,13 +2,11 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
 
 class Tags extends BaseModel
 {
-    use TotalInteractionsTrait {
-        getInteractionStorageKey as protected parentGetInteractionStorageKey;
-    }
+    use CustomTotalInteractionsTrait;
 
     public $id;
     public $apps_id;
@@ -74,18 +72,5 @@ class Tags extends BaseModel
     public function getSource()
     {
         return 'tags';
-    }
-
-    /**
-     * Get the interaction key.
-     *
-     * @return string
-     */
-    protected function getInteractionStorageKey(): string
-    {
-        if (!is_null($this->interaction_type_id)) {
-            return $this->parentGetInteractionStorageKey() . '-' . $this->interaction_type_id;
-        }
-        return $this->parentGetInteractionStorageKey();
     }
 }

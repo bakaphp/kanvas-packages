@@ -2,16 +2,15 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Phalcon\Di;
 
 class MessageComments extends BaseModel
 {
-    use TotalInteractionsTrait {
-        getInteractionStorageKey as protected parentGetInteractionStorageKey;
-    }
+    use CustomTotalInteractionsTrait;
+
     use InteractionsTrait {
         deleteInteraction as public parentDeleteInteraction;
     }
@@ -116,19 +115,6 @@ class MessageComments extends BaseModel
     public function getParentId(): int
     {
         return $this->parent_id == 0 ? $this->getId() : $this->parent_id;
-    }
-
-    /**
-     * Get the interaction key.
-     *
-     * @return string
-     */
-    protected function getInteractionStorageKey(): string
-    {
-        if (!is_null($this->interaction_type_id)) {
-            return $this->parentGetInteractionStorageKey() . '-' . $this->interaction_type_id;
-        }
-        return $this->parentGetInteractionStorageKey();
     }
 
     /**
