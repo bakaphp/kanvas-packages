@@ -25,13 +25,13 @@ trait InteractionsTrait
     }
 
     /**
-     * Undocumented function
+     * Remove an interaction
      *
      * @param string $action
      * @param UserInterface $user
      * @return void
      */
-    public function deleteInteraction(string $action, UserInterface $user)
+    public function deleteInteraction(string $action, UserInterface $user): void
     {
         $interaction = $this->getInteractionByUser($action, $user);
         if ($interaction) {
@@ -51,13 +51,13 @@ trait InteractionsTrait
     }
 
     /**
-     * Get the interaction maked it by the user to the current entity if exist
+     * Get the interaction made by the user to the current entity
      *
      * @param string $action
      * @param UserInterface $user
      * @return UsersInteractions|bool
      */
-    public function getInteractionByUser(string $action, UserInterface $user)
+    public function getInteractionByUser(string $action, UserInterface $user): UsersInteractions
     {
         return $this->getInteraction([
             'conditions' => 'users_id = :userId: AND interactions_id = :interactionId: AND is_deleted = 0',
