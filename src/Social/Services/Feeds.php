@@ -9,6 +9,7 @@ use Kanvas\Packages\Social\Models\AppModuleMessage;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
+use Phalcon\Mvc\Model\Resultset\Simple;
 
 class Feeds
 {
@@ -19,11 +20,23 @@ class Feeds
      * @param integer $uuid
      * @return Messages
      */
-    public static function get(int $uuid): Messages
+    public static function getMessage(int $uuid): Messages
     {
         $message = Messages::getByIdOrFail($uuid);
         
         return $message;
+    }
+
+    /**
+     * Get the feeds of the user
+     *
+     * @param UserInterface $user
+     * @return Simple
+     */
+    public static function getFeeds(UserInterface $user): Simple
+    {
+        $feed = new UserMessages();
+        return $feed->getUserFeeds($user);
     }
 
     /**
