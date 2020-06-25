@@ -17,10 +17,10 @@ class Feeds
     /**
      * Return a Message object by its id
      *
-     * @param integer $uuid
+     * @param string $uuid
      * @return Messages
      */
-    public static function getMessage(int $uuid): Messages
+    public static function getMessage(string $uuid): Messages
     {
         $message = Messages::getByIdOrFail($uuid);
         
