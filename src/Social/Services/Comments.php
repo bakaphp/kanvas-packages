@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Gewaer\Models\UsersInteractions;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 
@@ -63,7 +63,7 @@ class Comments
     public static function delete(string $commentId, UserInterface $user): bool
     {
         $comment = MessageComments::getByIdOrFail($commentId);
-        $comment->deleteInteraction(UsersInteractions::COMMENT, $user);
+        $comment->deleteInteraction(Interactions::COMMENT, $user);
         return (bool) $comment->softDelete();
     }
 
