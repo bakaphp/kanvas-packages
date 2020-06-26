@@ -16,6 +16,12 @@ class UsersInteractions extends BaseModel
     public $entity_namespace;
     public $interactions_id;
 
+    const LIKE = 'like';
+    const SAVE = 'save';
+    const COMMENT = 'comment';
+    const REPLIED = 'reply';
+    const FOLLOWING = 'follow';
+
     /**
      * Initialize relationshit after fetch
      * since we need entity_namespace info.
