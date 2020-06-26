@@ -31,9 +31,9 @@ trait InteractionsTrait
      * @param UserInterface $user
      * @return void
      */
-    public function deleteInteraction(string $action, UserInterface $user): void
+    public function deleteInteraction(int $interactionId, UserInterface $user): void
     {
-        $interaction = $this->getInteractionByUser($action, $user);
+        $interaction = $this->getInteractionByUser($interactionId, $user);
         if ($interaction) {
             Interactions::removeInteraction($interaction);
         }
@@ -53,17 +53,17 @@ trait InteractionsTrait
     /**
      * Get the interaction made by the user to the current entity
      *
-     * @param string $action
+     * @param int $interactionId
      * @param UserInterface $user
      * @return UsersInteractions|bool
      */
-    public function getInteractionByUser(string $action, UserInterface $user): UsersInteractions
+    public function getInteractionByUser(int $interactionId, UserInterface $user): UsersInteractions
     {
         return $this->getInteraction([
             'conditions' => 'users_id = :userId: AND interactions_id = :interactionId: AND is_deleted = 0',
             'bind' => [
                 'userId' => $user->getId(),
-                'interactionId' => Interactions::getInteractionIdByName($action)
+                'interactionId' => $interactionId
             ]
         ]);
     }
