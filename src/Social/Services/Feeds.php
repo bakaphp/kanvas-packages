@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
+use Kanvas\Packages\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\AppModuleMessage;
 use Kanvas\Packages\Social\Models\Messages;
@@ -59,6 +60,7 @@ class Feeds
         $newMessage->message = json_encode($message);
         $newMessage->saveOrFail();
         $newMessage->addDistributionChannel($distribution);
+        GenerateTags::dispatch($user, $newMessage);
 
         $newAppModule = new AppModuleMessage();
         $newAppModule->message_id = $newMessage->getId();
