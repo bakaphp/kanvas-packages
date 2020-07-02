@@ -1,16 +1,18 @@
 <?php
 
-namespace Kanvas\Packages\Jobs;
+namespace Kanvas\Packages\Social\Jobs;
 
+use Canvas\Contracts\Queue\QueueableJobInterface;
+use Canvas\Jobs\Job;
+use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\MessageTags;
 use Kanvas\Packages\Social\Models\Tags;
-use Kanvas\Packages\Social\Models\UsersInteractions;
 use Kanvas\Packages\Social\Utils\StringFormatter;
 use Phalcon\Di;
 use Phalcon\Utils\Slug;
 
-class GenerateTags
+class GenerateTags extends Job implements QueueableJobInterface
 {
     protected $user;
     protected $message;
@@ -21,7 +23,7 @@ class GenerateTags
      * @param UsersInteractions $user
      * @param Messages $message
      */
-    public function __construct(UsersInteractions $user, Messages $message)
+    public function __construct(UserInterface $user, Messages $message)
     {
         $this->user = $user;
         $this->message = $message;
@@ -46,6 +48,7 @@ class GenerateTags
                 [
                     'name' => $tag,
                     'slug' => Slug::generate($tag),
+                    'users_id' => $this->user->getId(),
                     'apps_id' => $this->user->getDefaultCompany()->getId(),
                     'companies_id' => Di::getDefault()->get('app')->getId(),
                 ]
