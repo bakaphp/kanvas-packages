@@ -8,7 +8,7 @@ class Interactions extends BaseModel
     public $name;
     public $icon;
 
-    const LIKE = 1;
+    const REACT = 1;
     const SAVE = 2;
     const COMMENT = 3;
     const REPLIED = 4;
@@ -45,7 +45,7 @@ class Interactions extends BaseModel
     }
 
     /**
-     * Verify if the interacion is a comment/reply
+     * Verify if the interaction is a comment/reply
      *
      * @param integer $interactionId
      * @return boolean
