@@ -14,7 +14,7 @@ trait InteractionsTrait
     use EventManagerAwareTrait;
     
     /**
-     * Undocumented function
+     * Interact with the object based on the action
      *
      * @param string $action
      * @return void
@@ -23,6 +23,18 @@ trait InteractionsTrait
     {
         $this->fire("socialUser:{$action}", $this);
     }
+
+    /**
+     * React to an object by emoji on reaction name
+     *
+     * @param string $reaction
+     * @return void
+     */
+    public function react(string $reaction): void
+    {
+        $this->fire("socialUser:react", $this, $reaction);
+    }
+
 
     /**
      * Remove an interaction
