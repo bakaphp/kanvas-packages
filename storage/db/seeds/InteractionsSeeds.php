@@ -18,7 +18,7 @@ class InteractionsSeeds extends AbstractSeed
         $data = [
             [
                 'id' => 1,
-                'name' => 'like',
+                'name' => 'react',
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [

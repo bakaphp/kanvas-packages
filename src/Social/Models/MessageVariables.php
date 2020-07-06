@@ -30,14 +30,4 @@ class MessageVariables extends BaseModel
             ]
         );
     }
-    
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'message_variables';
-    }
 }

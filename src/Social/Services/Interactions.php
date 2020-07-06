@@ -92,7 +92,7 @@ class Interactions
     {
         switch ($interactionName) {
             case 'like':
-                return InteractionsModel::LIKE;
+                return InteractionsModel::REACT;
                 break;
 
             case 'save':

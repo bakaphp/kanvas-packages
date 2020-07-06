@@ -87,6 +87,37 @@ class Messages extends BaseModel
             ]
         );
 
+        $this->hasMany(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reactions',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
+
+        $this->hasOne(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reaction',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
+
+
         $this->hasOne(
             'id',
             UsersInteractions::class,
@@ -134,16 +165,6 @@ class Messages extends BaseModel
                 'alias' => 'channels'
             ]
         );
-    }
-
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'messages';
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-class UsersFollows extends BaseModel
+class UsersReactions extends BaseModel
 {
     public $id;
     public $users_id;
@@ -11,7 +11,7 @@ class UsersFollows extends BaseModel
 
 
     /**
-     * Initialize relationshit after fetch
+     * Initialize relationship after fetch
      * since we need entity_namespace info.
      *
      * @return void
@@ -27,12 +27,12 @@ class UsersFollows extends BaseModel
             ]
         );
     }
-
+    
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
-        $this->setSource('users_follows');
+        $this->setSource('users_reactions');
     }
 }

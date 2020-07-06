@@ -10,12 +10,10 @@ class ChannelUsers extends BaseModel
     public $roles_id;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'channel_users';
+        $this->setSource('channel_users');
     }
 }
