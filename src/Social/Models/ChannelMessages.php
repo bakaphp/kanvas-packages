@@ -9,12 +9,10 @@ class ChannelMessages extends BaseModel
     public $users_id;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'channel_messages';
+        $this->setSource('channel_messages');
     }
 }

@@ -27,14 +27,12 @@ class UsersFollows extends BaseModel
             ]
         );
     }
-    
+
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'users_follows';
+        $this->setSource('users_follows');
     }
 }

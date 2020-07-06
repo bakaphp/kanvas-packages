@@ -168,16 +168,6 @@ class Messages extends BaseModel
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'messages';
-    }
-
-    /**
      * Create a channel for the current message
      *
      * @param string $distribution

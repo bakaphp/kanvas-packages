@@ -42,14 +42,4 @@ class AppModuleMessage extends BaseModel
             ]
         );
     }
-    
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'app_module_message';
-    }
 }

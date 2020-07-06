@@ -11,13 +11,11 @@ class UserMessages extends BaseModel
     public $users_id;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'user_messages';
+        $this->setSource('user_messages');
     }
 
     /**

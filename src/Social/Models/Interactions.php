@@ -33,16 +33,6 @@ class Interactions extends BaseModel
             ]
         );
     }
-    
-    /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'interactions';
-    }
 
     /**
      * Verify if the interaction is a comment/reply

@@ -42,15 +42,13 @@ class UsersInteractions extends BaseModel
             ]
         );
     }
-    
+
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'users_interactions';
+        $this->setSource('users_interactions');
     }
 
     /**

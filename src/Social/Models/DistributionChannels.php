@@ -9,12 +9,10 @@ class DistributionChannels extends BaseModel
     public $queues;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'distribution_channels';
+        $this->setSource('distribution_channels');
     }
 }

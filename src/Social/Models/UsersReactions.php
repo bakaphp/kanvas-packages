@@ -29,12 +29,10 @@ class UsersReactions extends BaseModel
     }
     
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'users_reactions';
+        $this->setSource('users_reactions');
     }
 }
