@@ -4,6 +4,7 @@ namespace Kanvas\Packages\Social\Listener;
 
 use Kanvas\Packages\Social\Services\Interactions;
 use Kanvas\Packages\Social\Models\Interactions as InteractionsModel;
+use Kanvas\Packages\Social\Services\Reactions;
 use Phalcon\Di;
 use Phalcon\Mvc\ModelInterface;
 use Phalcon\Events\Event;
@@ -17,21 +18,23 @@ class Users
      * @param ModelInterface $entity
      * @return void
      */
-    public function save(Event $event, ModelInterface $entity): void
+    public function save(Event $event, ModelInterface $entity, InteractionsModel $interactions): void
     {
         Interactions::add(Di::getDefault()->get('userData'), $entity, InteractionsModel::SAVE);
     }
 
     /**
-     * Create a like interaction between the user and the entity
+     * Add an reaction to the entity
      *
      * @param Event $event
      * @param ModelInterface $entity
+     * @param string $reaction
      * @return void
      */
-    public function like(Event $event, ModelInterface $entity): void
+    public function react(Event $event, ModelInterface $entity, string $reaction): void
     {
-        Interactions::add(Di::getDefault()->get('userData'), $entity, InteractionsModel::LIKE);
+        Interactions::add(Di::getDefault()->get('userData'), $entity, InteractionsModel::REACT);
+        Reactions::addReaction($reaction, Di::getDefault()->get('userData'), $entity);
     }
 
     /**
