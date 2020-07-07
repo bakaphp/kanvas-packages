@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
+use Exception;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Jobs\RemoveMessagesReactions;
 use Kanvas\Packages\Social\Models\Reactions as ReactionsModel;
 use Kanvas\Packages\Social\Models\UsersReactions;
 use Kanvas\Packages\Social\Utils\StringFormatter;
 use Phalcon\Di;
+use Phalcon\Mvc\Model\Resultset\Simple;
 use Phalcon\Mvc\ModelInterface;
 
 class Reactions
@@ -21,7 +24,7 @@ class Reactions
      * @param ModelInterface $entity
      * @return UsersReactions
      */
-    public static function addReaction(string $reaction, UserInterface $user, ModelInterface $entity): UsersReactions
+    public static function addMessageReaction(string $reaction, UserInterface $user, ModelInterface $entity): UsersReactions
     {
         if (StringFormatter::isStringEmoji($reaction)) {
             $reactionData = self::getReactionByEmoji($reaction, $user);
@@ -87,5 +90,57 @@ class Reactions
                 'appId' => Di::getDefault()->get('app')->getId()
             ]
         ]);
+    }
+
+    /**
+     * Create a new reaction with or without emoji, $reactionEmoji must be an unicode valid emoji
+     *
+     * @param string $reactionName
+     * @param UserInterface $user
+     * @param string $reactionEmoji
+     * @return Reactions
+     */
+    public static function createReaction(string $reactionName, UserInterface $user, string $reactionEmoji = null): ReactionsModel
+    {
+        if ($reactionEmoji && !StringFormatter::isStringEmoji($reactionEmoji)) {
+            throw new Exception('Emoji must have a valid unicode format');
+        }
+
+        $reaction = new ReactionsModel();
+        $reaction->name = $reactionName;
+        $reaction->apps_id = Di::getDefault()->get('app')->getId();
+        $reaction->companies_id = $user->getDefaultCompany()->getId();
+        $reaction->icon = $reactionEmoji;
+        $reaction->saveOrFail();
+
+        return $reaction;
+    }
+
+    /**
+     * Return the group of reactions that have emojis and bellow to the current app
+     *
+     * @return Simple
+     */
+    public static function getReactionsEmojis(): Simple
+    {
+        return ReactionsModel::find([
+            'conditions' => "icon IS NOT NULL AND apps_id = :appId: AND is_deleted = 0",
+            'bind' => [
+                'appId' => Di::getDefault()->get('app')->getId()
+            ]
+        ]);
+    }
+
+    /**
+     * Delete a Reaction by its id.
+     *
+     * @param integer $reactionId
+     * @return void
+     */
+    public static function deleteReaction(int $reactionId): void
+    {
+        $reaction = ReactionsModel::getByIdOrFail($reactionId);
+        $reaction->deleteOrFail();
+        RemoveMessagesReactions::dispatch($reaction);
     }
 }
