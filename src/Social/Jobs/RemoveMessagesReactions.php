@@ -40,7 +40,7 @@ class RemoveMessagesReactions extends Job implements QueueableJobInterface
             $messageReaction->delete();
         }
 
-        Di::getDefault()->get('log')->info('Delete message reactions from reaction id: ' . $this->message->getId());
+        Di::getDefault()->get('log')->info('Delete message reactions from reaction id: ' . $this->reaction->getId());
 
         return true;
     }
