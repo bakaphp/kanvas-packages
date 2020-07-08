@@ -33,6 +33,8 @@ class UsersReactions extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('users_reactions');
     }
 }

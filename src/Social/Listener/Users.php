@@ -34,7 +34,7 @@ class Users
     public function react(Event $event, ModelInterface $entity, string $reaction): void
     {
         Interactions::add(Di::getDefault()->get('userData'), $entity, InteractionsModel::REACT);
-        Reactions::addReaction($reaction, Di::getDefault()->get('userData'), $entity);
+        Reactions::addMessageReaction($reaction, Di::getDefault()->get('userData'), $entity);
     }
 
     /**

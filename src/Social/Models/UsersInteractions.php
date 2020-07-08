@@ -48,6 +48,8 @@ class UsersInteractions extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('users_interactions');
     }
 
