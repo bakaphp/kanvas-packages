@@ -13,6 +13,8 @@ class ChannelMessages extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('channel_messages');
     }
 }
