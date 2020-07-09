@@ -28,6 +28,7 @@ class Reactions extends BaseModel
             UsersReactions::class,
             'reactions_id',
             [
+                'params' => 'is_deleted = 0',
                 'alias' => 'usersReactions'
             ]
         );
