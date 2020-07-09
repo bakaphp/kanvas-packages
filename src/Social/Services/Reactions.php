@@ -143,4 +143,20 @@ class Reactions
         $reaction->deleteOrFail();
         RemoveMessagesReactions::dispatch($reaction);
     }
+
+    /**
+     * Edit a reaction
+     *
+     * @param string $reactionId
+     * @param string $name
+     * @return ReactionsModel
+     */
+    public static function editReaction(string $reactionId, string $name): ReactionsModel
+    {
+        $reaction = ReactionsModel::getByIdOrFail($reactionId);
+        $reaction->name = $name;
+        $reaction->saveOrFail();
+
+        return $reaction;
+    }
 }
