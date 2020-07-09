@@ -155,7 +155,7 @@ class Reactions
     {
         $reaction = ReactionsModel::getByIdOrFail($reactionId);
         $reaction->name = $name;
-        $reaction->save();
+        $reaction->saveOrFail();
 
         return $reaction;
     }
