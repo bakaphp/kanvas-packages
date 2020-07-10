@@ -19,6 +19,7 @@ class InteractionsSeeds extends AbstractSeed
             [
                 'id' => 1,
                 'name' => 'react',
+                'title' => 'react',
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
@@ -29,21 +30,25 @@ class InteractionsSeeds extends AbstractSeed
             [
                 'id' => 3,
                 'name' => 'comment',
+                'title' => 'comment',
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 4,
                 'name' => 'reply',
+                'title' => 'reply',
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 5,
                 'name' => 'following',
+                'title' => 'following',
                 'created_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id' => 6,
                 'name' => 'followers',
+                'title' => 'followers',
                 'created_at' => date('Y-m-d H:i:s'),
             ]
         ];
