@@ -7,10 +7,45 @@ use UnitTester;
 
 class StringFormatterCest
 {
-    public function getHashtagToString(UnitTester $I)
+    /**
+     * Test to get HashtagFromStrings
+     *
+     * @param UnitTester $I
+     * @return void
+     */
+    public function getHashtagToString(UnitTester $I): void
     {
         $text = "Test with #tags to #test";
 
-        $I->assertContains('tag', StringFormatter::getHashtagToString($text));
+        $I->assertContains('tags', StringFormatter::getHashtagToString($text));
+        $I->assertContains('test', StringFormatter::getHashtagToString($text));
+    }
+
+    /**
+     * Test if the string is an emoji
+     *
+     * @param UnitTester $I
+     * @return void
+     */
+    public function isStringEmoji(UnitTester $I): void
+    {
+        $emoji = "🙄";
+        $text = "No emoji";
+
+        $I->assertTrue(StringFormatter::isStringEmoji($emoji));
+        $I->assertFalse(StringFormatter::isStringEmoji($text));
+    }
+
+    /**
+     *
+     *
+     * @param UnitTester $I
+     * @return void
+     */
+    public function getEmojiFromString(UnitTester $I): void
+    {
+        $text = "Text with emoji 😛";
+
+        $I->assertContains('😛', StringFormatter::getEmojiFromString($text));
     }
 }
