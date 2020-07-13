@@ -18,7 +18,7 @@
     "require": {
         "php": ">=7.2",
         "vlucas/phpdotenv": "^4.1",
-        "baka/baka": "^0.5.4"
+        "baka/baka": "^0.6"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
