@@ -7,6 +7,8 @@ use Kanvas\Packages\Social\Models\BaseModel;
 
 class Users extends BaseModel implements UserInterface
 {
+    public $id;
+
     public function getId(): int
     {
         return 1;

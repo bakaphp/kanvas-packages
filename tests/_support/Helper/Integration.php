@@ -2,20 +2,18 @@
 
 namespace Helper;
 
+// use Canvas\Bootstrap\IntegrationTests;
 use Codeception\Module;
-use Codeception\Exception\TestRuntimeException;
 use Codeception\TestInterface;
-use Canvas\Bootstrap\Api;
-use Canvas\Mvc\Model\AbstractModel;
-use Phalcon\DI\FactoryDefault as PhDI;
+use Kanvas\Packages\Tests\Support\Models\Users;
+use Niden\Mvc\Model\AbstractModel;
 use Phalcon\Config as PhConfig;
-use Canvas\Models\Users;
-use Page\Data;
+use Phalcon\DI\FactoryDefault as PhDI;
 
 // here you can define custom actions
 // all public methods declared in helper class will be available in $I
-
 class Integration extends Module
+// class Integration extends PhalconUnit
 {
     /**
      * @var null|PhDI
@@ -31,38 +29,33 @@ class Integration extends Module
     public function _before(TestInterface $test)
     {
         PhDI::reset();
+        // $app = new IntegrationTests();
+        // $app->setup();
+        // $this->diContainer = $app->getContainer();
 
-        $app = new Api();
-        $app->setup();
+        // if ($this->config['rollback']) {
+        //     $this->diContainer->get('db')->begin();
+        // }
 
-        $this->diContainer = $app->getContainer();
-
-        //set userData to emulae logged in user
-        $this->diContainer->set(
-            'userData',
-            function () {
-                return Users::findFirstByEmail(Data::loginJson()['email']);
-            }
-        );
-
-        if ($this->config['rollback']) {
-            $this->diContainer->get('db')->begin();
-        }
+        //Set default user
+        $user = new Users();
+        $this->diContainer->setShared('userData', $user);
         $this->savedModels = [];
         $this->savedRecords = [];
     }
 
     public function _after(TestInterface $test)
     {
-        if (!$this->config['rollback']) {
-            foreach ($this->savedRecords as $record) {
-                $record->delete();
-            }
-        } else {
-            $this->diContainer->get('db')->rollback();
-        }
+    }
 
-        $this->diContainer->get('db')->close();
+    /**
+     * After all is done.
+     *
+     * @return void
+     */
+    public function _afterSuite()
+    {
+        //Phinx::dropTables();
     }
 
     /**
@@ -96,7 +89,6 @@ class Integration extends Module
         $model = new $class();
         $manager = $model->getModelsManager();
         $relationships = $manager->getRelations($class);
-
         $data = [];
         foreach ($relationships as $relationship) {
             $data[] = [
@@ -107,45 +99,7 @@ class Integration extends Module
                 $relationship->getOptions(),
             ];
         }
-
         return $data;
-    }
-
-    /**
-     * Get a record from $modelName with fields provided.
-     *
-     * @param string $modelName
-     * @param array  $fields
-     *
-     * @return bool|AbstractModel
-     */
-    public function getRecordWithFields(string $modelName, $fields = [])
-    {
-        $record = false;
-        if (count($fields) > 0) {
-            $conditions = '';
-            $bind = [];
-            foreach ($fields as $field => $value) {
-                $conditions .= sprintf(
-                    '%s = :%s: AND ',
-                    $field,
-                    $field
-                );
-                $bind[$field] = $value;
-            }
-
-            $conditions = rtrim($conditions, ' AND ');
-
-            /** @var AbstractModel $record */
-            $record = $modelName::findFirst(
-                [
-                    'conditions' => $conditions,
-                    'bind' => $bind,
-                ]
-            );
-        }
-
-        return $record;
     }
 
     /**
@@ -169,13 +123,11 @@ class Integration extends Module
         $model = new $modelName;
         $metadata = $model->getModelsMetaData();
         $attributes = $metadata->getAttributes($model);
-
         $this->assertEquals(
             count($fields),
             count($attributes),
             "Field count not correct for $modelName"
         );
-
         foreach ($fields as $value) {
             $this->assertContains(
                 $value,
@@ -202,9 +154,7 @@ class Integration extends Module
         $this->savedModels[$modelName] = $fields;
         $result = $record->save();
         $this->assertNotSame(false, $result);
-
         $this->savedRecords[] = $record;
-
         return $record;
     }
 
@@ -225,70 +175,6 @@ class Integration extends Module
         if ($this->diContainer->has($name)) {
             $this->diContainer->remove($name);
         }
-    }
-
-    /**
-     * Check that record created with haveRecordWithFields can be fetched and
-     * all its fields contain valid values.
-     *
-     * @param       $modelName
-     * @param       $by
-     * @param array $except
-     *
-     * @return mixed
-     */
-    public function seeRecordFieldsValid($modelName, $by, array $except = [])
-    {
-        if (!isset($this->savedModels[$modelName])) {
-            throw new TestRuntimeException(
-                'Should be used after haveModelWithFields with ' . $modelName
-            );
-        }
-        $fields = $this->savedModels[$modelName];
-        if (!is_array($by)) {
-            $by = [$by];
-        }
-        $bySelector = implode(
-            ' AND ',
-            array_map(
-                function ($key) {
-                    return "$key = :$key:";
-                },
-                $by
-            )
-        );
-        $byBind = [];
-        foreach ($by as $byVal) {
-            if (!isset($fields[$byVal])) {
-                throw new TestRuntimeException("Field $byVal is not set");
-            }
-            $byBind[$byVal] = $fields[$byVal];
-        }
-        $record = call_user_func(
-            [
-                $modelName, 'findFirst',
-            ],
-            [
-                'conditions' => $bySelector,
-                'bind' => $byBind,
-            ]
-        );
-        if (!$record) {
-            $this->fail("Record $modelName for $by not found");
-        }
-
-        foreach ($fields as $key => $val) {
-            if (isset($except[$key])) {
-                continue;
-            }
-            $this->assertEquals(
-                $val,
-                $record->get($key),
-                "Field in $modelName for $key not valid"
-            );
-        }
-
-        return $record;
     }
 
     /**
