@@ -2,7 +2,6 @@
 <?php
 
 require 'autoload.php';
-require 'config.php';
 require 'providers.php';
 
 ini_set('date.timezone', 'UTC');

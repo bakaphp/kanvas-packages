@@ -3,17 +3,22 @@
 namespace Helper;
 
 // use Canvas\Bootstrap\IntegrationTests;
+
 use Codeception\Module;
 use Codeception\TestInterface;
-use Kanvas\Packages\Tests\Support\Models\Users;
-use Niden\Mvc\Model\AbstractModel;
+use Kanvas\Packages\Test\Support\Helper\Phinx;
+use Kanvas\Packages\Test\Support\Models\Users;
 use Phalcon\Config as PhConfig;
+use Phalcon\Di;
 use Phalcon\DI\FactoryDefault as PhDI;
+use Phalcon\Mvc\Model\Manager as ModelsManager;
+use Phalcon\Mvc\Model\Metadata\Memory;
+use Kanvas\Packages\Social\Providers\DatabaseProvider;
+use Kanvas\Packages\Test\Support\Models\App;
 
 // here you can define custom actions
 // all public methods declared in helper class will be available in $I
 class Integration extends Module
-// class Integration extends PhalconUnit
 {
     /**
      * @var null|PhDI
@@ -29,17 +34,12 @@ class Integration extends Module
     public function _before(TestInterface $test)
     {
         PhDI::reset();
-        // $app = new IntegrationTests();
-        // $app->setup();
-        // $this->diContainer = $app->getContainer();
+        $this->diContainer = new Di();
 
-        // if ($this->config['rollback']) {
-        //     $this->diContainer->get('db')->begin();
-        // }
+        $this->diContainer->setShared('userData', new Users());
+        $this->diContainer->setShared('app', new App());
 
-        //Set default user
-        $user = new Users();
-        $this->diContainer->setShared('userData', $user);
+        $this->setDi($this->diContainer);
         $this->savedModels = [];
         $this->savedRecords = [];
     }
@@ -48,6 +48,20 @@ class Integration extends Module
     {
     }
 
+    /**
+     * Run migration.
+     *
+     * @param array $settings
+     *
+     * @return void
+     */
+    public function _beforeSuite($settings = [])
+    {
+        Phinx::migrate();
+        Phinx::seed();
+    }
+
+    
     /**
      * After all is done.
      *
@@ -77,64 +91,12 @@ class Integration extends Module
     }
 
     /**
-     * Returns the relationships that a model has.
-     *
-     * @param string $class
-     *
-     * @return array
-     */
-    public function getModelRelationships(string $class) : array
-    {
-        /** @var AbstractModel $class */
-        $model = new $class();
-        $manager = $model->getModelsManager();
-        $relationships = $manager->getRelations($class);
-        $data = [];
-        foreach ($relationships as $relationship) {
-            $data[] = [
-                $relationship->getType(),
-                $relationship->getFields(),
-                $relationship->getReferencedModel(),
-                $relationship->getReferencedFields(),
-                $relationship->getOptions(),
-            ];
-        }
-        return $data;
-    }
-
-    /**
      * @param array $configData
      */
     public function haveConfig(array $configData)
     {
         $config = new PhConfig($configData);
         $this->diContainer->set('config', $config);
-    }
-
-    /**
-     * Checks model fields.
-     *
-     * @param string $modelName
-     * @param array  $fields
-     */
-    public function haveModelDefinition(string $modelName, array $fields)
-    {
-        /** @var AbstractModel $model */
-        $model = new $modelName;
-        $metadata = $model->getModelsMetaData();
-        $attributes = $metadata->getAttributes($model);
-        $this->assertEquals(
-            count($fields),
-            count($attributes),
-            "Field count not correct for $modelName"
-        );
-        foreach ($fields as $value) {
-            $this->assertContains(
-                $value,
-                $attributes,
-                "Field not exists in $modelName"
-            );
-        }
     }
 
     /**
@@ -193,5 +155,25 @@ class Integration extends Module
             array_keys($by)
         );
         $this->savedRecords[] = $record;
+    }
+
+    protected function setDi()
+    {
+        $this->diContainer->setShared(
+            'modelsManager',
+            function () {
+                return new ModelsManager();
+            }
+        );
+
+        $this->diContainer->setShared(
+            'modelsMetadata',
+            function () {
+                return new Memory();
+            }
+        );
+
+        $db = new DatabaseProvider();
+        $db->register($this->diContainer);
     }
 }

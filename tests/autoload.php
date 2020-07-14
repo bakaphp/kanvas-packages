@@ -19,6 +19,7 @@ $loader->registerNamespaces([
     'Kanvas\Packages' => appPath('src/'),
     'Kanvas\Packages\Test' => appPath('tests/'),
     'Kanvas\Packages\Test\Support' => appPath('tests/_support'),
+    'Baka\Database' => appPath('vendor/baka/baka/src/database'),
 ]);
 
 $loader->register();
@@ -26,7 +27,3 @@ $loader->register();
 require appPath('vendor/autoload.php');
 
 (new Dotenv(__DIR__.'/../'))->load();
-// dd((new Dotenv(__DIR__.'/../'))->load());
-
-// $dotenv = Dotenv::createImmutable(appPath());
-// $dotenv->load();

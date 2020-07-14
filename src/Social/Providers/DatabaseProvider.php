@@ -11,8 +11,6 @@ use Phalcon\DiInterface;
 use PDOException;
 use PDO;
 
-use function Canvas\Core\envValue;
-
 class DatabaseProvider implements ServiceProviderInterface
 {
     /**
@@ -24,10 +22,10 @@ class DatabaseProvider implements ServiceProviderInterface
             'dbSocial',
             function () {
                 $options = [
-                    'host' => envValue('DATA_API_SOCIAL_MYSQL_HOST', 'localhost'),
-                    'username' => envValue('DATA_API_SOCIAL_MYSQL_USER', 'nanobox'),
-                    'password' => envValue('DATA_API_SOCIAL_MYSQL_PASS', ''),
-                    'dbname' => envValue('DATA_API_SOCIAL_MYSQL_NAME', 'kanvas_social'),
+                    'host' => getenv('DATA_API_SOCIAL_MYSQL_HOST'),
+                    'username' => getenv('DATA_API_SOCIAL_MYSQL_USER'),
+                    'password' => getenv('DATA_API_SOCIAL_MYSQL_PASS'),
+                    'dbname' => getenv('DATA_API_SOCIAL_MYSQL_NAME'),
                     'charset' => 'utf8',
                     "options" => [ PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING ]
                 ];
