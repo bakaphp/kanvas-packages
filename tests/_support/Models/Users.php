@@ -1,11 +1,10 @@
 <?php
 
-namespace Kanvas\Packages\Tests\Support\Models;
+namespace Kanvas\Packages\Test\Support\Models;
 
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
-use Kanvas\Packages\Social\Models\BaseModel;
 
-class Users extends BaseModel implements UserInterface
+class Users implements UserInterface
 {
     public $id;
 
