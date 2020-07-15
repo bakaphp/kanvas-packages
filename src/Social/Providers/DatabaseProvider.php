@@ -22,10 +22,10 @@ class DatabaseProvider implements ServiceProviderInterface
             'dbSocial',
             function () {
                 $options = [
-                    'host' => getenv('DATA_API_SOCIAL_MYSQL_HOST'),
-                    'username' => getenv('DATA_API_SOCIAL_MYSQL_USER'),
-                    'password' => getenv('DATA_API_SOCIAL_MYSQL_PASS'),
-                    'dbname' => getenv('DATA_API_SOCIAL_MYSQL_NAME'),
+                    'host' => getenv('DATA_API_MYSQL_HOST'),
+                    'username' => getenv('DATA_API_MYSQL_USER'),
+                    'password' => getenv('DATA_API_MYSQL_PASS'),
+                    'dbname' => getenv('DATA_API_MYSQL_NAME'),
                     'charset' => 'utf8',
                     "options" => [ PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING ]
                 ];
