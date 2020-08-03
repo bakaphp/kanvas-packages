@@ -2,8 +2,8 @@
 
 namespace Kanvas\Packages\Social\Jobs;
 
-use Canvas\Contracts\Queue\QueueableJobInterface;
-use Canvas\Jobs\Job;
+use Baka\Contracts\Queue\QueueableJobInterface;
+use Baka\Jobs\Job;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\MessageTags;

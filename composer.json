@@ -17,6 +17,7 @@
     "type": "project",
     "require": {
         "php": ">=7.2",
+        "baka/cashier": "dev-master",
         "vlucas/phpdotenv": "^2.4",
         "baka/baka": "^0.5.4"
     },
