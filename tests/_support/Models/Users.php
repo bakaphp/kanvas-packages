@@ -6,7 +6,7 @@ use Kanvas\Packages\Social\Contract\Users\UserInterface;
 
 class Users implements UserInterface
 {
-    public $id;
+    public int $id = 1;
 
     public function getId(): int
     {

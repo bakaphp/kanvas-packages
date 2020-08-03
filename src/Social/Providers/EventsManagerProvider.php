@@ -5,7 +5,7 @@ namespace Kanvas\Packages\Social\Providers;
 use Kanvas\Packages\Social\EventsManager;
 use Kanvas\Packages\Social\Listener\Users;
 use Phalcon\Di\ServiceProviderInterface;
-use Phalcon\DiInterface;
+use Phalcon\Di\DiInterface;
 
 class EventsManagerProvider implements ServiceProviderInterface
 {
@@ -25,7 +25,7 @@ class EventsManagerProvider implements ServiceProviderInterface
     /**
      * @param DiInterface $container
      */
-    public function register(DiInterface $container)
+    public function register(DiInterface $container): void
     {
         if (!$container->has('events')) {
             $container->setShared(

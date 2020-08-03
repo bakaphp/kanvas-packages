@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Kanvas\Packages\MagicImports;
 
@@ -35,7 +35,7 @@ class Imports extends Injectable
      * @param Phalcon\Mvc\Model $model
      * @param array $fields
      */
-    function __construct(ColumnsInterface $structure, bool $commit)
+    public function __construct(ColumnsInterface $structure, bool $commit)
     {
         $this->structure = $structure;
         $this->commit = $commit;
@@ -50,7 +50,7 @@ class Imports extends Injectable
     {
         $processData = $this->structureData($data);
 
-        $db = $this->di->get('db');
+        $db = $this->di->get('dbSocial');
         $db->begin();
         $return = [
             "errors" => [],
@@ -60,15 +60,15 @@ class Imports extends Injectable
             try {
                 $models = $this->save($modelData);
                 $relationships = $this->setRelationships($models);
-                $return['success'][] = $this->getReturn(array_merge($models,$relationships));
+                $return['success'][] = $this->getReturn(array_merge($models, $relationships));
             } catch (Exception $e) {
                 $return['errors'][] = $e->getMessage();
             }
         }
 
-        if($this->commit){
+        if ($this->commit) {
             $db->commit();
-        }else{
+        } else {
             $db->rollback();
         }
 
@@ -86,9 +86,9 @@ class Imports extends Injectable
         foreach ($modelData as $model => $data) {
             $obj = new $model();
 
-            if(method_exists($obj,'findFirstOrCreate')){
+            if (method_exists($obj, 'findFirstOrCreate')) {
                 $obj = $model::findFirstOrCreate(null, $data);
-            }else{
+            } else {
                 $obj->assign($data);
                 $obj->saveOrFail();
             }
@@ -110,7 +110,7 @@ class Imports extends Injectable
         $processData = [];
 
         foreach ($fileValues as $key => $data) {
-            if(!is_array($data)){
+            if (!is_array($data)) {
                 continue;
             }
             $processData[] = $this->getStructureData($data, $maps);
@@ -134,7 +134,7 @@ class Imports extends Injectable
              * 0 => Model
              * 1 => db tb name
              */
-            $map = explode('.',$value);
+            $map = explode('.', $value);
 
             $processData["{$this->namespaceModel}\\{$map[0]}"][$map[1]] = $raw[$order];
         }
@@ -155,11 +155,11 @@ class Imports extends Injectable
         $structures = $this->structure->getStructure();
         $returns = [];
         foreach ($structures as $modelName => $data) {
-            if(!isset($data['relationships'])){
+            if (!isset($data['relationships'])) {
                 continue;
             }
 
-            if(!isset($models[$modelName])){
+            if (!isset($models[$modelName])) {
                 continue;
             }
             
@@ -188,7 +188,7 @@ class Imports extends Injectable
         foreach ($models as $class => $obj) {
             $className = get_class($obj);
            
-            if(!isset($relationships[$className])){
+            if (!isset($relationships[$className])) {
                 continue;
             }
 

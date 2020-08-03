@@ -1,6 +1,7 @@
 <?php
 
-(new Dotenv\Dotenv(__DIR__))->load();
+$dotEnv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
+$dotEnv->load();
 
 return [
     'paths' => [
