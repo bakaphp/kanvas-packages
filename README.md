@@ -5,7 +5,7 @@ Kanvas Packages
 [![License](https://poser.pugx.org/gino-pane/composer-package-template/license)](https://packagist.org/packages/gino-pane/composer-package-template)
 [![composer.lock](https://poser.pugx.org/gino-pane/composer-package-template/composerlock)](https://packagist.org/packages/gino-pane/composer-package-template)
 [![Total Downloads](https://poser.pugx.org/gino-pane/composer-package-template/downloads)](https://packagist.org/packages/gino-pane/composer-package-template)
-![Tests](https://github.com/bakaphp/kanvas-packages/workflows/Tests/badge.svg)
+[![Tests](https://github.com/bakaphp/kanvas-packages/workflows/Tests/badge.svg?branch=development)](https://github.com/bakaphp/kanvas-packages/actions?query=workflow%3ATests)
 
 If you are trying to create a new PHP Composer package, whether it is going to be submitted to [packagist.org](packagist.org) 
 or just to exist in your Github account, this template package of files will surely help you make the process a lot easier 
