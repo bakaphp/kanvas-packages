@@ -16,9 +16,13 @@
     ],
     "type": "project",
     "require": {
-        "php": ">=7.2",
-        "vlucas/phpdotenv": "^2.4",
-        "baka/baka": "^0.5.4"
+        "php": ">= 7.4",
+        "vlucas/phpdotenv": "^4.1",
+        "phalcon/incubator": "4.0.x-dev",
+        "phalcon/incubator-acl": "^1.0.0-alpha.1",
+        "phalcon/incubator-test": "^1.0.0-alpha.1",    
+        "robmorgan/phinx": "^0.12",
+        "baka/baka": "0.6.x-dev"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
@@ -27,7 +31,7 @@
         "codeception/module-phalcon": "^1.0",
         "codeception/verify": "*",
         "fzaninotto/faker": "^1.9",
-        "odan/phinx-migrations-generator": "^4",
+        "odan/phinx-migrations-generator": "^5",
         "squizlabs/php_codesniffer": "1.*",
         "symfony/var-dumper": "^4.3@dev",
         "phpunit/phpunit": "^8.5"

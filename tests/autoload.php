@@ -26,4 +26,5 @@ $loader->register();
 
 require appPath('vendor/autoload.php');
 
-(new Dotenv(__DIR__.'/../'))->load();
+$dotEnv = Dotenv::createImmutable(__DIR__.'/../');
+$dotEnv->load();

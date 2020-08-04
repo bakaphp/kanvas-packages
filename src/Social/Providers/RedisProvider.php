@@ -2,9 +2,9 @@
 
 namespace Kanvas\Packages\Social\Providers;
 
-use function Canvas\Core\envValue;
+use function Baka\envValue;
 use Phalcon\Di\ServiceProviderInterface;
-use Phalcon\DiInterface;
+use Phalcon\Di\DiInterface;
 use Redis;
 
 class RedisProvider implements ServiceProviderInterface
@@ -12,9 +12,9 @@ class RedisProvider implements ServiceProviderInterface
     /**
      * @param DiInterface $container
      */
-    public function register(DiInterface $container)
+    public function register(DiInterface $container): void
     {
-        if(!$container->has('events')) {
+        if (!$container->has('events')) {
             $app = envValue('GEWAER_APP_ID', 1);
 
             $container->setShared(
