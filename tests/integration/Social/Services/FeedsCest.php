@@ -32,7 +32,7 @@ class FeedsCest
     public function createMessage(IntegrationTester $I): void
     {
         $text = [
-            'text' => 'This is test text'
+            'text' => 'This is test text for testing'
         ];
         
         $feed = Feeds::create(new Users(), 'memo', $text);
