@@ -43,6 +43,7 @@ class FeedsCest
      * Test add comment
      *
      * @param UnitTester $I
+     * @before createMessageType
      * @return void
      */
     public function createMessage(IntegrationTester $I): void
