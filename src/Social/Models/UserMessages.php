@@ -7,8 +7,8 @@ use Phalcon\Mvc\Model\Resultset\Simple;
 
 class UserMessages extends BaseModel
 {
-    public $messages_id;
-    public $users_id;
+    public int $messages_id;
+    public int $users_id;
 
     /**
      * Initialize method for model.

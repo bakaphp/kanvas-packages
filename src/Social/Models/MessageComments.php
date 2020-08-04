@@ -12,13 +12,13 @@ class MessageComments extends BaseModel
     use MultiInteractionsTrait;
 
     public $id;
-    public $message_id;
-    public $apps_id;
-    public $companies_id;
-    public $users_id;
-    public $message;
-    public $reactions_count;
-    public $parent_id;
+    public int $message_id;
+    public int $apps_id;
+    public int $companies_id;
+    public int $users_id;
+    public string $message;
+    public int $reactions_count = 0;
+    public int $parent_id = 0;
 
     /**
      * Initialize method for model.
@@ -67,6 +67,36 @@ class MessageComments extends BaseModel
                 'alias' => 'message',
                 'params' => [
                     'conditions' => 'is_deleted = 0'
+                ]
+            ]
+        );
+
+        $this->hasMany(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reactions',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
+
+        $this->hasOne(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reaction',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
                 ]
             ]
         );
