@@ -8,5 +8,5 @@ interface UserInterface
 {
     public function getDefaultCompany();
 
-    public function getId(): int;
+    public function getId();
 }
