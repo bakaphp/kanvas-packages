@@ -55,7 +55,7 @@ class Feeds
         $newMessage = new Messages();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
-        $newMessage->users_id = $user->getId();
+        $newMessage->users_id = (int) $user->getId();
         $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
         $newMessage->message = json_encode($message);
         $newMessage->saveOrFail();
