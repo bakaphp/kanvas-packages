@@ -4,8 +4,8 @@ namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use Codeception\Lib\Di;
 use IntegrationTester;
-use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Services\Feeds;
+use Kanvas\Packages\Social\Services\MessageTypes;
 use Kanvas\Packages\Test\Support\Models\Users;
 
 class FeedsCest
@@ -17,15 +17,16 @@ class FeedsCest
      *
      * @return void
      */
-    protected function getCommentData(): void
+    protected function createMessageType(): void
     {
-        $this->comment = MessageComments::findFirst();
+        MessageTypes::create(new Users(), 'memo', 'Test Type');
     }
-    
+        
     /**
      * Test add comment
      *
      * @param UnitTester $I
+     * @before createMessageType
      * @return void
      */
     public function createMessage(IntegrationTester $I): void
