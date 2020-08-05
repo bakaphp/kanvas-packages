@@ -4,14 +4,13 @@ namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use Codeception\Lib\Di;
 use IntegrationTester;
-use Kanvas\Packages\Social\Services\Feeds;
-use Kanvas\Packages\Social\Services\MessageTypes;
+use Kanvas\Packages\Social\Models\Reactions as ModelsReactions;
 use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 
 class ReactionsCest
 {
-    public $reaction;
+    public ModelsReactions $reaction;
 
     /**
      * Create a reaction for testing

@@ -8,10 +8,11 @@ use Kanvas\Packages\Social\Services\Feeds;
 use Kanvas\Packages\Social\Services\MessageTypes;
 use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
+use Kanvas\Packages\Social\Models\Messages;
 
 class FeedsCest
 {
-    public $message;
+    public Messages $message;
 
     /**
      * Get the first comment

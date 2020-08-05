@@ -12,7 +12,7 @@ use Kanvas\Packages\Test\Support\Models\Users;
 
 class CommentsCest
 {
-    public $comment;
+    public MessageComments $comment;
 
     /**
      * Get the first comment
