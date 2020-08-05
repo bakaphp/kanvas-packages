@@ -12,13 +12,13 @@ class Messages extends BaseModel
     use InteractionsTrait;
 
     public $id;
-    public $apps_id;
-    public $companies_id;
-    public $users_id;
-    public $message_types_id;
-    public $message;
-    public $reactions_count;
-    public $comments_count;
+    public int $apps_id;
+    public int $companies_id;
+    public int $users_id;
+    public int $message_types_id;
+    public string $message;
+    public ?int $reactions_count = null;
+    public ?int $comments_count = null;
 
     /**
      * Initialize method for model.

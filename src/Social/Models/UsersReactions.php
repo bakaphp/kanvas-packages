@@ -5,9 +5,9 @@ namespace Kanvas\Packages\Social\Models;
 class UsersReactions extends BaseModel
 {
     public $id;
-    public $users_id;
-    public $entity_id;
-    public $entity_namespace;
+    public int $users_id;
+    public int $entity_id;
+    public string $entity_namespace;
 
 
     /**

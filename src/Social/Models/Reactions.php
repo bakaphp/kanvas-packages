@@ -9,12 +9,10 @@ class Reactions extends BaseModel
     use CustomTotalInteractionsTrait;
 
     public $id;
-    public $name;
-    public $apps_id;
-    public $companies_id;
-    public $icon;
-    public $is_deleted;
-    public $is_feature;
+    public string $name;
+    public int $apps_id;
+    public int $companies_id;
+    public ?string $icon = null;
 
     /**
      * Initialize method for model.

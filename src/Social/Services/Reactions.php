@@ -135,13 +135,14 @@ class Reactions
      * Delete a Reaction by its id.
      *
      * @param integer $reactionId
-     * @return void
+     * @return bool
      */
-    public static function deleteReaction(int $reactionId): void
+    public static function deleteReaction(int $reactionId): bool
     {
         $reaction = ReactionsModel::getByIdOrFail($reactionId);
-        $reaction->deleteOrFail();
-        RemoveMessagesReactions::dispatch($reaction);
+        return (bool) $reaction->softDelete();
+
+        // RemoveMessagesReactions::dispatch($reaction);
     }
 
     /**

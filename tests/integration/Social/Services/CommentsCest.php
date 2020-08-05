@@ -7,11 +7,12 @@ use IntegrationTester;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Services\Comments;
+use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 
 class CommentsCest
 {
-    public $comment;
+    public MessageComments $comment;
 
     /**
      * Get the first comment
@@ -95,5 +96,21 @@ class CommentsCest
                 new Users()
             )
         );
+    }
+
+    /**
+     * Test comments Reactions
+     *
+     * @param IntegrationTester $I
+     * @before getCommentData
+     * @return void
+     */
+    public function commentReaction(IntegrationTester $I): void
+    {
+        $reaction = Reactions::addMessageReaction('confuse', new Users(), $this->comment);
+        $I->assertEquals($this->comment->getId(), $reaction->entity_id);
+
+        $reaction = Reactions::addMessageReaction('☺', new Users(), $this->comment);
+        $I->assertEquals($this->comment->getId(), $reaction->entity_id);
     }
 }

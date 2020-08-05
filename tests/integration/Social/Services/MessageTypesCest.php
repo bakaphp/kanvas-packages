@@ -4,12 +4,13 @@ namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use Codeception\Lib\Di;
 use IntegrationTester;
+use Kanvas\Packages\Social\Models\MessageTypes as ModelsMessageTypes;
 use Kanvas\Packages\Social\Services\MessageTypes;
 use Kanvas\Packages\Test\Support\Models\Users;
 
 class MessageTypesCest
 {
-    public $messageType;
+    public ModelsMessageTypes $messageType;
 
     /**
      * Create a message type for tests
