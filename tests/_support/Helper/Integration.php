@@ -15,6 +15,7 @@ use Phalcon\Mvc\Model\Manager as ModelsManager;
 use Phalcon\Mvc\Model\Metadata\Memory;
 use Kanvas\Packages\Social\Providers\DatabaseProvider;
 use Kanvas\Packages\Social\Providers\QueueProvider;
+use Kanvas\Packages\Social\Providers\RedisProvider;
 use Kanvas\Packages\Test\Support\Models\App;
 
 // here you can define custom actions
@@ -180,5 +181,8 @@ class Integration extends Module
 
         $queue = new QueueProvider();
         $queue->register($this->diContainer);
+
+        $redis = new RedisProvider();
+        $redis->register($this->diContainer);
     }
 }
