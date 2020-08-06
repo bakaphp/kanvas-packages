@@ -2,13 +2,13 @@
 
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
-use Codeception\Lib\Di;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Services\Comments;
 use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
+use Phalcon\Di;
 
 class CommentsCest
 {

@@ -4,9 +4,9 @@ namespace Kanvas\Packages\Social\Models;
 
 class ChannelMessages extends BaseModel
 {
-    public $channel_id;
-    public $messages_id;
-    public $users_id;
+    public int $channel_id;
+    public int $messages_id;
+    public int $users_id;
 
     /**
      * Initialize method for model.

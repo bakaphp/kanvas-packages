@@ -4,7 +4,7 @@ $dotEnv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
 $dotEnv->load();
 return[
     'paths' => [
-        'migrations' => (__DIR__.'/../').'storage/db/migrations',
+        'migrations' => __DIR__.'/_data/db/migrations',
         'seeds' => __DIR__.'/_data/db/seeds',
     ],
     'environments' => [

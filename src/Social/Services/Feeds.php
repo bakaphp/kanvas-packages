@@ -60,7 +60,7 @@ class Feeds
         $newMessage->message = json_encode($message);
         $newMessage->saveOrFail();
         $newMessage->addDistributionChannel($distribution);
-        // GenerateTags::dispatch($user, $newMessage);
+        GenerateTags::dispatch($user, $newMessage);
 
         $newAppModule = new AppModuleMessage();
         $newAppModule->message_id = $newMessage->getId();

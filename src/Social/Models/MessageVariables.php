@@ -5,9 +5,9 @@ namespace Kanvas\Packages\Social\Models;
 class MessageVariables extends BaseModel
 {
     public $id;
-    public $message_id;
-    public $key;
-    public $value;
+    public string $message_id;
+    public string $key;
+    public string $value;
 
     /**
      * Initialize method for model.

@@ -22,7 +22,8 @@
         "phalcon/incubator-acl": "^1.0.0-alpha.1",
         "phalcon/incubator-test": "^1.0.0-alpha.1",    
         "robmorgan/phinx": "^0.12",
-        "baka/baka": "0.6.x-dev"
+        "baka/baka": "0.6.x-dev",
+        "php-amqplib/php-amqplib": "^2.9"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
