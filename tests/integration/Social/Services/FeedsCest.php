@@ -4,11 +4,13 @@ namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use Codeception\Lib\Di;
 use IntegrationTester;
+use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
 use Kanvas\Packages\Social\Services\Feeds;
 use Kanvas\Packages\Social\Services\MessageTypes;
 use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Models\Messages;
+use Kanvas\Packages\Social\Services\Interactions;
 
 class FeedsCest
 {
@@ -73,5 +75,18 @@ class FeedsCest
 
         $reaction = Reactions::addMessageReaction('☺', new Users(), $this->message);
         $I->assertEquals($this->message->getId(), $reaction->entity_id);
+    }
+
+    /**
+     * Test Message Interaction
+     *
+     * @param IntegrationTester $I
+     * @before messageTestCreation
+     * @return void
+     */
+    public function messageInteraction(IntegrationTester $I): void
+    {
+        $messageInteraction = Interactions::add(new Users(), $this->message, ModelsInteractions::REACT);
+        $I->assertFalse($messageInteraction);
     }
 }
