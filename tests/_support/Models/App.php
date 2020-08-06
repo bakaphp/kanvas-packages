@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-class App
+class App extends BaseModel
 {
     public function getId(): int
     {

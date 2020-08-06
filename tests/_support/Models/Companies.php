@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-class Companies
+class Companies extends BaseModel
 {
     public string $language = "EN";
 
