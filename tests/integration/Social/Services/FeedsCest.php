@@ -86,7 +86,8 @@ class FeedsCest
      */
     public function messageInteraction(IntegrationTester $I): void
     {
-        $messageInteraction = Interactions::add(new Users(), $this->message, ModelsInteractions::REACT);
-        $I->assertFalse($messageInteraction);
+        $I->assertFalse(
+            Interactions::add(new Users(), $this->message, ModelsInteractions::REACT)
+        );
     }
 }

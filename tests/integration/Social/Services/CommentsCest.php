@@ -125,7 +125,8 @@ class CommentsCest
      */
     public function messageInteraction(IntegrationTester $I): void
     {
-        $messageInteraction = Interactions::add(new Users(), $this->comment, ModelsInteractions::REACT);
-        $I->assertFalse($messageInteraction);
+        $I->assertFalse(
+            Interactions::add(new Users(), $this->comment, ModelsInteractions::REACT)
+        );
     }
 }
