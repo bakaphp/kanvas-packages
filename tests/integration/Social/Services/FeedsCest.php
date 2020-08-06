@@ -68,6 +68,7 @@ class FeedsCest
     public function messageReaction(IntegrationTester $I): void
     {
         $reaction = Reactions::addMessageReaction('confuse', new Users(), $this->message);
+
         $I->assertEquals($this->message->getId(), $reaction->entity_id);
 
         $reaction = Reactions::addMessageReaction('☺', new Users(), $this->message);
