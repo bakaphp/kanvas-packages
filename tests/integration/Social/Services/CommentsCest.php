@@ -3,9 +3,11 @@
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use IntegrationTester;
+use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Services\Comments;
+use Kanvas\Packages\Social\Services\Interactions;
 use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 use Phalcon\Di;
@@ -112,5 +114,19 @@ class CommentsCest
 
         $reaction = Reactions::addMessageReaction('☺', new Users(), $this->comment);
         $I->assertEquals($this->comment->getId(), $reaction->entity_id);
+    }
+
+    /**
+     * Test Users Comments Interaction
+     *
+     * @param IntegrationTester $I
+     * @before getCommentData
+     * @return void
+     */
+    public function messageInteraction(IntegrationTester $I): void
+    {
+        $I->assertFalse(
+            Interactions::add(new Users(), $this->comment, ModelsInteractions::REACT)
+        );
     }
 }
