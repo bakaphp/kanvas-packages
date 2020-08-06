@@ -2,11 +2,12 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
+use Baka\Contracts\Auth\UserInterface as AuthUserInterface;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 
-class Users implements UserInterface
+class Users extends BaseModel implements UserInterface, AuthUserInterface
 {
-    public int $id = 1;
+    public $id = 1;
 
     public function getId(): int
     {
