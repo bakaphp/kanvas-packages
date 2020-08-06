@@ -14,6 +14,7 @@ use Phalcon\DI\FactoryDefault as PhDI;
 use Phalcon\Mvc\Model\Manager as ModelsManager;
 use Phalcon\Mvc\Model\Metadata\Memory;
 use Kanvas\Packages\Social\Providers\DatabaseProvider;
+use Kanvas\Packages\Social\Providers\QueueProvider;
 use Kanvas\Packages\Test\Support\Models\App;
 
 // here you can define custom actions
@@ -35,11 +36,12 @@ class Integration extends Module
     {
         PhDI::reset();
         $this->diContainer = new Di();
+        $this->setDi($this->diContainer);
 
         $this->diContainer->setShared('userData', new Users());
+        $this->diContainer->setShared('userProvider', new Users());
         $this->diContainer->setShared('app', new App());
 
-        $this->setDi($this->diContainer);
         $this->savedModels = [];
         $this->savedRecords = [];
     }
@@ -175,5 +177,8 @@ class Integration extends Module
 
         $db = new DatabaseProvider();
         $db->register($this->diContainer);
+
+        $queue = new QueueProvider();
+        $queue->register($this->diContainer);
     }
 }
