@@ -4,6 +4,7 @@ namespace Kanvas\Packages\Social\Models;
 
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Di;
 
 class UserMessages extends BaseModel
 {
@@ -15,6 +16,7 @@ class UserMessages extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
         $this->setSource('user_messages');
     }
 

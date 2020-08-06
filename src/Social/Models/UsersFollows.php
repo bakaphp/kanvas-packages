@@ -33,6 +33,8 @@ class UsersFollows extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
+        
         $this->setSource('users_follows');
     }
 }
