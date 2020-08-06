@@ -142,7 +142,7 @@ class Reactions
         $reaction = ReactionsModel::getByIdOrFail($reactionId);
         return (bool) $reaction->softDelete();
 
-        // RemoveMessagesReactions::dispatch($reaction);
+        RemoveMessagesReactions::dispatch($reaction);
     }
 
     /**
