@@ -17,7 +17,7 @@ class Interactions
      *
      * @param ModelInterface $entity
      * @param integer $interactionId
-     * @return UsersInteractions
+     * @return bool
      */
     public static function add(UserInterface $user, ModelInterface $entity, int $interactionId): bool
     {
@@ -49,11 +49,11 @@ class Interactions
      * Get interaction object by its name
      *
      * @param string $interactionName
-     * @return UsersInteractions
+     * @return InteractionsModel
      */
-    public static function getInteractionByName(string $interactionName): UsersInteractions
+    public static function getInteractionByName(string $interactionName): InteractionsModel
     {
-        return UsersInteractions::findOrFail([
+        return InteractionsModel::findFirstOrFail([
             'conditions' => 'name = :name: AND is_deleted = 0',
             'bind' => [
                 'name' => $interactionName
@@ -91,7 +91,7 @@ class Interactions
     public static function getInteractionIdByName(string $interactionName): int
     {
         switch ($interactionName) {
-            case 'like':
+            case 'react':
                 return InteractionsModel::REACT;
                 break;
 
