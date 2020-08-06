@@ -9,13 +9,13 @@ class Tags extends BaseModel
     use CustomTotalInteractionsTrait;
 
     public $id;
-    public $apps_id;
-    public $companies_id;
-    public $users_id;
-    public $name;
-    public $slug;
-    public $weight;
-    public $is_feature;
+    public int $apps_id;
+    public int $companies_id;
+    public int $users_id;
+    public string $name;
+    public string $slug;
+    public int $weight = 0;
+    public int $is_feature = 0;
 
     /**
      * Initialize method for model.

@@ -5,12 +5,12 @@ namespace Kanvas\Packages\Social\Models;
 class AppModuleMessage extends BaseModel
 {
     public $id;
-    public $message_id;
-    public $message_types_id;
-    public $apps_id;
-    public $companies_id;
-    public $system_modules_id;
-    public $entity_id;
+    public int $message_id;
+    public int $message_types_id;
+    public int $apps_id;
+    public int $companies_id;
+    public ?int $system_modules_id = null;
+    public ?int $entity_id = null;
 
     /**
      * Initialize method for model.

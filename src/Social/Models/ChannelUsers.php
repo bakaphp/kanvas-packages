@@ -4,10 +4,10 @@ namespace Kanvas\Packages\Social\Models;
 
 class ChannelUsers extends BaseModel
 {
-    public $channel_id;
-    public $users_id;
-    public $messages_read_at;
-    public $roles_id;
+    public int $channel_id;
+    public int $users_id;
+    public ?string $messages_read_at = null;
+    public int $roles_id;
 
     /**
      * Initialize method for model.

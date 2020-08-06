@@ -5,8 +5,8 @@ namespace Kanvas\Packages\Social\Models;
 class Interactions extends BaseModel
 {
     public $id;
-    public $name;
-    public $icon;
+    public string $name;
+    public ?string $icon = null;
 
     const REACT = 1;
     const SAVE = 2;

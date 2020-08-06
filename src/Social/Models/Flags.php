@@ -5,8 +5,8 @@ namespace Kanvas\Packages\Social\Models;
 class Flags extends BaseModel
 {
     public $id;
-    public $name;
-    public $weight;
+    public string $name;
+    public int $weight;
 
     /**
      * Initialize method for model.

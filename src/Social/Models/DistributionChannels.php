@@ -5,8 +5,8 @@ namespace Kanvas\Packages\Social\Models;
 class DistributionChannels extends BaseModel
 {
     public $id;
-    public $channel;
-    public $queues;
+    public string $channel;
+    public string $queues;
 
     /**
      * Initialize method for model.
