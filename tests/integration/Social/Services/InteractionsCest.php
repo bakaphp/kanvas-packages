@@ -25,9 +25,6 @@ class InteractionsCest
 
         $I->assertInstanceOf(ModelsInteractions::class, $interaction);
         $I->assertNotNull($interaction->id);
-        $reaction = Reactions::getReactionByName('test-reaction', new Users());
-
-        $I->assertEquals('test-reaction', $reaction->name);
     }
 
     /**
