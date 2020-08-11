@@ -3,7 +3,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class MessageSeeds extends AbstractSeed
+class UserMessagesSeeds extends AbstractSeed
 {
     /**
      * Run Method.
@@ -17,19 +17,20 @@ class MessageSeeds extends AbstractSeed
     {
         $data = [
             [
-                'id' => 0,
-                'apps_id' => 1,
-                'companies_id' => 1,
+                'messages_id' => 1,
                 'users_id' => 1,
-                'message_types_id' => 1,
-                'message' => 'test message',
-                'reactions_count' => 0,
-                'comments_count' => 0,
+                'is_deleted' => 0,
+                'created_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'messages_id' => 1,
+                'users_id' => 2,
+                'is_deleted' => 0,
                 'created_at' => date('Y-m-d H:i:s'),
             ]
         ];
 
-        $posts = $this->table('messages');
+        $posts = $this->table('user_messages');
         $posts->insert($data)
               ->save();
     }
