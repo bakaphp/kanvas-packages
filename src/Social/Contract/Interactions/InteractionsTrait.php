@@ -4,41 +4,51 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contract\Interactions;
 
+use Kanvas\Packages\Social\Contract\Events\EventManagerAwareTrait;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Models\UsersInteractions;
+use Kanvas\Packages\Social\Services\Interactions;
 
 trait InteractionsTrait
 {
+    use EventManagerAwareTrait;
+    
     /**
-     * Undocumented function
+     * Interact with the object based on the action
      *
      * @param string $action
-     * @param UserInterface $user
      * @return void
      */
-    public function interact(string $action, UserInterface $user)
+    public function interact(string $action): void
     {
+        $this->fire("socialUser:{$action}", $this);
     }
 
     /**
-     * Undocumented function
+     * React to an object by emoji on reaction name
      *
-     * @param string $action
-     * @param UserInterface $user
+     * @param string $reaction
      * @return void
      */
-    public function deleteInteraction(string $action, UserInterface $user)
+    public function react(string $reaction): void
     {
+        $this->fire("socialUser:react", $this, $reaction);
     }
 
+
     /**
-     * Undocumented function
+     * Remove an interaction
      *
      * @param string $action
      * @param UserInterface $user
      * @return void
      */
-    public function getInteractions(string $action, UserInterface $user)
+    public function deleteInteraction(int $interactionId, UserInterface $user): void
     {
+        $interaction = $this->getInteractionByUser($interactionId, $user);
+        if ($interaction) {
+            Interactions::removeInteraction($interaction);
+        }
     }
 
     /**
@@ -53,13 +63,20 @@ trait InteractionsTrait
     }
 
     /**
-     * Undocumented function
+     * Get the interaction made by the user to the current entity
      *
-     * @param string $action
+     * @param int $interactionId
      * @param UserInterface $user
-     * @return void
+     * @return UsersInteractions|bool
      */
-    public function getInteractionByUser(string $action, UserInterface $user)
+    public function getInteractionByUser(int $interactionId, UserInterface $user): UsersInteractions
     {
+        return $this->getInteraction([
+            'conditions' => 'users_id = :userId: AND interactions_id = :interactionId: AND is_deleted = 0',
+            'bind' => [
+                'userId' => $user->getId(),
+                'interactionId' => $interactionId
+            ]
+        ]);
     }
 }

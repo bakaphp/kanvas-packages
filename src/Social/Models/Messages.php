@@ -2,16 +2,23 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
+use Phalcon\Di;
+
 class Messages extends BaseModel
 {
+    use TotalInteractionsTrait;
+    use InteractionsTrait;
+
     public $id;
-    public $apps_id;
-    public $companies_id;
-    public $users_id;
-    public $message_types_id;
-    public $message;
-    public $reactions_count;
-    public $comments_count;
+    public int $apps_id;
+    public int $companies_id;
+    public int $users_id;
+    public int $message_types_id;
+    public string $message;
+    public ?int $reactions_count = null;
+    public ?int $comments_count = null;
 
     /**
      * Initialize method for model.
@@ -56,13 +63,60 @@ class Messages extends BaseModel
             [
                 'alias' => 'interactions',
                 'params' => [
-                    'conditions' => 'entity_namespace = :namespace:',
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
                     'bind' => [
                         'namespace' => get_class($this)
                     ]
                 ]
             ]
         );
+
+        $this->hasOne(
+            'id',
+            UsersInteractions::class,
+            'entity_id',
+            [
+                'alias' => 'interaction',
+                'params' => [
+                    'conditions' => 'entity_id = :entityId: AND entity_namespace = :namespace:',
+                    'bind' => [
+                        'namespace' => get_class($this),
+                        'entityId' => $this->id
+                    ]
+                ]
+            ]
+        );
+
+        $this->hasMany(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reactions',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
+
+        $this->hasOne(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reaction',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
+
 
         $this->hasOne(
             'id',
@@ -114,16 +168,6 @@ class Messages extends BaseModel
     }
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
-     */
-    public function getSource()
-    {
-        return 'messages';
-    }
-
-    /**
      * Create a channel for the current message
      *
      * @param string $distribution
@@ -136,5 +180,25 @@ class Messages extends BaseModel
         $channelMessage->users_id = $this->users_id;
         $channelMessage->channel_id = Channels::getByName($distribution)->getId();
         $channelMessage->saveOrFail();
+    }
+
+    /**
+     * Create a comment for a message
+     *
+     * @param string $messageId
+     * @param string $message
+     * @return MessageComments
+     */
+    public function comment(string $message): MessageComments
+    {
+        $comment = new MessageComments();
+        $comment->message_id = $this->getId();
+        $comment->apps_id = Di::getDefault()->get('app')->getId();
+        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
+        $comment->users_id = Di::getDefault()->get('userData')->getId();
+        $comment->message = $message;
+        $comment->saveOrFail();
+
+        return $comment;
     }
 }

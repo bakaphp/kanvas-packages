@@ -10,6 +10,20 @@ use Phalcon\Di;
 
 class MessageTypes
 {
+
+    /**
+     * Return a Message object by its id
+     *
+     * @param string $uuid
+     * @return MessageTypesModel
+     */
+    public static function get(string $uuid): MessageTypesModel
+    {
+        $messageType = MessageTypesModel::getByIdOrFail($uuid);
+        
+        return $messageType;
+    }
+
     /**
      * Create a new MessageTypes
      *
@@ -58,7 +72,7 @@ class MessageTypes
     public static function getTypeByVerb(string $verb): MessageTypesModel
     {
         return MessageTypesModel::findFirst([
-            'conditions' => 'verb = :verb: AND apps_id :currentAppId: AND is_deleted = 0',
+            'conditions' => 'verb = :verb: AND apps_id = :currentAppId: AND is_deleted = 0',
             'bind' => [
                 'verb' => $verb,
                 'currentAppId' => Di::getDefault()->get('app')->getId()

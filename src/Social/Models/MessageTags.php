@@ -5,16 +5,16 @@ namespace Kanvas\Packages\Social\Models;
 class MessageTags extends BaseModel
 {
     public $id;
-    public $message_id;
-    public $tags_id;
+    public int $message_id;
+    public int $tags_id;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'message_tags';
+        parent::initialize();
+        
+        $this->setSource('message_tags');
     }
 }

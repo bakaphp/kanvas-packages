@@ -5,16 +5,16 @@ namespace Kanvas\Packages\Social\Models;
 class DistributionChannels extends BaseModel
 {
     public $id;
-    public $channel;
-    public $queues;
+    public string $channel;
+    public string $queues;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'distribution_channels';
+        parent::initialize();
+        
+        $this->setSource('distribution_channels');
     }
 }

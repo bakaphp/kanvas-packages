@@ -2,13 +2,25 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
+
 class UsersInteractions extends BaseModel
 {
+    use TotalInteractionsTrait {
+        getInteractionStorageKey as protected parentGetInteractionStorageKey;
+    }
+
     public $id;
-    public $users_id;
-    public $entity_id;
-    public $entity_namespace;
-    public $interactions_id;
+    public int $users_id;
+    public int $entity_id;
+    public string $entity_namespace;
+    public int $interactions_id;
+
+    const LIKE = 'like';
+    const SAVE = 'save';
+    const COMMENT = 'comment';
+    const REPLIED = 'reply';
+    const FOLLOWING = 'follow';
 
     /**
      * Initialize relationshit after fetch
@@ -30,14 +42,24 @@ class UsersInteractions extends BaseModel
             ]
         );
     }
-    
+
     /**
-     * Returns table name mapped in the model.
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        parent::initialize();
+        
+        $this->setSource('users_interactions');
+    }
+
+    /**
+     * Get the interaction key.
      *
      * @return string
      */
-    public function getSource()
+    protected function getInteractionStorageKey(): string
     {
-        return 'users_interactions';
+        return $this->entity_namespace . '-' . $this->entity_id .'-' . $this->interactions_id;
     }
 }

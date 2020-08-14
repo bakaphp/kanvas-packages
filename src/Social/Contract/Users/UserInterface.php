@@ -7,4 +7,6 @@ namespace Kanvas\Packages\Social\Contract\Users;
 interface UserInterface
 {
     public function getDefaultCompany();
+
+    public function getId();
 }

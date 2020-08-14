@@ -1,5 +1,6 @@
 <?php
-namespace Kanvas\Packages;
+
+use _generated\UnitTesterActions;
 
 /**
  * Inherited Methods
@@ -18,9 +19,9 @@ namespace Kanvas\Packages;
 */
 class UnitTester extends \Codeception\Actor
 {
-    use _generated\UnitTesterActions;
+    use UnitTesterActions;
 
-   /**
-    * Define custom actions here
-    */
+    /**
+     * Define custom actions here
+     */
 }

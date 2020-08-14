@@ -5,9 +5,9 @@ namespace Kanvas\Packages\Social\Models;
 class UsersFollows extends BaseModel
 {
     public $id;
-    public $users_id;
-    public $entity_id;
-    public $entity_namespace;
+    public int $users_id;
+    public int $entity_id;
+    public string $entity_namespace;
 
 
     /**
@@ -27,14 +27,14 @@ class UsersFollows extends BaseModel
             ]
         );
     }
-    
+
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'users_follows';
+        parent::initialize();
+        
+        $this->setSource('users_follows');
     }
 }

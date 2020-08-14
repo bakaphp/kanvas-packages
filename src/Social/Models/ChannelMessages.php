@@ -4,17 +4,17 @@ namespace Kanvas\Packages\Social\Models;
 
 class ChannelMessages extends BaseModel
 {
-    public $channel_id;
-    public $messages_id;
-    public $users_id;
+    public int $channel_id;
+    public int $messages_id;
+    public int $users_id;
 
     /**
-     * Returns table name mapped in the model.
-     *
-     * @return string
+     * Initialize method for model.
      */
-    public function getSource()
+    public function initialize()
     {
-        return 'channel_messages';
+        parent::initialize();
+        
+        $this->setSource('channel_messages');
     }
 }

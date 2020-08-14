@@ -2,15 +2,23 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\MultiInteractionsTrait;
+use Phalcon\Di;
+
 class MessageComments extends BaseModel
 {
+    use CustomTotalInteractionsTrait;
+    use MultiInteractionsTrait;
+
     public $id;
-    public $message_id;
-    public $apps_id;
-    public $companies_id;
-    public $users_id;
-    public $message;
-    public $reactions_count;
+    public int $message_id;
+    public int $apps_id;
+    public int $companies_id;
+    public int $users_id;
+    public string $message;
+    public int $reactions_count = 0;
+    public int $parent_id = 0;
 
     /**
      * Initialize method for model.
@@ -62,15 +70,66 @@ class MessageComments extends BaseModel
                 ]
             ]
         );
+
+        $this->hasMany(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reactions',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
+
+        $this->hasOne(
+            'id',
+            UsersReactions::class,
+            'entity_id',
+            [
+                'alias' => 'reaction',
+                'params' => [
+                    'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
+                    'bind' => [
+                        'namespace' => get_class($this)
+                    ]
+                ]
+            ]
+        );
     }
-    
+
     /**
-     * Returns table name mapped in the model.
+     * Create a comment for a message
      *
-     * @return string
+     * @param string $messageId
+     * @param string $message
+     * @return MessageComments
      */
-    public function getSource()
+    public function reply(string $message): MessageComments
     {
-        return 'message_comments';
+        $comment = new MessageComments();
+        $comment->message_id = $this->message_id;
+        $comment->apps_id = Di::getDefault()->get('app')->getId();
+        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
+        $comment->users_id = Di::getDefault()->get('userData')->getId();
+        $comment->message = $message;
+        $comment->parent_id = $this->getParentId();
+        $comment->saveOrFail();
+
+        return $comment;
+    }
+
+    /**
+     * Return the id of the parent in case that comment is a reply
+     *
+     * @return integer
+     */
+    public function getParentId(): int
+    {
+        return $this->parent_id == 0 ? $this->getId() : $this->parent_id;
     }
 }

@@ -13,6 +13,19 @@ use Phalcon\Utils\Slug;
 class Tags
 {
     /**
+     * Get a Tag by its ID
+     *
+     * @param string $uuid
+     * @return TagsModel
+     */
+    public static function get(string $uuid): TagsModel
+    {
+        $tag = TagsModel::getByIdOrFail($uuid);
+
+        return $tag;
+    }
+
+    /**
      * To be describe
      *
      * @param UserMessages $feed

@@ -5,9 +5,15 @@ namespace Kanvas\Packages\Social\Models;
 class Interactions extends BaseModel
 {
     public $id;
-    public $name;
-    public $title;
-    public $icon;
+    public string $name;
+    public ?string $icon = null;
+
+    const REACT = 1;
+    const SAVE = 2;
+    const COMMENT = 3;
+    const REPLIED = 4;
+    const FOLLOWING = 5;
+    const FOLLOWERS = 6;
 
     /**
      * Initialize method for model.
@@ -27,14 +33,15 @@ class Interactions extends BaseModel
             ]
         );
     }
-    
+
     /**
-     * Returns table name mapped in the model.
+     * Verify if the interaction is a comment/reply
      *
-     * @return string
+     * @param integer $interactionId
+     * @return boolean
      */
-    public function getSource()
+    public static function isComment(int $interactionId): bool
     {
-        return 'interactions';
+        return $interactionId == self::COMMENT || $interactionId == self::REPLIED;
     }
 }
