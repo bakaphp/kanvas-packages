@@ -6,10 +6,10 @@ namespace Kanvas\Packages\Wallets\Contract;
 
 use Kanvas\Packages\Wallets\Models\Products;
 
+/**
+ * Methods most used in products
+ */
 trait ProductsWalletTrait
 {
-    public static function getAll()
-    {
-        return Products::find();
-    }
+    
 }

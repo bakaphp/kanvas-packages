@@ -2,6 +2,10 @@
 
 namespace Kanvas\Packages\Wallets\Models;
 
+/**
+ * Class TransactionsItems.
+ * transaction within the wallet
+ */
 class TransactionsItems extends BaseModel
 {
     public int $transactions_id;

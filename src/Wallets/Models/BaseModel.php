@@ -5,6 +5,9 @@ namespace Kanvas\Packages\Wallets\Models;
 
 use Baka\Database\Model;
 
+/**
+ * Base model
+ */
 class BaseModel extends Model
 {
     /**

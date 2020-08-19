@@ -5,19 +5,24 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Wallets\Contract;
 
 use Kanvas\Packages\Wallets\Models\Wallets;
+use Phalcon\Mvc\Model\Resultset\Simple;
 
+/**
+ * Methods most used in Users wallet
+ */
 trait UsersWalletTrait
 {
     /**
      * We get all the user's wallets
-     * @return 
+     * @return Simple
      */
-    public function getWallets()
+    public function getWallets() : ?Simple
     {
         return Wallets::find([
-            'conditions' => 'users_id = ?0',
+            'conditions' => 'users_id = ?0 AND is_deleted = ?1',
             'bind' => [
-                0 => $this->getId()
+                0 => $this->getId(),
+                1 => 0
             ]
         ]);
     }

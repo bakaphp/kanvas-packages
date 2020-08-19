@@ -2,6 +2,10 @@
 
 namespace Kanvas\Packages\Wallets\Models;
 
+/**
+ * Class Wallets.
+ * model for handling wallets
+ */
 class Wallets extends BaseModel
 {
     public string $name;
