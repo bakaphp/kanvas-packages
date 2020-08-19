@@ -5,9 +5,9 @@ namespace Kanvas\Packages\Wallets\Models;
 class Products extends BaseModel
 {
     public string $name;
-    public string $sdk;
+    public ?string $sdk = null;
     public float $price;
-    public ?int $status = 0;
+    public int $type;
 
     /**
      * Initialize method for model.
@@ -15,5 +15,19 @@ class Products extends BaseModel
     public function initialize()
     {
         parent::initialize();
+        $this->setSource('products');
+    }
+
+    /**
+     * Active products by type
+     */
+    public function getActiveByType(int $type)
+    {
+        return Products::find([
+            'conditions' => 'type = ?1 AND is_deleted = 0',
+            'bind' => [
+                1 => $type
+            ]
+        ]);
     }
 }

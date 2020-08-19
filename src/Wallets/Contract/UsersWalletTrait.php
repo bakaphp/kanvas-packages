@@ -27,7 +27,7 @@ trait UsersWalletTrait
      * @param string $name
      * @return Wallets
      */
-    public function getWalletsByName(string $name) : Wallets
+    public function getWalletsByName(string $name) : ?Wallets
     {
         return Wallets::findFirst([
             'conditions' => 'users_id = ?0 AND name = ?1',

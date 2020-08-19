@@ -18,7 +18,7 @@ class TransactionsItems extends BaseModel
     {
         parent::initialize();
 
-        $this->setSource('wallet_transactions');
+        $this->setSource('wallet_transactions_items');
         $this->hasOne('wallet_id', 'Kanvas\\Packages\\Wallets\\Models\\Wallets', 'id', ['alias' => 'wallets']);
     }
 }

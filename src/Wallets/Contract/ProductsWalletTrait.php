@@ -12,9 +12,4 @@ trait ProductsWalletTrait
     {
         return Products::find();
     }
-
-    public function getActiveProducts()
-    {
-        return Products::findByStatus(1);
-    }
 }
