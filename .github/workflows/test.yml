@@ -102,16 +102,16 @@ jobs:
         run: cp .env.example .env
           
       - name: Phinx Migrate Social
-        run: vendor/bin/phinx -c phinx-social.php migrate -e development
+        run: ./vendor/bin/phinx -c phinx-social.php migrate -e development
 
       - name: Phinx Seed:run Social
-        run: vendor/bin/phinx -c phinx-social.php seed:run
+        run: ./vendor/bin/phinx -c phinx-social.php seed:run
       
       - name: Phinx Migrate Wallet
-        run: vendor/bin/phinx -c phinx-wallets.php migrate -e development
+        run: ./vendor/bin/phinx -c phinx-wallets.php migrate -e development
 
       - name: Phinx Seed:run Wallet
-        run: vendor/bin/phinx -c phinx-wallets.php seed:run
+        run: ./vendor/bin/phinx -c phinx-wallets.php seed:run
 
       - name: Run test suites
         if: success()
