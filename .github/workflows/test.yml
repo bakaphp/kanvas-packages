@@ -105,13 +105,13 @@ jobs:
         run: ./vendor/bin/phinx migrate -c phinx-social.php -e development
 
       - name: Phinx Seed:run Social
-        run: ./vendor/bin/phinx migrate -c phinx-social.php seed:run
+        run: ./vendor/bin/phinx seed:run -c phinx-social.php
       
       - name: Phinx Migrate Wallet
-        run: ./vendor/bin/phinx migrate -c phinx-wallets.php migrate -e development
+        run: ./vendor/bin/phinx migrate -c phinx-wallets.php -e development
 
       - name: Phinx Seed:run Wallet
-        run: ./vendor/bin/phinx migrate -c phinx-wallets.php seed:run
+        run: ./vendor/bin/phinx seed:run -c phinx-wallets.php
 
       - name: Run test suites
         if: success()
