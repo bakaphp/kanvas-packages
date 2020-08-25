@@ -201,4 +201,15 @@ class Messages extends BaseModel
 
         return $comment;
     }
+
+    /**
+     * Verify if the $userId owns this message
+     *
+     * @param integer $userId
+     * @return boolean
+     */
+    public function hasUser(int $userId): bool
+    {
+        return $userId == $this->users_id;
+    }
 }

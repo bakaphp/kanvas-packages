@@ -90,4 +90,17 @@ class FeedsCest
             Interactions::add(new Users(), $this->message, ModelsInteractions::REACT)
         );
     }
+
+    /**
+     * Test message and feed delete
+     *
+     * @param IntegrationTester $I
+     * @return void
+     */
+    public function deleteMessage(IntegrationTester $I): void
+    {
+        $I->assertTrue(
+            Feeds::delete(Messages::findFirst()->getId(),new Users())
+        );
+    }
 }

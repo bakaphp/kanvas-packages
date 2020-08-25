@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
+use Exception;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
+use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
 use Kanvas\Packages\Social\Models\AppModuleMessage;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\UserMessages;
@@ -86,12 +88,21 @@ class Feeds
     }
 
     /**
-     * To be describe
+     * Delete the message and remove it from the users feeds
      *
      * @param string $uuid
-     * @return void
+     * @return bool
      */
-    public static function delete(string $uuid)
+    public static function delete(string $uuid, UserInterface $user): bool
     {
+        $message = Messages::getByIdOrFail($uuid);
+        
+        if (!$message->hasUser($user->getId())) {
+            throw new Exception('The user not own this message');
+        }
+
+        RemoveMessagesFeed::dispatch($message);
+
+        return $message->softDelete();
     }
 }
