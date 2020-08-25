@@ -20,6 +20,6 @@ class Wallets extends BaseModel
         parent::initialize();
 
         $this->setSource('wallets');
-        $this->hasMany('id', 'Gewaer\\Models\\Transactions', 'wallet_id', ['alias' => 'transactions']);
+        $this->hasMany('id', Transactions::class, 'wallet_id', ['alias' => 'transactions']);
     }
 }

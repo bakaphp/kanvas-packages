@@ -1,7 +1,7 @@
 <?php
 
 namespace Kanvas\Packages\Wallets\Models;
-
+use Gewaer\Models\Users;
 /**
  * Class Transactions.
  * transaction within the wallet
@@ -23,8 +23,8 @@ class Transactions extends BaseModel
         parent::initialize();
 
         $this->setSource('wallet_transactions');
-        $this->hasOne('wallet_id', 'Kanvas\\Packages\\Wallets\\Models\\Wallets', 'id', ['alias' => 'wallets']);
-        $this->hasOne('users_id', 'Gewaer\\Models\\Users', 'id', ['alias' => 'users']);
-        $this->hasMany('id', 'Gewaer\\Models\\TransactionsItems', 'transactions_id', ['alias' => 'items']);
+        $this->hasOne('wallet_id', Wallets::class, ['alias' => 'wallets']);
+        $this->hasOne('users_id', Users::class, 'id', ['alias' => 'users']);
+        $this->hasMany('id', TransactionsItems::class, 'transactions_id', ['alias' => 'items']);
     }
 }
