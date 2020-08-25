@@ -200,9 +200,16 @@ class InitialTablesWallet extends Phinx\Migration\AbstractMigration
             'limit' => MysqlAdapter::INT_TINY,
             'after' => 'price',
         ])
+        ->addColumn('json', 'text', [
+            'null' => true,
+            'limit' => 65535,
+            'collation' => 'utf8_unicode_520_ci',
+            'encoding' => 'utf8',
+            'after' => 'type',
+        ])
         ->addColumn('created_at', 'datetime', [
             'null' => false,
-            'after' => 'type',
+            'after' => 'json',
         ])
         ->addColumn('updated_at', 'datetime', [
             'null' => true,

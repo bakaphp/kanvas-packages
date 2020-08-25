@@ -101,11 +101,17 @@ jobs:
       - name: Setup Env Variable
         run: cp .env.example .env
           
-      - name: Phinx Migrate
-        run: vendor/bin/phinx migrate -e development
+      - name: Phinx Migrate Social
+        run: vendor/bin/phinx -c phinx-social.php migrate -e development
 
-      - name: Phinx Seed:run
-        run: vendor/bin/phinx seed:run
+      - name: Phinx Seed:run Social
+        run: vendor/bin/phinx -c phinx-social.php seed:run
+      
+      - name: Phinx Migrate Wallet
+        run: vendor/bin/phinx -c phinx-wallets.php migrate -e development
+
+      - name: Phinx Seed:run Wallet
+        run: vendor/bin/phinx -c phinx-wallets.php seed:run
 
       - name: Run test suites
         if: success()
