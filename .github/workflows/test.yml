@@ -106,6 +106,9 @@ jobs:
 
       - name: Phinx Seed:run Social
         run: ./vendor/bin/phinx seed:run -c phinx-social.php
+   
+      - name: Phinx Migrate Wallet
+        run: ./vendor/bin/phinx migrate -c phinx-wallets.php -e development
       
       - name: Run test suites
         if: success()
