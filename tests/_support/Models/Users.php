@@ -11,7 +11,7 @@ class Users extends BaseModel implements UserInterface, AuthUserInterface
 
     public function getId(): int
     {
-        return 1;
+        return $this->id;
     }
 
     public function getDefaultCompany(): Companies

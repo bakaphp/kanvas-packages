@@ -7,7 +7,7 @@ class Channels extends BaseModel
     public $id;
     public string $name;
     public string $description;
-    public int $last_message_id;
+    public ?int $last_message_id = null;
 
     /**
      * Initialize method for model.
