@@ -1,17 +1,19 @@
 <?php
 
-return array (
-  'database' => 
-  array (
+return array(
+  'database' =>
+  array(
     'default_character_set_name' => 'utf8mb4',
+    0 => 'utf8mb4',
     'default_collation_name' => 'utf8mb4_bin',
+    1 => 'utf8mb4_bin',
   ),
-  'tables' => 
-  array (
-    'ut_migrations' => 
-    array (
-      'table' => 
-      array (
+  'tables' =>
+  array(
+    'ut_migrations' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'ut_migrations',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -19,34 +21,34 @@ return array (
         'character_set_name' => 'utf8',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'version' => 
-        array (
+      'columns' =>
+      array(
+        'version' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'ut_migrations',
           'COLUMN_NAME' => 'version',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'bigint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '19',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'bigint(20)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'migration_name' => 
-        array (
+        'migration_name' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'ut_migrations',
           'COLUMN_NAME' => 'migration_name',
@@ -56,9 +58,9 @@ return array (
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '100',
           'CHARACTER_OCTET_LENGTH' => '300',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8',
           'COLLATION_NAME' => 'utf8_general_ci',
           'COLUMN_TYPE' => 'varchar(100)',
@@ -67,10 +69,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'start_time' => 
-        array (
+        'start_time' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'ut_migrations',
           'COLUMN_NAME' => 'start_time',
@@ -78,23 +80,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'timestamp',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'timestamp',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'end_time' => 
-        array (
+        'end_time' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'ut_migrations',
           'COLUMN_NAME' => 'end_time',
@@ -102,23 +104,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'timestamp',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'timestamp',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'breakpoint' => 
-        array (
+        'breakpoint' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'ut_migrations',
           'COLUMN_NAME' => 'breakpoint',
@@ -126,36 +128,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(1)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'ut_migrations',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'version',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -163,12 +165,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'message_tags' => 
-    array (
-      'table' => 
-      array (
+    'message_tags' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'message_tags',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -176,106 +178,106 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_tags',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message_id' => 
-        array (
+        'message_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_tags',
           'COLUMN_NAME' => 'message_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'tags_id' => 
-        array (
+        'tags_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_tags',
           'COLUMN_NAME' => 'tags_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_tags',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_tags',
           'COLUMN_NAME' => 'updated_at',
@@ -283,23 +285,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_tags',
           'COLUMN_NAME' => 'is_deleted',
@@ -307,36 +309,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'message_tags',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -344,12 +346,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'user_messages' => 
-    array (
-      'table' => 
-      array (
+    'user_messages' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'user_messages',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -357,22 +359,22 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'messages_id' => 
-        array (
+      'columns' =>
+      array(
+        'messages_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'user_messages',
           'COLUMN_NAME' => 'messages_id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'char',
           'CHARACTER_MAXIMUM_LENGTH' => '36',
           'CHARACTER_OCTET_LENGTH' => '144',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'char(36)',
@@ -381,58 +383,58 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'user_messages',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'user_messages',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'user_messages',
           'COLUMN_NAME' => 'is_deleted',
@@ -440,51 +442,51 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'user_messages',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'messages_id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
             'Index_comment' => '',
           ),
-          2 => 
-          array (
+          2 =>
+          array(
             'Table' => 'user_messages',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '2',
             'Column_name' => 'users_id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -492,12 +494,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'channel_users' => 
-    array (
-      'table' => 
-      array (
+    'channel_users' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'channel_users',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -505,58 +507,58 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'channel_id' => 
-        array (
+      'columns' =>
+      array(
+        'channel_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_users',
           'COLUMN_NAME' => 'channel_id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_users',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'messages_read_at' => 
-        array (
+        'messages_read_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_users',
           'COLUMN_NAME' => 'messages_read_at',
@@ -564,71 +566,71 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'roles_id' => 
-        array (
+        'roles_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_users',
           'COLUMN_NAME' => 'roles_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_users',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_users',
           'COLUMN_NAME' => 'updated_at',
@@ -636,23 +638,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_users',
           'COLUMN_NAME' => 'is_deleted',
@@ -660,51 +662,51 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'channel_users',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'channel_id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
             'Index_comment' => '',
           ),
-          2 => 
-          array (
+          2 =>
+          array(
             'Table' => 'channel_users',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '2',
             'Column_name' => 'users_id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -712,12 +714,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'messages' => 
-    array (
-      'table' => 
-      array (
+    'messages' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'messages',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -725,142 +727,142 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'apps_id' => 
-        array (
+        'apps_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'apps_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'companies_id' => 
-        array (
+        'companies_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'companies_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message_types_id' => 
-        array (
+        'message_types_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'message_types_id',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message' => 
-        array (
+        'message' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'message',
           'ORDINAL_POSITION' => '6',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'longtext',
           'CHARACTER_MAXIMUM_LENGTH' => '4294967295',
           'CHARACTER_OCTET_LENGTH' => '4294967295',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'longtext',
@@ -869,10 +871,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'reactions_count' => 
-        array (
+        'reactions_count' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'reactions_count',
@@ -880,23 +882,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'comments_count' => 
-        array (
+        'comments_count' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'comments_count',
@@ -904,47 +906,47 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '9',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'updated_at',
@@ -952,23 +954,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'messages',
           'COLUMN_NAME' => 'is_deleted',
@@ -976,36 +978,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'messages',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -1013,12 +1015,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'channels' => 
-    array (
-      'table' => 
-      array (
+    'channels' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'channels',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -1026,46 +1028,46 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channels',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'name' => 
-        array (
+        'name' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channels',
           'COLUMN_NAME' => 'name',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -1074,22 +1076,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'description' => 
-        array (
+        'description' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channels',
           'COLUMN_NAME' => 'description',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -1098,58 +1100,58 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'last_message_id' => 
-        array (
+        'last_message_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channels',
           'COLUMN_NAME' => 'last_message_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
-          'IS_NULLABLE' => 'NO',
+          'COLUMN_DEFAULT' => 'NULL',
+          'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channels',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channels',
           'COLUMN_NAME' => 'is_deleted',
@@ -1157,36 +1159,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'channels',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -1194,12 +1196,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'users_reactions' => 
-    array (
-      'table' => 
-      array (
+    'users_reactions' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'users_reactions',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -1207,94 +1209,94 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'reactions_id' => 
-        array (
+        'reactions_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'reactions_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'entity_id' => 
-        array (
+        'entity_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'entity_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'char',
           'CHARACTER_MAXIMUM_LENGTH' => '36',
           'CHARACTER_OCTET_LENGTH' => '144',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'char(36)',
@@ -1303,22 +1305,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'entity_namespace' => 
-        array (
+        'entity_namespace' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'entity_namespace',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -1327,10 +1329,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'is_deleted',
@@ -1338,47 +1340,47 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '7',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_reactions',
           'COLUMN_NAME' => 'updated_at',
@@ -1386,36 +1388,36 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'users_reactions',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -1423,12 +1425,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'flags' => 
-    array (
-      'table' => 
-      array (
+    'flags' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'flags',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -1436,46 +1438,46 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'flags',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'name' => 
-        array (
+        'name' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'flags',
           'COLUMN_NAME' => 'name',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '100',
           'CHARACTER_OCTET_LENGTH' => '400',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(100)',
@@ -1484,10 +1486,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'weight' => 
-        array (
+        'weight' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'flags',
           'COLUMN_NAME' => 'weight',
@@ -1495,47 +1497,47 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'flags',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'flags',
           'COLUMN_NAME' => 'updated_at',
@@ -1543,23 +1545,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'flags',
           'COLUMN_NAME' => 'is_deleted',
@@ -1567,36 +1569,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'flags',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -1604,12 +1606,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'tags' => 
-    array (
-      'table' => 
-      array (
+    'tags' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'tags',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -1617,118 +1619,118 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'apps_id' => 
-        array (
+        'apps_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'apps_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'companies_id' => 
-        array (
+        'companies_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'companies_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'name' => 
-        array (
+        'name' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'name',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -1737,22 +1739,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'slug' => 
-        array (
+        'slug' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'slug',
           'ORDINAL_POSITION' => '6',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -1761,10 +1763,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'weight' => 
-        array (
+        'weight' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'weight',
@@ -1772,23 +1774,23 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_feature' => 
-        array (
+        'is_feature' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'is_feature',
@@ -1796,47 +1798,47 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '9',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'updated_at',
@@ -1844,23 +1846,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'tags',
           'COLUMN_NAME' => 'is_deleted',
@@ -1868,36 +1870,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'tags',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -1905,12 +1907,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'channel_messages' => 
-    array (
-      'table' => 
-      array (
+    'channel_messages' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'channel_messages',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -1918,106 +1920,106 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'channel_id' => 
-        array (
+      'columns' =>
+      array(
+        'channel_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_messages',
           'COLUMN_NAME' => 'channel_id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'messages_id' => 
-        array (
+        'messages_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_messages',
           'COLUMN_NAME' => 'messages_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_messages',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_messages',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_messages',
           'COLUMN_NAME' => 'updated_at',
@@ -2025,23 +2027,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'channel_messages',
           'COLUMN_NAME' => 'is_deleted',
@@ -2049,66 +2051,66 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'channel_messages',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'channel_id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
             'Index_comment' => '',
           ),
-          2 => 
-          array (
+          2 =>
+          array(
             'Table' => 'channel_messages',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '2',
             'Column_name' => 'messages_id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
             'Index_comment' => '',
           ),
-          3 => 
-          array (
+          3 =>
+          array(
             'Table' => 'channel_messages',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '3',
             'Column_name' => 'users_id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -2116,12 +2118,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'message_comments' => 
-    array (
-      'table' => 
-      array (
+    'message_comments' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'message_comments',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -2129,142 +2131,142 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message_id' => 
-        array (
+        'message_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'message_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'apps_id' => 
-        array (
+        'apps_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'apps_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'companies_id' => 
-        array (
+        'companies_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'companies_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message' => 
-        array (
+        'message' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'message',
           'ORDINAL_POSITION' => '6',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'longtext',
           'CHARACTER_MAXIMUM_LENGTH' => '4294967295',
           'CHARACTER_OCTET_LENGTH' => '4294967295',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'longtext',
@@ -2273,10 +2275,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'reactions_count' => 
-        array (
+        'reactions_count' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'reactions_count',
@@ -2284,23 +2286,23 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'parent_id' => 
-        array (
+        'parent_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'parent_id',
@@ -2308,47 +2310,47 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '9',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'updated_at',
@@ -2356,23 +2358,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_comments',
           'COLUMN_NAME' => 'is_deleted',
@@ -2380,36 +2382,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'message_comments',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -2417,12 +2419,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'message_types' => 
-    array (
-      'table' => 
-      array (
+    'message_types' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'message_types',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -2430,46 +2432,46 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'apps_id' => 
-        array (
+        'apps_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'apps_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -2478,22 +2480,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'languages_id' => 
-        array (
+        'languages_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'languages_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -2502,22 +2504,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'name' => 
-        array (
+        'name' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'name',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '150',
           'CHARACTER_OCTET_LENGTH' => '600',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(150)',
@@ -2526,22 +2528,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'verb' => 
-        array (
+        'verb' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'verb',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '150',
           'CHARACTER_OCTET_LENGTH' => '600',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(150)',
@@ -2550,10 +2552,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'template' => 
-        array (
+        'template' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'template',
@@ -2563,9 +2565,9 @@ return array (
           'DATA_TYPE' => 'longtext',
           'CHARACTER_MAXIMUM_LENGTH' => '4294967295',
           'CHARACTER_OCTET_LENGTH' => '4294967295',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'longtext',
@@ -2574,10 +2576,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'templates_plura' => 
-        array (
+        'templates_plura' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'templates_plura',
@@ -2587,9 +2589,9 @@ return array (
           'DATA_TYPE' => 'longtext',
           'CHARACTER_MAXIMUM_LENGTH' => '4294967295',
           'CHARACTER_OCTET_LENGTH' => '4294967295',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'longtext',
@@ -2598,34 +2600,34 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '8',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'updated_at',
@@ -2633,23 +2635,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_types',
           'COLUMN_NAME' => 'is_deleted',
@@ -2657,36 +2659,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'message_types',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -2694,12 +2696,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'users_follows' => 
-    array (
-      'table' => 
-      array (
+    'users_follows' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'users_follows',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -2707,94 +2709,94 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_follows',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_follows',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'entity_id' => 
-        array (
+        'entity_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_follows',
           'COLUMN_NAME' => 'entity_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'entity_namespace' => 
-        array (
+        'entity_namespace' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_follows',
           'COLUMN_NAME' => 'entity_namespace',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -2803,10 +2805,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_follows',
           'COLUMN_NAME' => 'is_deleted',
@@ -2814,47 +2816,47 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_follows',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '6',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_follows',
           'COLUMN_NAME' => 'updated_at',
@@ -2862,36 +2864,36 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'users_follows',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -2899,12 +2901,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'users_interactions' => 
-    array (
-      'table' => 
-      array (
+    'users_interactions' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'users_interactions',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -2912,70 +2914,70 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'users_id' => 
-        array (
+        'users_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'users_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'entity_id' => 
-        array (
+        'entity_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'entity_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'char',
           'CHARACTER_MAXIMUM_LENGTH' => '36',
           'CHARACTER_OCTET_LENGTH' => '144',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'char(36)',
@@ -2984,22 +2986,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'entity_namespace' => 
-        array (
+        'entity_namespace' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'entity_namespace',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -3008,58 +3010,58 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'interactions_id' => 
-        array (
+        'interactions_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'interactions_id',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '6',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'updated_at',
@@ -3067,23 +3069,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'users_interactions',
           'COLUMN_NAME' => 'is_deleted',
@@ -3091,36 +3093,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'users_interactions',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -3128,12 +3130,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'app_module_message' => 
-    array (
-      'table' => 
-      array (
+    'app_module_message' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'app_module_message',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -3141,130 +3143,130 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message_id' => 
-        array (
+        'message_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'message_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message_types_id' => 
-        array (
+        'message_types_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'message_types_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'apps_id' => 
-        array (
+        'apps_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'apps_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'companies_id' => 
-        array (
+        'companies_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'companies_id',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'system_modules_id' => 
-        array (
+        'system_modules_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'system_modules_id',
@@ -3272,23 +3274,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'entity_id' => 
-        array (
+        'entity_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'entity_id',
@@ -3296,47 +3298,47 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '8',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'updated_at',
@@ -3344,23 +3346,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'app_module_message',
           'COLUMN_NAME' => 'is_deleted',
@@ -3368,36 +3370,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'app_module_message',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -3405,12 +3407,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'distribution_channels' => 
-    array (
-      'table' => 
-      array (
+    'distribution_channels' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'distribution_channels',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -3418,46 +3420,46 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'distribution_channels',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'channel' => 
-        array (
+        'channel' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'distribution_channels',
           'COLUMN_NAME' => 'channel',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -3466,22 +3468,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'queues' => 
-        array (
+        'queues' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'distribution_channels',
           'COLUMN_NAME' => 'queues',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'longtext',
           'CHARACTER_MAXIMUM_LENGTH' => '4294967295',
           'CHARACTER_OCTET_LENGTH' => '4294967295',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'longtext',
@@ -3490,23 +3492,23 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'distribution_channels',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -3514,12 +3516,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'message_variables' => 
-    array (
-      'table' => 
-      array (
+    'message_variables' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'message_variables',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -3527,46 +3529,46 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_variables',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'message_id' => 
-        array (
+        'message_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_variables',
           'COLUMN_NAME' => 'message_id',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -3575,22 +3577,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'key' => 
-        array (
+        'key' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_variables',
           'COLUMN_NAME' => 'key',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -3599,22 +3601,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'value' => 
-        array (
+        'value' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_variables',
           'COLUMN_NAME' => 'value',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -3623,22 +3625,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'message_variables',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -3647,23 +3649,23 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'message_variables',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -3671,12 +3673,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'interactions' => 
-    array (
-      'table' => 
-      array (
+    'interactions' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'interactions',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -3684,46 +3686,46 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'interactions',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'name' => 
-        array (
+        'name' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'interactions',
           'COLUMN_NAME' => 'name',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -3732,22 +3734,22 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'title' => 
-        array (
+        'title' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'interactions',
           'COLUMN_NAME' => 'title',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '100',
           'CHARACTER_OCTET_LENGTH' => '400',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(100)',
@@ -3756,10 +3758,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'icon' => 
-        array (
+        'icon' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'interactions',
           'COLUMN_NAME' => 'icon',
@@ -3769,9 +3771,9 @@ return array (
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '255',
           'CHARACTER_OCTET_LENGTH' => '1020',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
@@ -3780,34 +3782,34 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'interactions',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '5',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'interactions',
           'COLUMN_NAME' => 'updated_at',
@@ -3815,23 +3817,23 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'interactions',
           'COLUMN_NAME' => 'is_deleted',
@@ -3839,36 +3841,36 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'interactions',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -3876,12 +3878,12 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
-    'reactions' => 
-    array (
-      'table' => 
-      array (
+    'reactions' =>
+    array(
+      'table' =>
+      array(
         'table_name' => 'reactions',
         'engine' => 'InnoDB',
         'table_comment' => '',
@@ -3889,46 +3891,46 @@ return array (
         'character_set_name' => 'utf8mb4',
         'row_format' => 'Dynamic',
       ),
-      'columns' => 
-      array (
-        'id' => 
-        array (
+      'columns' =>
+      array(
+        'id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'id',
           'ORDINAL_POSITION' => '1',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => 'PRI',
           'EXTRA' => 'auto_increment',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'name' => 
-        array (
+        'name' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'name',
           'ORDINAL_POSITION' => '2',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_bin',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -3937,58 +3939,58 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'apps_id' => 
-        array (
+        'apps_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'apps_id',
           'ORDINAL_POSITION' => '3',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'companies_id' => 
-        array (
+        'companies_id' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'companies_id',
           'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '10',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'int(11)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'icon' => 
-        array (
+        'icon' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'icon',
@@ -3998,9 +4000,9 @@ return array (
           'DATA_TYPE' => 'varchar',
           'CHARACTER_MAXIMUM_LENGTH' => '45',
           'CHARACTER_OCTET_LENGTH' => '180',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
+          'DATETIME_PRECISION' => null,
           'CHARACTER_SET_NAME' => 'utf8mb4',
           'COLLATION_NAME' => 'utf8mb4_bin',
           'COLUMN_TYPE' => 'varchar(45)',
@@ -4009,10 +4011,10 @@ return array (
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'is_deleted' => 
-        array (
+        'is_deleted' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'is_deleted',
@@ -4020,47 +4022,47 @@ return array (
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
           'NUMERIC_PRECISION' => '3',
           'NUMERIC_SCALE' => '0',
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'DATETIME_PRECISION' => null,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'tinyint(3)',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'created_at' => 
-        array (
+        'created_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '7',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => null,
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
-        'updated_at' => 
-        array (
+        'updated_at' =>
+        array(
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'reactions',
           'COLUMN_NAME' => 'updated_at',
@@ -4068,36 +4070,36 @@ return array (
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
-          'CHARACTER_MAXIMUM_LENGTH' => NULL,
-          'CHARACTER_OCTET_LENGTH' => NULL,
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
+          'CHARACTER_MAXIMUM_LENGTH' => null,
+          'CHARACTER_OCTET_LENGTH' => null,
+          'NUMERIC_PRECISION' => null,
+          'NUMERIC_SCALE' => null,
           'DATETIME_PRECISION' => '0',
-          'CHARACTER_SET_NAME' => NULL,
-          'COLLATION_NAME' => NULL,
+          'CHARACTER_SET_NAME' => null,
+          'COLLATION_NAME' => null,
           'COLUMN_TYPE' => 'datetime',
           'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
           'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
+          'GENERATION_EXPRESSION' => null,
         ),
       ),
-      'indexes' => 
-      array (
-        'PRIMARY' => 
-        array (
-          1 => 
-          array (
+      'indexes' =>
+      array(
+        'PRIMARY' =>
+        array(
+          1 =>
+          array(
             'Table' => 'reactions',
             'Non_unique' => '0',
             'Key_name' => 'PRIMARY',
             'Seq_in_index' => '1',
             'Column_name' => 'id',
             'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
+            'Sub_part' => null,
+            'Packed' => null,
             'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
@@ -4105,7 +4107,7 @@ return array (
           ),
         ),
       ),
-      'foreign_keys' => NULL,
+      'foreign_keys' => null,
     ),
   ),
 );
