@@ -10,9 +10,9 @@ class TransactionsItems extends BaseModel
 {
     public int $transactions_id;
     public int $amount;
-    public floatval $subtotal;
-    public floatval $total;
-    public floatval $tax;
+    public float $subtotal;
+    public float $total;
+    public float $tax;
     public string $concept;
 
     /**

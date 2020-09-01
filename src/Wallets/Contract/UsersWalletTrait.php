@@ -6,12 +6,15 @@ namespace Kanvas\Packages\Wallets\Contract;
 
 use Kanvas\Packages\Wallets\Models\Wallets;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Kanvas\Packages\Wallets\PaymentMethods\PaymentMethods;
 
 /**
  * Methods most used in Users wallet
  */
 trait UsersWalletTrait
 {
+    public ?PaymentMethods $payment_methods = null;
+
     /**
      * We get all the user's wallets
      * @return Simple
@@ -59,5 +62,25 @@ trait UsersWalletTrait
             $wallet->saveOrFail();
         }
         return $wallet;
+    }
+
+    /**
+     * Set Payment Methods
+     * @param PaymentMethods $paymentMethods
+     * @return void
+     */
+    public function setPaymentMethods(PaymentMethods $paymentMethods) : void
+    {
+        $this->payment_methods = $paymentMethods;
+    }
+
+    /**
+     * Get Payment Methods
+     * @param PaymentMethods $paymentMethods
+     * @return PaymentMethods
+     */
+    public function getPaymentMethods() : PaymentMethods
+    {
+        return $this->payment_methods;
     }
 }

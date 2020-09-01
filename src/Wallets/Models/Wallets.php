@@ -10,7 +10,7 @@ class Wallets extends BaseModel
 {
     public string $name;
     public int $users_id;
-    public ?int $total = 0;
+    public ?float $total = 0;
 
     /**
      * Initialize method for model.
