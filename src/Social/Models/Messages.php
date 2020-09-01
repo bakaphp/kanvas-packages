@@ -168,21 +168,6 @@ class Messages extends BaseModel
     }
 
     /**
-     * Create a channel for the current message
-     *
-     * @param string $distribution
-     * @return void
-     */
-    public function addDistributionChannel(string $distribution): void
-    {
-        $channelMessage = new ChannelMessages();
-        $channelMessage->messages_id = $this->getId();
-        $channelMessage->users_id = $this->users_id;
-        $channelMessage->channel_id = Channels::getByName($distribution)->getId();
-        $channelMessage->saveOrFail();
-    }
-
-    /**
      * Create a comment for a message
      *
      * @param string $messageId
