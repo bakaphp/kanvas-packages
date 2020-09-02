@@ -1,6 +1,6 @@
 <?php
 
-$dotEnv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotEnv = Dotenv\Dotenv::createImmutable('/app');
 $dotEnv->load();
 
 return [
