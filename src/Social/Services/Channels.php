@@ -39,14 +39,14 @@ class Channels
      * @param string $description
      * @return ChannelsModel
      */
-    public static function create(UserInterface $user, ChannelsInterface $channel_entity, string $name, string $description = ''): ChannelsModel
+    public static function create(UserInterface $user, ChannelsInterface $channelEntity, string $name, string $description = ''): ChannelsModel
     {
         $channel = new ChannelsModel();
         $channel->name = $name;
         $channel->slug = Slug::generate($name);
         $channel->description = $description;
-        $channel->entity_namespace = get_class($channel_entity);
-        $channel->entity_id = (string) $channel_entity->getId();
+        $channel->entity_namespace = get_class($channelEntity);
+        $channel->entity_id = (string) $channelEntity->getId();
         $channel->saveOrFail();
 
         self::addUser($channel->getId(), $user);
