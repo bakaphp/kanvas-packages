@@ -10,7 +10,6 @@ use Kanvas\Packages\Social\Services\Comments;
 use Kanvas\Packages\Social\Services\Interactions;
 use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
-use Phalcon\Di;
 
 class CommentsCest
 {

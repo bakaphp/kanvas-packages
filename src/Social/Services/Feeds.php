@@ -9,6 +9,7 @@ use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
 use Kanvas\Packages\Social\Models\AppModuleMessage;
+use Kanvas\Packages\Social\Models\Channels;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
@@ -36,10 +37,21 @@ class Feeds
      * @param UserInterface $user
      * @return Simple
      */
-    public static function getFeeds(UserInterface $user): Simple
+    public static function getByUser(UserInterface $user): Simple
     {
         $feed = new UserMessages();
         return $feed->getUserFeeds($user);
+    }
+
+    /**
+     * Get the feeds of the channel
+     *
+     * @param Channels $user
+     * @return Simple
+     */
+    public static function getByChannel(Channels $channel): Simple
+    {
+        return $channel->getMessages();
     }
 
     /**
@@ -61,7 +73,6 @@ class Feeds
         $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
         $newMessage->message = json_encode($message);
         $newMessage->saveOrFail();
-        $newMessage->addDistributionChannel($distribution);
         GenerateTags::dispatch($user, $newMessage);
 
         $newAppModule = new AppModuleMessage();

@@ -2,7 +2,9 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-class App extends BaseModel
+use Kanvas\Packages\Social\Contract\Channels\ChannelsInterface;
+
+class Lead extends BaseModel implements ChannelsInterface
 {
     public int $id = 1;
 

@@ -19,6 +19,9 @@ class ChannelsSeeds extends AbstractSeed
             [
                 'name' => 'profile',
                 'description' => 'Basic Profile',
+                'slug' => 'profile',
+                'entity_namespace' => "Kanvas\Packages\Test\Support\Models\Lead",
+                'entity_id' => 0,
                 'created_at' => date('Y-m-d H:i:s'),
             ]
         ];
