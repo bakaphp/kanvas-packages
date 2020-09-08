@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\MobilePayments\Contracts;
 
 use ReceiptValidator\iTunes\Validator as iTunesValidator;
+use Phalcon\Http\Response;
 
 /**
  * Phalcon\Traits\ReceiptValidatorTrait.
