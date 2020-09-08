@@ -69,7 +69,7 @@ class Users
      * @param ModelInterface $entity
      * @return void
      */
-    public function followw(Event $event, ModelInterface $entity): void
+    public function follow(Event $event, ModelInterface $entity): void
     {
         $user = Di::getDefault()->get('userData');
         $user->interaction_type_id = InteractionsModel::FOLLOWING;
