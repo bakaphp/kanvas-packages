@@ -19,9 +19,9 @@ trait InteractionsTrait
      * @param string $action
      * @return void
      */
-    public function interact(string $action): void
+    public function interact(string $action, $data): void
     {
-        $this->fire("socialUser:{$action}", $this);
+        $this->fire("socialUser:{$action}", $data);
     }
 
     /**
