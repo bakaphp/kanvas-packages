@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contract\Interactions;
 
-use Phalcon\Mvc\ModelInterface;
+use Baka\Database\ModelInterface;
 use Kanvas\Packages\Social\Contract\Events\EventManagerAwareTrait;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\UsersInteractions;
