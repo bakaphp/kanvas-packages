@@ -23,7 +23,8 @@
         "phalcon/incubator-test": "^1.0.0-alpha.1",    
         "robmorgan/phinx": "^0.12",
         "baka/baka": "0.6.x-dev",
-        "php-amqplib/php-amqplib": "^2.9"
+        "php-amqplib/php-amqplib": "^2.9",
+        "aporat/store-receipt-validator": "^4.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
