@@ -41,26 +41,24 @@ class Follow
      */
     public static function userFollow(UserInterface $userFollowing, ModelInterface $entity): bool
     {
-        $follow = UsersFollows::findFirstOrCreate(
-            [
-                'conditions' => 'users_id = :user_id: AND entity_id = :entity_id: AND entity_namespace = :entity:',
-                'bind' => [
-                    'user_id' => $userFollowing->getId(),
-                    'entity' => get_class($entity),
-                    'entity_id' => $entity->getId()
-                ]
-            ],
-            [
-                'users_id' => $userFollowing->getId(),
-                'entity_id'=> $entity->getId(),
-                'entity_namespace' => get_class($entity),
+        $follow = UsersFollows::findFirst([
+            'conditions' => 'users_id = :user_id: AND entity_id = :entity_id: AND entity_namespace = :entity:',
+            'bind' => [
+                'user_id' => $userFollowing->getId(),
+                'entity' => get_class($entity),
+                'entity_id' => $entity->getId()
             ]
-        );
+        ]);
 
         if ($follow) {
             $follow->unFollow($userFollowing);
             return (bool) $follow->is_deleted;
         }
+        $follow = new UsersFollows();
+        $follow->users_id = $userFollowing->getId();
+        $follow->entity_id = $entity->getId();
+        $follow->entity_namespace = get_class($entity);
+        $follow->saveOrFail();
         $follow->increment();
         $userFollowing->increment();
 
