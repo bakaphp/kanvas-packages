@@ -15,9 +15,9 @@ class Follow
     /**
      * Return the data of entities that the user follows
      *
-     * @param BaseModel $categoryEntity
-     * @param Users $user
-     * @return array
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     * @return Simple
      */
     public static function getFollowsByUser(UserInterface $user, ModelInterface $entity): Simple
     {
@@ -35,8 +35,8 @@ class Follow
     /**
      * Follow and unfollow an entity if its exist.
      *
-     * @param Users $userFollowing User that is following
-     * @param Model $entity Entity that is being followed
+     * @param UserInterface $userFollowing User that is following
+     * @param ModelInterface $entity Entity that is being followed
      * @return boolean
      */
     public static function userFollow(UserInterface $userFollowing, ModelInterface $entity): bool
