@@ -32,7 +32,6 @@ trait TotalInteractionsTrait
     public function getTotal(int $interaction): int
     {
         $key = $this->getInteractionStorageKey() . '-' . $interaction;
-
         return (int) Di::getDefault()->get('redis')->get($key);
     }
 

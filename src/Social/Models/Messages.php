@@ -2,13 +2,14 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Phalcon\Di;
 
 class Messages extends BaseModel
 {
-    use TotalInteractionsTrait;
+    use CustomTotalInteractionsTrait;
     use InteractionsTrait;
 
     public $id;

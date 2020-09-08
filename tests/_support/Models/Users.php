@@ -3,10 +3,13 @@
 namespace Kanvas\Packages\Test\Support\Models;
 
 use Baka\Contracts\Auth\UserInterface as AuthUserInterface;
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 
 class Users extends BaseModel implements UserInterface, AuthUserInterface
 {
+    use CustomTotalInteractionsTrait;
+    
     public $id = 1;
 
     public function getId(): int
