@@ -21,8 +21,6 @@ class Follow
      */
     public static function getFollowsByUser(UserInterface $user, ModelInterface $entity): Simple
     {
-        $followsData = [];
-
         $userFollows = UsersFollows::findOrFail([
             'conditions' => 'users_id = :user_id: AND entity_namespace = :entity: AND is_deleted = 0',
             'bind' => [
@@ -30,10 +28,6 @@ class Follow
                 'entity' => get_class($entity),
             ]
         ]);
-
-        foreach ($userFollows as $userFollow) {
-            $followsData[] = $userFollow->getEntityData();
-        }
 
         return $userFollows;
     }

@@ -7,9 +7,7 @@ use Kanvas\Packages\Social\Contract\Users\UserInterface;
 
 class UsersFollows extends BaseModel
 {
-    use CustomTotalInteractionsTrait {
-        getInteractionStorageKey as protected parentGetInteractionStorageKey;
-    }
+    use CustomTotalInteractionsTrait;
 
     public $id;
     public int $users_id;
