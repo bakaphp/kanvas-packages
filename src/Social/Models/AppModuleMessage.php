@@ -9,7 +9,7 @@ class AppModuleMessage extends BaseModel
     public int $message_types_id;
     public int $apps_id;
     public int $companies_id;
-    public ?int $system_modules_id = null;
+    public ?string $system_modules = null;
     public ?int $entity_id = null;
 
     /**
