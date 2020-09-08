@@ -4,6 +4,7 @@ namespace Kanvas\Packages\Social\Listener;
 
 use Kanvas\Packages\Social\Services\Interactions;
 use Kanvas\Packages\Social\Models\Interactions as InteractionsModel;
+use Kanvas\Packages\Social\Services\Follow;
 use Kanvas\Packages\Social\Services\Reactions;
 use Phalcon\Di;
 use Phalcon\Mvc\ModelInterface;
@@ -68,8 +69,11 @@ class Users
      * @param ModelInterface $entity
      * @return void
      */
-    public function follow(Event $event, ModelInterface $entity): void
+    public function followw(Event $event, ModelInterface $entity): void
     {
-        Interactions::add(Di::getDefault()->get('userData'), $entity, InteractionsModel::FOLLOWING);
+        $user = Di::getDefault()->get('userData');
+        $user->interaction_type_id = InteractionsModel::FOLLOWING;
+
+        Follow::userFollow($user, $entity);
     }
 }
