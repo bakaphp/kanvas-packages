@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Exception;
+use Kanvas\Packages\Social\Contract\Messages\MessageableInterface;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
@@ -64,7 +65,7 @@ class Feeds
      * @param string $distribution
      * @return UserMessages
      */
-    public static function create(UserInterface $user, string $verb, array $message = [], array $object = null, string $distribution = 'profile'): Messages
+    public static function create(UserInterface $user, string $verb, array $message = [], MessageableInterface $object = null): Messages
     {
         $newMessage = new Messages();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
@@ -73,6 +74,7 @@ class Feeds
         $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
         $newMessage->message = json_encode($message);
         $newMessage->saveOrFail();
+
         GenerateTags::dispatch($user, $newMessage);
 
         $newAppModule = new AppModuleMessage();
@@ -80,8 +82,8 @@ class Feeds
         $newAppModule->message_types_id = $newMessage->message_types_id;
         $newAppModule->apps_id = $newMessage->apps_id; //Duplicate data?
         $newAppModule->companies_id = $newMessage->companies_id; //Duplicate data?
-        $newAppModule->system_modules_id =  $object['entity_namespace'] ?? null;
-        $newAppModule->entity_id =  $object['entity_id'] ?? null;
+        $newAppModule->system_modules =  $object ? get_class($object) : null;
+        $newAppModule->entity_id =  $object ? $object->getId() : null;
         $newAppModule->saveOrFail();
 
         return $newMessage;
