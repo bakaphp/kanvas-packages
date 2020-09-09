@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d248a4d16c0f7fea8e9a896fe1f297d",
+    "content-hash": "71bc28cd71c93ed62c83882674cdf35d",
     "packages": [
         {
             "name": "baka/baka",
@@ -780,6 +780,20 @@
                 "constructor",
                 "instantiate"
             ],
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finstantiator",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-29T17:27:14+00:00"
         },
         {
@@ -842,6 +856,20 @@
                 "parser",
                 "php"
             ],
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Flexer",
+                    "type": "tidelift"
+                }
+            ],
             "time": "2020-05-25T17:44:05+00:00"
         },
         {
@@ -901,6 +929,119 @@
                 "validator"
             ],
             "time": "2020-09-06T13:44:32+00:00"
+        },
+        {
+            "name": "elastic/app-search",
+            "version": "7.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elastic/app-search-php.git",
+                "reference": "394f679c89785d9e8fc86e85abc2cf8711714b92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elastic/app-search-php/zipball/394f679c89785d9e8fc86e85abc2cf8711714b92",
+                "reference": "394f679c89785d9e8fc86e85abc2cf8711714b92",
+                "shasum": ""
+            },
+            "require": {
+                "elastic/openapi-codegen": "^1.0.4",
+                "php": "^5.6|^7.0",
+                "psr/log": "^1.0."
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "overtrue/phplint": "^1.1",
+                "phpunit/phpunit": "^5.6.0|^6.3.0",
+                "squizlabs/php_codesniffer": "^3.4.0",
+                "symfony/yaml": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Elastic\\AppSearch\\Client\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aurélien FOUCRET",
+                    "email": "aurelien.foucret@elastic.co"
+                }
+            ],
+            "description": "Elastic App Search Official PHP Client",
+            "homepage": "https://github.com/elastic/app-search-php",
+            "keywords": [
+                "client",
+                "elastic",
+                "php",
+                "search"
+            ],
+            "time": "2020-07-06T10:15:10+00:00"
+        },
+        {
+            "name": "elastic/openapi-codegen",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elastic/openapi-codegen-php.git",
+                "reference": "5287cc6be0b581c5c5f038520707a160fba927b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elastic/openapi-codegen-php/zipball/5287cc6be0b581c5c5f038520707a160fba927b9",
+                "reference": "5287cc6be0b581c5c5f038520707a160fba927b9",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/ringphp": "^1.0",
+                "php": "^5.6|^7.0",
+                "psr/log": "^1.0."
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.14",
+                "overtrue/phplint": "^1.1",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "^5.6.0|^6.3.0",
+                "squizlabs/php_codesniffer": "^3.4.0"
+            },
+            "bin": [
+                "resources/dev/elastic-openapi-codegen.sh"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Elastic\\OpenApi\\Codegen\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Aurélien FOUCRET",
+                    "email": "aurelien.foucret@elastic.co"
+                }
+            ],
+            "description": "A base library used to create Elastic PHP clients.",
+            "homepage": "https://github.com/elastic/openapi-codegen-php",
+            "keywords": [
+                "client",
+                "elastic",
+                "openapi",
+                "search"
+            ],
+            "time": "2020-02-11T12:48:03+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
@@ -1256,6 +1397,109 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
+            "name": "guzzlehttp/ringphp",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/RingPHP.git",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "reference": "5e2a174052995663dd68e6b5ad838afd47dd615b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/streams": "~3.0",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "abandoned": true,
+            "time": "2018-07-31T13:22:33+00:00"
+        },
+        {
+            "name": "guzzlehttp/streams",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/streams.git",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple abstraction over streams of data",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "abandoned": true,
+            "time": "2014-10-12T19:18:40+00:00"
+        },
+        {
             "name": "lcobucci/jwt",
             "version": "3.3.3",
             "source": {
@@ -1456,6 +1700,12 @@
                 "duplicate",
                 "object",
                 "object graph"
+            ],
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
+                    "type": "tidelift"
+                }
             ],
             "time": "2020-06-29T13:22:24+00:00"
         },
@@ -2895,6 +3145,16 @@
                 "phpunit",
                 "testing",
                 "xunit"
+            ],
+            "funding": [
+                {
+                    "url": "https://phpunit.de/donate.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
             ],
             "time": "2020-06-22T07:06:58+00:00"
         },
@@ -6602,6 +6862,7 @@
                 }
             ],
             "time": "2020-09-09T05:20:36+00:00"
+
         }
     ],
     "aliases": [],
