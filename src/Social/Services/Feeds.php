@@ -65,7 +65,7 @@ class Feeds
      * @param string $distribution
      * @return UserMessages
      */
-    public static function create(UserInterface $user, string $verb, array $message = [], MessageableInterface $object = null): Messages
+    public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableInterface $object = null): Messages
     {
         $newMessage = new Messages();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
