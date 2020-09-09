@@ -20,24 +20,22 @@ trait ReceiptValidatorTrait
     /**
      * Validate Apple Pay receipts
      *
+     * @param string $receiptData
+     * @param string $source
      * @return Response
      */
-    public function validateApplePayReceipt(): Response
+    public function validateReceipt(string $receiptData, string $source): array
     {
-        $request = $this->request->getPostData();
         $validator = new iTunesValidator(iTunesValidator::ENDPOINT_PRODUCTION); // Or iTunesValidator::ENDPOINT_SANDBOX if sandbox testing
-
-        $receiptBase64Data = $request['receipt-data'];
-        $sharedSecret = $request['password'];
+        $sharedSecret = getenv('ITUNES_STORE_PASS');
 
         try {
-            $response = $validator->setSharedSecret($sharedSecret)->setReceiptData($receiptBase64Data)->validate(); // use setSharedSecret() if for recurring subscriptions
+            $response = $validator->setSharedSecret($sharedSecret)->setReceiptData($receiptData)->validate(); // use setSharedSecret() if for recurring subscriptions
         } catch (Throwable $e) {
             throw new Throwable($e->getMessage());
         }
 
         if ($response->isValid()) {
-            $this->updateSubscriptionPaymentStatus($this->userData, $this->parseReceiptData($response->getReceipt(), 'apple'));
             return $this->response($response->getReceipt());
         } else {
             return $this->response('Receipt result code = ' . $response->getResultCode());
@@ -52,7 +50,7 @@ trait ReceiptValidatorTrait
      *
      * @return array
      */
-    private function parseReceiptData(array $receiptData, string $source): array
+    public function parseReceiptData(array $receiptData, string $source): array
     {
         switch ($source) {
             case 'apple':
