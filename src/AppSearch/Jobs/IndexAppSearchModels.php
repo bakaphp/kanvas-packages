@@ -8,7 +8,7 @@ use Baka\Contracts\Queue\QueueableJobInterface;
 use Baka\Jobs\Job;
 use Exception;
 use Gewaer\Models\Storms;
-use Kanvas\Packages\AppSearch\Contract\SearchableModelsInterface;
+use Kanvas\Packages\AppSearch\Contracts\SearchableModelsInterface;
 use Phalcon\Di;
 
 class IndexAppSearchModels extends Job implements QueueableJobInterface
