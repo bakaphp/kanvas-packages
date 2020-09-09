@@ -2,11 +2,12 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\FollowableInterface;
+use Kanvas\Packages\Social\Contract\Interactions\FollowersTrait;
 
-class Tag extends BaseModel
+class Tag extends BaseModel implements FollowableInterface
 {
-    use CustomTotalInteractionsTrait;
+    use FollowersTrait;
 
     public int $id = 1;
 
