@@ -37,7 +37,6 @@ trait ReceiptValidatorTrait
         }
 
         if ($response->isValid()) {
-            return $this->response($response->getReceipt());
             $this->updateSubscriptionPaymentStatus($this->userData, $this->parseReceiptData($response->getReceipt(), 'apple'));
             return $this->response($response->getReceipt());
         } else {

@@ -15,9 +15,9 @@ class AppleReceipts implements ReceiptsInterface
     {
         return [
             "is_mobile" => true,
-            "receipt_creation_date" => gmdate('Y-m-d H:i:s', (int) $payload['receipt_creation_date_ms'] / 1000),
-            "paid_status" => !empty(array_key_exists('transaction_id', current($payload['in_app']))) ? 1 : 0,
-            "subscription_status" => !empty(array_key_exists('transaction_id', current($payload['in_app']))) ? 1 : 0
+            "receipt_creation_date" => gmdate('Y-m-d H:i:s', (int) $receiptData['receipt_creation_date_ms'] / 1000),
+            "paid_status" => !empty(array_key_exists('transaction_id', current($receiptData['in_app']))) ? 1 : 0,
+            "subscription_status" => !empty(array_key_exists('transaction_id', current($receiptData['in_app']))) ? 1 : 0
         ];
     }
 }
