@@ -24,7 +24,7 @@ trait ReceiptValidatorTrait
      * @param string $source
      * @return Response
      */
-    public function validateReceipt(string $receiptData): array
+    public function validateReceipt(string $receiptData): ?array
     {
         $validator = new iTunesValidator(iTunesValidator::ENDPOINT_PRODUCTION); // Or iTunesValidator::ENDPOINT_SANDBOX if sandbox testing
         $sharedSecret = getenv('ITUNES_STORE_PASS');
@@ -35,11 +35,7 @@ trait ReceiptValidatorTrait
             throw new Throwable($e->getMessage());
         }
 
-        if ($response->isValid()) {
-            return $this->response($response->getReceipt());
-        } else {
-            return $this->response('Receipt result code = ' . $response->getResultCode());
-        }
+        return $response->isValid() ? $response->getReceipt() : 'Receipt result code = ' . $response->getResultCode();
     }
 
     /**
