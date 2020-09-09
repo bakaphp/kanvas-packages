@@ -17,13 +17,15 @@
     "type": "project",
     "require": {
         "php": ">= 7.4",
+        "ext-phalcon": ">=4",
         "vlucas/phpdotenv": "^4.1",
         "phalcon/incubator": "4.0.x-dev",
         "phalcon/incubator-acl": "^1.0.0-alpha.1",
         "phalcon/incubator-test": "^1.0.0-alpha.1",    
         "robmorgan/phinx": "^0.12",
         "baka/baka": "0.6.x-dev",
-        "php-amqplib/php-amqplib": "^2.9"
+        "php-amqplib/php-amqplib": "^2.9",
+        "elastic/app-search": "^7.5"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
