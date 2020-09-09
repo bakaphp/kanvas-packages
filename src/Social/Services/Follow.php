@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
-use Kanvas\Packages\Social\Models\BaseModel;
 use Kanvas\Packages\Social\Models\UsersFollows;
 use Phalcon\Mvc\ModelInterface;
 use Phalcon\Mvc\Model\Resultset\Simple;
@@ -21,7 +20,7 @@ class Follow
      */
     public static function getFollowsByUser(UserInterface $user, ModelInterface $entity): Simple
     {
-        $userFollows = UsersFollows::findOrFail([
+        $userFollows = UsersFollows::find([
             'conditions' => 'users_id = :user_id: AND entity_namespace = :entity: AND is_deleted = 0',
             'bind' => [
                 'user_id' => $user->getId(),

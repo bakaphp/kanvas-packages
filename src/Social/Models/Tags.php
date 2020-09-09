@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\Social\Models;
 
 use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
+use Phalcon\Di;
 
 class Tags extends BaseModel
 {
@@ -92,6 +93,22 @@ class Tags extends BaseModel
                 ]
             ]
         );
+    }
 
+    /**
+     * Verify if the user follow the tag.
+     *
+     * @return boolean
+     */
+    public function isFollow() : bool
+    {
+        return (bool) UsersFollows::count([
+            'conditions' => 'users_id = :userId: AND entity_id = :entityId: AND entity_namespace = :entityName: AND is_deleted = 0',
+            'bind' => [
+                'userId' => Di::getDefault()->get('userData')->getId(),
+                'entityId' => $this->getId(),
+                'entityName' => get_class($this)
+            ]
+        ]);
     }
 }

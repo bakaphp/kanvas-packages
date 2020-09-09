@@ -4,6 +4,7 @@ namespace Kanvas\Packages\Social\Jobs;
 
 use Baka\Contracts\Queue\QueueableJobInterface;
 use Baka\Jobs\Job;
+use Baka\Queue\Queue;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\MessageTags;
@@ -25,6 +26,8 @@ class GenerateTags extends Job implements QueueableJobInterface
      */
     public function __construct(UserInterface $user, Messages $message)
     {
+        Queue::setDurable(true);
+
         $this->user = $user;
         $this->message = $message;
     }
@@ -37,6 +40,7 @@ class GenerateTags extends Job implements QueueableJobInterface
     public function handle(): bool
     {
         $tags = StringFormatter::getHashtagToString($this->message->message);
+
         foreach ($tags as $tag) {
             $tagData = Tags::findFirstOrCreate(
                 [
@@ -53,10 +57,20 @@ class GenerateTags extends Job implements QueueableJobInterface
                     'companies_id' => Di::getDefault()->get('app')->getId(),
                 ]
             );
-            $messageTag = new MessageTags();
-            $messageTag->message_id = $this->message->getId();
-            $messageTag->tags_id = $tagData->getId();
-            $messageTag->save();
+
+            MessageTags::findFirstOrCreate(
+                [
+                    'conditions' => 'message_id = :messageId: AND tags_id = :tagId: AND is_deleted = 0',
+                    'bind' => [
+                        'messageId' => $this->message->getId(),
+                        'tagId' => $tagData->getId()
+                    ]
+                ],
+                [
+                    'message_id' => $this->message->getId(),
+                    'tags_id' => $tagData->getId()
+                ]
+            );
         }
 
         Di::getDefault()->get('log')->info('Generate tags for message ' . $this->message->getId());
