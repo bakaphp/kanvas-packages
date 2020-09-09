@@ -17,6 +17,7 @@
     "type": "project",
     "require": {
         "php": ">= 7.4",
+        "ext-phalcon": ">=4",
         "vlucas/phpdotenv": "^4.1",
         "phalcon/incubator": "4.0.x-dev",
         "phalcon/incubator-acl": "^1.0.0-alpha.1",
