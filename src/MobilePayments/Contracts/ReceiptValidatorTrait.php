@@ -54,7 +54,7 @@ trait ReceiptValidatorTrait
                 return $appleReceipt->parse($receiptData);
                 break;
 
-            case 'apple':
+            case 'google':
                 $googleReceipt = new AppleReceipts();
                 return $googleReceipt->parse($receiptData);
                 break;
