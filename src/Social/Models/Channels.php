@@ -6,8 +6,11 @@ class Channels extends BaseModel
 {
     public $id;
     public string $name;
+    public string $slug;
     public string $description;
-    public int $last_message_id;
+    public string $entity_namespace;
+    public string $entity_id;
+    public ?int $last_message_id = null;
 
     /**
      * Initialize method for model.

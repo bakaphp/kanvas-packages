@@ -3,7 +3,7 @@
 
 use Phinx\Seed\AbstractSeed;
 
-class ChannelsSeeder extends AbstractSeed
+class ChannelsSeeds extends AbstractSeed
 {
     /**
      * Run Method.
@@ -11,7 +11,7 @@ class ChannelsSeeder extends AbstractSeed
      * Write your database seeder using this method.
      *
      * More information on writing seeders is available here:
-     * https://book.cakephp.org/phinx/0/en/seeding.html
+     * http://docs.phinx.org/en/latest/seeding.html
      */
     public function run()
     {
@@ -19,7 +19,9 @@ class ChannelsSeeder extends AbstractSeed
             [
                 'name' => 'profile',
                 'description' => 'Basic Profile',
-                'last_message_id' => 0,
+                'slug' => 'profile',
+                'entity_namespace' => "Kanvas\Packages\Test\Support\Models\Lead",
+                'entity_id' => 0,
                 'created_at' => date('Y-m-d H:i:s'),
             ]
         ];

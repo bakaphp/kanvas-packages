@@ -2,9 +2,11 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-class Companies extends BaseModel
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
+
+class Tag extends BaseModel
 {
-    public string $language = "EN";
+    use CustomTotalInteractionsTrait;
 
     public int $id = 1;
 
