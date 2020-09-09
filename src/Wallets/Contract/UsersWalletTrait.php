@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Wallets\Contract;
 
 use Kanvas\Packages\Wallets\Models\Wallets;
-use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Mvc\Model\ResultsetInterface;
 use Kanvas\Packages\Wallets\PaymentMethods\PaymentMethods;
 
 /**
@@ -17,9 +17,9 @@ trait UsersWalletTrait
 
     /**
      * We get all the user's wallets
-     * @return Simple
+     * @return ResultsetInterface
      */
-    public function getWallets() : ?Simple
+    public function getWallets() : ResultsetInterface
     {
         return Wallets::find([
             'conditions' => 'users_id = ?0 AND is_deleted = ?1',

@@ -1,7 +1,7 @@
 <?php
 
 namespace Kanvas\Packages\Wallets\Models;
-use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Mvc\Model\ResultsetInterface;
 
 /**
  * Class Products.
@@ -26,7 +26,7 @@ class Products extends BaseModel
     /**
      * Active products by type
      */
-    public function getActiveByType(int $type) : ?Simple
+    public function getActiveByType(int $type) : ResultsetInterface
     {
         return Products::find([
             'conditions' => 'type = ?1 AND is_deleted = 0',
