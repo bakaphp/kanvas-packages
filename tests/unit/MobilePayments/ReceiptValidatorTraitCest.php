@@ -3,16 +3,10 @@
 namespace Kanvas\Packages\Tests\Unit\MobilePayments;
 
 use Kanvas\Packages\MobilePayments\Contracts\ReceiptValidatorTrait;
-use Kanvas\Packages\MobilePayments\Contracts\AppleReceipts;
 use UnitTester;
 
 class ReceiptValidatorTraitCest
 {
-    /**
-     * Receipt Validator Trait.
-     */
-    use ReceiptValidatorTrait;
-
     /**
      * Test to get HashtagFromStrings
      *
@@ -26,7 +20,10 @@ class ReceiptValidatorTraitCest
             "in_app" => [["transaction_id" => 21000048610733]]
         ];
 
-        $formattedReceipt = $this->parseReceiptData($receipt, 'apple');
+        $receiptValidator = new class {
+            use ReceiptValidatorTrait;
+        };
+        $formattedReceipt = $receiptValidator->parseReceiptData($receipt, 'apple');
 
         $I->assertContains('is_mobile', $formattedReceipt);
         $I->assertContains('receipt_creation_date', $formattedReceipt);
