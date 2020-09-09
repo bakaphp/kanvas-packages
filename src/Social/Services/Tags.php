@@ -49,7 +49,7 @@ class Tags
         $newTag->name = $message;
         $newTag->apps_id = $user->getDefaultCompany()->getId();
         $newTag->companies_id = Di::getDefault()->get('app')->getId();
-        $newTag->users_id = $user->id;
+        $newTag->users_id = $user->getId();
         $newTag->slug = Slug::generate($message);
         $newTag->saveOrFail();
 
@@ -59,13 +59,12 @@ class Tags
     /**
      * Update an existing Tag
      *
-     * @param string $uuid
+     * @param TagsModel $tag
      * @param string $message
      * @return TagsModel
      */
-    public static function update(string $uuid, string $message): TagsModel
+    public static function update(TagsModel $tag, string $message): TagsModel
     {
-        $tag = TagsModel::findFirstOrFail($uuid);
         $tag->name = $message;
         $tag->slug = Slug::generate($message);
         $tag->updateOrFail();
@@ -79,9 +78,21 @@ class Tags
      * @param UserInterface $user
      * @return bool
      */
-    public static function delete(string $uuid): bool
+    public static function delete(TagsModel $tag): bool
     {
-        $tag = TagsModel::findFirstOrFail($uuid);
         return $tag->deleteOrFail();
+    }
+
+    /**
+     * SoftDelete an existing tag
+     *
+     * @param TagsModel $tag
+     * @return boolean
+     */
+    public static function softDelete(TagsModel $tag): bool
+    {
+        $tag->softDelete();
+
+        return (bool)$tag->is_deleted;
     }
 }
