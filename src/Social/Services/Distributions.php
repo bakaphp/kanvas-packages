@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
+use Baka\Queue\Queue;
+use Kanvas\Packages\Social\Contract\Interactions\FollowableInterface;
 use Kanvas\Packages\Social\Models\ChannelMessages;
 use Kanvas\Packages\Social\Models\Channels;
 use Kanvas\Packages\Social\Models\Messages;
@@ -31,7 +33,43 @@ class Distributions
         return $channelMessage;
     }
 
-    public static function sendToUsersFeeds(string $channelName)
+    /**
+     * Send the message to the users feeds that follow the entity
+     *
+     * @param Messages $message
+     * @param FollowableInterface $followableEntity
+     * @return void
+     */
+    public static function sendToUsersFeeds(Messages $message, FollowableInterface $followableEntity): void
     {
+        $messageFormated = self::formatDistributionNewMessage($message, $followableEntity);
+
+        Queue::setDurable(false);
+
+        Queue::send('feedsDistribution', json_encode($messageFormated));
+    }
+
+    /**
+     * Format the data that will be send to the distribution queue when new message is created
+     *
+     * @param Messages $message
+     * @param FollowableInterface $followableEntity
+     * @return array
+     */
+    public static function formatDistributionNewMessage(Messages $message, FollowableInterface $followableEntity): array
+    {
+        $data = [
+            'action' => '',
+            'entity_id' => $followableEntity->getId(),
+            'users_id' => 0,
+            'apps_id' => $message->apps_id,
+            'companies_id' => $message->companies_id,
+            'message_id' => $message->getId(),
+            'num_messages' => 0,
+            'is_deleted' => 0,
+            'entity_namespace' => get_class($followableEntity),
+            'delete_message' => 0
+        ];
+        return $data;
     }
 }
