@@ -14,6 +14,7 @@ class Interactions extends BaseModel
     const REPLIED = 4;
     const FOLLOWING = 5;
     const FOLLOWERS = 6;
+    const MESSAGE = 7;
 
     /**
      * Initialize method for model.

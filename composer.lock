@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bakaphp/baka.git",
-                "reference": "75819f993a66aaf2ddb82398f4f5f09ee4419663"
+                "reference": "5297e12ae9e5482014aa0f5d2ee905e7cd79c5bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bakaphp/baka/zipball/75819f993a66aaf2ddb82398f4f5f09ee4419663",
-                "reference": "75819f993a66aaf2ddb82398f4f5f09ee4419663",
+                "url": "https://api.github.com/repos/bakaphp/baka/zipball/5297e12ae9e5482014aa0f5d2ee905e7cd79c5bf",
+                "reference": "5297e12ae9e5482014aa0f5d2ee905e7cd79c5bf",
                 "shasum": ""
             },
             "require": {
@@ -77,7 +77,7 @@
                 "canvas",
                 "saas"
             ],
-            "time": "2020-09-08T22:26:40+00:00"
+            "time": "2020-09-09T14:13:13+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -6778,12 +6778,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "3406f88a0142ea17c9a46607e5ac4b2410b9ec35"
+                "reference": "9ab6195f4049147a974e188e951d9ae356dce2cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3406f88a0142ea17c9a46607e5ac4b2410b9ec35",
-                "reference": "3406f88a0142ea17c9a46607e5ac4b2410b9ec35",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/9ab6195f4049147a974e188e951d9ae356dce2cc",
+                "reference": "9ab6195f4049147a974e188e951d9ae356dce2cc",
                 "shasum": ""
             },
             "require": {
@@ -6861,7 +6861,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-08T11:16:46+00:00"
+            "time": "2020-09-09T05:20:36+00:00"
+
         }
     ],
     "aliases": [],
