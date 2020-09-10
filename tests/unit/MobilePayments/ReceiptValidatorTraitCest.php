@@ -8,12 +8,33 @@ use UnitTester;
 class ReceiptValidatorTraitCest
 {
     /**
-     * Test to get HashtagFromStrings
+     * Validate Apple Pay receipts
+     *
+     * @param string $receiptData
+     * @param string $source
+     * @return array
+     */
+    public function validateReceiptTest(UnitTester $I): void
+    {
+        $receipt = getenv('ITUNES_RECEIPT_EXAMPLE');
+        $sharedSecret = getenv('ITUNES_STORE_PASS');
+
+        $receiptValidator = new class {
+            use ReceiptValidatorTrait;
+        };
+
+        $response = $receiptValidator->validateReceipt($receipt);
+
+        $I->assertIsArray($response);
+    }
+
+    /**
+     * Test to parse Apple Receipt Data
      *
      * @param UnitTester $I
      * @return void
      */
-    public function parseReceiptDataApple(UnitTester $I): void
+    public function parseAppleReceiptData(UnitTester $I): void
     {
         $receipt = [
             "receipt_creation_date_ms" => gmdate('Y-m-d H:i:s', (int) 1532540395000 / 1000),
