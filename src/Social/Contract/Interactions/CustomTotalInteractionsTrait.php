@@ -9,6 +9,7 @@ trait CustomTotalInteractionsTrait
     use TotalInteractionsTrait {
         getInteractionStorageKey as protected parentGetInteractionStorageKey;
     }
+    
     /**
      * @var int
     */

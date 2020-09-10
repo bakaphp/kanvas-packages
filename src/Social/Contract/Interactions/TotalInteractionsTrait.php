@@ -32,7 +32,6 @@ trait TotalInteractionsTrait
     public function getTotal(int $interaction): int
     {
         $key = $this->getInteractionStorageKey() . '-' . $interaction;
-
         return (int) Di::getDefault()->get('redis')->get($key);
     }
 
@@ -102,18 +101,8 @@ trait TotalInteractionsTrait
      *
      * @return integer
      */
-    public function getTotalFollowing(): int
+    public function getTotalMessages(): int
     {
-        return $this->getTotal(Interactions::FOLLOWING);
-    }
-
-    /**
-     * Get the total of following of the user
-     *
-     * @return integer
-     */
-    public function getTotalFollowers(): int
-    {
-        return $this->getTotal(Interactions::FOLLOWERS);
+        return $this->getTotal(Interactions::MESSAGE);
     }
 }

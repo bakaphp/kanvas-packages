@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contract\Interactions;
 
+use Baka\Contracts\Database\ModelInterface;
 use Kanvas\Packages\Social\Contract\Events\EventManagerAwareTrait;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\UsersInteractions;
@@ -17,11 +18,12 @@ trait InteractionsTrait
      * Interact with the object based on the action
      *
      * @param string $action
+     * @param Model $data
      * @return void
      */
-    public function interact(string $action): void
+    public function interact(string $action, ModelInterface $data): void
     {
-        $this->fire("socialUser:{$action}", $this);
+        $this->fire("socialUser:{$action}", $data);
     }
 
     /**
