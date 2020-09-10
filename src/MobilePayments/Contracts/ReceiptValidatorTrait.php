@@ -22,9 +22,9 @@ trait ReceiptValidatorTrait
      *
      * @param string $receiptData
      * @param string $source
-     * @return Response
+     * @return array
      */
-    public function validateReceipt(string $receiptData): ?array
+    public function validateReceipt(string $receiptData)
     {
         $validator = new iTunesValidator(iTunesValidator::ENDPOINT_PRODUCTION); // Or iTunesValidator::ENDPOINT_SANDBOX if sandbox testing
         $sharedSecret = getenv('ITUNES_STORE_PASS');
