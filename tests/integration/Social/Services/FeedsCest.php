@@ -13,6 +13,7 @@ use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Services\Distributions;
 use Kanvas\Packages\Social\Services\Interactions;
 use Kanvas\Packages\Test\Support\Models\Lead;
+use Kanvas\Packages\Test\Support\Models\MessageObject;
 
 class FeedsCest
 {
@@ -78,7 +79,7 @@ class FeedsCest
             'text' => 'This is test text for testing'
         ];
         
-        $feed = Feeds::create(new Users(), 'memo', $text);
+        $feed = Feeds::create(new Users(), 'memo', $text, new MessageObject());
 
         $I->assertNotNull($feed->getId());
     }
