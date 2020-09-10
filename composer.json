@@ -25,7 +25,8 @@
         "robmorgan/phinx": "^0.12",
         "baka/baka": "0.6.x-dev",
         "php-amqplib/php-amqplib": "^2.9",
-        "elastic/app-search": "^7.5"
+        "elastic/app-search": "^7.5",
+        "aporat/store-receipt-validator": "^4.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
