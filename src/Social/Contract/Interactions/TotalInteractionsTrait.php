@@ -101,26 +101,6 @@ trait TotalInteractionsTrait
      *
      * @return integer
      */
-    public function getTotalFollowing(): int
-    {
-        return $this->getTotal(Interactions::FOLLOWING);
-    }
-
-    /**
-     * Get the total of following of the user
-     *
-     * @return integer
-     */
-    public function getTotalFollowers(): int
-    {
-        return $this->getTotal(Interactions::FOLLOWERS);
-    }
-
-    /**
-     * Get the total of following of the user
-     *
-     * @return integer
-     */
     public function getTotalMessages(): int
     {
         return $this->getTotal(Interactions::MESSAGE);
