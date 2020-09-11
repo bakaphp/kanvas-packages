@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Exception;
 use Kanvas\Packages\Social\Contract\Messages\MessageableInterface;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
@@ -36,12 +35,14 @@ class Feeds
      * Get the feeds of the user
      *
      * @param UserInterface $user
+     * @param integer $limit
+     * @param integer $page
      * @return Simple
      */
-    public static function getByUser(UserInterface $user): Simple
+    public static function getByUser(UserInterface $user, int $page = 1, int $limit = 25): Simple
     {
         $feed = new UserMessages();
-        return $feed->getUserFeeds($user);
+        return $feed->getUserFeeds($user, $limit, $page);
     }
 
     /**
@@ -106,13 +107,9 @@ class Feeds
      * @param string $uuid
      * @return bool
      */
-    public static function delete(string $uuid, UserInterface $user): bool
+    public static function delete(string $uuid): bool
     {
         $message = Messages::getByIdOrFail($uuid);
-        
-        if (!$message->hasUser($user->getId())) {
-            throw new Exception('The user not own this message');
-        }
 
         RemoveMessagesFeed::dispatch($message);
 

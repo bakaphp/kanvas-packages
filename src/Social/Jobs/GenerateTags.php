@@ -9,6 +9,7 @@ use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\MessageTags;
 use Kanvas\Packages\Social\Models\Tags;
+use Kanvas\Packages\Social\Services\Distributions;
 use Kanvas\Packages\Social\Utils\StringFormatter;
 use Phalcon\Di;
 use Phalcon\Utils\Slug;
@@ -71,6 +72,8 @@ class GenerateTags extends Job implements QueueableJobInterface
                     'tags_id' => $tagData->getId()
                 ]
             );
+
+            Distributions::sendToUsersFeeds($this->message, $tagData);
         }
 
         Di::getDefault()->get('log')->info('Generate tags for message ' . $this->message->getId());
