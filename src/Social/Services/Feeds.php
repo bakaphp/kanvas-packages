@@ -35,12 +35,14 @@ class Feeds
      * Get the feeds of the user
      *
      * @param UserInterface $user
+     * @param integer $limit
+     * @param integer $page
      * @return Simple
      */
-    public static function getByUser(UserInterface $user): Simple
+    public static function getByUser(UserInterface $user, int $page = 1, int $limit = 10): Simple
     {
         $feed = new UserMessages();
-        return $feed->getUserFeeds($user);
+        return $feed->getUserFeeds($user, $limit, $page);
     }
 
     /**
