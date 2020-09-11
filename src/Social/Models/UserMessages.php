@@ -40,9 +40,16 @@ class UserMessages extends BaseModel
             null,
             new Messages(),
             $this->getReadConnection()->query(
-            "SELECT * from user_messages left join messages on messages.id = user_messages.messages_id where user_messages.users_id = {$user->getId()} and user_messages.is_deleted = 0 and messages.apps_id = {$appData->getId()}
-            limit {$limit} OFFSET {$offSet}"
-            )
+            "SELECT 
+            * 
+            from 
+                user_messages 
+                left join 
+                messages on messages.id = user_messages.messages_id 
+            where user_messages.users_id = {$user->getId()}
+            and user_messages.is_deleted = 0 
+            and messages.apps_id = {$appData->getId()}
+            limit {$limit} OFFSET {$offSet}")
         );
 
         return $userFeeds;
