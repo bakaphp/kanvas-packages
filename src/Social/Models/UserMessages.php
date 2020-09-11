@@ -30,7 +30,7 @@ class UserMessages extends BaseModel
     * @param integer $page
     * @return Simple
     */
-    public function getUserFeeds(UserInterface $user, int $limit = 10, int $page = 1): Simple
+    public function getUserFeeds(UserInterface $user, int $limit = 25, int $page = 1): Simple
     {
        $appData = Di::getDefault()->get('app');
 

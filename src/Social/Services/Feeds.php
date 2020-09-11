@@ -39,7 +39,7 @@ class Feeds
      * @param integer $page
      * @return Simple
      */
-    public static function getByUser(UserInterface $user, int $page = 1, int $limit = 10): Simple
+    public static function getByUser(UserInterface $user, int $page = 1, int $limit = 25): Simple
     {
         $feed = new UserMessages();
         return $feed->getUserFeeds($user, $limit, $page);
