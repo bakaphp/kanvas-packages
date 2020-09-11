@@ -50,7 +50,7 @@ class Imports extends Injectable
     {
         $processData = $this->structureData($data);
 
-        $db = $this->di->get('dbSocial');
+        $db = $this->di->get('dbLocal');
         $db->begin();
         $return = [
             "errors" => [],

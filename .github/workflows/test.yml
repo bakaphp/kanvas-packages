@@ -15,6 +15,10 @@ jobs:
       DATA_API_SOCIAL_MYSQL_USER: root
       DATA_API_SOCIAL_MYSQL_PASS: password
       DATA_API_SOCIAL_MYSQL_NAME: kanvas_social
+      DATA_API_WALLET_MYSQL_HOST: 127.0.0.1
+      DATA_API_WALLET_MYSQL_USER: root
+      DATA_API_WALLET_MYSQL_PASS: password
+      DATA_API_WALLET_MYSQL_NAME: kanvas_social
       DATA_API_MEMCACHED_HOST: 127.0.0.1
       DATA_API_MEMCACHED_PORT: 11211
       DATA_API_MEMCACHED_WEIGHT: 100
@@ -103,12 +107,15 @@ jobs:
       - name: Setup Env Variable
         run: cp .env.example .env
           
-      - name: Phinx Migrate
-        run: vendor/bin/phinx migrate -e development
+      - name: Phinx Migrate Social
+        run: ./vendor/bin/phinx migrate -c phinx-social.php -e development
 
-      - name: Phinx Seed:run
-        run: vendor/bin/phinx seed:run
-
+      - name: Phinx Seed:run Social
+        run: ./vendor/bin/phinx seed:run -c phinx-social.php
+   
+      - name: Phinx Migrate Wallet
+        run: ./vendor/bin/phinx migrate -c phinx-wallets.php -e development
+      
       - name: Run test suites
         if: success()
         run: vendor/bin/codecept run
