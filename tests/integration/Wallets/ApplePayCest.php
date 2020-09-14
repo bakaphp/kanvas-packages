@@ -26,7 +26,7 @@ class ApplePayCest
 
         $applePay = new ApplePay();
 
-        $response = $applePay->validatePayment($receipt);
+        $response = $applePay->validatePayment($receiptData);
 
         $I->assertIsArray($response);
     }
