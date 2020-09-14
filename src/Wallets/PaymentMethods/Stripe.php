@@ -27,7 +27,7 @@ class Stripe implements PaymentMethodsInterface
     /**
      * charge the user
      * @param float $amount
-     * @return Transactions
+     * @return bool
      */
     public function charge(float $amount) : bool
     {
