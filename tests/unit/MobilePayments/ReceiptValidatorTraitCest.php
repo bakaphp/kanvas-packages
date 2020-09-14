@@ -38,7 +38,11 @@ class ReceiptValidatorTraitCest
     {
         $receipt = [
             "receipt_creation_date_ms" => gmdate('Y-m-d H:i:s', (int) 1532540395000 / 1000),
-            "in_app" => [["transaction_id" => 21000048610733]]
+            "in_app" => [[
+                "transaction_id" => 21000048610733,
+                "product_id" => "example.product.id",
+                "quantity" => 1
+                ]]
         ];
 
         $receiptValidator = new class {

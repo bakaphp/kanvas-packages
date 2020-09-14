@@ -3,7 +3,6 @@
 namespace Kanvas\Packages\Wallets\PaymentMethods;
 
 use Gewaer\Models\Users;
-use Kanvas\Packages\MobilePayments\Contracts\AppleReceipts;
 use Kanvas\Packages\MobilePayments\Contracts\ReceiptValidatorTrait;
 use Exception;
 
