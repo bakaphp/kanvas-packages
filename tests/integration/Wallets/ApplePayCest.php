@@ -17,7 +17,7 @@ class ApplePayCest
      * @param string $source
      * @return array
      */
-    public function validatePaymentTest(UnitTester $I): void
+    public function validatePaymentTest(IntegrationTester $I): void
     {
         $receiptData = getenv('ITUNES_RECEIPT_EXAMPLE');
         $sharedSecret = getenv('ITUNES_STORE_PASS');
