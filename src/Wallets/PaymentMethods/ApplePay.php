@@ -13,22 +13,13 @@ class ApplePay implements PaymentMethodsInterface
      */
     use ReceiptValidatorTrait;
 
-    public ?Users $users = null;
-    public ?string $customerId = null;
-
-    public function __construct(Users $users)
-    {
-        $this->users = $users;
-        $this->customerId = $users->getDefaultCompany()->get('payment_gateway_customer_id');
-    }
-
     /**
      * Can be charged to user
      * @return bool
      */
     public function canCharge() : bool
     {
-        return is_null($this->customerId) ? false : true;
+        return true;
     }
 
     /**
