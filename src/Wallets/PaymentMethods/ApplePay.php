@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Wallets\PaymentMethods;
 use Gewaer\Models\Users;
 use Kanvas\Packages\MobilePayments\Contracts\AppleReceipts;
 use Kanvas\Packages\MobilePayments\Contracts\ReceiptValidatorTrait;
+use Exception;
 
 class ApplePay implements PaymentMethodsInterface
 {
@@ -14,12 +15,12 @@ class ApplePay implements PaymentMethodsInterface
     use ReceiptValidatorTrait;
 
     public ?Users $users = null;
-    public ?string $customer_id = null;
+    public ?string $customerId = null;
 
     public function __construct(Users $users)
     {
         $this->users = $users;
-        $this->customer_id = $users->getDefaultCompany()->get('payment_gateway_customer_id');
+        $this->customerId = $users->getDefaultCompany()->get('payment_gateway_customer_id');
     }
 
     /**
@@ -28,7 +29,7 @@ class ApplePay implements PaymentMethodsInterface
      */
     public function canCharge() : bool
     {
-        return is_null($this->customer_id) ? false : true;
+        return is_null($this->customerId) ? false : true;
     }
 
     /**
