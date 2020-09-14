@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Tests\Integration\Wallets;
 use IntegrationTester;
 use Kanvas\Packages\MobilePayments\Contracts\ReceiptValidatorTrait;
 use Kanvas\Packages\Wallets\PaymentMethods\ApplePay;
+use Kanvas\Packages\Test\Support\Models\Users;
 
 class ApplePayCest
 {
