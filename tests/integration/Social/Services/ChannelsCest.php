@@ -59,7 +59,7 @@ class ChannelsCest
         $user = new Users();
         $user->id = 2;
 
-        $newChannelUser = Channels::addUser($this->channel->getId(), $user);
+        $newChannelUser = Channels::addUser($this->channel, $user);
         
         $I->assertInstanceOf(ChannelUsers::class, $newChannelUser);
         $I->assertEquals($user->id, $newChannelUser->users_id);

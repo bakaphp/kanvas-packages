@@ -49,7 +49,7 @@ class Channels
         $channel->entity_id = (string) $channelEntity->getId();
         $channel->saveOrFail();
 
-        self::addUser($channel->getId(), $user);
+        self::addUser($channel, $user);
 
         return $channel;
     }
@@ -57,23 +57,23 @@ class Channels
     /**
      * Add a new user to the channel
      *
-     * @param integer $channelId
+     * @param ChannelsModel $channel
      * @param UserInterface $newUser
      * @param integer $rolId
      * @return ChannelUsers
      */
-    public static function addUser(int $channelId, UserInterface $newUser, int $rolId = 1): ChannelUsers
+    public static function addUser(ChannelsModel $channel, UserInterface $newUser, int $rolId = 1): ChannelUsers
     {
         $channelUser = ChannelUsers::findFirstOrCreate(
             [
             'conditions' => 'users_id = :user_id: AND channel_id = :channel_id: AND is_deleted = 0',
             'bind' => [
                 'user_id' => $newUser->getId(),
-                'channel_id' => $channelId,
+                'channel_id' => $channel->getId(),
                 ]
             ],
             [
-                'channel_id' => $channelId,
+                'channel_id' => $channel->getId(),
                 'users_id' => $newUser->getId(),
                 'roles_id' => $rolId
             ]
