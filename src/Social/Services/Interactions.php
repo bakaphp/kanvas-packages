@@ -21,12 +21,18 @@ class Interactions
      */
     public static function add(UserInterface $user, ModelInterface $entity, int $interactionId): bool
     {
-        $interaction = $entity->getInteraction([
-            'conditions' => 'users_id = :user_id: AND interactions_id = :interaction_id:',
-            'bind' => [
-                'user_id' => $user->getId(),
-                'interaction_id' => $interactionId,
-            ]
+        $interaction = UsersInteractions::findFirst([
+                'conditions' => 'users_id = :userId: AND 
+                                interactions_id = :interactionId: AND 
+                                entity_namespace = :namespace: AND 
+                                entity_id = :entityId: AND 
+                                is_deleted = 0',
+                'bind' => [
+                    'userId' => $user->getId(),
+                    'interactionId' => $interactionId,
+                    'namespace' => get_class($entity),
+                    'entityId' => $entity->getId(),
+                ]
         ]);
 
         if ($interaction && !InteractionsModel::isComment($interactionId)) {

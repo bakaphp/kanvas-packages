@@ -60,9 +60,9 @@ trait TotalInteractionsTrait
      *
      * @return integer
      */
-    public function getTotalLiked(): int
+    public function getTotalReacted(): int
     {
-        return $this->getTotal(Interactions::LIKE);
+        return $this->getTotal(Interactions::REACT);
     }
 
     /**
