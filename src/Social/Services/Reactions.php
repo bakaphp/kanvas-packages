@@ -32,24 +32,27 @@ class Reactions
             $reactionData = self::getReactionByName($reaction, $user);
         }
 
-        $userReaction = $entity->getReaction(
+        $userReaction = UsersReactions::findFirstOrCreate(
             [
-                'conditions' => 'users_id = :user_id: AND reactions_id = :reaction_id: AND is_deleted = 0',
+                'conditions' => 'users_id = :userId: AND 
+                                reactions_id = :reactionId: AND 
+                                entity_namespace = :namespace: AND 
+                                entity_id = :entityId: AND 
+                                is_deleted = 0',
                 'bind' => [
-                    'user_id' => $user->getId(),
-                    'reaction_id' => $reactionData->getId()
+                    'userId' => $user->getId(),
+                    'reactionId' => $reactionData->getId(),
+                    'namespace' => get_class($entity),
+                    'entityId' => $entity->getId(),
                 ]
+            ],
+            [
+                'users_id' => $user->getId(),
+                'reactions_id' => $reactionData->getId(),
+                'entity_namespace' => get_class($entity),
+                'entity_id' => $entity->getId(),
             ]
         );
-
-        if (!$userReaction) {
-            $userReaction = new UsersReactions();
-            $userReaction->users_id = $user->getId();
-            $userReaction->reactions_id = $reactionData->getId();
-            $userReaction->entity_id = $entity->getId();
-            $userReaction->entity_namespace = get_class($entity);
-            $userReaction->save();
-        }
 
         return $userReaction;
     }
@@ -134,12 +137,11 @@ class Reactions
     /**
      * Delete a Reaction by its id.
      *
-     * @param integer $reactionId
+     * @param ReactionsModel $reaction
      * @return bool
      */
-    public static function deleteReaction(int $reactionId): bool
+    public static function deleteReaction(ReactionsModel $reaction): bool
     {
-        $reaction = ReactionsModel::getByIdOrFail($reactionId);
         return (bool) $reaction->softDelete();
 
         RemoveMessagesReactions::dispatch($reaction);
@@ -148,13 +150,12 @@ class Reactions
     /**
      * Edit a reaction
      *
-     * @param string $reactionId
+     * @param ReactionsModel $reaction
      * @param string $name
      * @return ReactionsModel
      */
-    public static function editReaction(string $reactionId, string $name): ReactionsModel
+    public static function editReaction(ReactionsModel $reaction, string $name): ReactionsModel
     {
-        $reaction = ReactionsModel::getByIdOrFail($reactionId);
         $reaction->name = $name;
         $reaction->saveOrFail();
 
