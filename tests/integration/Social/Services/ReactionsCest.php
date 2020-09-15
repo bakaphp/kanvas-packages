@@ -85,7 +85,7 @@ class ReactionsCest
      */
     public function editReaction(IntegrationTester $I): void
     {
-        $reaction = Reactions::editReaction($this->reaction->getId(), 'test-edited-reaction');
+        $reaction = Reactions::editReaction($this->reaction, 'test-edited-reaction');
 
         $I->assertEquals('test-edited-reaction', $reaction->name);
     }
@@ -99,10 +99,6 @@ class ReactionsCest
      */
     public function deleteReaction(IntegrationTester $I): void
     {
-        $I->assertTrue(
-            Reactions::deleteReaction(
-                (string) $this->reaction->getId()
-            )
-        );
+        $I->assertTrue(Reactions::deleteReaction($this->reaction));
     }
 }
