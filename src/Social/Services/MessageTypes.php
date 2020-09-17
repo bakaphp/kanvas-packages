@@ -19,7 +19,7 @@ class MessageTypes
      */
     public static function get(string $uuid): MessageTypesModel
     {
-        $messageType = MessageTypesModel::getByIdOrFail((int)$uuid);
+        $messageType = MessageTypesModel::findFirstOrFail($uuid);
         
         return $messageType;
     }
