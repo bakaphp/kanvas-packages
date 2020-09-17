@@ -19,7 +19,12 @@ class MessageTypes
      */
     public static function get(string $uuid): MessageTypesModel
     {
-        $messageType = MessageTypesModel::findFirstOrFail($uuid);
+        $messageType = MessageTypesModel::findFirstOrFail([
+            'conditions' => 'id = :uuid: and is_deleted = 0',
+            'bind' => [
+                'uuid' => $uuid
+            ]
+        ]);
         
         return $messageType;
     }
