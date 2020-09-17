@@ -74,7 +74,7 @@ class MessageTypesCest
     {
         $I->assertTrue(
             MessageTypes::delete(
-                $this->messageType->getId()
+                $this->messageType
             )
         );
     }
