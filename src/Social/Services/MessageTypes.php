@@ -19,7 +19,12 @@ class MessageTypes
      */
     public static function get(string $uuid): MessageTypesModel
     {
-        $messageType = MessageTypesModel::getByIdOrFail($uuid);
+        $messageType = MessageTypesModel::findFirstOrFail([
+            'conditions' => 'id = :uuid: and is_deleted = 0',
+            'bind' => [
+                'uuid' => $uuid
+            ]
+        ]);
         
         return $messageType;
     }
@@ -52,13 +57,12 @@ class MessageTypes
     /**
      * Delete an existing message type
      *
-     * @param string $uuid
+     * @param MessageTypesModel $messageType
      * @return bool
      */
-    public static function delete(string $uuid): bool
+    public static function delete(MessageTypesModel $messageType): bool
     {
-        $messageType = MessageTypesModel::findFirstOrFail($uuid);
-        return $messageType->deleteOrFail();
+        return (bool) $messageType->softDelete();
     }
 
 

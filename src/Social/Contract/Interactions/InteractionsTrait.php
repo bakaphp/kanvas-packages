@@ -21,20 +21,9 @@ trait InteractionsTrait
      * @param Model $data
      * @return void
      */
-    public function interact(string $action, ModelInterface $data): void
+    public function interact(string $action, ModelInterface $data, ?string $reactionName = null): void
     {
-        $this->fire("socialUser:{$action}", $data);
-    }
-
-    /**
-     * React to an object by emoji on reaction name
-     *
-     * @param string $reaction
-     * @return void
-     */
-    public function react(string $reaction): void
-    {
-        $this->fire("socialUser:react", $this, $reaction);
+        $this->fire("socialUser:{$action}", $data, $reactionName);
     }
 
 
