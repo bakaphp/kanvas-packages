@@ -56,6 +56,7 @@ class Imports extends Injectable
             "errors" => [],
             "success" => [],
         ];
+
         foreach ($processData as $modelData) {
             try {
                 $models = $this->save($modelData);
@@ -89,8 +90,7 @@ class Imports extends Injectable
             if (method_exists($obj, 'findFirstOrCreate')) {
                 $obj = $model::findFirstOrCreate(null, $data);
             } else {
-                $obj->assign($data);
-                $obj->saveOrFail();
+                $obj->saveOrFail($data);
             }
             
             $return[\Baka\getShortClassName($obj)] = $obj;
@@ -135,6 +135,10 @@ class Imports extends Injectable
              * 1 => db tb name
              */
             $map = explode('.', $value);
+            
+            if (count($map) != 2) {
+                continue;
+            }
 
             $processData["{$this->namespaceModel}\\{$map[0]}"][$map[1]] = $raw[$order];
         }
