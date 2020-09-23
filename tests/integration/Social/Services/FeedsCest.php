@@ -61,17 +61,4 @@ class FeedsCest
         Distributions::sendToChannelFeed($this->channel, $this->message);
 
     }
-
-    /**
-     * Test get feeds by channel
-     *
-     * @param IntegrationTester $I
-     * @before messageTestCreation
-     * @before channelMessagesDistribution
-     * @return void
-     */
-    public function getFeedsByChannel(IntegrationTester $I): void
-    {
-        
-    }
 }
