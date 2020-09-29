@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Payments\Contracts;
 
@@ -20,16 +21,20 @@ trait PlaidActionsTrait
      */
     public function plaidAuth() : Response
     {
+        $request = $this->request->getPostData();
+
         $validation = new CanvasValidation();
         $validation->add('public_token', new PresenceOf(['message' => _('The access_token is required.')]));
-        $request = $this->request->getPostData();
         $validation->validate($request);
+
         $response = $this->plaid->exchangeToken($request['public_token']);
         $accessToken = $response->access_token;
         $auth = $this->plaid->getAuth($accessToken);
+
         if (!$auth->numbers || !$auth->numbers->ach) {
             throw new Exception('We have a problem on palid account');
         }
+
         return $this->response($auth->numbers->ach);
     }
 
@@ -42,11 +47,13 @@ trait PlaidActionsTrait
     public function plaidTransaction() : Response
     {
         $request = $this->request->getPostData();
+
         $validation = new CanvasValidation();
-        $validation->add('public_token', new PresenceOf(['message' => _('The access_token is required.')]));
-        $validation->add('account_id', new PresenceOf(['message' => _('The access_token is required.')]));
-        $validation->add('amount', new PresenceOf(['message' => _('The access_token is required.')]));
+        $validation->add('public_token', new PresenceOf(['message' => _('The public_token is required.')]));
+        $validation->add('account_id', new PresenceOf(['message' => _('The account_id is required.')]));
+        $validation->add('amonut', new PresenceOf(['message' => _('The amonut is required.')]));
         $validation->validate($request);
+
         try {
             // here we get the access token
             $accessToken = $this->plaid->exchangeToken($request['public_token']);
