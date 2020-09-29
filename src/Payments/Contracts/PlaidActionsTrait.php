@@ -9,7 +9,10 @@ use Kanvas\Packages\Payments\Exception\PaymentException;
 use Phalcon\Http\Response;
 use Phalcon\Validation\Validator\PresenceOf;
 use Stripe\Charge;
+use Stripe\Exception\AuthenticationException;
+use Stripe\Exception\InvalidRequestException;
 use Stripe\Stripe;
+use TomorrowIdeas\Plaid\PlaidRequestException;
 
 trait PlaidActionsTrait
 {
@@ -67,8 +70,15 @@ trait PlaidActionsTrait
                 'description' => $request['reference'],
                 'source' => $stripeToken->stripe_bank_account_token
             ]);
+        } catch (PlaidRequestException $e) {
+            throw new Exception('We have a problem with plaid account');
+        } catch (AuthenticationException $e) {
+            throw new Exception('We have a problem with stripe auth');
         } catch (PaymentException $e) {
-            throw new Exception('We have a problem on palid account');
+        } catch (InvalidRequestException $e) {
+            throw new Exception('We have a problem with stripe api');
+        } catch (PaymentException $e) {
+            throw new Exception('We have a problem processing');
         }
         return $this->response($charge);
     }
