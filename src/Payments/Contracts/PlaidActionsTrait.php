@@ -1,6 +1,6 @@
 <?php
 
-namespace Canvas\Contracts\Controllers;
+namespace Kanvas\Packages\Payments\Contracts;
 
 use function Baka\envValue;
 use Canvas\Validation as CanvasValidation;
