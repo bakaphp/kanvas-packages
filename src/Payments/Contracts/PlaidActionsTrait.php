@@ -51,7 +51,7 @@ trait PlaidActionsTrait
         $validation = new CanvasValidation();
         $validation->add('public_token', new PresenceOf(['message' => _('The public_token is required.')]));
         $validation->add('account_id', new PresenceOf(['message' => _('The account_id is required.')]));
-        $validation->add('amonut', new PresenceOf(['message' => _('The amonut is required.')]));
+        $validation->add('amount', new PresenceOf(['message' => _('The amount is required.')]));
         $validation->validate($request);
 
         try {
