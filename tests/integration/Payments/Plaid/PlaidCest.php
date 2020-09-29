@@ -2,6 +2,7 @@
 
 namespace Kanvas\Packages\Tests\Integration\Payments\Plaid;
 
+use IntegrationTester;
 use TomorrowIdeas\Plaid\Plaid;
 
 class PlaidCest
