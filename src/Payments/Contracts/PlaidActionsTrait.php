@@ -4,11 +4,11 @@ namespace Kanvas\Packages\Payments\Contracts;
 
 use function Baka\envValue;
 use Canvas\Validation as CanvasValidation;
+use Kanvas\Packages\Payments\PaymentException;
 use Phalcon\Http\Response;
 use Phalcon\Validation\Validator\PresenceOf;
 use Stripe\Charge;
 use Stripe\Stripe;
-use TomorrowIdeas\Plaid\PlaidRequestException;
 
 trait PlaidActionsTrait
 {
@@ -47,38 +47,22 @@ trait PlaidActionsTrait
         $validation->add('account_id', new PresenceOf(['message' => _('The access_token is required.')]));
         $validation->add('amount', new PresenceOf(['message' => _('The access_token is required.')]));
         $validation->validate($request);
-
-        $charge = $this->makeTransaction($request);
-        return $this->response($charge);
-    }
-
-    /**
-     * makeTransaction
-     * make a plaid charge through stripe.
-     *
-     * @return Charge
-     */
-    private function makeTransaction($payment) : Charge
-    {
-        $plaid = DI::getDefault()->getPlaid();
         try {
             // here we get the access token
-            $accessToken = $this->plaid->exchangeToken($payment['public_token']);
-
+            $accessToken = $this->plaid->exchangeToken($request['public_token']);
             // here we get the stripe token with plaid
-            $stripeToken = $this->plaid->createStripeToken($accessToken->access_token, $payment['account_id']);
+            $stripeToken = $this->plaid->createStripeToken($accessToken->access_token, $request['account_id']);
             // here we make the stripe charge
             Stripe::setApiKey(envValue('STRIPE_SECRET'));
-
             $charge = Charge::create([
-                'amount' => str_replace('.', '', $payment['amount']),
+                'amount' => str_replace('.', '', $request['amount']),
                 'currency' => 'USD',
-                'description' => $payment['reference'],
+                'description' => $request['reference'],
                 'source' => $stripeToken->stripe_bank_account_token
             ]);
-        } catch (PlaidRequestException $e) {
+        } catch (PaymentException $e) {
             throw new Exception('We have a problem on palid account');
         }
-        return $charge;
+        return $this->response($charge);
     }
 }
