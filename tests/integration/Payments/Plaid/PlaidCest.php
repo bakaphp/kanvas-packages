@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanvas\Packages\Tests\Integration\Payments;
+namespace Kanvas\Packages\Tests\Integration\Payments\Plaid;
 
 use TomorrowIdeas\Plaid\Plaid;
 
