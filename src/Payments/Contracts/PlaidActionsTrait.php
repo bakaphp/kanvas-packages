@@ -71,6 +71,7 @@ trait PlaidActionsTrait
                 'source' => $stripeToken->stripe_bank_account_token
             ]);
         } catch (PlaidRequestException $e) {
+            $this->log->error('Plaid ' . $e->getMessage());
             throw new PaymentException('We have a problem with plaid account');
         } catch (AuthenticationException $e) {
             throw new PaymentException('We have a problem with stripe auth');
