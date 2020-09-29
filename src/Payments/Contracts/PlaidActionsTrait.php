@@ -5,7 +5,7 @@ namespace Kanvas\Packages\Payments\Contracts;
 
 use function Baka\envValue;
 use Canvas\Validation as CanvasValidation;
-use Kanvas\Packages\Payments\PaymentException;
+use Kanvas\Packages\Payments\Exception\PaymentException;
 use Phalcon\Http\Response;
 use Phalcon\Validation\Validator\PresenceOf;
 use Stripe\Charge;
