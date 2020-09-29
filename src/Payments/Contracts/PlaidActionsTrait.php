@@ -71,14 +71,13 @@ trait PlaidActionsTrait
                 'source' => $stripeToken->stripe_bank_account_token
             ]);
         } catch (PlaidRequestException $e) {
-            throw new Exception('We have a problem with plaid account');
+            throw new PaymentException('We have a problem with plaid account');
         } catch (AuthenticationException $e) {
-            throw new Exception('We have a problem with stripe auth');
-        } catch (PaymentException $e) {
+            throw new PaymentException('We have a problem with stripe auth');
         } catch (InvalidRequestException $e) {
-            throw new Exception('We have a problem with stripe api');
+            throw new PaymentException('We have a problem with stripe api');
         } catch (PaymentException $e) {
-            throw new Exception('We have a problem processing');
+            throw new PaymentException('We have a problem processing');
         }
         return $this->response($charge);
     }
