@@ -35,7 +35,7 @@ trait PlaidActionsTrait
         $auth = $this->plaid->getAuth($accessToken);
 
         if (!$auth->numbers || !$auth->numbers->ach) {
-            throw new Exception('We have a problem on palid account');
+            throw new PaymentException('We have a problem on palid account');
         }
 
         return $this->response($auth->numbers->ach);
@@ -74,10 +74,13 @@ trait PlaidActionsTrait
             $this->log->error('Plaid ' . $e->getMessage());
             throw new PaymentException('We have a problem with plaid account');
         } catch (AuthenticationException $e) {
+            $this->log->error('Plaid ' . $e->getMessage());
             throw new PaymentException('We have a problem with stripe auth');
         } catch (InvalidRequestException $e) {
+            $this->log->error('Plaid ' . $e->getMessage());
             throw new PaymentException('We have a problem with stripe api');
         } catch (PaymentException $e) {
+            $this->log->error('Plaid ' . $e->getMessage());
             throw new PaymentException('We have a problem processing');
         }
         return $this->response($charge);

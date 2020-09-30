@@ -2,22 +2,24 @@
 
 namespace Helper;
 
+include __DIR__ . '/../../providers.php';
+
 // use Canvas\Bootstrap\IntegrationTests;
 
 use Codeception\Module;
 use Codeception\TestInterface;
+use Kanvas\Packages\Payments\Providers\PlaidProvider;
+use Kanvas\Packages\Social\Providers\DatabaseProvider;
+use Kanvas\Packages\Social\Providers\QueueProvider;
+use Kanvas\Packages\Social\Providers\RedisProvider;
 use Kanvas\Packages\Test\Support\Helper\Phinx;
+use Kanvas\Packages\Test\Support\Models\App;
 use Kanvas\Packages\Test\Support\Models\Users;
 use Phalcon\Config as PhConfig;
 use Phalcon\Di;
 use Phalcon\DI\FactoryDefault as PhDI;
 use Phalcon\Mvc\Model\Manager as ModelsManager;
 use Phalcon\Mvc\Model\Metadata\Memory;
-use Kanvas\Packages\Social\Providers\DatabaseProvider;
-use Kanvas\Packages\Social\Providers\QueueProvider;
-use Kanvas\Packages\Social\Providers\RedisProvider;
-use Kanvas\Packages\Payments\Providers\PlaidProvider;
-use Kanvas\Packages\Test\Support\Models\App;
 
 // here you can define custom actions
 // all public methods declared in helper class will be available in $I
@@ -65,7 +67,6 @@ class Integration extends Module
         Phinx::seed();
     }
 
-    
     /**
      * After all is done.
      *
@@ -185,7 +186,7 @@ class Integration extends Module
 
         $redis = new RedisProvider();
         $redis->register($this->diContainer);
-        
+
         $plaid = new PlaidProvider();
         $plaid->register($this->diContainer);
     }
