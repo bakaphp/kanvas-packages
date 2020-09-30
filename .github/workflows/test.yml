@@ -26,6 +26,10 @@ jobs:
       STRIPE_SECRET: ${{ secrets.STRIPE_SECRET }}
       EMAIL_USER: ${{ secrets.EMAIL_USER }}
       EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+      PLAID_CLIENT_ID: ${{ secrets.PLAID_CLIENT_ID }}
+      PLAID_CLIENT_SECRET: ${{ secrets.PLAID_CLIENT_SECRET }}
+      PLAID_PUBLIC_KEY: ${{ secrets.PLAID_PUBLIC_KEY }}
+      PLAID_ENVIRONMENT: sandbox
       REDIS_HOST: 127.0.0.1
       REDIS_PORT: 6379
       APP_IP: api.kanvas.ld
