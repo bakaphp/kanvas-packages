@@ -8,9 +8,6 @@ include __DIR__ . '/../../providers.php';
 
 use Codeception\Module;
 use Codeception\TestInterface;
-use Kanvas\Packages\Social\Providers\DatabaseProvider;
-use Kanvas\Packages\Social\Providers\QueueProvider;
-use Kanvas\Packages\Social\Providers\RedisProvider;
 use Kanvas\Packages\Test\Support\Helper\Phinx;
 use Kanvas\Packages\Test\Support\Models\App;
 use Kanvas\Packages\Test\Support\Models\Users;
@@ -176,15 +173,6 @@ class Integration extends Module
                 return new Memory();
             }
         );
-
-        $db = new DatabaseProvider();
-        $db->register($this->diContainer);
-
-        $queue = new QueueProvider();
-        $queue->register($this->diContainer);
-
-        $redis = new RedisProvider();
-        $redis->register($this->diContainer);
         $providers = include __DIR__ . '/../../providers.php';
         foreach ($providers as $provider) {
             (new $provider())->register($this->diContainer);
