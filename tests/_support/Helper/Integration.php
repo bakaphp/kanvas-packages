@@ -16,6 +16,7 @@ use Phalcon\Mvc\Model\Metadata\Memory;
 use Kanvas\Packages\Social\Providers\DatabaseProvider;
 use Kanvas\Packages\Social\Providers\QueueProvider;
 use Kanvas\Packages\Social\Providers\RedisProvider;
+use Kanvas\Packages\Payments\Providers\PlaidProvider;
 use Kanvas\Packages\Test\Support\Models\App;
 
 // here you can define custom actions
@@ -184,5 +185,8 @@ class Integration extends Module
 
         $redis = new RedisProvider();
         $redis->register($this->diContainer);
+        
+        $plaid = new PlaidProvider();
+        $plaid->register($this->diContainer);
     }
 }
