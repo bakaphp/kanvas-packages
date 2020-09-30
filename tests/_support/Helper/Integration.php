@@ -2,8 +2,6 @@
 
 namespace Helper;
 
-include __DIR__ . '/../../providers.php';
-
 // use Canvas\Bootstrap\IntegrationTests;
 
 use Codeception\Module;
