@@ -6,7 +6,7 @@ namespace Kanvas\Packages\Payments\Providers;
 
 use function Baka\envValue;
 use Canvas\Exception\ServerErrorHttpException;
-use PDOException;
+use Exception;
 use Phalcon\Di\DiInterface;
 use Phalcon\Di\ServiceProviderInterface;
 use TomorrowIdeas\Plaid\Plaid;
@@ -30,7 +30,7 @@ class PlaidProvider implements ServiceProviderInterface
                     $plaid->setEnvironment(
                         envValue('PLAID_ENVIRONMENT')
                     );
-                } catch (PDOException $e) {
+                } catch (Exception $e) {
                     throw new ServerErrorHttpException($e->getMessage());
                 }
                 return $plaid;
