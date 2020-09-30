@@ -8,7 +8,6 @@ include __DIR__ . '/../../providers.php';
 
 use Codeception\Module;
 use Codeception\TestInterface;
-use Kanvas\Packages\Payments\Providers\PlaidProvider;
 use Kanvas\Packages\Social\Providers\DatabaseProvider;
 use Kanvas\Packages\Social\Providers\QueueProvider;
 use Kanvas\Packages\Social\Providers\RedisProvider;
@@ -63,8 +62,8 @@ class Integration extends Module
      */
     public function _beforeSuite($settings = [])
     {
-        Phinx::migrate();
-        Phinx::seed();
+        //Phinx::migrate();
+        //Phinx::seed();
     }
 
     /**
@@ -186,8 +185,9 @@ class Integration extends Module
 
         $redis = new RedisProvider();
         $redis->register($this->diContainer);
-
-        $plaid = new PlaidProvider();
-        $plaid->register($this->diContainer);
+        $providers = include __DIR__ . '/../../providers.php';
+        foreach ($providers as $provider) {
+            (new $provider())->register($this->diContainer);
+        }
     }
 }
