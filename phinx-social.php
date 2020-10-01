@@ -5,8 +5,8 @@ $dotEnv->load();
 
 return [
     'paths' => [
-        'migrations' => 'storage/db/Social/migrations',
-        'seeds' => 'storage/db/Social/seeds',
+        'migrations' => getenv('SOCIAL_PHINX_CONFIG_DIR') . '/storage/db/Social/migrations',
+        'seeds' => getenv('SOCIAL_PHINX_CONFIG_DIR') .'/storage/db/Social/seeds',
     ],
     'environments' => [
         'default_migration_table' => 'ut_migrations',
