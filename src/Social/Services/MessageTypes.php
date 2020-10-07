@@ -71,9 +71,9 @@ class MessageTypes
      *
      * @param string $verb
      * @param UserInterface $user
-     * @return self
+     * @return MessageTypesModel | null
      */
-    public static function getTypeByVerb(string $verb): MessageTypesModel
+    public static function getTypeByVerb(string $verb) : ?MessageTypesModel
     {
         return MessageTypesModel::findFirst([
             'conditions' => 'verb = :verb: AND apps_id = :currentAppId: AND is_deleted = 0',
