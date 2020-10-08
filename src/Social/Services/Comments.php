@@ -14,10 +14,10 @@ class Comments
     /**
      * Get a comment by its ID
      *
-     * @param string $uuid
+     * @param int $uuid
      * @return MessageComments
      */
-    public static function get(string $uuid): MessageComments
+    public static function get(int $uuid): MessageComments
     {
         $comment = MessageComments::getByIdOrFail($uuid);
 
@@ -27,11 +27,11 @@ class Comments
     /**
      * Create a comment for a message
      *
-     * @param string $messageId
+     * @param int $messageId
      * @param string $message
      * @return MessageComments
      */
-    public static function add(string $messageId, string $message): MessageComments
+    public static function add(int $messageId, string $message): MessageComments
     {
         $messageData = Messages::getByIdOrFail($messageId);
 
