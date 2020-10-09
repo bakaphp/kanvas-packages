@@ -28,38 +28,26 @@ class ChannelMessages extends BaseModel
     *
     * @return Simple
     */
-    public function getMessages(Channels $channel, array $filter = []): Simple
+    public function getMessages(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
     {
         $appData = Di::getDefault()->get('app');
         $userData = Di::getDefault()->get('userData');
 
-        if (empty($filter)) {
-            $filter = [
-                "page" => 1,
-                "limit" => 25,
-                "order_by" => "id",
-                "sort" => "DESC"
-            ];
-        }
-
-        $offSet = ($filter["page"] - 1) * $filter["limit"];
+        $offSet = ($page - 1) * $limit;
 
         $channelMessages = new Simple(
             null,
             new Messages(),
             Di::getDefault()->getShared('dbSocial')->query(
-                "SELECT 
-            * 
-            from 
-                channel_messages 
-                left join 
-                messages on messages.id = channel_messages.messages_id 
-            where channel_messages.channel_id = {$channel->getId()}
-            and channel_messages.is_deleted = 0 
-            and messages.apps_id = {$appData->getId()}
-            and messages.companies_id = {$userData->getCurrentCompany()->getId()}
-            order by {$filter["order_by"]} {$filter['sort']}
-            limit {$filter["limit"]} OFFSET {$offSet}"
+                "SELECT    * 
+                FROM      channel_messages 
+                LEFT JOIN messages 
+                ON        messages.id = channel_messages.messages_id 
+                WHERE     channel_messages.channel_id = {$channel->getId()} 
+                AND       channel_messages.is_deleted = 0 
+                AND       messages.apps_id = {$appData->getId()} 
+                AND       messages.companies_id = {$userData->getCurrentCompany()->getId()} 
+                ORDER BY  {$orderBy} {$sort} limit {$limit} offset {$offSet}"
             )
         );
 
