@@ -2,6 +2,9 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Phalcon\Di;
+use Phalcon\Mvc\Model\Resultset\Simple;
+
 class ChannelMessages extends BaseModel
 {
     public int $channel_id;
