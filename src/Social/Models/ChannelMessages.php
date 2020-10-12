@@ -17,4 +17,38 @@ class ChannelMessages extends BaseModel
         
         $this->setSource('channel_messages');
     }
+
+    /**
+    * Return all the messages of a channel
+    *
+    * @param Channels $channel
+    * @param array $filter
+    *
+    * @return Simple
+    */
+    public function getMessagesByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
+    {
+        $appData = Di::getDefault()->get('app');
+        $userData = Di::getDefault()->get('userData');
+
+        $offSet = ($page - 1) * $limit;
+
+        $channelMessages = new Simple(
+            null,
+            new Messages(),
+            Di::getDefault()->getShared('dbSocial')->query(
+                "SELECT    * 
+                FROM      channel_messages 
+                LEFT JOIN messages 
+                ON        messages.id = channel_messages.messages_id 
+                WHERE     channel_messages.channel_id = {$channel->getId()} 
+                AND       channel_messages.is_deleted = 0 
+                AND       messages.apps_id = {$appData->getId()} 
+                AND       messages.companies_id = {$userData->getCurrentCompany()->getId()} 
+                ORDER BY  {$orderBy} {$sort} limit {$limit} offset {$offSet}"
+            )
+        );
+
+        return $channelMessages;
+    }
 }
