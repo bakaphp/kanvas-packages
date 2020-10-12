@@ -47,13 +47,11 @@ class Feeds
      * @param Channels $user
      * @param array $filter
      *
-     * default $filter = ["page" => 1, "limit" => 25, "order_by" => "id", "sort" => "DESC"]
-     *
      * @return Simple
      */
     public static function getByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
     {
         $feed = new ChannelMessages();
-        return $feed->getMessages($channel, $page, $limit, $orderBy, $sort);
+        return $feed->getMessagesByChannel($channel, $page, $limit, $orderBy, $sort);
     }
 }

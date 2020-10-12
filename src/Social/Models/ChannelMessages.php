@@ -24,11 +24,9 @@ class ChannelMessages extends BaseModel
     * @param Channels $channel
     * @param array $filter
     *
-    * default $filter = ["page" => 1, "limit" => 25, "order_by" => "id", "sort" => "DESC"]
-    *
     * @return Simple
     */
-    public function getMessages(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
+    public function getMessagesByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
     {
         $appData = Di::getDefault()->get('app');
         $userData = Di::getDefault()->get('userData');
