@@ -8,6 +8,7 @@ use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Channels;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\UserMessages;
+use Kanvas\Packages\Social\Models\ChannelMessages;
 use Phalcon\Mvc\Model\Resultset\Simple;
 
 class Feeds
@@ -44,10 +45,13 @@ class Feeds
      * Get the feeds of the channel
      *
      * @param Channels $user
+     * @param array $filter
+     *
      * @return Simple
      */
-    public static function getByChannel(Channels $channel): Simple
+    public static function getByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
     {
-        return $channel->getMessages();
+        $feed = new ChannelMessages();
+        return $feed->getMessagesByChannel($channel, $page, $limit, $orderBy, $sort);
     }
 }
