@@ -89,4 +89,25 @@ class Messages
 
         return $message->softDelete();
     }
+
+    /**
+     * Get the message from an MessageableInterface if exist
+     *
+     * @param MessageableInterface $object
+     * @return MessagesModel
+     */
+    public static function getMessageFrom(MessageableInterface $object): MessagesModel
+    {
+        $module = AppModuleMessage::findFirstOrFail([
+            'conditions' => 'system_modules = :objectNamespace: AND entity_id = :entityId: AND
+                             apps_id = :appId: AND is_deleted = 0',
+            'bind' => [
+                'objectNamespace' => get_class($object),
+                'entityId' => $object->getId(),
+                'appId' => Di::getDefault()->get('app')->getId(),
+            ]
+        ]);
+
+        return $module->getMessage();
+    }
 }

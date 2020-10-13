@@ -62,7 +62,7 @@ class CommentsCest
      */
     public function getComment(IntegrationTester $I): void
     {
-        $comment = Comments::get((string) $this->comment->getId());
+        $comment = Comments::get($this->comment->getId());
 
         $I->assertNotNull($comment->getId());
     }
