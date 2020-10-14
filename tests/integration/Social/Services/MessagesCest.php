@@ -93,12 +93,14 @@ class MessagesCest
      */
     public function messageReaction(IntegrationTester $I): void
     {
-        $reaction = Reactions::addMessageReaction('confuse', new Users(), $this->message);
+        $I->assertFalse(Reactions::addMessageReaction('confuse', new Users(), $this->message));
 
-        $I->assertEquals($this->message->getId(), $reaction->entity_id);
+        $I->assertFalse(Reactions::addMessageReaction('☺', new Users(), $this->message));
 
-        $reaction = Reactions::addMessageReaction('☺', new Users(), $this->message);
-        $I->assertEquals($this->message->getId(), $reaction->entity_id);
+        $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->message));
+
+        $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->message));
+
     }
 
     /**

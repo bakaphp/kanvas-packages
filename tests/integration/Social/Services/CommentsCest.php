@@ -108,11 +108,12 @@ class CommentsCest
      */
     public function commentReaction(IntegrationTester $I): void
     {
-        $reaction = Reactions::addMessageReaction('confuse', new Users(), $this->comment);
-        $I->assertEquals($this->comment->getId(), $reaction->entity_id);
+        $I->assertFalse(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
+        $I->assertFalse(Reactions::addMessageReaction('☺', new Users(), $this->comment));
 
-        $reaction = Reactions::addMessageReaction('☺', new Users(), $this->comment);
-        $I->assertEquals($this->comment->getId(), $reaction->entity_id);
+        $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
+        $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->comment));
+
     }
 
     /**
