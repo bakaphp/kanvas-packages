@@ -597,9 +597,11 @@ class InitialTablesMigrations extends Phinx\Migration\AbstractMigration
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'apps_id',
             ])
-            ->addColumn('system_modules_id', 'integer', [
+            ->addColumn('system_modules', 'string', [
                 'null' => false,
-                'limit' => MysqlAdapter::INT_REGULAR,
+                'limit' => 55,
+                'collation' => 'utf8mb4_general_ci',
+                'encoding' => 'utf8mb4',
                 'after' => 'companies_id',
             ])
             ->addColumn('entity_id', 'integer', [
