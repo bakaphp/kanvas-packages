@@ -18,7 +18,7 @@ class AppModuleMessageMigration extends Phinx\Migration\AbstractMigration
             ->addColumn('system_modules', 'string', [
                 'null' => true,
                 'default' => null,
-                'limit' => 45,
+                'limit' => 100,
                 'collation' => 'utf8mb4_general_ci',
                 'encoding' => 'utf8mb4',
                 'after' => 'companies_id',
