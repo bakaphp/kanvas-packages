@@ -22,9 +22,9 @@ class Reactions
      * @param string $reaction
      * @param UserInterface $user
      * @param ModelInterface $entity
-     * @return UsersReactions
+     * @return bool
      */
-    public static function addMessageReaction(string $reaction, UserInterface $user, ModelInterface $entity): UsersReactions
+    public static function addMessageReaction(string $reaction, UserInterface $user, ModelInterface $entity): bool
     {
         if (StringFormatter::isStringEmoji($reaction)) {
             $reactionData = self::getReactionByEmoji($reaction, $user);
@@ -32,29 +32,32 @@ class Reactions
             $reactionData = self::getReactionByName($reaction, $user);
         }
 
-        $userReaction = UsersReactions::findFirstOrCreate(
-            [
+        $userReaction = UsersReactions::findFirst([
                 'conditions' => 'users_id = :userId: AND 
                                 reactions_id = :reactionId: AND 
                                 entity_namespace = :namespace: AND 
-                                entity_id = :entityId: AND 
-                                is_deleted = 0',
+                                entity_id = :entityId:',
                 'bind' => [
                     'userId' => $user->getId(),
                     'reactionId' => $reactionData->getId(),
                     'namespace' => get_class($entity),
                     'entityId' => $entity->getId(),
                 ]
-            ],
-            [
-                'users_id' => $user->getId(),
-                'reactions_id' => $reactionData->getId(),
-                'entity_namespace' => get_class($entity),
-                'entity_id' => $entity->getId(),
-            ]
-        );
+            ]);
 
-        return $userReaction;
+        if ($userReaction) {
+            self::removeUserReaction($userReaction, $user);
+            return (bool) $userReaction->is_deleted;
+        } elseif (!$userReaction) {
+            $userReaction = new UsersReactions();
+            $userReaction->users_id = $user->getId();
+            $userReaction->reactions_id = $reactionData->getId();
+            $userReaction->entity_namespace = get_class($entity);
+            $userReaction->entity_id = $entity->getId();
+            $userReaction->saveOrFail();
+        }
+        
+        return (bool) $userReaction->is_deleted;
     }
 
     /**
@@ -160,5 +163,41 @@ class Reactions
         $reaction->saveOrFail();
 
         return $reaction;
+    }
+
+    /**
+     * Get the interaction made by the user to the current entity
+     *
+     * @param int $interactionId
+     * @param UserInterface $user
+     * @return UsersReactions|null
+     */
+    public static function getUserReactionByName(ModelInterface $entity, string $reactionName, UserInterface $user): ?UsersReactions
+    {
+        return UsersReactions::findFirst([
+            'conditions' => 'users_id = :userId: AND reactions_id = :reactionId: AND 
+                            entity_namespace = :entityNamespace: AND is_deleted = 0',
+            'bind' => [
+                'userId' => $user->getId(),
+                'reactionId' => self::getReactionByName($reactionName, $user)->getId(),
+                'entityNamespace' => get_class($entity)
+            ]
+        ]);
+    }
+
+    /**
+     * Remove or Restore a reaction based on its is_deleted
+     *
+     * @param UsersReactions $reaction
+     * @return void
+     */
+    public static function removeUserReaction(UsersReactions $reaction): void
+    {
+        if ($reaction->is_deleted) {
+            $reaction->is_deleted = 0;
+        } else {
+            $reaction->is_deleted = 1;
+        }
+        $reaction->saveOrFail();
     }
 }
