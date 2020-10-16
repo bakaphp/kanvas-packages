@@ -22,9 +22,9 @@ class Reactions
      * @param string $reaction
      * @param UserInterface $user
      * @param ModelInterface $entity
-     * @return Boolean
+     * @return bool
      */
-    public static function addMessageReaction(string $reaction, UserInterface $user, ModelInterface $entity): Bool
+    public static function addMessageReaction(string $reaction, UserInterface $user, ModelInterface $entity): bool
     {
         if (StringFormatter::isStringEmoji($reaction)) {
             $reactionData = self::getReactionByEmoji($reaction, $user);
@@ -195,10 +195,9 @@ class Reactions
     {
         if ($reaction->is_deleted) {
             $reaction->is_deleted = 0;
-            $reaction->saveOrFail();
         } else {
             $reaction->is_deleted = 1;
-            $reaction->saveOrFail();
         }
+        $reaction->saveOrFail();
     }
 }
