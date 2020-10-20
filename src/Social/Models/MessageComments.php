@@ -132,4 +132,25 @@ class MessageComments extends BaseModel
     {
         return $this->parent_id == 0 ? $this->getId() : $this->parent_id;
     }
+
+    /**
+     * Check if comment is parent.
+     *
+     * @return bool
+     */
+    public function isParent() : bool
+    {
+        return $this->parent_id == 0;
+    }
+
+    /**
+     * Verify if this comment has message
+     *
+     * @param Messages $message
+     * @return boolean
+     */
+    public function hasMessage(Messages $message): bool
+    {
+        return $this->message_id == $message->getId();
+    }
 }
