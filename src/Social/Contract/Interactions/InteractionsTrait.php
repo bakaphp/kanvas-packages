@@ -52,22 +52,4 @@ trait InteractionsTrait
     public function getInteractionByType(InteractionTypesInterface $type, UserInterface $user)
     {
     }
-
-    /**
-     * Get the interaction made by the user to the current entity
-     *
-     * @param int $interactionId
-     * @param UserInterface $user
-     * @return UsersInteractions|bool
-     */
-    public function getInteractionByUser(int $interactionId, UserInterface $user): UsersInteractions
-    {
-        return $this->getInteraction([
-            'conditions' => 'users_id = :userId: AND interactions_id = :interactionId: AND is_deleted = 0',
-            'bind' => [
-                'userId' => $user->getId(),
-                'interactionId' => $interactionId
-            ]
-        ]);
-    }
 }

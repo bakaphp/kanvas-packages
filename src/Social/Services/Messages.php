@@ -50,8 +50,6 @@ class Messages
         $newMessage->message = json_encode($message);
         $newMessage->saveOrFail();
 
-        GenerateTags::dispatch($user, $newMessage);
-
         $newAppModule = new AppModuleMessage();
         $newAppModule->message_id = $newMessage->getId();
         $newAppModule->message_types_id = $newMessage->message_types_id;
@@ -60,6 +58,9 @@ class Messages
         $newAppModule->system_modules =  $object ? get_class($object) : null;
         $newAppModule->entity_id =  $object ? $object->getId() : null;
         $newAppModule->saveOrFail();
+
+        Distributions::sendToUsersFeeds($newMessage, $user);
+        GenerateTags::dispatch($user, $newMessage);
 
         return $newMessage;
     }
@@ -88,5 +89,39 @@ class Messages
         RemoveMessagesFeed::dispatch($message);
 
         return $message->softDelete();
+    }
+
+    /**
+     * Get the message from an MessageableInterface if exist
+     *
+     * @param MessageableInterface $object
+     * @return MessagesModel
+     */
+    public static function getMessageFrom(MessageableInterface $object): MessagesModel
+    {
+        $module = AppModuleMessage::findFirstOrFail([
+            'conditions' => 'system_modules = :objectNamespace: AND entity_id = :entityId: AND
+                             apps_id = :appId: AND is_deleted = 0',
+            'bind' => [
+                'objectNamespace' => get_class($object),
+                'entityId' => $object->getId(),
+                'appId' => Di::getDefault()->get('app')->getId(),
+            ]
+        ]);
+
+        return $module->getMessage();
+    }
+
+    /**
+     * Return the App Module Message data from a message
+     *
+     * @param MessagesModel $message
+     * @return AppModuleMessage
+     */
+    public static function getAppModuleMessageFromMessage(MessagesModel $message): AppModuleMessage
+    {
+        return $message->getAppModuleMessage([
+            'conditions' => 'is_deleted = 0'
+        ]);
     }
 }

@@ -25,8 +25,7 @@ class Interactions
                 'conditions' => 'users_id = :userId: AND 
                                 interactions_id = :interactionId: AND 
                                 entity_namespace = :namespace: AND 
-                                entity_id = :entityId: AND 
-                                is_deleted = 0',
+                                entity_id = :entityId:',
                 'bind' => [
                     'userId' => $user->getId(),
                     'interactionId' => $interactionId,

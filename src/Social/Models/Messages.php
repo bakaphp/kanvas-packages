@@ -30,7 +30,7 @@ class Messages extends BaseModel
 
         $this->setSource('messages');
 
-        $this->hasMany(
+        $this->hasOne(
             'id',
             AppModuleMessage::class,
             'message_id',
