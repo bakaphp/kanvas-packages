@@ -8,3 +8,4 @@ build
 
 # OS specific
 .DS_Store
+phinx-workflow.php

@@ -70,12 +70,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bakaphp/baka.git",
-                "reference": "5a17f9509f56dd9cc94176d0133cf44cb56f7357"
+                "reference": "cd0cecfbd3e9c0a27d423560875d576a3dc864d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bakaphp/baka/zipball/5a17f9509f56dd9cc94176d0133cf44cb56f7357",
-                "reference": "5a17f9509f56dd9cc94176d0133cf44cb56f7357",
+                "url": "https://api.github.com/repos/bakaphp/baka/zipball/cd0cecfbd3e9c0a27d423560875d576a3dc864d0",
+                "reference": "cd0cecfbd3e9c0a27d423560875d576a3dc864d0",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
                 "canvas",
                 "saas"
             ],
-            "time": "2020-10-06T17:13:47+00:00"
+            "time": "2020-10-19T14:03:56+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -1380,16 +1380,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.150",
+            "version": "v0.151",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "765bfb40c7a00e8fd891ff1969bade6e3c0889fc"
+                "reference": "784a4fdb110b67a2344cfbdbf927194bd29f9e73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/765bfb40c7a00e8fd891ff1969bade6e3c0889fc",
-                "reference": "765bfb40c7a00e8fd891ff1969bade6e3c0889fc",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/784a4fdb110b67a2344cfbdbf927194bd29f9e73",
+                "reference": "784a4fdb110b67a2344cfbdbf927194bd29f9e73",
                 "shasum": ""
             },
             "require": {
@@ -1413,20 +1413,20 @@
             "keywords": [
                 "google"
             ],
-            "time": "2020-10-11T00:26:14+00:00"
+            "time": "2020-10-19T00:26:26+00:00"
         },
         {
             "name": "google/auth",
-            "version": "v1.14.1",
+            "version": "v1.14.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "2df57c61c2fd739a15a81f792b1ccedc3e06d2b6"
+                "reference": "c1503299c779af0cbc99b43788f75930988852cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/2df57c61c2fd739a15a81f792b1ccedc3e06d2b6",
-                "reference": "2df57c61c2fd739a15a81f792b1ccedc3e06d2b6",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/c1503299c779af0cbc99b43788f75930988852cf",
+                "reference": "c1503299c779af0cbc99b43788f75930988852cf",
                 "shasum": ""
             },
             "require": {
@@ -1465,7 +1465,7 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2020-10-06T18:10:43+00:00"
+            "time": "2020-10-16T21:33:48+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2164,20 +2164,20 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v9.99.99",
+            "version": "v9.99.100",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95"
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
-                "reference": "84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7"
+                "php": ">= 7"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*|5.*",
@@ -2205,7 +2205,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-07-02T15:55:56+00:00"
+            "time": "2020-10-15T08:29:30+00:00"
         },
         {
             "name": "phalcon/incubator",
@@ -2424,16 +2424,16 @@
         },
         {
             "name": "phalcon/incubator-logger",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phalcon/incubator-logger.git",
-                "reference": "4e105994b32e290a7474a8c3c8078c932b4c7891"
+                "reference": "d64331c08a339c99ffa97373a41bfd12fa625f2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phalcon/incubator-logger/zipball/4e105994b32e290a7474a8c3c8078c932b4c7891",
-                "reference": "4e105994b32e290a7474a8c3c8078c932b4c7891",
+                "url": "https://api.github.com/repos/phalcon/incubator-logger/zipball/d64331c08a339c99ffa97373a41bfd12fa625f2f",
+                "reference": "d64331c08a339c99ffa97373a41bfd12fa625f2f",
                 "shasum": ""
             },
             "require": {
@@ -2498,7 +2498,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2020-07-29T20:10:36+00:00"
+            "time": "2020-10-15T14:29:37+00:00"
         },
         {
             "name": "phalcon/incubator-session",
@@ -4732,16 +4732,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.57.0",
+            "version": "v7.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "e2475efff624c6b9b62e8ea14ba7ee4e417cbfe5"
+                "reference": "4015ff20a6838a04b663e20724f2fc4f3943f630"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/e2475efff624c6b9b62e8ea14ba7ee4e417cbfe5",
-                "reference": "e2475efff624c6b9b62e8ea14ba7ee4e417cbfe5",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/4015ff20a6838a04b663e20724f2fc4f3943f630",
+                "reference": "4015ff20a6838a04b663e20724f2fc4f3943f630",
                 "shasum": ""
             },
             "require": {
@@ -4785,7 +4785,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2020-09-30T05:53:53+00:00"
+            "time": "2020-10-15T19:29:35+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
