@@ -18,7 +18,7 @@ class Comments
      * @param string $uuid
      * @return MessageComments
      */
-    public static function get(string $uuid): MessageComments
+    public static function getById(string $uuid): MessageComments
     {
         $comment = MessageComments::getByIdOrFail($uuid);
 
