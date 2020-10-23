@@ -12,6 +12,6 @@ class BaseModel extends Model
      */
     public function initialize()
     {
-        $this->setConnectionService('dbSocial');
+        $this->setConnectionService('dbWorkflow');
     }
 }

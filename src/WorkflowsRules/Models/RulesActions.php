@@ -14,6 +14,7 @@ class RulesActions extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
         $this->setSource('rules_actions');
 
         $this->belongsTo(

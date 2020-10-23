@@ -5,7 +5,6 @@
  */
 
 use function Baka\appPath;
-
 use Dotenv\Dotenv;
 use Phalcon\Loader;
 
@@ -26,5 +25,5 @@ $loader->register();
 
 require appPath('vendor/autoload.php');
 
-$dotEnv = Dotenv::createImmutable(__DIR__.'/../');
+$dotEnv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotEnv->load();

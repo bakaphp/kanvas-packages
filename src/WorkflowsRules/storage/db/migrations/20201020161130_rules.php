@@ -26,7 +26,7 @@ final class Rules extends AbstractMigration
             ->addColumn('pattern', 'string', ['null' => false])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'datetime', ['null' => true])
-            ->addColumn('is_deleted', 'integer', ['null' => false])
+            ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => 0])
             ->addForeignKey('rules_types_id', 'rules_types', 'id', ['delete' => 'SET_NULL', 'update' => 'NO_ACTION'])
             ->create();
     }

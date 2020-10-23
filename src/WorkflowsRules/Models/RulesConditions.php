@@ -16,6 +16,7 @@ class RulesConditions extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
         $this->setSource('rules_conditions');
 
         $this->belongsTo(

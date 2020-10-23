@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Providers;
+namespace Kanvas\Packages\WorkflowsRules\Providers;
 
 use Exception;
 use PDO;
@@ -23,9 +23,9 @@ class DatabaseProvider implements ServiceProviderInterface
             function () {
                 $options = [
                     'host' => getenv('WORKFLOW_MYSQL_HOST'),
-                    'username' => getenv('WORKFLOW_MYSQL_NAME'),
-                    'password' => getenv('WORKFLOW_MYSQL_USER'),
-                    'dbname' => getenv('WORKFLOW_MYSQL_PASS'),
+                    'username' => getenv('DATA_API_MYSQL_USER'),
+                    'password' => getenv('WORKFLOW_MYSQL_PASS'),
+                    'dbname' => getenv('DATA_API_MYSQL_NAME'),
                     'charset' => 'utf8',
                     'options' => [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]
                 ];

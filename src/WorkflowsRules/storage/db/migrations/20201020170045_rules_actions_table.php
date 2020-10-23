@@ -23,7 +23,7 @@ final class RulesActionsTable extends AbstractMigration
             ->addColumn('rules_workflow_actions_id', 'integer', ['null' => true])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'datetime', ['null' => true])
-            ->addColumn('is_deleted', 'integer', ['null' => false])
+            ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => 0])
             ->addForeignKey('rules_id', 'rules', 'id', ['delete' => 'SET_NULL', 'update' => 'NO_ACTION'])
             ->addForeignKey('rules_workflow_actions_id', 'rules_workflow_actions', 'id', ['delete' => 'SET_NULL', 'update' => 'NO_ACTION'])
             ->create();

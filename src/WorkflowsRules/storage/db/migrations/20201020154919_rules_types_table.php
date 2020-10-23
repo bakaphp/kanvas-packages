@@ -22,7 +22,7 @@ final class RulesTypesTable extends AbstractMigration
             ->addColumn('name', 'string', ['null' => false])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'datetime', ['null' => true])
-            ->addColumn('is_deleted', 'integer', ['null' => false])
+            ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => 0])
             ->create();
     }
 }

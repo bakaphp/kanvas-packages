@@ -26,7 +26,7 @@ final class RulesConditionsTable extends AbstractMigration
             ->addColumn('is_custom_attriube', 'integer', ['default' => 0])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'datetime', ['null' => true])
-            ->addColumn('is_deleted', 'integer', ['null' => false])
+            ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => 0])
             ->addForeignKey('rules_id', 'rules', 'id', ['delete' => 'SET_NULL', 'update' => 'NO_ACTION'])
             ->create();
     }

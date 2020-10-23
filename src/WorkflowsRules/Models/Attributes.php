@@ -15,8 +15,8 @@ class Attributes extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
         $this->setSource('attributes');
-
         $this->hasMany(
             'id',
             RulesConditions::class,

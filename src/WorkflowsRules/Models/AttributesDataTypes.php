@@ -12,6 +12,7 @@ class AttributesDataTypes extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
         $this->setSource('attributes_data_types');
 
         $this->hasMany(
@@ -20,7 +21,7 @@ class AttributesDataTypes extends BaseModel
             'attributes_data_types_id',
             ['alias' => 'attributes']
         );
-        
+
         $this->hasMany(
             'id',
             AttributesOperators::class,

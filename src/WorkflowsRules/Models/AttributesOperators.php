@@ -13,6 +13,7 @@ class AttributesOperators extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
         $this->setSource('attributes_operators');
 
         $this->hasMany(

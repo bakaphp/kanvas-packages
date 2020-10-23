@@ -1,11 +1,11 @@
 <?php
 
-namespace Kanvas\Packages\WorkflowRules\Jobs;
+namespace Kanvas\Packages\WorkflowsRules\Jobs;
 
-use Baka\Jobs\Jobs;
+use Baka\Jobs\Job;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 
-class RulesJobs extends Jobs
+class RulesJob extends Job
 {
     public Rules $rule;
     public string $event;
@@ -13,6 +13,7 @@ class RulesJobs extends Jobs
     public function __construct(Rules $rules, string $event, object $entity)
     {
         $this->rule = $rules;
+        $this->onQueue('workflows');
     }
 
     public function handle()

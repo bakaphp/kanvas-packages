@@ -16,6 +16,7 @@ class Rules extends BaseModel
      */
     public function initialize()
     {
+        parent::initialize();
         $this->setSource('rules');
 
         $this->hasMany(
