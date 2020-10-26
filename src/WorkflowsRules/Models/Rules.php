@@ -8,7 +8,7 @@ class Rules extends BaseModel
     public int $system_modules_id;
     public int $rules_types_id;
     public string $name;
-    public string $description;
+    public ?string $description = null;
     public string $pattern;
 
     /**

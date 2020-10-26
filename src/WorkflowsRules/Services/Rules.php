@@ -4,6 +4,7 @@ namespace Kanvas\Packages\WorkflowsRules\Services;
 
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Phalcon\Di;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Rules
 {
@@ -31,8 +32,24 @@ class Rules
      */
     public function validate(object $entity) : bool
     {
+        if (!method_exists($entity, 'toArray')) {
+            Di::getDefault()->get('log')->info('to array method not  found');
+            return false;
+        }
+
         Di::getDefault()->get('log')->info('Rule validate');
-        return true;
+        $expression = $this->getStringConditions();
+        $values = $this->getArrayValueConditions();
+        $values = array_merge($values, $entity->toArray());
+        Di::getDefault()->get('log')->info('condition ' . $this->getStringConditions());
+        $expressionLanguage = new ExpressionLanguage();
+        $result = $expressionLanguage->evaluate(
+            $expression,
+            $values
+        );
+        dump('result ' . $result);
+        dump($values);
+        return $result;
     }
 
     /**
@@ -76,8 +93,7 @@ class Rules
             'bind' => ['name' => $name]
         ]);
 
-        self::$rules = $rules;
-        return new static();
+        return (new static())->assignRule($rules);
     }
 
     /**
@@ -87,8 +103,33 @@ class Rules
      */
     public function getStringConditions() : string
     {
-        $conditions = $this->rules->getRulesConditions();
-        foreach ($conditions as $key => $condition) {
+        $conditions = $this->rule->getRulesConditions();
+        $pattern = $this->condition;
+
+        foreach ($conditions as $key => $conditionModel) {
+            $condition = "{$conditionModel->attribute_name}Rule  {$conditionModel->operator}  {$conditionModel->attribute_name}";
+            $index = ($key + 1);
+            $pattern = str_replace($index, $condition, $pattern);
         }
+        $pattern = str_replace('AND', 'and', $pattern);
+        $pattern = str_replace('OR', 'or', $pattern);
+
+        return $pattern;
+    }
+
+    /**
+     * getArrayValueConditions.
+     *
+     * @return array
+     */
+    public function getArrayValueConditions() : array
+    {
+        $conditions = $this->rule->getRulesConditions();
+        $values = [];
+
+        foreach ($conditions as $key => $conditionModel) {
+            $values["{$conditionModel->attribute_name}Rule"] = $conditionModel->value;
+        }
+        return $values;
     }
 }

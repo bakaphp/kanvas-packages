@@ -16,6 +16,7 @@ class RulesCest
         ]);
         $test = new Test;
         $test->name = 'Ichigo';
+        $test->city = 'Santo Domingo';
         RulesJob::dispatch($rules, 'created', $test);
     }
 }
