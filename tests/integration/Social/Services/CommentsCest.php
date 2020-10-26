@@ -62,7 +62,7 @@ class CommentsCest
      */
     public function getComment(IntegrationTester $I): void
     {
-        $comment = Comments::get((string) $this->comment->getId());
+        $comment = Comments::getById($this->comment->getId());
 
         $I->assertNotNull($comment->getId());
     }
@@ -108,11 +108,12 @@ class CommentsCest
      */
     public function commentReaction(IntegrationTester $I): void
     {
-        $reaction = Reactions::addMessageReaction('confuse', new Users(), $this->comment);
-        $I->assertEquals($this->comment->getId(), $reaction->entity_id);
+        $I->assertFalse(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
+        $I->assertFalse(Reactions::addMessageReaction('☺', new Users(), $this->comment));
 
-        $reaction = Reactions::addMessageReaction('☺', new Users(), $this->comment);
-        $I->assertEquals($this->comment->getId(), $reaction->entity_id);
+        $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
+        $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->comment));
+
     }
 
     /**
@@ -127,5 +128,20 @@ class CommentsCest
         $I->assertFalse(
             Interactions::add(new Users(), $this->comment, ModelsInteractions::REACT)
         );
+    }
+
+    /**
+     * Test method to get comments from a message
+     *
+     * @param IntegrationTester $I
+     * @before getCommentData
+     * @return void
+     */
+    public function getCommentsFromMessage(IntegrationTester $I): void
+    {
+        $message = $this->comment->getMessage();
+        $comments = Comments::getCommentsFromMessage($message);
+
+        $I->assertNotEmpty($comments->toArray());
     }
 }

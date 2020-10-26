@@ -56,9 +56,7 @@ class FollowsCest
         $follows = Follow::getFollowsByUser(new Users(), new Tag())->toArray();
 
         $I->assertNotNull($follows[0]['id']);
-        $I->assertNotNull($follows[1]['id']);
 
         $I->assertEquals($follows[0]['entity_namespace'], get_class(new Tag()));
-        $I->assertEquals($follows[1]['entity_namespace'], get_class(new Tag()));
     }
 }
