@@ -6,6 +6,10 @@ namespace Kanvas\Packages\MobilePayments\Contracts;
 
 use ReceiptValidator\iTunes\Validator as iTunesValidator;
 use Phalcon\Http\Response;
+use Canvas\Models\Users;
+use Canvas\Models\Subscription;
+use Canvas\Models\CompaniesSettings;
+use Canvas\Exception\ServerErrorHttpException;
 
 /**
  * Phalcon\Traits\ReceiptValidatorTrait.
