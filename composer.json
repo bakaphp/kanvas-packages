@@ -28,7 +28,8 @@
         "elastic/app-search": "^7.5",
         "aporat/store-receipt-validator": "^4.0",
         "tomorrow-ideas/plaid-sdk-php": "^0.12.0",
-        "symfony/expression-language": "^5.1"
+        "symfony/expression-language": "^5.1",
+        "mctekk/zohocrm": "^0.1"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",

@@ -20,6 +20,7 @@ final class Rules extends AbstractMigration
     {
         $this->table('rules')
             ->addColumn('system_modules_id', 'integer', ['null' => false])
+            ->addColumn('companies_id', 'integer', ['null' => true])
             ->addColumn('rules_types_id', 'integer', ['null' => true])
             ->addColumn('name', 'string', ['null' => false])
             ->addColumn('description', 'string', ['null' => true])

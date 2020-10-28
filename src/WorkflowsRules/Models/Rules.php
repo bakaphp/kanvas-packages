@@ -6,6 +6,7 @@ namespace Kanvas\Packages\WorkflowsRules\Models;
 class Rules extends BaseModel
 {
     public int $system_modules_id;
+    public int $companies_id;
     public int $rules_types_id;
     public string $name;
     public ?string $description = null;

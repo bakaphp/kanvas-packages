@@ -2,6 +2,7 @@
 
 namespace Kanvas\Packages\WorkflowsRules\Services;
 
+use Exception;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Phalcon\Di;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -59,7 +60,10 @@ class Rules
                 dump($workFlow->toArray());
                 $class = 'Kanvas\\Packages\\WorkflowsRules\\Actions\\' . $workFlow->action;
                 $objectAction = new $class;
-                $objectAction->handle($entity, ['frederickpeal@gmail.com', 'frederickpeal@mctekk.com']);
+                try {
+                    $objectAction->handle($entity, ['frederickpeal@gmail.com', 'frederickpeal@mctekk.com']);
+                } catch (Exception $e) {
+                }
             }
         }
 

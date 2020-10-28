@@ -17,6 +17,10 @@ class RulesCest
         $test = new Test;
         $test->name = 'Ichigo';
         $test->city = 'Santo Domingo';
+        $test->firstname = 'Frederick';
+        $test->lastname = 'Peñalo';
+        $test->phone = '829-379-6918';
+        $test->email = 'frederickpeal@mctekk.com';
         RulesJob::dispatch($rules, 'created', $test);
     }
 }
