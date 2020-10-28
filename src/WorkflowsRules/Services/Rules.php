@@ -38,15 +38,31 @@ class Rules
         }
 
         Di::getDefault()->get('log')->info('Rule validate');
+
         $expression = $this->getStringConditions();
         $values = $this->getArrayValueConditions();
         $values = array_merge($values, $entity->toArray());
+
         Di::getDefault()->get('log')->info('condition ' . $this->getStringConditions());
+
         $expressionLanguage = new ExpressionLanguage();
         $result = $expressionLanguage->evaluate(
             $expression,
             $values
         );
+
+        if ($result) {
+            $actions = $this->rule->getRulesActions();
+            dump($actions->toArray());
+            foreach ($actions as $action) {
+                $workFlow = $action->getRulesWorkflowActions();
+                dump($workFlow->toArray());
+                $class = 'Kanvas\\Packages\\WorkflowsRules\\Actions\\' . $workFlow->action;
+                $objectAction = new $class;
+                $objectAction->handle($entity, ['frederickpeal@gmail.com', 'frederickpeal@mctekk.com']);
+            }
+        }
+
         dump('result ' . $result);
         dump($values);
         return $result;

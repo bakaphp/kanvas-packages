@@ -23,9 +23,9 @@ class DatabaseProvider implements ServiceProviderInterface
             function () {
                 $options = [
                     'host' => getenv('WORKFLOW_MYSQL_HOST'),
-                    'username' => getenv('DATA_API_MYSQL_USER'),
+                    'username' => getenv('WORKFLOW_MYSQL_USER'),
                     'password' => getenv('WORKFLOW_MYSQL_PASS'),
-                    'dbname' => getenv('DATA_API_MYSQL_NAME'),
+                    'dbname' => getenv('WORKFLOW_MYSQL_NAME'),
                     'charset' => 'utf8',
                     'options' => [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]
                 ];
