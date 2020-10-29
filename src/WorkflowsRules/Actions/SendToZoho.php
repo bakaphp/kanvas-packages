@@ -4,6 +4,7 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\IAction;
 use Phalcon\Di;
+use Throwable;
 use Zoho\CRM\ZohoClient;
 
 class SendToZoho implements IAction
@@ -33,10 +34,7 @@ class SendToZoho implements IAction
                 'Email' => $entity->email,
             ];
 
-            $customFields = $entity->getAll();
-
-            $di->get('log')->info('Data customs fields', $customFields);
-            $di->get('log')->info('Data lead', $this->data);
+            $di->get('log')->info('Data lead', $request);
 
             $response = $zohoClient->insertRecords(
                 $request,
