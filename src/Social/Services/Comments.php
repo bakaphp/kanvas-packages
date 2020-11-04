@@ -8,6 +8,7 @@ use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
+use Phalcon\Mvc\Model\Resultset\Simple;
 
 class Comments
 {
@@ -17,7 +18,7 @@ class Comments
      * @param string $uuid
      * @return MessageComments
      */
-    public static function get(string $uuid): MessageComments
+    public static function getById(string $uuid): MessageComments
     {
         $comment = MessageComments::getByIdOrFail($uuid);
 
@@ -34,7 +35,6 @@ class Comments
     public static function add(string $messageId, string $message): MessageComments
     {
         $messageData = Messages::getByIdOrFail($messageId);
-
         return $messageData->comment($message);
     }
 
@@ -80,4 +80,18 @@ class Comments
         
         return $comment->reply($message);
     }
+
+    /**
+     * Get comments from a message
+     *
+     * @param Messages $message
+     * @return Simple
+     */
+    public static function getCommentsFromMessage(Messages $message): Simple
+    {
+        $comments = $message->getMessageComments();
+        
+        return $comments;
+    }
+
 }
