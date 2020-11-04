@@ -12,6 +12,7 @@ class Test
     public string $phone;
     public string $email;
     public ?string $leads_receivers = null;
+    public ?int $companies_id = null;
 
     /**
      * toArray.
@@ -21,5 +22,17 @@ class Test
     public function toArray() : array
     {
         return get_object_vars($this);
+    }
+
+    /**
+     * Get the settings base on the key.
+     *
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public function get(string $key): string
+    {
+        return getenv($key);
     }
 }

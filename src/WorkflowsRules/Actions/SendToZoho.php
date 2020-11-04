@@ -13,15 +13,15 @@ class SendToZoho implements IAction
     {
         try {
             $di = Di::getDefault();
-            $companyId = 1;
+            $companyId = $entity->companies_id;
             $di->get('log')->info('Start Process Leads For company ' . $companyId);
 
             $zohoClient = new ZohoClient();
 
             ///get from db
-            $zohoClient->setAuthRefreshToken(getenv('ZOHO_AUTH_REFRESH_TOKEN'));
-            $zohoClient->setZohoClientId(getenv('ZOHO_CLIENT_ID'));
-            $zohoClient->setZohoClientSecret(getenv('ZOHO_CLIENT_SECRET'));
+            $zohoClient->setAuthRefreshToken($entity->get('ZOHO_AUTH_REFRESH_TOKEN'));
+            $zohoClient->setZohoClientId($entity->get('ZOHO_CLIENT_ID'));
+            $zohoClient->setZohoClientSecret($entity->get('ZOHO_CLIENT_SECRET'));
 
             $refresh = $zohoClient->manageAccessTokenRedis($di->get('redis'), 'zoho_client' . $companyId);
             $zohoClient->setModule('Leads');

@@ -21,6 +21,7 @@ class RulesCest
         $test->lastname = 'Peñalo';
         $test->phone = '829-379-6918';
         $test->email = 'frederickpeal@mctekk.com';
+        $test->companies_id = 1;
         RulesJob::dispatch($rules, 'created', $test);
     }
 }

@@ -3,8 +3,11 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Models;
 
+use Baka\Contracts\Database\HashTableTrait;
+
 class RulesWorkflowActions extends BaseModel
 {
+    use HashTableTrait;
     public int $system_modules_id;
     public string $action;
 
