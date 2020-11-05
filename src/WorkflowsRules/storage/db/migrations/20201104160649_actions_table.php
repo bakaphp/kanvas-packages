@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class RulesWorkflowActionsTable extends AbstractMigration
+final class ActionsTable extends AbstractMigration
 {
     /**
      * Change Method.
@@ -18,8 +18,8 @@ final class RulesWorkflowActionsTable extends AbstractMigration
      */
     public function change() : void
     {
-        $this->table('rules_workflow_actions')
-            ->addColumn('system_modules_id', 'integer', ['null' => true])
+        $this->table('actions')
+            ->addColumn('name', 'string')
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'datetime', ['null' => true])
             ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => 0])

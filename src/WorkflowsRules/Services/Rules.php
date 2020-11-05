@@ -58,7 +58,7 @@ class Rules
             foreach ($actions as $action) {
                 $workFlow = $action->getRulesWorkflowActions();
                 dump($workFlow->toArray());
-                $class = 'Kanvas\\Packages\\WorkflowsRules\\Actions\\' . $workFlow->action;
+                $class = 'Kanvas\\Packages\\WorkflowsRules\\Actions\\' . $workFlow->actions->name;
                 $objectAction = new $class;
                 try {
                     $objectAction->handle($entity, ['frederickpeal@gmail.com', 'frederickpeal@mctekk.com']);

@@ -9,7 +9,7 @@ class RulesWorkflowActions extends BaseModel
 {
     use HashTableTrait;
     public int $system_modules_id;
-    public string $action;
+    public int $actions_id;
 
     /**
      * Initialize method for model.
@@ -24,6 +24,13 @@ class RulesWorkflowActions extends BaseModel
             RulesActions::class,
             'rules_workflow_actions_id',
             ['alias' => 'rulesActions']
+        );
+
+        $this->belongsTo(
+            'actions_id',
+            Actions::class,
+            'id',
+            ['alias' => 'actions']
         );
     }
 }
