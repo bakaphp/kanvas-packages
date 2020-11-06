@@ -32,7 +32,6 @@ class QueueTask extends PhTask
             }
             //we get the data from our event trigger and unserialize
             $job = unserialize($msg->body);
-            dump(get_class($job['job']));
             //overwrite the user who is running this process
             if ($job['userData'] instanceof Users) {
                 $this->di->setShared('userData', $job['userData']);

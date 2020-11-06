@@ -38,6 +38,11 @@ class Rules
             return false;
         }
 
+        if (!method_exists($entity, 'get')) {
+            Di::getDefault()->get('log')->info('get method not  found');
+            return false;
+        }
+
         Di::getDefault()->get('log')->info('Rule validate');
 
         $expression = $this->getStringConditions();
