@@ -2,12 +2,12 @@
 
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\IAction;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
 use Phalcon\Di;
 use Throwable;
 use Zoho\CRM\ZohoClient;
 
-class SendToZoho implements IAction
+class SendToZoho implements ActionInterfaces
 {
     public function handle(object $entity, array $params = [])
     {
@@ -19,9 +19,9 @@ class SendToZoho implements IAction
             $zohoClient = new ZohoClient();
 
             ///get from db
-            $zohoClient->setAuthRefreshToken($entity->get('ZOHO_AUTH_REFRESH_TOKEN'));
-            $zohoClient->setZohoClientId($entity->get('ZOHO_CLIENT_ID'));
-            $zohoClient->setZohoClientSecret($entity->get('ZOHO_CLIENT_SECRET'));
+            $zohoClient->setAuthRefreshToken($entity->companies->get('ZOHO_AUTH_REFRESH_TOKEN'));
+            $zohoClient->setZohoClientId($entity->companies->get('ZOHO_CLIENT_ID'));
+            $zohoClient->setZohoClientSecret($entity->companies->get('ZOHO_CLIENT_SECRET'));
 
             $refresh = $zohoClient->manageAccessTokenRedis($di->get('redis'), 'zoho_client' . $companyId);
             $zohoClient->setModule('Leads');
@@ -40,6 +40,10 @@ class SendToZoho implements IAction
                 $request,
                 ['wfTrigger' => 'true']
             );
+            $response = $response->getResponse();
+            if (!empty($response['recordId'])) {
+                $entity->saveLinkedSources($response);
+            }
             $di->get('log')->info('Process Leads For company ' . $companyId, [$response]);
         } catch (Throwable $e) {
             $di->get('log')->error('Error processing lead - ' . $e->getMessage(), [$e->getTraceAsString()]);

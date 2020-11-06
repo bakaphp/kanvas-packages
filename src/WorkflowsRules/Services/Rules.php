@@ -59,12 +59,9 @@ class Rules
 
         if ($result) {
             $actions = $this->rule->getRulesActions();
-            dump($actions->toArray());
             foreach ($actions as $action) {
                 $workFlow = $action->getRulesWorkflowActions();
-                dump($workFlow->toArray());
-                $class = 'Kanvas\\Packages\\WorkflowsRules\\Actions\\' . $workFlow->actions->name;
-                $objectAction = new $class;
+                $objectAction = new $workFlow->actions->model_name;
                 try {
                     $objectAction->handle($entity, ['frederickpeal@gmail.com', 'frederickpeal@mctekk.com']);
                 } catch (Exception $e) {
@@ -73,7 +70,6 @@ class Rules
         }
 
         dump('result ' . $result);
-        dump($values);
         return $result;
     }
 
@@ -132,7 +128,7 @@ class Rules
         $pattern = $this->condition;
 
         foreach ($conditions as $key => $conditionModel) {
-            $condition = "{$conditionModel->attribute_name}Rule  {$conditionModel->operator}  {$conditionModel->attribute_name}";
+            $condition = "{$conditionModel->attribute_name}  {$conditionModel->operator}  {$conditionModel->attribute_name}Rule";
             $index = ($key + 1);
             $pattern = str_replace($index, $condition, $pattern);
         }

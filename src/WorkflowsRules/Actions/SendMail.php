@@ -39,18 +39,18 @@ class SendMail implements IAction
     {
         $config = [
             'driver' => 'smtp',
-            'host' => $entity->get('EMAIL_HOST'),
-            'port' => $entity->get('EMAIL_PORT'),
-            'username' => $entity->get('EMAIL_USER'),
-            'password' => $entity->get('EMAIL_PASS'),
+            'host' => $entity->companies->get('EMAIL_HOST'),
+            'port' => $entity->companies->get('EMAIL_PORT'),
+            'username' => $entity->companies->get('EMAIL_USER'),
+            'password' => $entity->companies->get('EMAIL_PASS'),
             'from' => [
-                'email' => $entity->get('EMAIL_FROM_PRODUCTION'),
-                'name' => $entity->get('EMAIL_FROM_NAME_PRODUCTION'),
+                'email' => $entity->companies->get('EMAIL_FROM_PRODUCTION'),
+                'name' => $entity->companies->get('EMAIL_FROM_NAME_PRODUCTION'),
             ],
             'debug' => [
                 'from' => [
-                    'email' => $entity->get('EMAIL_FROM_DEBUG'),
-                    'name' => $entity->get('EMAIL_FROM_NAME_DEBUG'),
+                    'email' => $entity->companies->get('EMAIL_FROM_DEBUG'),
+                    'name' => $entity->companies->get('EMAIL_FROM_NAME_DEBUG'),
                 ],
             ],
         ];

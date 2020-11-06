@@ -8,7 +8,7 @@ use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
 
 trait RulesTrait
 {
-    public function fireRules(string $event)
+    public function fireRules(string $event) : void
     {
         if ($this->systems_modules) {
             $rulesTypes = RulesTypes::findFirstByName($event);
