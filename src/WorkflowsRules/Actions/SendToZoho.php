@@ -3,13 +3,14 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ModelInterfaces;
 use Phalcon\Di;
 use Throwable;
 use Zoho\CRM\ZohoClient;
 
 class SendToZoho implements ActionInterfaces
 {
-    public function handle(object $entity, array $params = [])
+    public function handle(ModelInterfaces $entity, array $params = [])
     {
         try {
             $di = Di::getDefault();

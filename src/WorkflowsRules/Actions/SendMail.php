@@ -3,9 +3,9 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Baka\Mail\Manager as BakaMail;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\IAction;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
 
-class SendMail implements IAction
+class SendMail implements ActionInterfaces
 {
     private $mailManager;
 
