@@ -26,7 +26,6 @@ class Messages
     public static function getMessage(string $uuid): MessagesModel
     {
         $message = MessagesModel::getByIdOrFail($uuid);
-        
         return $message;
     }
 

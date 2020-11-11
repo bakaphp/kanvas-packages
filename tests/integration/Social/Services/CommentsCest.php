@@ -62,7 +62,7 @@ class CommentsCest
      */
     public function getComment(IntegrationTester $I): void
     {
-        $comment = Comments::get($this->comment->getId());
+        $comment = Comments::getById($this->comment->getId());
 
         $I->assertNotNull($comment->getId());
     }
@@ -128,5 +128,20 @@ class CommentsCest
         $I->assertFalse(
             Interactions::add(new Users(), $this->comment, ModelsInteractions::REACT)
         );
+    }
+
+    /**
+     * Test method to get comments from a message
+     *
+     * @param IntegrationTester $I
+     * @before getCommentData
+     * @return void
+     */
+    public function getCommentsFromMessage(IntegrationTester $I): void
+    {
+        $message = $this->comment->getMessage();
+        $comments = Comments::getCommentsFromMessage($message);
+
+        $I->assertNotEmpty($comments->toArray());
     }
 }
