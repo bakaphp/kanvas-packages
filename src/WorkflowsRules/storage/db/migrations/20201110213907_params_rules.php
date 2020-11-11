@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class ActionsTable extends AbstractMigration
+final class ParamsRules extends AbstractMigration
 {
     /**
      * Change Method.
@@ -18,12 +18,8 @@ final class ActionsTable extends AbstractMigration
      */
     public function change() : void
     {
-        $this->table('actions')
-            ->addColumn('name', 'string')
-            ->addColumn('model_name', 'string')
-            ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
-            ->addColumn('updated_at', 'datetime', ['null' => true])
-            ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => 0])
-            ->create();
+        $this->table('rules')
+            ->addColumn('params', 'json', ['after' => 'pattern', 'null' => true])
+            ->save();
     }
 }

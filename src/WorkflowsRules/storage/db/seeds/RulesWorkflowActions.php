@@ -18,11 +18,11 @@ class RulesWorkflowActions extends AbstractSeed
              ->insert([
                  [
                      'system_modules_id' => '1',
-                     'action' => 'SendToZoho',
+                     'actions_id' => '1',
                  ],
                  [
                      'system_modules_id' => '1',
-                     'action' => 'SendMail',
+                     'action' => '2',
                  ]
              ])
              ->saveData();

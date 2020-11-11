@@ -8,16 +8,26 @@ use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
 
 trait RulesTrait
 {
+    /**
+     * fireRules.
+     *
+     * search rules for companies and systems_modules
+     *
+     * @param  mixed $event
+     *
+     * @return void
+     */
     public function fireRules(string $event) : void
     {
         if ($this->systems_modules) {
             $rulesTypes = RulesTypes::findFirstByName($event);
 
             $rules = Rules::find([
-                'conditions' => 'system_modules_id = :system_module_id: AND rules_types_id = :rule_type_id:',
+                'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id = :companies_id:',
                 'bind' => [
-                    'system_module_id' => $this->systems_modules->getId(),
-                    'rule_type_id' => $rulesTypes->getId()
+                    'systems_module_id' => $this->systems_modules->getId(),
+                    'rules_types_id' => $rulesTypes->getId(),
+                    'companies_id' => $this->companies->getId()
                 ]
             ]);
 
