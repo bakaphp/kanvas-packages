@@ -17,7 +17,7 @@ class Rules extends AbstractSeed
         $this->table('rules')
             ->insert([
                 [
-                    'system_modules_id' => '1',
+                    'systems_modules_id' => '1',
                     'rules_types_id' => '1',
                     'name' => 'test',
                     'pattern' => '1 AND 2'
