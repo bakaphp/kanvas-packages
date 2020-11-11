@@ -34,7 +34,8 @@ class SendToZoho implements ActionInterfaces
                 'Phone' => $entity->phone,
                 'Email' => $entity->email,
             ];
-
+            $customFields = $entity->getAll();
+            $request = array_merge($customFields, $request);
             $di->get('log')->info('Data lead', $request);
 
             $response = $zohoClient->insertRecords(
