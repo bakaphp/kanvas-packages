@@ -122,7 +122,7 @@ jobs:
         run: vendor/bin/phinx migrate -c phinx-workflows.php
           
       - name: Phinx seeder Workflows
-        run: vendor/bin/phinx seed:run -s Action -c phinx-workflows.php && vendor/bin/phinx seed:run -s RulesTypes && vendor/bin/phinx seed:run -s RulesWorkflowActions && vendor/bin/phinx seed:run -s Rules && vendor/bin/phinx seed:run -s RulesConditions && vendor/bin/phinx seed:run -s RulesActions
+        run: vendor/bin/phinx seed:run -s Actions -c phinx-workflows.php && vendor/bin/phinx seed:run -s RulesTypes && vendor/bin/phinx seed:run -s RulesWorkflowActions && vendor/bin/phinx seed:run -s Rules && vendor/bin/phinx seed:run -s RulesConditions && vendor/bin/phinx seed:run -s RulesActions
 
       - name: Phinx Migrate Social
         run: ./vendor/bin/phinx migrate -c phinx-social.php -e development
