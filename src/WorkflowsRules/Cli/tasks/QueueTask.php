@@ -31,6 +31,7 @@ class QueueTask extends PhTask
                 return ;
             }
             //we get the data from our event trigger and unserialize
+            dump($msg->body);
             $job = unserialize($msg->body);
             //overwrite the user who is running this process
             if ($job['userData'] instanceof Users) {

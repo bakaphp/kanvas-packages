@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Models;
 
-class Test
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ModelInterfaces;
+
+class Test implements ModelInterfaces
 {
     public ?string $name = null;
     public ?string $city = null;
@@ -25,14 +27,26 @@ class Test
     }
 
     /**
-     * Get the settings base on the key.
+     * getAll.
      *
-     * @param string $key
-     *
-     * @return mixed
+     * @return array
      */
-    public function get(string $key): string
+    public function getAll() : array
     {
-        return getenv($key);
+        return [];
+    }
+
+    /**
+     * getCompanies.
+     *
+     * @return Companies
+     */
+    public function getCompanies() : Companies
+    {
+        return new Companies();
+    }
+
+    public function saveLinkedSources($variable)
+    {
     }
 }

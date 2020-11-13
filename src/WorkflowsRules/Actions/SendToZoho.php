@@ -10,6 +10,30 @@ use Zoho\CRM\ZohoClient;
 
 class SendToZoho implements ActionInterfaces
 {
+    protected ?string $message = null;
+
+    protected ?array $data = [];
+
+    /**
+     * getData.
+     *
+     * @return array
+     */
+    public function getData() : ?array
+    {
+        return $this->data;
+    }
+
+    /**
+     * getMessage.
+     *
+     * @return string
+     */
+    public function getMessage() : ?string
+    {
+        return $this->message;
+    }
+
     public function handle(ModelInterfaces $entity, array $params = [])
     {
         try {
@@ -20,9 +44,9 @@ class SendToZoho implements ActionInterfaces
             $zohoClient = new ZohoClient();
 
             ///get from db
-            $zohoClient->setAuthRefreshToken($entity->companies->get('ZOHO_AUTH_REFRESH_TOKEN'));
-            $zohoClient->setZohoClientId($entity->companies->get('ZOHO_CLIENT_ID'));
-            $zohoClient->setZohoClientSecret($entity->companies->get('ZOHO_CLIENT_SECRET'));
+            $zohoClient->setAuthRefreshToken($entity->getCompanies()->get('ZOHO_AUTH_REFRESH_TOKEN'));
+            $zohoClient->setZohoClientId($entity->getCompanies()->get('ZOHO_CLIENT_ID'));
+            $zohoClient->setZohoClientSecret($entity->getCompanies()->get('ZOHO_CLIENT_SECRET'));
 
             $refresh = $zohoClient->manageAccessTokenRedis($di->get('redis'), 'zoho_client' . $companyId);
             $zohoClient->setModule('Leads');
@@ -37,6 +61,7 @@ class SendToZoho implements ActionInterfaces
             $customFields = $entity->getAll();
             $request = array_merge($customFields, $request);
             $di->get('log')->info('Data lead', $request);
+            $this->data = $request;
 
             $response = $zohoClient->insertRecords(
                 $request,
@@ -46,9 +71,15 @@ class SendToZoho implements ActionInterfaces
             if (!empty($response['recordId'])) {
                 $entity->saveLinkedSources($response);
             }
+
+            $this->data = $request;
+            $this->message = 'Process Leads For company ' . $companyId;
+
             $di->get('log')->info('Process Leads For company ' . $companyId, [$response]);
         } catch (Throwable $e) {
+            $this->message = 'Error processing lead - ' . $e->getMessage();
             $di->get('log')->error('Error processing lead - ' . $e->getMessage(), [$e->getTraceAsString()]);
+            return false;
         }
 
         return true;

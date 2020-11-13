@@ -4,4 +4,5 @@ Techinal Description in this [document](https://docs.google.com/document/d/1TGTo
 
 ## Instalation
 
-You must use the RulesTrait on your entity model *Kanvas\Packages\WorkflowsRules\Contracts\Traits\RulesTrait* 
+You must use the RulesTrait on your entity model *Kanvas\Packages\WorkflowsRules\Contracts\Traits\RulesTrait* And de Database provider 
+*Kanvas\Packages\WorkflowsRules\Providers\DatabaseProvider*

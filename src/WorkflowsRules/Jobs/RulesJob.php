@@ -35,7 +35,6 @@ class RulesJob extends Job
      */
     public function handle()
     {
-        dump(get_class($this->rule));
         $rule = RulesServices::set($this->rule);
         $rule->validate($this->entity);
     }

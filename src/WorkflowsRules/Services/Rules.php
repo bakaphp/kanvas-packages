@@ -4,6 +4,7 @@ namespace Kanvas\Packages\WorkflowsRules\Services;
 
 use Exception;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
+use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
 use Phalcon\Di;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -34,12 +35,12 @@ class Rules
     public function validate(object $entity) : bool
     {
         if (!method_exists($entity, 'toArray')) {
-            Di::getDefault()->get('log')->info('to array method not  found');
+            $this->workflowLog->error('to array method not  found', $entity->toArray());
             return false;
         }
 
-        if (!method_exists($entity, 'get')) {
-            Di::getDefault()->get('log')->info('get method not  found');
+        if (!property_exists($entity, 'companies') && !method_exists($entity, 'getCompanies')) {
+            $this->workflowLog->error('properties companies not  found', $entity->toArray());
             return false;
         }
 
@@ -56,19 +57,24 @@ class Rules
             $expression,
             $values
         );
-
         if ($result) {
             $actions = $this->rule->getRulesActions();
             foreach ($actions as $action) {
+                $workflowLog = WorkflowsLogs::start($this->rule->id);
                 $workFlow = $action->getRulesWorkflowActions();
                 $objectAction = new $workFlow->actions->model_name;
                 try {
-                    $objectAction->handle($entity, ['frederickpeal@gmail.com', 'frederickpeal@mctekk.com']);
+                    $workflowLog->actions_id = $action->id;
+                    $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
+                    $workflowLog->is_succeed = $objectAction->handle($entity, $params);
+                    $workflowLog->message = $objectAction->getMessage();
+                    $workflowLog->end();
                 } catch (Exception $e) {
+                    $workflowLog->message = $e->getMessage();
+                    $workflowLog->end();
                 }
             }
         }
-
         dump('result ' . $result);
         return $result;
     }
