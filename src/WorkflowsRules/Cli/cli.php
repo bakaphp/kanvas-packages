@@ -7,7 +7,7 @@ use Phalcon\Di\FactoryDefault\Cli as CliDI;
 use Phalcon\Loader;
 use Swoole\Runtime;
 
-require '/app/vendor/autoload.php';
+require __DIR__ . '/../../../vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable(appPath());
 $dotenv->load();

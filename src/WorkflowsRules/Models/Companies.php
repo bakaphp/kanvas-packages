@@ -11,7 +11,7 @@ class Companies
      *
      * @return mixed
      */
-    public function get(string $key) : string
+    public function get(string $key) : ?string
     {
         return getenv($key);
     }
