@@ -66,8 +66,7 @@ class Rules
                 try {
                     $workflowLog->actions_id = $action->id;
                     $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
-                    $workflowLog->is_succeed = $objectAction->handle($entity, $params);
-                    $workflowLog->message = $objectAction->getMessage();
+                    $workflowLog->setLog($objectAction->handle($entity, $params));
                     $workflowLog->end();
                 } catch (Exception $e) {
                     $workflowLog->message = $e->getMessage();
@@ -75,7 +74,6 @@ class Rules
                 }
             }
         }
-        dump('result ' . $result);
         return $result;
     }
 

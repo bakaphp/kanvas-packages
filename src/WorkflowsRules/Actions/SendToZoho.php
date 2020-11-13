@@ -3,7 +3,7 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ModelInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 use Zoho\CRM\ZohoClient;
@@ -13,6 +13,8 @@ class SendToZoho implements ActionInterfaces
     protected ?string $message = null;
 
     protected ?array $data = [];
+
+    protected int $status = 1;
 
     /**
      * getData.
@@ -34,8 +36,27 @@ class SendToZoho implements ActionInterfaces
         return $this->message;
     }
 
-    public function handle(ModelInterfaces $entity, array $params = [])
+    /**
+     * getStatus.
+     *
+     * @return bool
+     */
+    public function getStatus() : int
     {
+        return $this->status;
+    }
+
+    /**
+     * handle.
+     *
+     * @param  WorkflowsEntityInterfaces $entity
+     * @param  array $params
+     *
+     * @return array
+     */
+    public function handle(WorkflowsEntityInterfaces $entity, array $params = []) : array
+    {
+        $response = null;
         try {
             $di = Di::getDefault();
             $companyId = $entity->companies_id;
@@ -74,14 +95,20 @@ class SendToZoho implements ActionInterfaces
 
             $this->data = $request;
             $this->message = 'Process Leads For company ' . $companyId;
-
+            $this->status = 1;
             $di->get('log')->info('Process Leads For company ' . $companyId, [$response]);
         } catch (Throwable $e) {
             $this->message = 'Error processing lead - ' . $e->getMessage();
             $di->get('log')->error('Error processing lead - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            return false;
+            $this->status = 0;
+            $response = $e->getTraceAsString();
         }
 
-        return true;
+        return [
+            'status' => $this->status,
+            'message' => $this->message,
+            'data' => $this->data,
+            'body' => $response
+        ];
     }
 }

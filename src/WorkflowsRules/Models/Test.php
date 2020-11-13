@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Models;
 
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ModelInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 
-class Test implements ModelInterfaces
+class Test implements WorkflowsEntityInterfaces
 {
     public ?string $name = null;
     public ?string $city = null;
@@ -15,6 +15,7 @@ class Test implements ModelInterfaces
     public string $email;
     public ?string $leads_receivers = null;
     public ?int $companies_id = null;
+    public string $dob;
 
     /**
      * toArray.

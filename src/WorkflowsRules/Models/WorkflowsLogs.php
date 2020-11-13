@@ -9,8 +9,8 @@ class WorkflowsLogs extends BaseModel
     public ?int $actions_id = null;
     public string $start_at;
     public ?string $end_at = null;
-    public int $is_succeed = 0;
-    public ?array $data = null;
+    public int $did_succeed = 1;
+    public ?string $data = null;
     public ?string $message = null;
 
     /**
@@ -44,6 +44,21 @@ class WorkflowsLogs extends BaseModel
         ]);
         $log->saveOrFail();
         return $log;
+    }
+
+    /**
+     * setLog.
+     *
+     * @param  array $log
+     *
+     * @return void
+     */
+    public function setLog(array $log) : void
+    {
+        $this->data = json_encode($log);
+        $this->message = key_exists('message', $log) ? $log['message'] : $this->message;
+        $this->did_succeed = key_exists('status', $log) ? $log['status'] : $this->did_succeed;
+        $this->message = key_exists('message', $log) ? $log['message'] : $this->message;
     }
 
     /**

@@ -23,7 +23,7 @@ final class WorkflowsLogs extends AbstractMigration
             ->addColumn('actions_id', 'integer', ['null' => true, 'after' => 'id'])
             ->addColumn('start_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('end_at', 'datetime', ['null' => true])
-            ->addColumn('is_succeed', 'boolean', ['null' => false, 'default' => 0])
+            ->addColumn('did_succeed', 'boolean', ['null' => false, 'default' => 0])
             ->addColumn('data', 'json', ['null' => true])
             ->addColumn('message', 'string', ['null' => true])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
