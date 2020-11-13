@@ -27,15 +27,19 @@
         "php-amqplib/php-amqplib": "^2.9",
         "elastic/app-search": "^7.5",
         "aporat/store-receipt-validator": "^4.0",
-        "tomorrow-ideas/plaid-sdk-php": "^0.12.0"
+        "tomorrow-ideas/plaid-sdk-php": "^0.12.0",
+        "symfony/expression-language": "^5.1",
+        "mctekk/zohocrm": "^0.1",
+        "fzaninotto/faker": "^1.9"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
         "codeception/module-asserts": "^1.2",
         "codeception/module-filesystem": "^1.0",
         "codeception/module-phalcon": "^1.0",
+        "codeception/module-phalcon4": "^1.0",
+        "codeception/module-rest": "^1.2",
         "codeception/verify": "*",
-        "fzaninotto/faker": "^1.9",
         "odan/phinx-migrations-generator": "^5",
         "squizlabs/php_codesniffer": "1.*",
         "symfony/var-dumper": "^4.3@dev",

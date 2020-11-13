@@ -8,3 +8,7 @@ build
 
 # OS specific
 .DS_Store
+phinx-workflow.php
+
+storage/logs/*
+src/WorkflowsRules/storage/logs/*

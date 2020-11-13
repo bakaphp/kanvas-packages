@@ -19,6 +19,10 @@ jobs:
       DATA_API_WALLET_MYSQL_USER: root
       DATA_API_WALLET_MYSQL_PASS: password
       DATA_API_WALLET_MYSQL_NAME: kanvas_social
+      WORKFLOW_MYSQL_HOST: 127.0.0.1
+      WORKFLOW_MYSQL_NAME: kanvas_social
+      WORKFLOW_MYSQL_USER: root
+      WORKFLOW_MYSQL_PASS: password
       DATA_API_MEMCACHED_HOST: 127.0.0.1
       DATA_API_MEMCACHED_PORT: 11211
       DATA_API_MEMCACHED_WEIGHT: 100
@@ -111,6 +115,15 @@ jobs:
       - name: Setup Env Variable
         run: cp .env.example .env
           
+      - name: Setup Phinx Workflow
+        run: cp src/WorkflowsRules/storage/ci/phinx.example phinx-workflows.php
+      
+      - name: Phinx migrate workflows
+        run: vendor/bin/phinx migrate -c phinx-workflows.php
+          
+      - name: Phinx seeder Workflows
+        run: vendor/bin/phinx seed:run -s Actions -c phinx-workflows.php && vendor/bin/phinx seed:run -s RulesTypes -c phinx-workflows.php && vendor/bin/phinx seed:run -s RulesWorkflowActions -c phinx-workflows.php && vendor/bin/phinx seed:run -s Rules  -c phinx-workflows.php && vendor/bin/phinx seed:run -s RulesConditions -c phinx-workflows.php && vendor/bin/phinx seed:run -s RulesActions -c phinx-workflows.php
+
       - name: Phinx Migrate Social
         run: ./vendor/bin/phinx migrate -c phinx-social.php -e development
 
