@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\WorkflowsRules\Services;
 
 use Exception;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
 use Phalcon\Di;
@@ -32,7 +33,7 @@ class Rules
      *
      * @return bool
      */
-    public function validate(object $entity) : bool
+    public function validate(WorkflowsEntityInterfaces $entity) : bool
     {
         if (!method_exists($entity, 'toArray')) {
             $this->workflowLog->error('to array method not  found', $entity->toArray());

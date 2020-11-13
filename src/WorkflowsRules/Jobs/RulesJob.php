@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\WorkflowsRules\Jobs;
 
 use Baka\Jobs\Job;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Services\Rules as RulesServices;
 
@@ -21,7 +22,7 @@ class RulesJob extends Job
      *
      * @return void
      */
-    public function __construct(Rules $rules, string $event, object $entity)
+    public function __construct(Rules $rules, string $event, WorkflowsEntityInterfaces $entity)
     {
         $this->rule = $rules;
         $this->onQueue('workflows');
