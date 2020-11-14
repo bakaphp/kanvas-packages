@@ -35,16 +35,6 @@ class Rules
      */
     public function validate(WorkflowsEntityInterfaces $entity) : bool
     {
-        if (!method_exists($entity, 'toArray')) {
-            $this->workflowLog->error('to array method not  found', $entity->toArray());
-            return false;
-        }
-
-        if (!property_exists($entity, 'companies') && !method_exists($entity, 'getCompanies')) {
-            $this->workflowLog->error('properties companies not  found', $entity->toArray());
-            return false;
-        }
-
         Di::getDefault()->get('log')->info('Rule validate');
 
         $expression = $this->getStringConditions();
