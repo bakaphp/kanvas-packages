@@ -47,7 +47,8 @@ class ChannelMessages extends BaseModel
                 WHERE     channel_messages.channel_id = {$channel->getId()} 
                 AND       channel_messages.is_deleted = 0 
                 AND       messages.apps_id = {$appData->getId()} 
-                AND       messages.companies_id = {$userData->getCurrentCompany()->getId()} 
+                AND       messages.companies_id = {$userData->getCurrentCompany()->getId()}
+                AND       messages.is_deleted = 0
                 ORDER BY  {$orderBy} {$sort} limit {$limit} offset {$offSet}"
             )
         );
