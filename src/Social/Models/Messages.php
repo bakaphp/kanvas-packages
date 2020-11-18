@@ -199,14 +199,4 @@ class Messages extends BaseModel implements MessageableInterface
     {
         return $userId == $this->users_id;
     }
-
-    /**
-     * Get instance id
-     *
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $id;
-    }
 }
