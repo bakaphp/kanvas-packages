@@ -23,7 +23,7 @@ class Messages
      * @param string $uuid
      * @return MessagesModel
      */
-    public static function getMessage(string $uuid): MessagesModel
+    public static function getMessage(string $uuid): MessageableInterface
     {
         $message = MessagesModel::getByIdOrFail($uuid);
         return $message;
@@ -39,7 +39,7 @@ class Messages
      * @param string $distribution
      * @return UserMessages
      */
-    public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableInterface $object = null): MessagesModel
+    public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableInterface $object = null): MessageableInterface
     {
         $newMessage = new MessagesModel();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();

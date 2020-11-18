@@ -7,7 +7,7 @@ use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Phalcon\Di;
 
-class Messages extends BaseModel
+class Messages extends BaseModel implements MessageableInterface
 {
     use CustomTotalInteractionsTrait;
     use InteractionsTrait;
@@ -197,5 +197,15 @@ class Messages extends BaseModel
     public function hasUser(int $userId): bool
     {
         return $userId == $this->users_id;
+    }
+
+    /**
+     * Get instance id
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $id;
     }
 }
