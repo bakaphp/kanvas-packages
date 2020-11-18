@@ -53,17 +53,18 @@ class MessagesCest
     {
         $lead = new Lead();
 
-        $this->channel = Channels::findFirstOrCreate([
+        $this->channel = Channels::findFirstOrCreate(
+            [
             'conditions' => 'is_deleted = 0'
         ],
-        [
+            [
             'name' => 'channel Test',
             'entity_namespace' => new Lead(),
             'entity_id' => $lead->getId()
-        ]);
+        ]
+        );
 
         Distributions::sendToChannelFeed($this->channel, $this->message);
-
     }
         
     /**
@@ -85,6 +86,24 @@ class MessagesCest
     }
 
     /**
+     * Create Message by Message Object Test
+     *
+     * @param UnitTester $I
+     * @before createMessageType
+     * @return void
+     */
+    public function createMessageByObject(IntegrationTester $I): void
+    {
+        $text = [
+            'text' => 'This is test text for testing'
+        ];
+        
+        $feed = MessagesService::createByObject(new Users(), 'memo', $text, new MessageObject());
+
+        $I->assertNotNull($feed->getId());
+    }
+
+    /**
      * Test Message Reactions
      *
      * @param IntegrationTester $I
@@ -100,7 +119,6 @@ class MessagesCest
         $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->message));
 
         $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->message));
-
     }
 
     /**
@@ -126,7 +144,7 @@ class MessagesCest
     public function deleteMessage(IntegrationTester $I): void
     {
         $I->assertTrue(
-            MessagesService::delete(Messages::findFirst()->getId(),new Users())
+            MessagesService::delete(Messages::findFirst()->getId(), new Users())
         );
     }
 }

@@ -67,6 +67,40 @@ class Messages
     /**
      * To be describe
      *
+     * @param UserInterface $user
+     * @param string $verb
+     * @param array $message
+     * @param array $object contains the entity object + its id.
+     * @param string $distribution
+     * @return UserMessages
+     */
+    public static function createByObject(UserInterface $user, string $verb, array $message = [], ?MessageableInterface $object): MessageableInterface
+    {
+        $object->apps_id = Di::getDefault()->get('app')->getId();
+        $object->companies_id = $user->getDefaultCompany()->getId();
+        $object->users_id = (int) $user->getId();
+        $object->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $object->message = json_encode($message);
+        $object->saveOrFail();
+
+        $newAppModule = new AppModuleMessage();
+        $newAppModule->message_id = $object->getId();
+        $newAppModule->message_types_id = $object->message_types_id;
+        $newAppModule->apps_id = $object->apps_id; //Duplicate data?
+        $newAppModule->companies_id = $object->companies_id; //Duplicate data?
+        $newAppModule->system_modules =  $object ? get_class($object) : null;
+        $newAppModule->entity_id =  $object ? $object->getId() : null;
+        $newAppModule->saveOrFail();
+
+        Distributions::sendToUsersFeeds($object, $user);
+        GenerateTags::dispatch($user, $object);
+
+        return $newMessage;
+    }
+
+    /**
+     * To be describe
+     *
      * @param string $uuid
      * @param array $message
      * @return void
