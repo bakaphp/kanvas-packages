@@ -2,9 +2,9 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-use Kanvas\Packages\Social\Contract\Messages\MessageableInterface;
+use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 
-class MessageObject implements MessageableInterface
+class MessageObject implements MessagesInterface
 {
     public int $id = 1;
 
