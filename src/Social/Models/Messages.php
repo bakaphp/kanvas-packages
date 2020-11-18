@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Social\Models;
 use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
+use Kanvas\Packages\Social\Contract\Messages\MessageableInterface;
 use Phalcon\Di;
 
 class Messages extends BaseModel implements MessageableInterface
