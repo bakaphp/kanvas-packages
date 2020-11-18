@@ -95,7 +95,7 @@ class Messages
         Distributions::sendToUsersFeeds($object, $user);
         GenerateTags::dispatch($user, $object);
 
-        return $newMessage;
+        return $object;
     }
 
     /**
