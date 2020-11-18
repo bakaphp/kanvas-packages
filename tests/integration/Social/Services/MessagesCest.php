@@ -99,7 +99,7 @@ class MessagesCest
         ];
 
         $newMessage =  new Messages();
-        $newMessage->message = $text;
+        $newMessage->message = json_encode($text);
         
         $feed = MessagesService::createByObject(new Users(), 'memo', $newMessage, new Messages());
 
