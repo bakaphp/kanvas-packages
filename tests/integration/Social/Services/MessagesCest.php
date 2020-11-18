@@ -98,7 +98,7 @@ class MessagesCest
             'text' => 'This is test text for testing'
         ];
         
-        $feed = MessagesService::createByObject(new Users(), 'memo', $text, new MessageObject());
+        $feed = MessagesService::createByObject(new Users(), 'memo', $text, new Messages());
 
         $I->assertNotNull($feed->getId());
     }
