@@ -50,13 +50,12 @@ trait RulesTrait
         $di = Di::getDefault();
         $appId = $di->get('app')->getId();
 
-        $systemModules = SystemModules::findFirst([
+        return SystemModules::findFirst([
             'conditions' => 'model_name = :model_name: AND apps_id = :apps_id:',
             'bind' => [
                 'model_name' => get_class($this),
                 'apps_id' => $appId
             ]
         ]);
-        return $systemModules;
     }
 }
