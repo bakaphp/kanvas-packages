@@ -5,8 +5,7 @@ $dotEnv->load();
 
 return [
     'paths' => [
-        'migrations' => 'storage/db/Wallets/migrations',
-        'seeds' => 'storage/db/Wallets/seeds',
+        'migrations' => 'storage/db/migrations',
     ],
     'environments' => [
         'default_migration_table' => 'ut_migrations',
