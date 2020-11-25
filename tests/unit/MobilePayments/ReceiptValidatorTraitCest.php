@@ -50,9 +50,9 @@ class ReceiptValidatorTraitCest
         };
         $formattedReceipt = $receiptValidator->parseReceiptData($receipt, 'apple');
 
-        $I->assertContains('is_mobile', $formattedReceipt);
-        $I->assertContains('receipt_creation_date', $formattedReceipt);
-        $I->assertContains('paid_status', $formattedReceipt);
-        $I->assertContains('subscription_status', $formattedReceipt);
+        $I->assertArrayHasKey('is_mobile', $formattedReceipt);
+        $I->assertArrayHasKey('receipt_creation_date', $formattedReceipt);
+        $I->assertArrayHasKey('paid_status', $formattedReceipt);
+        $I->assertArrayHasKey('subscription_status', $formattedReceipt);
     }
 }
