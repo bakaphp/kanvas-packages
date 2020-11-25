@@ -5,8 +5,8 @@ $dotEnv->load();
 
 return [
     'paths' => [
-        'migrations' => 'storage/db/migrations',
-        'seeds' => 'storage/db/seeds',
+        'migrations' => getenv('SOCIAL_CORE_PATH') . '/storage/db/migrations',
+        'seeds' => getenv('SOCIAL_CORE_PATH') . '/storage/db/seeds',
     ],
     'environments' => [
         'default_migration_table' => 'ut_migrations',
