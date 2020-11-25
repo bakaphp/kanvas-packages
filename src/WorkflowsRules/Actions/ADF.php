@@ -3,19 +3,12 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use GuzzleHttp\Client;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 
-class ADF implements ActionInterfaces
+class ADF extends Action
 {
-    protected ?string $message = null;
-
-    protected ?array $data = [];
-
-    protected int $status = 1;
-
     /**
      * handle.
      *
@@ -36,10 +29,10 @@ class ADF implements ActionInterfaces
                 'phone' => $data['phone'],
                 'message' => $data['message'],
                 'email' => $data['email'],
-                'username' => key_exists('username', $data) ? $data['username'] : null,
-                'vehicleid' => key_exists('vehicleid', $data) ? $data['vehicleid'] : null,
-                'rooftopid' => key_exists('rooftopid', $data) ? $data['rooftopid'] : null,
-                'dealergroupid' => key_exists('dealergroupid', $data) ? $data['dealergroupid'] : null,
+                'username' => $data['username'] ?: null,
+                'vehicleid' => $data['vehicleid'] ?: null,
+                'rooftopid' => $data['rooftopid'] ?: null,
+                'dealergroupid' => $data['dealergroupid'] ?: null
             ];
             $client = new Client();
             $baseUrl = getenv('URL_DEALER_API');
@@ -65,35 +58,5 @@ class ADF implements ActionInterfaces
             'data' => $this->data,
             'body' => $response
         ];
-    }
-
-    /**
-     * getData.
-     *
-     * @return array
-     */
-    public function getData() : ?array
-    {
-        return $this->data;
-    }
-
-    /**
-     * getMessage.
-     *
-     * @return string
-     */
-    public function getMessage() : ?string
-    {
-        return $this->message;
-    }
-
-    /**
-     * getStatus.
-     *
-     * @return bool
-     */
-    public function getStatus() : int
-    {
-        return $this->status;
     }
 }
