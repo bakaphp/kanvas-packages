@@ -16,6 +16,7 @@ class Test implements WorkflowsEntityInterfaces
     public ?string $leads_receivers = null;
     public ?int $companies_id = null;
     public string $dob;
+    public int $vehicleid = 1;
 
     /**
      * toArray.
@@ -34,7 +35,7 @@ class Test implements WorkflowsEntityInterfaces
      */
     public function getAll() : array
     {
-        return [];
+        return $this->toArray();
     }
 
     /**
