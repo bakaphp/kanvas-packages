@@ -18,15 +18,9 @@ class RulesConditions extends AbstractSeed
              ->insert([
                  [
                      'rules_id' => '1',
-                     'attribute_name' => 'name',
-                     'operator' => '==',
-                     'value' => 'Ichigo'
-                 ],
-                 [
-                     'rules_id' => '1',
-                     'attribute_name' => 'city',
-                     'operator' => '==',
-                     'value' => 'Santo Domingo'
+                     'attribute_name' => 'dob',
+                     'operator' => '>',
+                     'value' => '1900-01-01'
                  ]
              ])
              ->saveData();
