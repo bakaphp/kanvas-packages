@@ -16,8 +16,8 @@ class Test implements WorkflowsEntityInterfaces
     public ?string $leads_receivers = null;
     public ?int $companies_id = null;
     public string $dob;
-    public int $vehicleid = 1;
-    public int $rooftopid = 1;
+    public int $vehicleid = 1919;
+    public int $rooftopid = 106;
 
     /**
      * toArray.

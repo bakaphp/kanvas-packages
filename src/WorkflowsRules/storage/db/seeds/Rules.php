@@ -21,7 +21,7 @@ class Rules extends AbstractSeed
                     'rules_types_id' => '1',
                     'companies_id' => '1',
                     'name' => 'test',
-                    'pattern' => '1 AND 2'
+                    'pattern' => '1'
                 ]
             ])
             ->saveData();
