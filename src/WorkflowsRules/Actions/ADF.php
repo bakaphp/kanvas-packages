@@ -34,7 +34,6 @@ class ADF extends Action
                 'rooftopid' => key_exists('rooftopid', $data) ? $data['rooftopid'] : null,
                 'dealergroupid' => key_exists('dealergroupid', $data) ? $data['dealergroupid'] : null
             ];
-            dump($request);
             $client = new Client();
             $baseUrl = getenv('URL_DEALER_API');
             $response = $client->request('POST', "{$baseUrl}/forms/vehicleinterest", [
