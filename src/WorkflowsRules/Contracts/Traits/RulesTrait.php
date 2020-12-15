@@ -24,6 +24,10 @@ trait RulesTrait
         $systemModules = $this->getSystemModules();
         if ($systemModules) {
             $rulesTypes = RulesTypes::findFirstByName($event);
+            if (!$rulesTypes) {
+                return;
+            }
+            Di::getDefault()->get('log')->info("Rules trait started, event {$event}");
 
             $rules = Rules::find([
                 'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id = :companies_id:',
@@ -36,6 +40,7 @@ trait RulesTrait
 
             foreach ($rules as $rule) {
                 RulesJob::dispatch($rule, $event, $this);
+                Di::getDefault()->get('log')->info("Rules fire {$rule->name}");
             }
         }
     }
