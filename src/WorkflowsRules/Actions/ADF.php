@@ -27,12 +27,12 @@ class ADF extends Action
                 'name' => $data['firstname'],
                 'lastname' => $data['lastname'],
                 'phone' => $data['phone'],
-                'message' => key_exists('message', $data) ? $data['message'] : ' ',
+                'message' => $data['message'] ?? ' ',
                 'email' => $data['email'],
-                'username' => key_exists('username', $data) ? $data['username'] : null,
-                'vehicleid' => key_exists('vehicleid', $data) ? $data['vehicleid'] : null,
-                'rooftopid' => key_exists('rooftopid', $data) ? $data['rooftopid'] : null,
-                'dealergroupid' => key_exists('dealergroupid', $data) ? $data['dealergroupid'] : null
+                'username' => $data['username'] ?? null,
+                'vehicleid' => $data['vehicleid'] ?? null,
+                'rooftopid' => $data['rooftopid'] ?? null,
+                'dealergroupid' => $data['dealergroupid'] ?? null
             ];
             $client = new Client();
             $baseUrl = getenv('URL_DEALER_API');
