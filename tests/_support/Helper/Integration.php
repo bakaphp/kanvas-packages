@@ -57,8 +57,8 @@ class Integration extends Module
      */
     public function _beforeSuite($settings = [])
     {
-         Phinx::migrate();
-         Phinx::seed();
+        Phinx::migrate();
+        Phinx::seed();
     }
 
     /**
