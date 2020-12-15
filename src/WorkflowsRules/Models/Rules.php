@@ -11,7 +11,7 @@ class Rules extends BaseModel
     public string $name;
     public ?string $description = null;
     public string $pattern;
-    public ?array $params = null;
+    public ?string $params = null;
 
     /**
      * Initialize method for model.

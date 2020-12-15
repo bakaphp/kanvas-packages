@@ -34,6 +34,7 @@ class ADF extends Action
                 'rooftopid' => $data['rooftopid'] ?? null,
                 'dealergroupid' => $data['dealergroupid'] ?? null
             ];
+            $this->data = $request;
             $client = new Client();
             $baseUrl = getenv('URL_DEALER_API');
             $response = $client->request('POST', "{$baseUrl}/forms/vehicleinterest", [
@@ -44,7 +45,6 @@ class ADF extends Action
                 $this->status = 0;
             }
             $this->message = $body;
-            $this->data = $request;
         } catch (Throwable $e) {
             $this->message = 'Error processing lead - ' . $e->getMessage();
             $di->get('log')->error('Error processing lead - ' . $e->getMessage(), [$e->getTraceAsString()]);

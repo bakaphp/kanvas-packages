@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Kanvas\Packages\Social\Contract\Messages\MessageableInterface;
+use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
+use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
@@ -23,7 +24,7 @@ class Messages
      * @param string $uuid
      * @return MessagesModel
      */
-    public static function getMessage(string $uuid): MessagesModel
+    public static function getMessage(string $uuid): MessagesInterface
     {
         $message = MessagesModel::getByIdOrFail($uuid);
         return $message;
@@ -39,7 +40,7 @@ class Messages
      * @param string $distribution
      * @return UserMessages
      */
-    public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableInterface $object = null): MessagesModel
+    public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableEntityInterface $object = null): MessagesInterface
     {
         $newMessage = new MessagesModel();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
@@ -56,6 +57,39 @@ class Messages
         $newAppModule->companies_id = $newMessage->companies_id; //Duplicate data?
         $newAppModule->system_modules =  $object ? get_class($object) : null;
         $newAppModule->entity_id =  $object ? $object->getId() : null;
+        $newAppModule->saveOrFail();
+
+        Distributions::sendToUsersFeeds($newMessage, $user);
+        GenerateTags::dispatch($user, $newMessage);
+
+        return $newMessage;
+    }
+
+    /**
+     * To be describe
+     *
+     * @param UserInterface $user
+     * @param string $verb
+     * @param array $message
+     * @param array $object contains the entity object + its id.
+     * @param string $distribution
+     * @return UserMessages
+     */
+    public static function createByObject(UserInterface $user, string $verb, MessagesInterface $newMessage, MessageableEntityInterface $object): MessagesInterface
+    {
+        $newMessage->apps_id = Di::getDefault()->get('app')->getId();
+        $newMessage->companies_id = $user->getDefaultCompany()->getId();
+        $newMessage->users_id = (int) $user->getId();
+        $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $newMessage->saveOrFail();
+
+        $newAppModule = new AppModuleMessage();
+        $newAppModule->message_id = $newMessage->getId();
+        $newAppModule->message_types_id = $newMessage->message_types_id;
+        $newAppModule->apps_id = $newMessage->apps_id; //Duplicate data?
+        $newAppModule->companies_id = $newMessage->companies_id; //Duplicate data?
+        $newAppModule->system_modules = $object ? get_class($object) : null;
+        $newAppModule->entity_id = $object ? $object->getId() : null;
         $newAppModule->saveOrFail();
 
         Distributions::sendToUsersFeeds($newMessage, $user);
@@ -91,12 +125,12 @@ class Messages
     }
 
     /**
-     * Get the message from an MessageableInterface if exist
+     * Get the message from an MessagesInterface if exist
      *
-     * @param MessageableInterface $object
+     * @param MessagesInterface $object
      * @return MessagesModel
      */
-    public static function getMessageFrom(MessageableInterface $object): MessagesModel
+    public static function getMessageFrom(MessagesInterface $object): MessagesModel
     {
         $module = AppModuleMessage::findFirstOrFail([
             'conditions' => 'system_modules = :objectNamespace: AND entity_id = :entityId: AND
