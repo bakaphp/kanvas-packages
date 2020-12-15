@@ -18,7 +18,7 @@
     "require": {
         "php": ">= 7.4",
         "ext-phalcon": ">=4",
-        "canvas/core": "0.2.x-dev",
+        "canvas/core": "^0.2",
         "vlucas/phpdotenv": "^4.1",
         "phalcon/incubator": "4.0.x-dev",
         "phalcon/incubator-acl": "^1.0.0-alpha.1",
