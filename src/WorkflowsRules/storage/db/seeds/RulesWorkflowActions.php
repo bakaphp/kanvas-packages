@@ -23,6 +23,10 @@ class RulesWorkflowActions extends AbstractSeed
                  [
                      'system_modules_id' => '1',
                      'actions_id' => '2',
+                 ],
+                 [
+                     'system_modules_id' => '1',
+                     'actions_id' => '3',
                  ]
              ])
              ->saveData();

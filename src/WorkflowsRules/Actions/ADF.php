@@ -27,18 +27,18 @@ class ADF extends Action
                 'name' => $data['firstname'],
                 'lastname' => $data['lastname'],
                 'phone' => $data['phone'],
-                'message' => $data['message'],
+                'message' => $data['message'] ?? ' ',
                 'email' => $data['email'],
-                'username' => $data['username'] ?: null,
-                'vehicleid' => $data['vehicleid'] ?: null,
-                'rooftopid' => $data['rooftopid'] ?: null,
-                'dealergroupid' => $data['dealergroupid'] ?: null
+                'username' => $data['username'] ?? null,
+                'vehicleid' => $data['vehicleid'] ?? null,
+                'rooftopid' => $data['rooftopid'] ?? null,
+                'dealergroupid' => $data['dealergroupid'] ?? null
             ];
             $this->data = $request;
             $client = new Client();
             $baseUrl = getenv('URL_DEALER_API');
             $response = $client->request('POST', "{$baseUrl}/forms/vehicleinterest", [
-                'json' => $request
+                'form_params' => $request
             ]);
             $body = $response->getBody();
             if ($response->getStatusCode() != 200) {

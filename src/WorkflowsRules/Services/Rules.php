@@ -2,12 +2,12 @@
 
 namespace Kanvas\Packages\WorkflowsRules\Services;
 
-use Exception;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
 use Phalcon\Di;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Throwable;
 
 class Rules
 {
@@ -59,7 +59,7 @@ class Rules
                     $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
                     $workflowLog->setLog($objectAction->handle($entity, $params));
                     $workflowLog->end();
-                } catch (Exception $e) {
+                } catch (Throwable $e) {
                     $workflowLog->message = $e->getMessage();
                     $workflowLog->end();
                 }

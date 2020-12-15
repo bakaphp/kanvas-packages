@@ -23,6 +23,10 @@ class Actions extends AbstractSeed
                 [
                     'name' => 'SendMail',
                     'model_name' => 'Kanvas\Packages\WorkflowsRules\Actions\SendMail'
+                ],
+                [
+                    'name' => 'ADF',
+                    'model_name' => 'Kanvas\Packages\WorkflowsRules\Actions\ADF'
                 ]
             ])
             ->saveData();
