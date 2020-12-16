@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
 final class WorkflowsLogs extends AbstractMigration
@@ -24,8 +25,8 @@ final class WorkflowsLogs extends AbstractMigration
             ->addColumn('start_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('end_at', 'datetime', ['null' => true])
             ->addColumn('did_succeed', 'boolean', ['null' => false, 'default' => 0])
-            ->addColumn('data', 'json', ['null' => true])
-            ->addColumn('message', 'text', ['null' => true])
+            ->addColumn('data', 'text', ['null' => true,  'limit' => MysqlAdapter::TEXT_LONG])
+            ->addColumn('message', 'string', ['null' => true])
             ->addColumn('created_at', 'datetime', ['null' => false, 'default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('updated_at', 'datetime', ['null' => true])
             ->addColumn('is_deleted', 'integer', ['null' => false, 'default' => 0])

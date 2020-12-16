@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Phinx\Db\Adapter\MysqlAdapter;
 use Phinx\Migration\AbstractMigration;
 
 final class ParamsRules extends AbstractMigration
@@ -19,7 +20,7 @@ final class ParamsRules extends AbstractMigration
     public function change() : void
     {
         $this->table('rules')
-            ->addColumn('params', 'json', ['after' => 'pattern', 'null' => true])
+            ->addColumn('params', 'text', ['after' => 'pattern', 'null' => true, 'limit' => MysqlAdapter::TEXT_LONG])
             ->save();
     }
 }
