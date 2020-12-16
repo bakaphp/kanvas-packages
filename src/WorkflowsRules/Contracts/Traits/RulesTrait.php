@@ -28,6 +28,9 @@ trait RulesTrait
                 return;
             }
             Di::getDefault()->get('log')->info("Rules trait started, event {$event}");
+            Di::getDefault()->get('log')->info("Rules trait system module id {$systemModules->getId()}");
+            Di::getDefault()->get('log')->info("Rules trait rules type id  {$rulesTypes->getId()}");
+            Di::getDefault()->get('log')->info("Rules trait company id  {$this->companies->getId()}");
 
             $rules = Rules::find([
                 'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id = :companies_id:',
