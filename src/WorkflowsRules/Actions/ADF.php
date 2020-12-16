@@ -22,7 +22,7 @@ class ADF extends Action
         $response = null;
         $di = Di::getDefault();
         try {
-            $data = $entity->getAll();
+            $data = array_merge($entity->toArray(), $entity->getAll());
             $request = [
                 'name' => $data['firstname'],
                 'lastname' => $data['lastname'],
