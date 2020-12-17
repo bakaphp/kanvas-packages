@@ -44,6 +44,15 @@ class SendToZoho extends Action
             ];
             $customFields = $entity->getAll();
             $request = array_merge($customFields, $request);
+
+            unset($request['Code'], $request['Programs'], $request['Office'], $request['Business_Founded']);
+            if (isset($request['Retirement_Account'])) {
+                $request['Retirement_Account'] = [$request['Retirement_Account']];
+            }
+            if (isset($request['Available_Collateral'])) {
+                $request['Available_Collateral'] = [$request['Available_Collateral']];
+            }
+
             $di->get('log')->info('Data lead', $request);
             $this->data = $request;
 
