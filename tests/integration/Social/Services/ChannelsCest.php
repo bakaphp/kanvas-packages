@@ -22,14 +22,16 @@ class ChannelsCest
     {
         $lead = new Lead();
 
-        $this->channel = ChannelsModel::findFirstOrCreate([
+        $this->channel = ChannelsModel::findFirstOrCreate(
+            [
             'conditions' => 'is_deleted = 0'
         ],
-        [
+            [
             'name' => 'channel Test',
             'entity_namespace' => new Lead(),
             'entity_id' => $lead->getId()
-        ]);
+        ]
+        );
     }
     
     /**
@@ -40,7 +42,7 @@ class ChannelsCest
      */
     public function createChannel(IntegrationTester $I): void
     {
-        $channel = Channels::create(new Users(), new Lead(),'Test', 'Channel for testing propose');
+        $channel = Channels::create(new Users(), new Lead(), 'Test', 'Channel for testing propose');
 
         $I->assertInstanceOf(ChannelsModel::class, $channel);
         $I->assertEquals(get_class(new Lead()), $channel->entity_namespace);
