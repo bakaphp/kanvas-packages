@@ -27,6 +27,7 @@ class Channels extends BaseModel
             'channel_id',
             'messages_id',
             Messages::class,
+            'id',
             [
                 'alias' => 'messages'
             ]

@@ -52,7 +52,7 @@ trait SearchableControllerTrait
 
         $results = $this->elasticApp->querySuggestion(
             $engine,
-            strip_tags($query)
+            strip_tags(urldecode($query))
         );
 
         if (!empty($results)) {

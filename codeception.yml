@@ -42,7 +42,7 @@ extensions:
 # Global modules configuration.
 modules:
   config:
-    Phalcon:
+    Phalcon4:
       cleanup: false
       savepoints: false
     DB:
