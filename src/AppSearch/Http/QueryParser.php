@@ -4,23 +4,23 @@ namespace Kanvas\Packages\AppSearch\Http;
 
 use Baka\Elasticsearch\Query\FromClause;
 use Baka\Support\Str;
-use Phalcon\Mvc\ModelInterface;
+use Phalcon\Http\RequestInterface;
 
 /**
  * QueryParser translates a complex syntax query provided via an url in an string format to a SQL alike syntax.
  */
 class QueryParser
 {
-    public ?array $request = null;
+    public ?RequestInterface $request = null;
     public array $searchParams = [];
     public array $filters = [];
     
     /**
      * Constructor.
      *
-     * @param array $filtersParams
+     * @param RequestInterface $request
      */
-    public function __construct(array $request)
+    public function __construct(RequestInterface $request)
     {
         $this->request = $request;
         $this->page = $this->request->getQuery('page', 'int', 1);
