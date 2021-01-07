@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanvas\Packages\AppSearch\Http;
+namespace Kanvas\Packages\AppSearch\Http\QueryParser;
 
 use Baka\Elasticsearch\Query\FromClause;
 use Baka\Support\Str;
@@ -97,13 +97,13 @@ class QueryParser
     private function parser(string $filter) : void
     {
         //equal
-        if (strpos($filter, ':') !== false) {
+        if (Str::contains($filter, ':')) {
             $fields = explode(':', $filter);
             $this->filters[$fields[0]] = explode('|', $fields[1]);
         }
 
         //between
-        if (strpos($filter, '¬') !== false) {
+        if (Str::contains($filter, '¬')) {
             $fields = explode('¬', $filter);
             $delimiter = explode('|', $fields[1]);
 
@@ -114,13 +114,13 @@ class QueryParser
         }
 
         //different from
-        if (strpos($filter, '~') !== false) {
+        if (Str::contains($filter, '~')) {
             $fields = explode('~', $filter);
             $this->filters["none"][$fields[0]] = explode('|', $fields[1]);
         }
 
         //greater than
-        if (strpos($filter, '>') !== false) {
+        if (Str::contains($filter, '>')) {
             $fields = explode('>', $filter);
             $this->filters["any"][$fields[0]] = [
                 'from' => $fields[1],
@@ -128,7 +128,7 @@ class QueryParser
         }
 
         //smaller than
-        if (strpos($filter, '<') !== false) {
+        if (Str::contains($filter, '<')) {
             $fields = explode('<', $filter);
             $this->filters["any"][$fields[0]]['to'] = $fields[1];
         }
