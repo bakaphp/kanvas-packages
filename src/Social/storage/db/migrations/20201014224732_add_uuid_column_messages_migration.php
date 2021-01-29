@@ -2,7 +2,7 @@
 
 use Phinx\Db\Adapter\MysqlAdapter;
 
-class AppModuleMessageMigration extends Phinx\Migration\AbstractMigration
+class AddUuidColumnMessagesMigration extends Phinx\Migration\AbstractMigration
 {
     public function change()
     {
