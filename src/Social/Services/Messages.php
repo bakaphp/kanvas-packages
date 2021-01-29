@@ -14,6 +14,7 @@ use Kanvas\Packages\Social\Models\Messages as MessagesModel;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Security\Random;
 
 class Messages
 {
@@ -42,7 +43,9 @@ class Messages
      */
     public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableEntityInterface $object = null): MessagesInterface
     {
+        $random = new Random();
         $newMessage = new MessagesModel();
+        $newMessage->uuid = $random->uuid();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
