@@ -19,6 +19,9 @@ class ChannelMessages extends BaseModel
         parent::initialize();
         
         $this->setSource('channel_messages');
+
+        $this->belongsTo('channel_id', Channels::class, 'id', ['alias' => 'channels']);
+        $this->belongsTo('messages_id', Messages::class, 'id', ['alias' => 'messages']);
     }
 
     /**
@@ -29,10 +32,11 @@ class ChannelMessages extends BaseModel
     *
     * @return Simple
     */
-    public function getMessagesByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
+    public function getMessagesByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC", string $messageTypeId = null): Simple
     {
         $appData = Di::getDefault()->get('app');
         $userData = Di::getDefault()->get('userData');
+        $messageTypeFilter = !is_null($messageTypeId) ? "AND messages.message_types_id = {$messageTypeId}" : "";
 
         $offSet = ($page - 1) * $limit;
 
@@ -47,8 +51,9 @@ class ChannelMessages extends BaseModel
                 WHERE     channel_messages.channel_id = {$channel->getId()} 
                 AND       channel_messages.is_deleted = 0 
                 AND       messages.apps_id = {$appData->getId()} 
-                AND       messages.companies_id = {$userData->getCurrentCompany()->getId()}
-                AND       messages.is_deleted = 0
+                AND       messages.companies_id = {$userData->getCurrentCompany()->getId()} "
+                . $messageTypeFilter 
+                . " AND       messages.is_deleted = 0
                 ORDER BY  {$orderBy} {$sort} limit {$limit} offset {$offSet}"
             )
         );
