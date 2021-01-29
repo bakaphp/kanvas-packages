@@ -16,7 +16,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use InteractionsTrait;
 
     public $id;
-    public string $uuid;
+    public ?string $uuid = null;
     public int $apps_id;
     public int $companies_id;
     public int $users_id;
