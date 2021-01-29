@@ -16,8 +16,7 @@ class AddUuidColumnMessagesMigration extends Phinx\Migration\AbstractMigration
                 'row_format' => 'DYNAMIC',
             ])
             ->addColumn('uuid', 'string', [
-                'null' => true,
-                'default' => null,
+                'null' => false,
                 'limit' => 36,
                 'collation' => 'utf8mb4_general_ci',
                 'encoding' => 'utf8mb4',
