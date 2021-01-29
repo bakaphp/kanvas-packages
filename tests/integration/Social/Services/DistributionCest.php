@@ -37,7 +37,7 @@ class DistributionCest
         $this->message = Messages::findFirstOrCreate([
             'conditions' => 'is_deleted = 0'
         ],[
-            'uuid' => $random->uuid();
+            'uuid' => $random->uuid(),
             'apps_id' => $app->getId(),
             'companies_id' => $user->getDefaultCompany(),
             'users_id' => $user->getId(),
