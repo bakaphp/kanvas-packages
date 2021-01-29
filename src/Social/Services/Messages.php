@@ -43,9 +43,7 @@ class Messages
      */
     public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableEntityInterface $object = null): MessagesInterface
     {
-        $random = new Random();
         $newMessage = new MessagesModel();
-        $newMessage->uuid = $random->uuid();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
@@ -81,8 +79,6 @@ class Messages
      */
     public static function createByObject(UserInterface $user, string $verb, MessagesInterface $newMessage, MessageableEntityInterface $object): MessagesInterface
     {
-        $random = new Random();
-        $newMessage->uuid = $random->uuid();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
