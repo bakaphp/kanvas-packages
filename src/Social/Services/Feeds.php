@@ -49,9 +49,9 @@ class Feeds
      *
      * @return Simple
      */
-    public static function getByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC"): Simple
+    public static function getByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC", string $messageTypeId = null): Simple
     {
         $feed = new ChannelMessages();
-        return $feed->getMessagesByChannel($channel, $page, $limit, $orderBy, $sort);
+        return $feed->getMessagesByChannel($channel, $page, $limit, $orderBy, $sort, $messageTypeId);
     }
 }
