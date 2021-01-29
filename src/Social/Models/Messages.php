@@ -8,6 +8,7 @@ use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
 use Phalcon\Di;
+use Phalcon\Security\Random;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
 {
@@ -15,6 +16,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use InteractionsTrait;
 
     public $id;
+    public string $uuid;
     public int $apps_id;
     public int $companies_id;
     public int $users_id;
@@ -199,5 +201,16 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function hasUser(int $userId): bool
     {
         return $userId == $this->users_id;
+    }
+
+    /**
+     * Before create.
+     *
+     * @return void
+     */
+    public function beforeCreate()
+    {
+        $random = new Random();
+        $this->uuid = $random->uuid();
     }
 }
