@@ -16,7 +16,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use InteractionsTrait;
 
     public $id;
-    public ?string $uuid = null;
+    public string $uuid;
     public int $apps_id;
     public int $companies_id;
     public int $users_id;
@@ -204,11 +204,11 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
-     * Before save
+     * Before create
      *
      * @return void
      */
-    public function beforeSave()
+    public function beforeCreate()
     {
         $random = new Random();
         $this->uuid = $random->uuid();
