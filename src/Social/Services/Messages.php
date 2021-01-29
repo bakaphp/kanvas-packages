@@ -51,6 +51,7 @@ class Messages
         $newMessage->users_id = (int) $user->getId();
         $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
         $newMessage->message = json_encode($message);
+        $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 
         $newAppModule = new AppModuleMessage();
