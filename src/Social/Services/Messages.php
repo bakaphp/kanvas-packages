@@ -87,6 +87,7 @@ class Messages
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
         $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 
         $newAppModule = new AppModuleMessage();
