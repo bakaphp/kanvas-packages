@@ -204,11 +204,11 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
-     * Before create.
+     * Before save
      *
      * @return void
      */
-    public function beforeCreate()
+    public function beforeSave()
     {
         $random = new Random();
         $this->uuid = $random->uuid();
