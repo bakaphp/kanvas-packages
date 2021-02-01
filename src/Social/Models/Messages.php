@@ -202,15 +202,4 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     {
         return $userId == $this->users_id;
     }
-
-    /**
-     * Before create
-     *
-     * @return void
-     */
-    public function beforeCreate()
-    {
-        $random = new Random();
-        $this->uuid = $random->uuid();
-    }
 }

@@ -25,10 +25,23 @@ class Messages
      * @param string $uuid
      * @return MessagesModel
      */
-    public static function getMessage(string $uuid): MessagesInterface
+    public static function getMessage(string $id): MessagesInterface
     {
-        $message = MessagesModel::getByIdOrFail($uuid);
-        return $message;
+        return MessagesModel::getByIdOrFail($id);
+    }
+
+    /**
+     * Return a Message object by its uuid
+     *
+     * @param string $uuid
+     * @return MessagesModel
+     */
+    public static function getMessageByUuid(string $uuid): MessagesInterface
+    {
+        return MessagesModel::findFirstOrFail([
+            'conditions' => 'uuid = :uuid: AND is_deleted = 0',
+            'bind' => ['uuid' => $uuid]
+        ]);
     }
 
     /**
