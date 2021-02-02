@@ -9,6 +9,7 @@ use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
 use Phalcon\Di;
 use Phalcon\Security\Random;
+use Canvas\Models\Behaviors\Uuid;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
 {
@@ -33,6 +34,10 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         parent::initialize();
 
         $this->setSource('messages');
+
+        $this->addBehavior(
+            new Uuid()
+        );
 
         $this->hasOne(
             'id',
