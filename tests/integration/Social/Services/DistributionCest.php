@@ -9,6 +9,7 @@ use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Services\Distributions;
 use Kanvas\Packages\Test\Support\Models\App;
 use Kanvas\Packages\Test\Support\Models\Users;
+use Phalcon\Security\Random;
 
 class DistributionCest
 {
@@ -22,6 +23,7 @@ class DistributionCest
      */
     protected function setDistributionsParams(): void
     {
+        $random = new Random();
         $this->channel = ChannelsModel::findFirstOrCreate([
             'conditions' => 'is_deleted = 0'
         ],
@@ -33,8 +35,10 @@ class DistributionCest
         $app = new App();
 
         $this->message = Messages::findFirstOrCreate([
-            'conditions' => 'is_deleted = 0'
+            'conditions' => 'is_deleted = 0',
+            'order'=> 'id desc'
         ],[
+            'uuid' => $random->uuid(),
             'apps_id' => $app->getId(),
             'companies_id' => $user->getDefaultCompany(),
             'users_id' => $user->getId(),

@@ -14,6 +14,7 @@ use Kanvas\Packages\Social\Models\Messages as MessagesModel;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Security\Random;
 
 class Messages
 {
@@ -21,13 +22,26 @@ class Messages
     /**
      * Return a Message object by its id
      *
+     * @param string $id
+     * @return MessagesModel
+     */
+    public static function getMessage(string $id): MessagesInterface
+    {
+        return MessagesModel::getByIdOrFail($id);
+    }
+
+    /**
+     * Return a Message object by its uuid
+     *
      * @param string $uuid
      * @return MessagesModel
      */
-    public static function getMessage(string $uuid): MessagesInterface
+    public static function getMessageByUuid(string $uuid): MessagesInterface
     {
-        $message = MessagesModel::getByIdOrFail($uuid);
-        return $message;
+        return MessagesModel::findFirstOrFail([
+            'conditions' => 'uuid = :uuid: AND is_deleted = 0',
+            'bind' => ['uuid' => $uuid]
+        ]);
     }
 
     /**
@@ -48,6 +62,7 @@ class Messages
         $newMessage->users_id = (int) $user->getId();
         $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
         $newMessage->message = json_encode($message);
+        $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 
         $newAppModule = new AppModuleMessage();
@@ -81,6 +96,7 @@ class Messages
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
         $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 
         $newAppModule = new AppModuleMessage();
