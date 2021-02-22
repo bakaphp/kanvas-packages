@@ -13,7 +13,7 @@ class ChannelsTraitCest
 {
     public ChannelsModel $channel;
 
-    public Lead $lead =  new Lead();
+    public Lead $lead;
 
     /**
      * Get the first channel
@@ -22,6 +22,7 @@ class ChannelsTraitCest
      */
     protected function getChannel(): void
     {
+        $this->lead = new Lead();
         $this->channel = ChannelsModel::findFirstOrCreate(
             [
             'conditions' => 'is_deleted = 0'
