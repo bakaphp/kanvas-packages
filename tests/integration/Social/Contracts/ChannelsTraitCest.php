@@ -16,13 +16,22 @@ class ChannelsTraitCest
     public Lead $lead;
 
     /**
+     * set objects.
+     *
+     * @return void
+     */
+    public function onConstruct() : void
+    {
+        $this->lead = new Lead();
+    }
+
+    /**
      * Get the first channel
      *
      * @return void
      */
     protected function getChannel(): void
     {
-        $this->lead = new Lead();
         $this->channel = ChannelsModel::findFirstOrCreate(
             [
             'conditions' => 'is_deleted = 0'
@@ -31,8 +40,7 @@ class ChannelsTraitCest
             'name' => 'channel Test',
             'entity_namespace' => get_class($this->lead),
             'entity_id' => '0'
-        ]
-        );
+        ]);
     }
     
     /**
