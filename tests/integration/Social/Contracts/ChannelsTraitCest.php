@@ -51,7 +51,7 @@ class ChannelsTraitCest
      */
     public function createChannel(IntegrationTester $I): void
     {
-        $channel = $this->lead->createChannele(new Users(), 'Test', 'Channel for testing propose');
+        $channel = $this->lead->createChannel(new Users(), 'Test', 'Channel for testing propose');
 
         $I->assertInstanceOf(ChannelsModel::class, $channel);
         $I->assertEquals(get_class($this->lead), $channel->entity_namespace);
