@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\Social\Models;
 
 use Canvas\Models\Behaviors\Uuid;
+use Phalcon\Di;
 
 class MessageTypes extends BaseModel
 {

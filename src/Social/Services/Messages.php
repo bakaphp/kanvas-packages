@@ -11,6 +11,7 @@ use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
 use Kanvas\Packages\Social\Models\AppModuleMessage;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
+use Kanvas\Packages\Social\Models\MessageTypes as MessageTypesModel;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
@@ -60,7 +61,7 @@ class Messages
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
-        $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $newMessage->message_types_id = MessageTypesModel::getTypeByVerb($verb)->getId();
         $newMessage->message = json_encode($message);
         $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
@@ -95,7 +96,7 @@ class Messages
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
-        $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $newMessage->message_types_id = MessageTypesModel::getTypeByVerb($verb)->getId();
         $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 
