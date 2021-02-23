@@ -42,4 +42,40 @@ class MessageTypes extends BaseModel
             ]
         );
     }
+
+    /**
+     * Return a Message object by its id
+     *
+     * @param string $uuid
+     * @return MessageTypesModel
+     */
+    public static function getByUuid(string $uuid): MessageTypesModel
+    {
+        $messageType = MessageTypes::findFirstOrFail([
+            'conditions' => 'uuid = :uuid: and is_deleted = 0',
+            'bind' => [
+                'uuid' => $uuid
+            ]
+        ]);
+        
+        return $messageType;
+    }
+
+    /**
+    * Get the message type by its verb
+    *
+    * @param string $verb
+    * @param UserInterface $user
+    * @return MessageTypesModel | null
+    */
+    public static function getTypeByVerb(string $verb) : ?MessageTypesModel
+    {
+        return MessageTypes::findFirst([
+            'conditions' => 'verb = :verb: AND apps_id = :currentAppId: AND is_deleted = 0',
+            'bind' => [
+                'verb' => $verb,
+                'currentAppId' => Di::getDefault()->get('app')->getId()
+            ]
+        ]);
+    }
 }
