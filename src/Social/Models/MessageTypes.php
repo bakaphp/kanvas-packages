@@ -2,9 +2,12 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Canvas\Models\Behaviors\Uuid;
+
 class MessageTypes extends BaseModel
 {
     public $id;
+    public string $uuid;
     public $apps_id;
     public $languages_id;
     public $name;
@@ -20,6 +23,10 @@ class MessageTypes extends BaseModel
         parent::initialize();
 
         $this->setSource('message_types');
+
+        $this->addBehavior(
+            new Uuid()
+        );
 
         $this->hasMany(
             'id',
@@ -51,14 +58,12 @@ class MessageTypes extends BaseModel
      */
     public static function getByUuid(string $uuid): MessageTypesModel
     {
-        $messageType = MessageTypes::findFirstOrFail([
+        return MessageTypes::findFirstOrFail([
             'conditions' => 'uuid = :uuid: and is_deleted = 0',
             'bind' => [
                 'uuid' => $uuid
             ]
         ]);
-        
-        return $messageType;
     }
 
     /**
