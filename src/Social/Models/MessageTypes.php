@@ -55,9 +55,9 @@ class MessageTypes extends BaseModel
      * Return a Message object by its id
      *
      * @param string $uuid
-     * @return MessageTypesModel
+     * @return self
      */
-    public static function getByUuid(string $uuid): MessageTypesModel
+    public static function getByUuid(string $uuid): self
     {
         return MessageTypes::findFirstOrFail([
             'conditions' => 'uuid = :uuid: and is_deleted = 0',
@@ -72,9 +72,9 @@ class MessageTypes extends BaseModel
     *
     * @param string $verb
     * @param UserInterface $user
-    * @return MessageTypesModel | null
+    * @return self | null
     */
-    public static function getTypeByVerb(string $verb) : ?MessageTypesModel
+    public static function getTypeByVerb(string $verb) : ?self
     {
         return MessageTypes::findFirst([
             'conditions' => 'verb = :verb: AND apps_id = :currentAppId: AND is_deleted = 0',
