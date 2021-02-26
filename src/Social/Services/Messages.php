@@ -46,6 +46,34 @@ class Messages
     }
 
     /**
+     * Get all the messages of a user.
+     *
+     * @param UserInterface $user
+     * @param integer $limit
+     * @param integer $page
+     * @return Simple
+     */
+    public static function getByUser(UserInterface $user, int $page = 1, int $limit = 25): Simple
+    {
+        $feed = new UserMessages();
+        return $feed->getUserFeeds($user, $limit, $page);
+    }
+
+    /**
+     * Get all the messages of a channel
+     *
+     * @param Channels $user
+     * @param array $filter
+     *
+     * @return Simple
+     */
+    public static function getByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC", string $messageTypeId = null): Simple
+    {
+        $feed = new ChannelMessages();
+        return $feed->getMessagesByChannel($channel, $page, $limit, $orderBy, $sort, $messageTypeId);
+    }
+
+    /**
      * To be describe
      *
      * @param UserInterface $user
