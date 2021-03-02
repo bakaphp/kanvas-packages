@@ -17,15 +17,13 @@ class AddCompaniesColumnUsersFollowsMigration extends Phinx\Migration\AbstractMi
             ])
             ->addColumn('companies_id', 'integer', [
                 'null' => true,
-                'default' => null,
                 'limit' => 11,
                 'collation' => 'utf8mb4_general_ci',
                 'encoding' => 'utf8mb4',
-                'after' => 'updated_at',
+                'after' => 'entity_id',
             ])
             ->addColumn('companies_branches_id', 'integer', [
                 'null' => true,
-                'default' => null,
                 'limit' => 11,
                 'collation' => 'utf8mb4_general_ci',
                 'encoding' => 'utf8mb4',
