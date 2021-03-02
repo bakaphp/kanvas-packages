@@ -15,7 +15,7 @@ class AddCompaniesColumnUsersFollowsMigration extends Phinx\Migration\AbstractMi
                 'comment' => '',
                 'row_format' => 'DYNAMIC',
             ])
-            ->addColumn('companies_id', 'int', [
+            ->addColumn('companies_id', 'integer', [
                 'null' => true,
                 'default' => null,
                 'limit' => 11,
@@ -23,7 +23,7 @@ class AddCompaniesColumnUsersFollowsMigration extends Phinx\Migration\AbstractMi
                 'encoding' => 'utf8mb4',
                 'after' => 'entity_id',
             ])
-            ->addColumn('companies_branches_id', 'int', [
+            ->addColumn('companies_branches_id', 'integer', [
                 'null' => true,
                 'default' => null,
                 'limit' => 11,
