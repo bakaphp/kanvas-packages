@@ -21,7 +21,7 @@ class AddCompaniesColumnUsersFollowsMigration extends Phinx\Migration\AbstractMi
                 'limit' => 11,
                 'collation' => 'utf8mb4_general_ci',
                 'encoding' => 'utf8mb4',
-                'after' => 'entity_id',
+                'after' => 'updated_at',
             ])
             ->addColumn('companies_branches_id', 'integer', [
                 'null' => true,
