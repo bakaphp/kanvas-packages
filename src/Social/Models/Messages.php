@@ -55,7 +55,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageComments::class,
             'message_id',
             [
-                'alias' => 'messageComments'
+                'alias' => 'comments'
             ]
         );
 
