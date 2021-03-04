@@ -174,7 +174,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             ]
         );
 
-        // $systemModule = SystemModules::getSystemModuleByModelName(self::class);
+        $systemModule = SystemModules::getSystemModuleByModelName(self::class);
         $this->hasMany(
             'id',
             'Canvas\Models\FileSystemEntities',
@@ -183,7 +183,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
                 'alias' => 'files',
                 'params' => [
                     'conditions' => 'system_modules_id = ?0',
-                    'bind' => [69]
+                    'bind' => [$systemModule->getId()]
                 ]
             ]
         );
