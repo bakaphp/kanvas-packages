@@ -8,11 +8,15 @@ use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
 use Phalcon\Di;
+use Canvas\Traits\FileSystemModelTrait;
+use Canvas\Models\SystemModules;
+use Canvas\Models\Users;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
 {
     use CustomTotalInteractionsTrait;
     use InteractionsTrait;
+    use FileSystemModelTrait;
 
     public $id;
     public int $apps_id;
@@ -31,6 +35,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         parent::initialize();
 
         $this->setSource('messages');
+        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
 
         $this->hasOne(
             'id',
@@ -168,6 +173,20 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
                 'alias' => 'channels'
             ]
         );
+
+        // $systemModule = SystemModules::getSystemModuleByModelName(self::class);
+        $this->hasMany(
+            'id',
+            'Canvas\Models\FileSystemEntities',
+            'entity_id',
+            [
+                'alias' => 'files',
+                'params' => [
+                    'conditions' => 'system_modules_id = ?0',
+                    'bind' => [69]
+                ]
+            ]
+        );
     }
 
     /**
@@ -199,5 +218,17 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function hasUser(int $userId): bool
     {
         return $userId == $this->users_id;
+    }
+
+    /**
+     * Upload Files.
+     *
+     * @todo move this to the baka class
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        $this->associateFileSystem();
     }
 }

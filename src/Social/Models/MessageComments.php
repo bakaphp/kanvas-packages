@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Social\Models;
 use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\MultiInteractionsTrait;
 use Phalcon\Di;
+use Canvas\Models\Users;
 
 class MessageComments extends BaseModel
 {
@@ -28,6 +29,7 @@ class MessageComments extends BaseModel
         parent::initialize();
 
         $this->setSource('message_comments');
+        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
 
         $this->hasMany(
             'id',

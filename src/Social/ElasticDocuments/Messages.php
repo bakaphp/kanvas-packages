@@ -100,17 +100,16 @@ class Messages extends Documents
     {
         parent::setData($id, $data);
         $message = MessagesModel::findFirstOrFail($id);
-        $messageUser = Users::findFirstOrFail($message->users_id);
         $this->data = [
             'id' => (int)$message->id,
             'apps_id' => $message->apps_id,
             'companies_id' => $message->companies_id,
             'users_id' => $message->users_id,
             'users' => [
-                'id' => $messageUser->id,
-                'firstname' => $messageUser->firstname,
-                'lastname' => $messageUser->lastname,
-                'photo' => $messageUser->getPhoto()->url
+                'id' => $message->users->id,
+                'firstname' => $message->users->firstname,
+                'lastname' => $message->users->lastname,
+                'photo' => $message->users->getPhoto()->url
             ],
             'message_types_id' => $message->message_types_id,
             'message_types' => [
@@ -150,18 +149,16 @@ class Messages extends Documents
         $element = [];
         $data = [];
         foreach ($comments as $comment) {
-            $commentUser = Users::findFirstOrFail($comment->users_id);
             $element['id'] = (int)$comment->id;
             $element['message_id'] = $comment->message_id;
             $element['apps_id'] = $comment->apps_id;
             $element['companies_id'] = $comment->companies_id;
             $element['users_id'] = $comment->users_id;
-            $element['users']['id'] = (int)$commentUser->id;
-            $element['users']['firstname'] = $commentUser->firstname;
-            $element['users']['lastname'] = $commentUser->lastname;
-            $element['users']['photo'] = $commentUser->getPhoto()->url;
+            $element['users']['id'] = (int)$comment->users->id;
+            $element['users']['firstname'] = $comment->users->firstname;
+            $element['users']['lastname'] = $comment->users->lastname;
+            $element['users']['photo'] = $comment->users->getPhoto()->url;
             $element['message'] = $comment->message;
-
             $data[] = $element;
         }
 
