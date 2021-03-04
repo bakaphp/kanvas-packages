@@ -30,8 +30,6 @@ trait SearchableModelsTrait
      */
     public function searchEngineIndexDocument() : void
     {
-        if (Di::getDefault()->get('config')->app->env == Flags::PRODUCTION) {
-            IndexAppSearchModels::dispatch($this);
-        }
+        IndexAppSearchModels::dispatch($this);
     }
 }

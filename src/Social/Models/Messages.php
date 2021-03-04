@@ -11,6 +11,8 @@ use Phalcon\Di;
 use Canvas\Traits\FileSystemModelTrait;
 use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
+use Phalcon\Security\Random;
+use Canvas\Models\Behaviors\Uuid;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
 {
@@ -19,6 +21,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use FileSystemModelTrait;
 
     public $id;
+    public string $uuid;
     public int $apps_id;
     public int $companies_id;
     public int $users_id;
@@ -36,6 +39,10 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
 
         $this->setSource('messages');
         $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
+
+        $this->addBehavior(
+            new Uuid()
+        );
 
         $this->hasOne(
             'id',

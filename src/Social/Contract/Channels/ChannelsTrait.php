@@ -1,25 +1,24 @@
 <?php
 
-declare(strict_types=1);
+namespace Kanvas\Packages\Social\Contract\Channels;
 
-namespace Kanvas\Packages\Social\Services;
-
-use Kanvas\Packages\Social\Contract\Channels\ChannelsInterface;
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Channels as ChannelsModel;
 use Kanvas\Packages\Social\Models\ChannelUsers;
 use Phalcon\Utils\Slug;
 
-class Channels
+/**
+ * Channels Trait
+ */
+trait ChannelsTrait
 {
-
     /**
      * Get Channel by its name
      *
      * @param string $channelName
      * @return ChannelsModel
      */
-    public static function getChannelByName(string $channelName): ChannelsModel
+    public function getChannelByName(string $channelName): ChannelsModel
     {
         $channel = ChannelsModel::findFirstOrFail([
             'conditions' => 'slug = :slug: AND is_deleted = 0',
@@ -39,14 +38,14 @@ class Channels
      * @param string $description
      * @return ChannelsModel
      */
-    public static function create(UserInterface $user, ChannelsInterface $channelEntity, string $name, string $description = ''): ChannelsModel
+    public function createChannel(UserInterface $user, string $name, string $description = ''): ChannelsModel
     {
         $channel = new ChannelsModel();
         $channel->name = $name;
         $channel->slug = Slug::generate($name);
         $channel->description = $description;
-        $channel->entity_namespace = get_class($channelEntity);
-        $channel->entity_id = (string) $channelEntity->getId();
+        $channel->entity_namespace = get_class($this);
+        $channel->entity_id = (string) $this->getId();
         $channel->saveOrFail();
 
         self::addUser($channel, $user);

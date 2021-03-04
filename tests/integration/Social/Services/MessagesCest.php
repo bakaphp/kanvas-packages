@@ -107,6 +107,23 @@ class MessagesCest
     }
 
     /**
+     * Create Message by Message Object Test
+     *
+     * @param UnitTester $I
+     * @before createMessageType
+     * @return void
+     */
+    public function getMessageByUuid(IntegrationTester $I): void
+    {
+        $message = Messages::findFirst(['order' => 'id desc']);
+
+        $feed = MessagesService::getMessageByUuid($message->uuid);
+
+        $I->assertNotNull($feed->getId());
+    }
+
+
+    /**
      * Test Message Reactions
      *
      * @param IntegrationTester $I
@@ -147,7 +164,7 @@ class MessagesCest
     public function deleteMessage(IntegrationTester $I): void
     {
         $I->assertTrue(
-            MessagesService::delete(Messages::findFirst()->getId(), new Users())
+            MessagesService::delete(Messages::findFirst(['order' => 'id desc'])->getId(), new Users())
         );
     }
 }

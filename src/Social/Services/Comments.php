@@ -18,9 +18,9 @@ class Comments
      * @param string $uuid
      * @return MessageComments
      */
-    public static function getById(string $uuid): MessageComments
+    public static function getById(string $id): MessageComments
     {
-        $comment = MessageComments::getByIdOrFail($uuid);
+        $comment = MessageComments::getByIdOrFail($id);
 
         return $comment;
     }
@@ -93,5 +93,4 @@ class Comments
         
         return $comments;
     }
-
 }

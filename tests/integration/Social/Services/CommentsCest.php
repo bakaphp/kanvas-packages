@@ -10,6 +10,8 @@ use Kanvas\Packages\Social\Services\Comments;
 use Kanvas\Packages\Social\Services\Interactions;
 use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
+use Kanvas\Packages\Social\Services\Messages as MessagesService;
+use Kanvas\Packages\Social\Services\MessageTypes;
 
 class CommentsCest
 {
@@ -33,7 +35,18 @@ class CommentsCest
      */
     public function addComment(IntegrationTester $I): void
     {
-        $feed = Messages::findFirst();
+
+        //Create a new message type
+        MessageTypes::create(new Users(), 'comments', 'Test Type');
+
+        $text = [
+            'text' => 'Test some messages'
+        ];
+        
+        //Create a new Message for the comment
+        $feed = MessagesService::create(new Users(), 'comments', $text);
+
+        // $feed = Messages::findFirst();
         $comment = Comments::add($feed->getId(), 'test-text');
 
         $I->assertEquals('test-text', $comment->message);
