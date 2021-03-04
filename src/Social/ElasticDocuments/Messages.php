@@ -7,6 +7,7 @@ use Kanvas\Packages\Social\Models\Messages as MessagesModel;
 use Kanvas\Packages\Social\Models\ChannelMessages as ChannelMessagesModel;
 use Kanvas\Packages\Social\Models\MessageComments as MessageCommentsModel;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Canvas\Models\Users;
 
 class Messages extends Documents
 {
@@ -24,6 +25,7 @@ class Messages extends Documents
         $this->addRelation('apps', ['alias' => 'apps', 'elasticAlias' => 'apps', 'elasticIndex' => 1]);
         $this->addRelation('users', ['alias' => 'users', 'elasticAlias' => 'usrs', 'elasticIndex' => 1]);
         $this->addRelation('comments', ['alias' => 'comments', 'elasticAlias' => 'msgcm', 'elasticIndex' => 1]);
+        $this->addRelation('message_type', ['alias' => 'message_type', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
     }
     
     /**
@@ -39,6 +41,13 @@ class Messages extends Documents
             'companies_id' => $this->integer,
             'users_id' => $this->integer,
             'message_types_id' => $this->integer,
+            'message_types' => [
+                'id' => $this->integer,
+                'apps_id' => $this->integer,
+                'languages_id' => $this->text,
+                'name' => $this->text,
+                'verb' => $this->text,
+            ],
             'message' => $this->text,
             'channels' => [
                 'id' => $this->integer,
@@ -85,6 +94,13 @@ class Messages extends Documents
             'companies_id' => $message->companies_id,
             'users_id' => $message->users_id,
             'message_types_id' => $message->message_types_id,
+            'message_types' => [
+                'id' => $message->message_type->id,
+                'apps_id' => $message->message_type->apps_id,
+                'languages_id' => $message->message_type->languages_id,
+                'name' => $message->message_type->name,
+                'verb' => $message->message_type->verb,
+            ],
             'message' => $message->message,
             'channels' => [
                 'id' => $message->channels->id,
@@ -109,16 +125,16 @@ class Messages extends Documents
         $element = [];
         $data = [];
         foreach ($comments as $comment) {
-            $commentUser =
+            $commentUser = Users::findFirstOrFail($comment->users_id);
             $element['id'] = (int)$comment->id;
             $element['message_id'] = $comment->message_id;
             $element['apps_id'] = $comment->apps_id;
             $element['companies_id'] = $comment->companies_id;
             $element['users_id'] = $comment->users_id;
-            $element['users']['id'] = $comment->users->id;
-            $element['users']['firstname'] = $comment->users->firstname;
-            $element['users']['lastname'] = $comment->users->lastname;
-            $element['users']['photo'] = ''; //Can't use getPhoto for some reason
+            $element['users']['id'] = (int)$commentUser->id;
+            $element['users']['firstname'] = $commentUser->firstname;
+            $element['users']['lastname'] = $commentUser->lastname;
+            $element['users']['photo'] = $commentUser->getPhoto()->url;
             $element['message'] = $comment->message;
 
             $data[] = $element;

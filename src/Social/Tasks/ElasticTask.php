@@ -21,7 +21,7 @@ class ElasticTask extends KanvasElasticTask
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
-        $messagesRecords = MessagesModel::findOrFail();
+        $messagesRecords = MessagesModel::findOrFail(["limit" => 1]);
 
         foreach ($messagesRecords as $message) {
             $messages->setData($message->id, []);
