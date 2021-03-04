@@ -40,6 +40,12 @@ class Messages extends Documents
             'apps_id' => $this->integer,
             'companies_id' => $this->integer,
             'users_id' => $this->integer,
+            'users' => [
+                'id' => $this->integer,
+                'firstname' => $this->text,
+                'lastname' => $this->text,
+                'photo' => $this->text
+            ],
             'message_types_id' => $this->integer,
             'message_types' => [
                 'id' => $this->integer,
@@ -49,6 +55,9 @@ class Messages extends Documents
                 'verb' => $this->text,
             ],
             'message' => $this->text,
+            'reactions_count' => $this->integer,
+            'comments_count' => $this->integer,
+            'files' => [],
             'channels' => [
                 'id' => $this->integer,
                 'name' => $this->text,
@@ -72,7 +81,10 @@ class Messages extends Documents
                     'photo' => $this->text
                 ],
                 'message' => $this->text,
-            ]
+            ],
+            'created_at' => $this->text,
+            'updated_at' => $this->text,
+            'is_deleted' => $this->integer
         ];
     }
 
@@ -88,11 +100,18 @@ class Messages extends Documents
     {
         parent::setData($id, $data);
         $message = MessagesModel::findFirstOrFail($id);
+        $messageUser = Users::findFirstOrFail($message->users_id);
         $this->data = [
             'id' => (int)$message->id,
             'apps_id' => $message->apps_id,
             'companies_id' => $message->companies_id,
             'users_id' => $message->users_id,
+            'users' => [
+                'id' => $messageUser->id,
+                'firstname' => $messageUser->firstname,
+                'lastname' => $messageUser->lastname,
+                'photo' => $messageUser->getPhoto()->url
+            ],
             'message_types_id' => $message->message_types_id,
             'message_types' => [
                 'id' => $message->message_type->id,
@@ -102,6 +121,9 @@ class Messages extends Documents
                 'verb' => $message->message_type->verb,
             ],
             'message' => $message->message,
+            'reactions_count' => $message->reactions_count,
+            'comments_count' => $message->comments_count,
+            'files' => $message->files->toArray(),
             'channels' => [
                 'id' => $message->channels->id,
                 'name' => $message->channels->name,
@@ -110,9 +132,12 @@ class Messages extends Documents
             'channel_messages' => [
                 'channel_id' => $message->channels->id,
                 'messages_id' => $message->channels->messages_id,
-                'users_id' => $message->tags->users_id,
+                'users_id' => $message->channels->users_id,
             ],
-            'comments' => $this->formatComments($message->comments)
+            'comments' => $this->formatComments($message->comments),
+            'created_at' => $message->created_at,
+            'updated_at' => $message->updated_at,
+            'is_deleted' => $message->is_deleted
         ];
         return $this;
     }

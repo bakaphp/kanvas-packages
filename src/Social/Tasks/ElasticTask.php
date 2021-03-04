@@ -21,7 +21,15 @@ class ElasticTask extends KanvasElasticTask
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
-        $messagesRecords = MessagesModel::findOrFail(["limit" => 1]);
+        // $messagesRecords = MessagesModel::findOrFail([
+        //     'conditions' => "apps_id = :apps_id: and companies_id = :companies_id: and is_deleted = 0",
+        //     'bind' => [
+        //         "apps_id" => Di::getDefault()->get('app')->getId(),
+        //         "companies_id" => Di::getDefault()->get('userData')->getCurrentCompany()->getId()
+        //     ],
+        //     'limit' => 1
+        // ]);
+        $messagesRecords = MessagesModel::findOrFail(['limit' => 1]);
 
         foreach ($messagesRecords as $message) {
             $messages->setData($message->id, []);
