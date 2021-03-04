@@ -12,6 +12,8 @@ class UsersFollows extends BaseModel
     public $id;
     public int $users_id;
     public int $entity_id;
+    public ?int $companies_id = null;
+    public ?int $companies_branches_id = null;
     public string $entity_namespace;
 
 
