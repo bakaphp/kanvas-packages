@@ -10,7 +10,7 @@ use Kanvas\Packages\Social\Providers\QueueProvider;
 use Kanvas\Packages\Social\Providers\RedisProvider;
 use Kanvas\Packages\WorkflowsRules\Providers\DatabaseProvider as WorkflowDatabaseProvider;
 use Kanvas\Packages\Social\Providers\ModelsCacheProvider;
-use Canvas\Providers\ConfigProvider;
+use Kanvas\Packages\Social\Providers\ConfigProvider;
 use Canvas\Providers\AppProvider;
 
 return [
