@@ -14,12 +14,12 @@ use Kanvas\Packages\Social\Providers\ConfigProvider;
 use Canvas\Providers\AppProvider;
 
 return [
-    ConfigProvider::class,
-    AppProvider::class,
+    // ConfigProvider::class,
+    // AppProvider::class,
     DatabaseProvider::class,
     QueueProvider::class,
     RedisProvider::class,
-    ModelsCacheProvider::class,
+    // ModelsCacheProvider::class,
     PlaidProvider::class,
     WorkflowDatabaseProvider::class
 ];
