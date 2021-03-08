@@ -9,7 +9,7 @@ use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
 use Phalcon\Di;
 use Canvas\Traits\FileSystemModelTrait;
-use Canvas\Models\SystemModules;
+use Kanvas\Packages\Social\Models\SystemModules;
 use Canvas\Models\Users;
 use Phalcon\Security\Random;
 use Canvas\Models\Behaviors\Uuid;
