@@ -7,12 +7,12 @@ use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
-use Phalcon\Di;
 use Canvas\Traits\FileSystemModelTrait;
 use Kanvas\Packages\Social\Models\SystemModules;
 use Canvas\Models\Users;
 use Phalcon\Security\Random;
 use Canvas\Models\Behaviors\Uuid;
+use Phalcon\Di;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
 {
@@ -39,6 +39,10 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
 
         $this->setSource('messages');
         $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
+
+        $this->addBehavior(
+            new Uuid()
+        );
 
         $this->addBehavior(
             new Uuid()
