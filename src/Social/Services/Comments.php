@@ -9,6 +9,7 @@ use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Di;
 
 class Comments
 {
@@ -20,7 +21,14 @@ class Comments
      */
     public static function getById(string $id): MessageComments
     {
-        $comment = MessageComments::getByIdOrFail($id);
+        $comment = MessageComments::getByIdOrFail([
+            'conditions' => 'id = :id: and apps_id = :apps_id: and companies_id = :companies_id: and is_deleted = 0',
+            'bind' => [
+                'id' => $id,
+                'apps_id' => Di::getDefault()->get('app')->getId(),
+                'companies_id' => Di::getDefault()->get('userData')->getCurrentCompany()->getId()
+            ]
+        ]);
 
         return $comment;
     }

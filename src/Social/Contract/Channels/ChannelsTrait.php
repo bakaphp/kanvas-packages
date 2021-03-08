@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 namespace Kanvas\Packages\Social\Contract\Channels;
 
 use Kanvas\Packages\Social\Contract\Users\UserInterface;
