@@ -12,6 +12,7 @@ use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Services\Messages as MessagesService;
 use Kanvas\Packages\Social\Services\MessageTypes;
+use Kanvas\Packages\Social\Models\SystemModules;
 
 class CommentsCest
 {
@@ -35,6 +36,16 @@ class CommentsCest
      */
     public function addComment(IntegrationTester $I): void
     {
+
+        //Add new SystemModule for Messages
+        $systemModule = new SystemModules();
+        $systemModule->name = 'Messages';
+        $systemModule->slug = 'messages';
+        $systemModule->model_name = 'Kanvas\Packages\Social\Models\Messages';
+        $systemModule->apps_id = 1;
+        $systemModule->date = date('Y-m-d H:i:s');
+        $systemModule->save();
+        
 
         //Create a new message type
         MessageTypes::create(new Users(), 'comments', 'Test Type');
