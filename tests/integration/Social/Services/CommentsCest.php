@@ -13,6 +13,7 @@ use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Services\Messages as MessagesService;
 use Kanvas\Packages\Social\Services\MessageTypes;
 use Canvas\Models\SystemModules;
+use Phalcon\Di;
 
 class CommentsCest
 {
