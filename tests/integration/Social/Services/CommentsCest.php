@@ -48,7 +48,7 @@ class CommentsCest
                 'name' => 'Messages',
                 'slug' => 'messages',
                 'apps_id' => 1,
-                'model_name' => 'Kanvas\Packages\Social\Models\Messages'
+                'model_name' => 'Kanvas\Packages\Social\Models\Messages',
                 'date' => date('Y-m-d H:i:s')
             ]);
 
