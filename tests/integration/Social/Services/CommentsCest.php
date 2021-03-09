@@ -38,14 +38,19 @@ class CommentsCest
     {
 
         //Add new SystemModule for Messages
-        $systemModule = new SystemModules();
-        $systemModule->name = 'Messages';
-        $systemModule->slug = 'messages';
-        $systemModule->model_name = 'Kanvas\Packages\Social\Models\Messages';
-        $systemModule->apps_id = 1;
-        $systemModule->date = date('Y-m-d H:i:s');
-        $systemModule->save();
-        
+
+        $systemModule = SystemModules::findFirstOrCreate([
+            'conditions' => 'apps_id = :apps_id: and model_name = :model_name: and is_deleted = 0',
+            'bind' => [
+                'apps_id' => 1,
+                'model_name' => 'Kanvas\Packages\Social\Models\Messages'
+            ]], [
+                'name' => 'Messages',
+                'slug' => 'messages',
+                'apps_id' => 1,
+                'model_name' => 'Kanvas\Packages\Social\Models\Messages'
+                'date' => date('Y-m-d H:i:s')
+            ]);
 
         //Create a new message type
         MessageTypes::create(new Users(), 'comments', 'Test Type');

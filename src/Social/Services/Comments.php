@@ -26,7 +26,6 @@ class Comments
             'bind' => [
                 'id' => $id,
                 'apps_id' => Di::getDefault()->get('app')->getId(),
-                'companies_id' => Di::getDefault()->get('userData')->getCurrentCompany()->getId()
             ]
         ]);
 
@@ -97,7 +96,7 @@ class Comments
      */
     public static function getCommentsFromMessage(Messages $message): Simple
     {
-        $comments = $message->getMessageComments();
+        $comments = $message->getComments();
         
         return $comments;
     }
