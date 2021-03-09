@@ -17,7 +17,7 @@ class ElasticTask extends KanvasElasticTask
      *
      * @return void
      */
-    public function indexDocumentAction()
+    public function indexMessages()
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();

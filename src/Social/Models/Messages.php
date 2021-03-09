@@ -207,13 +207,13 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
      * @param string $message
      * @return MessageComments
      */
-    public function comment(string $message): MessageComments
+    public function comment(string $message, Users $user): MessageComments
     {
         $comment = new MessageComments();
         $comment->message_id = $this->getId();
         $comment->apps_id = Di::getDefault()->get('app')->getId();
-        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
-        $comment->users_id = Di::getDefault()->get('userData')->getId();
+        $comment->companies_id = $user->getDefaultCompany()->getId();
+        $comment->users_id = $user->getId();
         $comment->message = $message;
         $comment->saveOrFail();
 

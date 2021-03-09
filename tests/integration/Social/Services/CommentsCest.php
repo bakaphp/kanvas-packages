@@ -59,11 +59,12 @@ class CommentsCest
             'text' => 'Test some messages'
         ];
         
+        $user = new Users();
         //Create a new Message for the comment
-        $feed = MessagesService::create(new Users(), 'comments', $text);
+        $feed = MessagesService::create($user, 'comments', $text);
 
         // $feed = Messages::findFirst();
-        $comment = Comments::add($feed->getId(), 'test-text');
+        $comment = Comments::add($feed->getId(), 'test-text',$user);
 
         $I->assertEquals('test-text', $comment->message);
     }
