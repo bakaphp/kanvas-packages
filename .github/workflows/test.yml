@@ -112,6 +112,18 @@ jobs:
       - name: Update Composer dependencies
         run: composer update --prefer-dist --no-suggest
 
+      - name: Setup Kanvas Env Variable
+        run: cp canvas/core/storage/ci/.env.example .env
+      
+      - name: Setup Kanvas Phinx
+        run: cp canvas/core/storage/ci/phinx.php.example kanvas-phinx.php
+
+      - name: Phinx migrate Kanvas
+        run: vendor/bin/phinx migrate -c kanvas-phinx.php
+
+      - name: Phinx Migrate Kanvas Seed
+        run: vendor/bin/phinx seed:run -c kanvas-phinx.php
+
       - name: Setup Env Variable
         run: cp .env.example .env
           
