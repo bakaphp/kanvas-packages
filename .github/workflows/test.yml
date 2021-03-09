@@ -45,6 +45,7 @@ jobs:
       PHINX_CONFIG_DIR: storage
       ITUNES_RECEIPT_EXAMPLE: ${{ secrets.ITUNES_RECEIPT_EXAMPLE }}
       ITUNES_STORE_PASS: ${{ secrets.ITUNES_STORE_PASS }}
+      CANVAS_PHINX_CONFIG_DIR: vendor/canvas/core/storage
     services:
       mysql:
         image: mariadb:10.4
