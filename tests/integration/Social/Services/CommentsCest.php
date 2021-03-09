@@ -13,7 +13,6 @@ use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Services\Messages as MessagesService;
 use Kanvas\Packages\Social\Services\MessageTypes;
 use Kanvas\Packages\Social\Models\SystemModules;
-use Canvas\Models\Users as KanvasUsers;
 
 class CommentsCest
 {
@@ -37,9 +36,9 @@ class CommentsCest
      */
     public function addComment(IntegrationTester $I): void
     {
+        $user = new Users();
 
         //Add new SystemModule for Messages
-
         $systemModule = SystemModules::findFirstOrCreate([
             'conditions' => 'apps_id = :apps_id: and model_name = :model_name: and is_deleted = 0',
             'bind' => [
@@ -54,17 +53,14 @@ class CommentsCest
             ]);
 
         //Create a new message type
-        MessageTypes::create(new Users(), 'comments', 'Test Type');
+        MessageTypes::create($user, 'comments', 'Test Type');
 
         $text = [
             'text' => 'Test some messages'
         ];
         
-        $user = KanvasUsers::findFirst(1);
         //Create a new Message for the comment
         $feed = MessagesService::create($user, 'comments', $text);
-
-        // $feed = Messages::findFirst();
         $comment = Comments::add($feed->getId(), 'test-text',$user);
 
         $I->assertEquals('test-text', $comment->message);

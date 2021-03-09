@@ -7,6 +7,7 @@ use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
+use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Canvas\Traits\FileSystemModelTrait;
 use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
@@ -207,7 +208,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
      * @param string $message
      * @return MessageComments
      */
-    public function comment(string $message, Users $user): MessageComments
+    public function comment(string $message, UserInterface $user): MessageComments
     {
         $comment = new MessageComments();
         $comment->message_id = $this->getId();

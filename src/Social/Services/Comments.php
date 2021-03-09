@@ -9,7 +9,6 @@ use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Phalcon\Mvc\Model\Resultset\Simple;
-use Canvas\Models\Users;
 use Phalcon\Di;
 
 class Comments
@@ -41,7 +40,7 @@ class Comments
      * @param int $users_id
      * @return MessageComments
      */
-    public static function add(string $messageId, string $message, Users $user): MessageComments
+    public static function add(string $messageId, string $message, UserInterface $user): MessageComments
     {
         $messageData = Messages::getByIdOrFail($messageId);
         return $messageData->comment($message, $user);
