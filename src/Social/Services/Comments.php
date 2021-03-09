@@ -21,13 +21,15 @@ class Comments
      */
     public static function getById(string $id): MessageComments
     {
-        $comment = MessageComments::getByIdOrFail([
-            'conditions' => 'id = :id: and apps_id = :apps_id: and is_deleted = 0',
-            'bind' => [
-                'id' => $id,
-                'apps_id' => Di::getDefault()->get('app')->getId(),
-            ]
-        ]);
+        // $comment = MessageComments::getByIdOrFail([
+        //     'conditions' => 'id = :id: and apps_id = :apps_id: and is_deleted = 0',
+        //     'bind' => [
+        //         'id' => $id,
+        //         'apps_id' => Di::getDefault()->get('app')->getId(),
+        //     ]
+        // ]);
+
+        $comment = MessageComments::getByIdOrFail($id);
 
         return $comment;
     }
