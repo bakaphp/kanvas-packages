@@ -13,6 +13,7 @@ use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Services\Messages as MessagesService;
 use Kanvas\Packages\Social\Services\MessageTypes;
 use Kanvas\Packages\Social\Models\SystemModules;
+use Canvas\Models\Users as KanvasUsers;
 
 class CommentsCest
 {
@@ -59,7 +60,7 @@ class CommentsCest
             'text' => 'Test some messages'
         ];
         
-        $user = new Users();
+        $user = KanvasUsers::findFirst(1);
         //Create a new Message for the comment
         $feed = MessagesService::create($user, 'comments', $text);
 
