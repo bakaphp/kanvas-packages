@@ -8,7 +8,7 @@ use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
 use Canvas\Traits\FileSystemModelTrait;
-use Kanvas\Packages\Social\Models\SystemModules;
+use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
 use Phalcon\Security\Random;
 use Canvas\Models\Behaviors\Uuid;
@@ -185,7 +185,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             ]
         );
 
-        $systemModule = SystemModules::getSystemModuleByModelName(self::class);
+        $systemModule = SystemModules::getSystemModuleByModelName(self::class, false);
         $this->hasMany(
             'id',
             'Canvas\Models\FileSystemEntities',
