@@ -12,7 +12,7 @@ use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Services\Messages as MessagesService;
 use Kanvas\Packages\Social\Services\MessageTypes;
-use Kanvas\Packages\Social\Models\SystemModules;
+use Canvas\Models\SystemModules;
 
 class CommentsCest
 {
