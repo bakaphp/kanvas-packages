@@ -36,7 +36,7 @@ class ElasticTask extends KanvasElasticTask
                 Indices::create($messages, 3, 1000);
             }
             $result = $messages->add();
-            Di::getDefault()->get('log')->info('Vehicle Add to Index BrowseVehicle', [$result]);
+            Di::getDefault()->get('log')->info('Messages added to Messages Index', [$result]);
         }
         
         return true;

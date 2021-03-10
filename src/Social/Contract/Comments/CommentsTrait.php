@@ -7,6 +7,7 @@ use Kanvas\Packages\Social\Services\Comments;
 use Gewaer\Models\MessageComments;
 use Baka\Validation as CanvasValidation;
 use Phalcon\Validation\Validator\PresenceOf;
+use Kanvas\Packages\Social\Models\Users;
 
 /**
  * Channels Trait
@@ -68,7 +69,15 @@ trait CommentsTrait
     public function addComment(int $messageId): Response
     {
         $request = $this->processInput($this->request->getPostData());
-        $newComment = Comments::add($messageId, $request['message']);
+
+        // We need to validate that the users_id exists too. This validation only exists when creating comments
+        $validation = new CanvasValidation();
+        $validation->add('users_id', new PresenceOf(['message' => _('users_id is required.')]));
+        $validation->validate($request);
+
+        //Fetch the user and throw exception when not found
+        $user = Users::findFirstOrFail($request['users_id']);
+        $newComment = Comments::add($messageId, $request['message'], $user);
 
         return $this->response($newComment);
     }
@@ -81,11 +90,7 @@ trait CommentsTrait
      */
     public function editComment(int $commentId): Response
     {
-        $request = $this->request->getPutData();
-
-        $validation = new CanvasValidation();
-        $validation->add('message', new PresenceOf(['message' => _('message is required.')]));
-        $validation->validate($request);
+        $request = $this->processInput($this->request->getPutData());
 
         $newComment = Comments::edit($commentId, $request['message']);
 
