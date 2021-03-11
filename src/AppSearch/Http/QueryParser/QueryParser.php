@@ -108,8 +108,8 @@ class QueryParser
             $delimiter = explode('|', $fields[1]);
 
             $this->filters[$fields[0]] = (object) [
-                'from' => $delimiter[0],
-                'to' => $delimiter[1],
+                'from' => (int) $delimiter[0],
+                'to' => (int) $delimiter[1],
             ];
         }
 
