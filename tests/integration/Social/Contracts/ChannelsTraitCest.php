@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanvas\Packages\Tests\Integration\Social\Service;
+namespace Kanvas\Packages\Tests\Integration\Social\Contracts;
 
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Channels as ChannelsModel;
@@ -9,9 +9,21 @@ use Kanvas\Packages\Social\Services\Channels;
 use Kanvas\Packages\Test\Support\Models\Lead;
 use Kanvas\Packages\Test\Support\Models\Users;
 
-class ChannelsCest
+class ChannelsTraitCest
 {
     public ChannelsModel $channel;
+
+    public Lead $lead;
+
+    /**
+     * set objects.
+     *
+     * @return void
+     */
+    public function onConstruct() : void
+    {
+        $this->lead = new Lead();
+    }
 
     /**
      * Get the first channel
@@ -20,18 +32,15 @@ class ChannelsCest
      */
     protected function getChannel(): void
     {
-        $lead = new Lead();
-
         $this->channel = ChannelsModel::findFirstOrCreate(
             [
             'conditions' => 'is_deleted = 0'
         ],
             [
             'name' => 'channel Test',
-            'entity_namespace' => new Lead(),
-            'entity_id' => $lead->getId()
-        ]
-        );
+            'entity_namespace' => get_class($this->lead),
+            'entity_id' => '0'
+        ]);
     }
     
     /**
@@ -42,10 +51,10 @@ class ChannelsCest
      */
     public function createChannel(IntegrationTester $I): void
     {
-        $channel = Channels::create(new Users(), new Lead(), 'Test', 'Channel for testing propose');
+        $channel = $this->lead->createChannel(new Users(), 'Test', 'Channel for testing propose');
 
         $I->assertInstanceOf(ChannelsModel::class, $channel);
-        $I->assertEquals(get_class(new Lead()), $channel->entity_namespace);
+        $I->assertEquals(get_class($this->lead), $channel->entity_namespace);
         $I->assertEquals('Test', $channel->name);
     }
 
@@ -61,7 +70,7 @@ class ChannelsCest
         $user = new Users();
         $user->id = 2;
 
-        $newChannelUser = Channels::addUser($this->channel, $user);
+        $newChannelUser = $this->lead::addUser($this->channel, $user);
         
         $I->assertInstanceOf(ChannelUsers::class, $newChannelUser);
         $I->assertEquals($user->id, $newChannelUser->users_id);
@@ -76,7 +85,7 @@ class ChannelsCest
      */
     public function getChannelByItsName(IntegrationTester $I): void
     {
-        $channel = Channels::getChannelByName($this->channel->name);
+        $channel = $this->lead->getChannelByName($this->channel->name);
 
         $I->assertInstanceOf(ChannelsModel::class, $channel);
         $I->assertEquals($this->channel->getId(), $channel->getId());

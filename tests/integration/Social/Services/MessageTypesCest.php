@@ -44,7 +44,7 @@ class MessageTypesCest
      */
     public function getTypeByVerb(IntegrationTester $I): void
     {
-        $messageType = MessageTypes::getTypeByVerb('test');
+        $messageType = ModelsMessageTypes::getTypeByVerb('test');
 
         $I->assertEquals($this->messageType->verb, $messageType->verb);
     }
@@ -58,7 +58,7 @@ class MessageTypesCest
      */
     public function getMessageType(IntegrationTester $I): void
     {
-        $messageType = MessageTypes::get($this->messageType->getId());
+        $messageType = ModelsMessageTypes::getByUuid($this->messageType->uuid);
 
         $I->assertEquals($this->messageType->getId(), $messageType->getId());
     }

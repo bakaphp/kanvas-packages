@@ -9,6 +9,7 @@ use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Phalcon\Di;
 
 class Comments
 {
@@ -18,9 +19,15 @@ class Comments
      * @param string $uuid
      * @return MessageComments
      */
-    public static function getById(string $uuid): MessageComments
+    public static function getById(string $id): MessageComments
     {
-        $comment = MessageComments::getByIdOrFail($uuid);
+        $comment = MessageComments::findFirstOrFail([
+            'conditions' => 'id = :id: and apps_id = :apps_id: and is_deleted = 0',
+            'bind' => [
+                'id' => (int)$id,
+                'apps_id' => Di::getDefault()->get('app')->getId(),
+            ]
+        ]);
 
         return $comment;
     }
@@ -30,12 +37,13 @@ class Comments
      *
      * @param string $messageId
      * @param string $message
+     * @param int $users_id
      * @return MessageComments
      */
-    public static function add(string $messageId, string $message): MessageComments
+    public static function add(string $messageId, string $message, UserInterface $user): MessageComments
     {
         $messageData = Messages::getByIdOrFail($messageId);
-        return $messageData->comment($message);
+        return $messageData->comment($message, $user);
     }
 
     /**
@@ -89,9 +97,8 @@ class Comments
      */
     public static function getCommentsFromMessage(Messages $message): Simple
     {
-        $comments = $message->getMessageComments();
+        $comments = $message->getComments();
         
         return $comments;
     }
-
 }

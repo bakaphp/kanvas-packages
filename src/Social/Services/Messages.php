@@ -11,6 +11,7 @@ use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
 use Kanvas\Packages\Social\Models\AppModuleMessage;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
+use Kanvas\Packages\Social\Models\MessageTypes as MessageTypesModel;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
@@ -45,6 +46,35 @@ class Messages
     }
 
     /**
+     * Get all the messages of a user.
+     *
+     * @param UserInterface $user
+     * @param integer $limit
+     * @param integer $page
+     * @return Simple
+     */
+    public static function getByUser(UserInterface $user, int $page = 1, int $limit = 25): Simple
+    {
+        $feed = new UserMessages();
+        return $feed->getUserFeeds($user, $limit, $page);
+    }
+
+    /**
+     * Get all the messages of a channel
+     *
+     * @param Channels $user
+     * @param array $filter
+     *
+     * @deprecated
+     * @return Simple
+     */
+    public static function getByChannel(Channels $channel, int $page = 1, int $limit = 25, string $orderBy = "id", string $sort = "DESC", ?string $messageTypeId = null): Simple
+    {
+        $feed = new ChannelMessages();
+        return $feed->getMessagesByChannel($channel, $page, $limit, $orderBy, $sort, $messageTypeId);
+    }
+
+    /**
      * To be describe
      *
      * @param UserInterface $user
@@ -60,7 +90,7 @@ class Messages
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
-        $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $newMessage->message_types_id = MessageTypesModel::getTypeByVerb($verb)->getId();
         $newMessage->message = json_encode($message);
         $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
@@ -95,7 +125,7 @@ class Messages
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
         $newMessage->users_id = (int) $user->getId();
-        $newMessage->message_types_id = MessageTypes::getTypeByVerb($verb)->getId();
+        $newMessage->message_types_id = MessageTypesModel::getTypeByVerb($verb)->getId();
         $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 

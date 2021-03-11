@@ -7,14 +7,19 @@ use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
-use Phalcon\Di;
+use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Canvas\Traits\FileSystemModelTrait;
+use Canvas\Models\SystemModules;
+use Canvas\Models\Users;
 use Phalcon\Security\Random;
 use Canvas\Models\Behaviors\Uuid;
+use Phalcon\Di;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
 {
     use CustomTotalInteractionsTrait;
     use InteractionsTrait;
+    use FileSystemModelTrait;
 
     public $id;
     public string $uuid;
@@ -34,6 +39,11 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         parent::initialize();
 
         $this->setSource('messages');
+        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
+
+        $this->addBehavior(
+            new Uuid()
+        );
 
         $this->addBehavior(
             new Uuid()
@@ -62,7 +72,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageComments::class,
             'message_id',
             [
-                'alias' => 'messageComments'
+                'alias' => 'comments'
             ]
         );
 
@@ -175,6 +185,20 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
                 'alias' => 'channels'
             ]
         );
+
+        $systemModule = SystemModules::getSystemModuleByModelName(self::class, false);
+        $this->hasMany(
+            'id',
+            'Canvas\Models\FileSystemEntities',
+            'entity_id',
+            [
+                'alias' => 'files',
+                'params' => [
+                    'conditions' => 'system_modules_id = ?0',
+                    'bind' => [$systemModule->getId()]
+                ]
+            ]
+        );
     }
 
     /**
@@ -184,13 +208,13 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
      * @param string $message
      * @return MessageComments
      */
-    public function comment(string $message): MessageComments
+    public function comment(string $message, UserInterface $user): MessageComments
     {
         $comment = new MessageComments();
         $comment->message_id = $this->getId();
         $comment->apps_id = Di::getDefault()->get('app')->getId();
-        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
-        $comment->users_id = Di::getDefault()->get('userData')->getId();
+        $comment->companies_id = $user->getDefaultCompany()->getId();
+        $comment->users_id = $user->getId();
         $comment->message = $message;
         $comment->saveOrFail();
 
@@ -206,5 +230,17 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function hasUser(int $userId): bool
     {
         return $userId == $this->users_id;
+    }
+
+    /**
+     * Upload Files.
+     *
+     * @todo move this to the baka class
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        $this->associateFileSystem();
     }
 }

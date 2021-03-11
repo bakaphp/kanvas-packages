@@ -12,6 +12,8 @@ use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Services\Messages as MessagesService;
 use Kanvas\Packages\Social\Services\MessageTypes;
+use Canvas\Models\SystemModules;
+use Phalcon\Di;
 
 class CommentsCest
 {
@@ -35,19 +37,32 @@ class CommentsCest
      */
     public function addComment(IntegrationTester $I): void
     {
+        $user = new Users();
+
+        //Add new SystemModule for Messages
+        $systemModule = SystemModules::findFirstOrCreate([
+            'conditions' => 'apps_id = :apps_id: and model_name = :model_name: and is_deleted = 0',
+            'bind' => [
+                'apps_id' => 1,
+                'model_name' => 'Kanvas\Packages\Social\Models\Messages'
+            ]], [
+                'name' => 'Messages',
+                'slug' => 'messages',
+                'apps_id' => 1,
+                'model_name' => 'Kanvas\Packages\Social\Models\Messages',
+                'date' => date('Y-m-d H:i:s')
+            ]);
 
         //Create a new message type
-        MessageTypes::create(new Users(), 'comments', 'Test Type');
+        MessageTypes::create($user, 'comments', 'Test Type');
 
         $text = [
             'text' => 'Test some messages'
         ];
         
         //Create a new Message for the comment
-        $feed = MessagesService::create(new Users(), 'comments', $text);
-
-        // $feed = Messages::findFirst();
-        $comment = Comments::add($feed->getId(), 'test-text');
+        $feed = MessagesService::create($user, 'comments', $text);
+        $comment = Comments::add($feed->getId(), 'test-text',$user);
 
         $I->assertEquals('test-text', $comment->message);
     }
