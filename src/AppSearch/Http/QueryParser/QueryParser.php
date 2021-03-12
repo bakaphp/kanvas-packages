@@ -4,6 +4,7 @@ namespace Kanvas\Packages\AppSearch\Http\QueryParser;
 
 use Baka\Elasticsearch\Query\FromClause;
 use Baka\Support\Str;
+use Baka\Support\Date;
 use Phalcon\Http\RequestInterface;
 
 /**
@@ -31,7 +32,7 @@ class QueryParser
             $this->setSort($sort);
         }
 
-        if ($filters = $this->request->getQuery('filters', 'string')) {
+        if ($filters = $this->request->getQuery('filters')) {
             $this->setFilters($filters);
         }
     }
@@ -107,9 +108,12 @@ class QueryParser
             $fields = explode('¬', $filter);
             $delimiter = explode('|', $fields[1]);
 
+            $from = Date::validate($delimiter[0]) ? $delimiter[0] : (int) $delimiter[0];
+            $to = Date::validate($delimiter[1]) ? $delimiter[1] : (int) $delimiter[1];
+
             $this->filters[$fields[0]] = (object) [
-                'from' => (int) $delimiter[0],
-                'to' => (int) $delimiter[1],
+                'from' => $from,
+                'to' => $to,
             ];
         }
 
@@ -123,14 +127,14 @@ class QueryParser
         if (Str::contains($filter, '>')) {
             $fields = explode('>', $filter);
             $this->filters["any"][$fields[0]] = [
-                'from' => $fields[1],
+                'from' => (int) $fields[1],
             ];
         }
 
         //smaller than
         if (Str::contains($filter, '<')) {
             $fields = explode('<', $filter);
-            $this->filters["any"][$fields[0]]['to'] = $fields[1];
+            $this->filters["any"][$fields[0]]['to'] = (int) $fields[1];
         }
     }
 }
