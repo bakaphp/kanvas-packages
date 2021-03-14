@@ -4,7 +4,7 @@ namespace Kanvas\Packages\Wallets\Models;
 
 /**
  * Class Wallets.
- * model for handling wallets
+ * model for handling wallets.
  */
 class Wallets extends BaseModel
 {

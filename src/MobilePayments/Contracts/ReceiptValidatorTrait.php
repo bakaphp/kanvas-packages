@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\MobilePayments\Contracts;
 
-use ReceiptValidator\iTunes\Validator as iTunesValidator;
-use Phalcon\Http\Response;
-use Canvas\Models\Users;
-use Canvas\Models\Subscription;
-use Canvas\Models\CompaniesSettings;
 use Canvas\Exception\ServerErrorHttpException;
+use Canvas\Models\CompaniesSettings;
+use Canvas\Models\Subscription;
+use Canvas\Models\Users;
+use Phalcon\Http\Response;
+use ReceiptValidator\iTunes\Validator as iTunesValidator;
 
 /**
  * Phalcon\Traits\ReceiptValidatorTrait.
@@ -23,11 +23,13 @@ trait ReceiptValidatorTrait
 {
     /**
      * Updates subscription payment status depending on charge event.
+     *
      * @param $user
      * @param $payload
+     *
      * @return void
      */
-    public function updateSubscriptionPaymentStatus(Users $user, array $payload): void
+    public function updateSubscriptionPaymentStatus(Users $user, array $payload) : void
     {
         // Identify if payload comes from mobile payments
         if ($payload['is_mobile']) {
@@ -77,11 +79,11 @@ trait ReceiptValidatorTrait
     }
 
     /**
-     * Update subscription payment status via Mobile Payments
+     * Update subscription payment status via Mobile Payments.
      *
      * @return Response
      */
-    public function updateSubscriptionStatusMobilePayments(): Response
+    public function updateSubscriptionStatusMobilePayments() : Response
     {
         $request = $this->request->getPostData();
         $receipt = $this->validateReceipt($request['receipt-data']);
@@ -90,16 +92,16 @@ trait ReceiptValidatorTrait
             throw new ServerErrorHttpException($receipt);
         }
 
-        $this->updateSubscriptionPaymentStatus($this->userData, $this->parseReceiptData($receipt, "apple"));
+        $this->updateSubscriptionPaymentStatus($this->userData, $this->parseReceiptData($receipt, 'apple'));
         return $this->response($receipt);
     }
 
-
     /**
-     * Validate Apple Pay receipts
+     * Validate Apple Pay receipts.
      *
      * @param string $receiptData
      * @param string $source
+     *
      * @return array
      */
     public function validateReceipt(string $receiptData)
@@ -117,14 +119,14 @@ trait ReceiptValidatorTrait
     }
 
     /**
-     * Parses receipt data depending of the source
+     * Parses receipt data depending of the source.
      *
      * @param array $receiptData
      * @param string $source
      *
      * @return array
      */
-    public function parseReceiptData(array $receiptData, string $source): array
+    public function parseReceiptData(array $receiptData, string $source) : array
     {
         switch ($source) {
             case 'apple':

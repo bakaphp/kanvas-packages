@@ -2,9 +2,8 @@
 
 namespace Kanvas\Packages\AppSearch\Http\QueryParser;
 
-use Baka\Elasticsearch\Query\FromClause;
-use Baka\Support\Str;
 use Baka\Support\Date;
+use Baka\Support\Str;
 use Phalcon\Http\RequestInterface;
 
 /**
@@ -38,7 +37,8 @@ class QueryParser
     }
 
     /**
-     * get search params
+     * get search params.
+     *
      * @return array;
      */
     public function getSearchParams() : array
@@ -47,7 +47,8 @@ class QueryParser
     }
 
     /**
-     * get filters params
+     * get filters params.
+     *
      * @return array;
      */
     public function getFiltersParams() : array
@@ -70,7 +71,7 @@ class QueryParser
     public function setFilters(string $filters) : void
     {
         //remove ()
-        $filters = str_replace(['(',')'], '', $filters);
+        $filters = str_replace(['(', ')'], '', $filters);
 
         foreach (explode(',', $filters) as $filter) {
             $this->parser($filter);
@@ -92,9 +93,10 @@ class QueryParser
     }
 
     /**
-    * @param string $filter
-    * @return void
-    */
+     * @param string $filter
+     *
+     * @return void
+     */
     private function parser(string $filter) : void
     {
         //equal
@@ -120,13 +122,13 @@ class QueryParser
         //different from
         if (Str::contains($filter, '~')) {
             $fields = explode('~', $filter);
-            $this->filters["none"][$fields[0]] = explode('|', $fields[1]);
+            $this->filters['none'][$fields[0]] = explode('|', $fields[1]);
         }
 
         //greater than
         if (Str::contains($filter, '>')) {
             $fields = explode('>', $filter);
-            $this->filters["any"][$fields[0]] = [
+            $this->filters['any'][$fields[0]] = [
                 'from' => (int) $fields[1],
             ];
         }
@@ -134,7 +136,7 @@ class QueryParser
         //smaller than
         if (Str::contains($filter, '<')) {
             $fields = explode('<', $filter);
-            $this->filters["any"][$fields[0]]['to'] = (int) $fields[1];
+            $this->filters['any'][$fields[0]]['to'] = (int) $fields[1];
         }
     }
 }

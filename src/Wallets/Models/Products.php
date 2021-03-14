@@ -1,11 +1,12 @@
 <?php
 
 namespace Kanvas\Packages\Wallets\Models;
+
 use Phalcon\Mvc\Model\ResultsetInterface;
 
 /**
  * Class Products.
- * Manager the products to buy with the wallet
+ * Manager the products to buy with the wallet.
  */
 class Products extends BaseModel
 {
@@ -24,7 +25,7 @@ class Products extends BaseModel
     }
 
     /**
-     * Active products by type
+     * Active products by type.
      */
     public function getActiveByType(int $type) : ResultsetInterface
     {

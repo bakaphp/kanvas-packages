@@ -2,19 +2,19 @@
 
 namespace Kanvas\Packages\Wallets\PaymentMethods;
 
-use Gewaer\Models\Users;
-use Kanvas\Packages\MobilePayments\Contracts\ReceiptValidatorTrait;
 use Exception;
+use Kanvas\Packages\MobilePayments\Contracts\ReceiptValidatorTrait;
 
 class ApplePay implements PaymentMethodsInterface
 {
     /**
-     * Receipt Validator Trait
+     * Receipt Validator Trait.
      */
     use ReceiptValidatorTrait;
 
     /**
-     * Can be charged to user
+     * Can be charged to user.
+     *
      * @return bool
      */
     public function canCharge() : bool
@@ -23,8 +23,10 @@ class ApplePay implements PaymentMethodsInterface
     }
 
     /**
-     * charge the user
+     * charge the user.
+     *
      * @param float $amount
+     *
      * @return bool
      */
     public function charge(float $amount) : bool
@@ -33,7 +35,7 @@ class ApplePay implements PaymentMethodsInterface
     }
 
     /**
-     * Validate Apple Pay payment via receipt
+     * Validate Apple Pay payment via receipt.
      *
      * @param string $receipt
      *
@@ -43,7 +45,7 @@ class ApplePay implements PaymentMethodsInterface
     {
         $receipt = $this->validateReceipt($receipt);
 
-        if (gettype($receipt) == "string") {
+        if (gettype($receipt) == 'string') {
             throw new Exception($receipt);
         }
 

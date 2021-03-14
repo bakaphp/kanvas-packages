@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contract\Interactions;
 
-use Kanvas\Packages\Social\Models\UsersFollows;
 use Kanvas\Packages\Social\Models\Interactions;
+use Kanvas\Packages\Social\Models\UsersFollows;
 use Phalcon\Di;
 
 trait FollowersTrait
@@ -13,21 +13,21 @@ trait FollowersTrait
     use TotalInteractionsTrait;
 
     /**
-     * Get the total of following of the user
+     * Get the total of following of the user.
      *
-     * @return integer
+     * @return int
      */
-    public function getTotalFollowing(): int
+    public function getTotalFollowing() : int
     {
         return $this->getTotal(Interactions::FOLLOWING);
     }
 
     /**
-     * Get the total of following of the user
+     * Get the total of following of the user.
      *
-     * @return integer
+     * @return int
      */
-    public function getTotalFollowers(): int
+    public function getTotalFollowers() : int
     {
         return $this->getTotal(Interactions::FOLLOWERS);
     }
@@ -35,7 +35,7 @@ trait FollowersTrait
     /**
      * Verify if the user follow the tag.
      *
-     * @return boolean
+     * @return bool
      */
     public function isFollow() : bool
     {

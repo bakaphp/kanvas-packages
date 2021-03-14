@@ -11,25 +11,25 @@ trait TotalInteractionsTrait
 {
     /**
      * @var int
-    */
+     */
     public $interaction_type_id;
-        
+
     /**
      * Get the interaction key.
      *
      * @return string
      */
-    protected function getInteractionStorageKey(): string
+    protected function getInteractionStorageKey() : string
     {
         return get_class($this) . '-' . $this->getId();
     }
 
     /**
-    * Get the total likes of the storm.
-    *
-    * @return integer
-    */
-    public function getTotal(int $interaction): int
+     * Get the total likes of the storm.
+     *
+     * @return int
+     */
+    public function getTotal(int $interaction) : int
     {
         $key = $this->getInteractionStorageKey() . '-' . $interaction;
         return (int) Di::getDefault()->get('redis')->get($key);
@@ -38,9 +38,9 @@ trait TotalInteractionsTrait
     /**
      * Increment the total of interaction.
      *
-     * @return integer
+     * @return int
      */
-    public function increment(): int
+    public function increment() : int
     {
         return Di::getDefault()->get('redis')->incr($this->getInteractionStorageKey());
     }
@@ -48,60 +48,61 @@ trait TotalInteractionsTrait
     /**
      * Decres the total of interaction.
      *
-     * @return integer
+     * @return int
      */
-    public function decrese(): int
+    public function decrese() : int
     {
         return Di::getDefault()->get('redis')->decr($this->getInteractionStorageKey());
     }
 
     /**
-     * Get total
+     * Get total.
      *
-     * @return integer
+     * @return int
      */
-    public function getTotalReacted(): int
+    public function getTotalReacted() : int
     {
         return $this->getTotal(Interactions::REACT);
     }
 
     /**
-     * Get total
+     * Get total.
      *
-     * @return integer
+     * @return int
      */
-    public function getTotalComments(): int
+    public function getTotalComments() : int
     {
         return $this->getTotal(Interactions::COMMENT);
     }
 
     /**
-     * Get total
+     * Get total.
      *
-     * @return integer
+     * @return int
      */
-    public function getTotalReplies(): int
+    public function getTotalReplies() : int
     {
         return $this->getTotal(Interactions::REPLIED);
     }
 
     /**
-     * Get the total by the Key
+     * Get the total by the Key.
      *
      * @param string $key
-     * @return integer
+     *
+     * @return int
      */
-    public function getTotalByKey(string $key): int
+    public function getTotalByKey(string $key) : int
     {
         return (int) Di::getDefault()->get('redis')->get($key);
     }
 
     /**
-     * Get the total of following of the user
+     * Get the total of following of the user.
      *
-     * @return integer
+     * @return int
      */
-    public function getTotalMessages(): int
+    public function getTotalMessages() : int
     {
         return $this->getTotal(Interactions::MESSAGE);
     }

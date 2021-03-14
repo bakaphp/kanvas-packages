@@ -16,7 +16,8 @@ class Stripe implements PaymentMethodsInterface
     }
 
     /**
-     * Can be charged to user
+     * Can be charged to user.
+     *
      * @return bool
      */
     public function canCharge() : bool
@@ -25,8 +26,10 @@ class Stripe implements PaymentMethodsInterface
     }
 
     /**
-     * charge the user
+     * charge the user.
+     *
      * @param float $amount
+     *
      * @return bool
      */
     public function charge(float $amount) : bool
