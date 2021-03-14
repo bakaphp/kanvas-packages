@@ -43,11 +43,11 @@ class Distributions
      */
     public static function sendToUsersFeeds(Messages $message, FollowableInterface $followableEntity) : void
     {
-        $messageFormated = self::formatDistributionNewMessage($message, $followableEntity);
+        $messageFormatted = self::formatDistributionNewMessage($message, $followableEntity);
 
         Queue::setDurable(false);
 
-        Queue::send('feedsDistribution', json_encode($messageFormated));
+        Queue::send('feedsDistribution', json_encode($messageFormatted));
     }
 
     /**
