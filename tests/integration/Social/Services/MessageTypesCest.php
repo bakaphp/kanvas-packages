@@ -2,7 +2,6 @@
 
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
-use Codeception\Lib\Di;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\MessageTypes as ModelsMessageTypes;
 use Kanvas\Packages\Social\Services\MessageTypes;
@@ -13,22 +12,23 @@ class MessageTypesCest
     public ModelsMessageTypes $messageType;
 
     /**
-     * Create a message type for tests
+     * Create a message type for tests.
      *
      * @return void
      */
-    protected function createMessageType(): void
+    protected function createMessageType() : void
     {
         $this->messageType = MessageTypes::create(new Users(), 'test', 'For Testing');
     }
-    
+
     /**
-     * Test add message type
+     * Test add message type.
      *
      * @param UnitTester $I
+     *
      * @return void
      */
-    public function addMessageType(IntegrationTester $I): void
+    public function addMessageType(IntegrationTester $I) : void
     {
         $messageType = MessageTypes::create(new Users(), 'tweet', 'Para probar');
 
@@ -36,13 +36,14 @@ class MessageTypesCest
     }
 
     /**
-     * Test getTypeByVerb
+     * Test getTypeByVerb.
      *
      * @param IntegrationTester $I
      * @before createMessageType
+     *
      * @return void
      */
-    public function getTypeByVerb(IntegrationTester $I): void
+    public function getTypeByVerb(IntegrationTester $I) : void
     {
         $messageType = ModelsMessageTypes::getTypeByVerb('test');
 
@@ -50,13 +51,14 @@ class MessageTypesCest
     }
 
     /**
-     * Test get Message Type by its Id
+     * Test get Message Type by its Id.
      *
      * @param IntegrationTester $I
      * @before createMessageType
+     *
      * @return void
      */
-    public function getMessageType(IntegrationTester $I): void
+    public function getMessageType(IntegrationTester $I) : void
     {
         $messageType = ModelsMessageTypes::getByUuid($this->messageType->uuid);
 
@@ -64,13 +66,14 @@ class MessageTypesCest
     }
 
     /**
-     * Test delete Message Type
+     * Test delete Message Type.
      *
      * @param IntegrationTester $I
      * @before createMessageType
+     *
      * @return void
      */
-    public function deleteMessageType(IntegrationTester $I): void
+    public function deleteMessageType(IntegrationTester $I) : void
     {
         $I->assertTrue(
             MessageTypes::delete(

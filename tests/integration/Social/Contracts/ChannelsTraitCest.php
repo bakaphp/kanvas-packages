@@ -5,7 +5,6 @@ namespace Kanvas\Packages\Tests\Integration\Social\Contracts;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Channels as ChannelsModel;
 use Kanvas\Packages\Social\Models\ChannelUsers;
-use Kanvas\Packages\Social\Services\Channels;
 use Kanvas\Packages\Test\Support\Models\Lead;
 use Kanvas\Packages\Test\Support\Models\Users;
 
@@ -26,30 +25,32 @@ class ChannelsTraitCest
     }
 
     /**
-     * Get the first channel
+     * Get the first channel.
      *
      * @return void
      */
-    protected function getChannel(): void
+    protected function getChannel() : void
     {
         $this->channel = ChannelsModel::findFirstOrCreate(
             [
-            'conditions' => 'is_deleted = 0'
-        ],
+                'conditions' => 'is_deleted = 0'
+            ],
             [
-            'name' => 'channel Test',
-            'entity_namespace' => get_class($this->lead),
-            'entity_id' => '0'
-        ]);
+                'name' => 'channel Test',
+                'entity_namespace' => get_class($this->lead),
+                'entity_id' => '0'
+            ]
+        );
     }
-    
+
     /**
-     * Test channel creation
+     * Test channel creation.
      *
      * @param IntegrationTester $I
+     *
      * @return void
      */
-    public function createChannel(IntegrationTester $I): void
+    public function createChannel(IntegrationTester $I) : void
     {
         $channel = $this->lead->createChannel(new Users(), 'Test', 'Channel for testing propose');
 
@@ -59,31 +60,33 @@ class ChannelsTraitCest
     }
 
     /**
-     * Test the add of a user to a channel
+     * Test the add of a user to a channel.
      *
      * @param IntegrationTester $I
      * @before getChannel
+     *
      * @return void
      */
-    public function addUserToChannel(IntegrationTester $I): void
+    public function addUserToChannel(IntegrationTester $I) : void
     {
         $user = new Users();
         $user->id = 2;
 
         $newChannelUser = $this->lead::addUser($this->channel, $user);
-        
+
         $I->assertInstanceOf(ChannelUsers::class, $newChannelUser);
         $I->assertEquals($user->id, $newChannelUser->users_id);
     }
 
     /**
-     * Test get channel data by its name
+     * Test get channel data by its name.
      *
      * @param IntegrationTester $I
      * @before getChannel
+     *
      * @return void
      */
-    public function getChannelByItsName(IntegrationTester $I): void
+    public function getChannelByItsName(IntegrationTester $I) : void
     {
         $channel = $this->lead->getChannelByName($this->channel->name);
 

@@ -10,30 +10,30 @@ use Kanvas\Packages\Test\Support\Models\Users;
 class FollowsCest
 {
     /**
-     * Create a two follows tags for testing
+     * Create a two follows tags for testing.
      *
      * @return void
      */
-    protected function testFollow(): void
+    protected function testFollow() : void
     {
         $tag1 = new Tag();
         $tag1->id = 1;
 
         $tag2 = new Tag();
         $tag2->id = 2;
-        
+
         Follow::userFollow(new Users(), $tag1);
         Follow::userFollow(new Users(), $tag2);
     }
 
-
     /**
-     * Test follow service method user follow
+     * Test follow service method user follow.
      *
      * @param IntegrationTester $I
+     *
      * @return void
      */
-    public function follow(IntegrationTester $I): void
+    public function follow(IntegrationTester $I) : void
     {
         $user = new Users();
         $userFollow = new Users();
@@ -45,13 +45,14 @@ class FollowsCest
     }
 
     /**
-     * Test Users follows by entitie
+     * Test Users follows by entitie.
      *
      * @param IntegrationTester $I
      * @before testFollow
+     *
      * @return void
      */
-    public function getUserFollows(IntegrationTester $I): void
+    public function getUserFollows(IntegrationTester $I) : void
     {
         $follows = Follow::getFollowsByUser(new Users(), new Tag())->toArray();
 
