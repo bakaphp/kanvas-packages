@@ -12,21 +12,21 @@ use Kanvas\Packages\Social\Models\Messages;
 
 class Distributions
 {
-
     /**
-     * Send Messages to channels feeds
+     * Send Messages to channels feeds.
      *
      * @param string $channelName
+     *
      * @return ChannelsModel
      */
-    public static function sendToChannelFeed(Channels $channel, Messages $message): ChannelMessages
+    public static function sendToChannelFeed(Channels $channel, Messages $message) : ChannelMessages
     {
         $channelMessage = new ChannelMessages();
         $channelMessage->messages_id = $message->getId();
         $channelMessage->users_id = $message->users_id;
         $channelMessage->channel_id = $channel->getId();
         $channelMessage->saveOrFail();
-        
+
         $channel->last_message_id = $message->getId();
         $channel->saveOrFail();
 
@@ -34,13 +34,14 @@ class Distributions
     }
 
     /**
-     * Send the message to the users feeds that follow the entity
+     * Send the message to the users feeds that follow the entity.
      *
      * @param Messages $message
      * @param FollowableInterface $followableEntity
+     *
      * @return void
      */
-    public static function sendToUsersFeeds(Messages $message, FollowableInterface $followableEntity): void
+    public static function sendToUsersFeeds(Messages $message, FollowableInterface $followableEntity) : void
     {
         $messageFormated = self::formatDistributionNewMessage($message, $followableEntity);
 
@@ -50,13 +51,14 @@ class Distributions
     }
 
     /**
-     * Format the data that will be send to the distribution queue when new message is created
+     * Format the data that will be send to the distribution queue when new message is created.
      *
      * @param Messages $message
      * @param FollowableInterface $followableEntity
+     *
      * @return array
      */
-    public static function formatDistributionNewMessage(Messages $message, FollowableInterface $followableEntity): array
+    public static function formatDistributionNewMessage(Messages $message, FollowableInterface $followableEntity) : array
     {
         $data = [
             'action' => '',

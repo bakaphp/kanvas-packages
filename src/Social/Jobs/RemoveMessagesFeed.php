@@ -13,7 +13,7 @@ class RemoveMessagesFeed extends Job implements QueueableJobInterface
     protected $message;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param Messages $reaction
      */
@@ -24,9 +24,10 @@ class RemoveMessagesFeed extends Job implements QueueableJobInterface
 
     /**
      * Handle that delete the message contains in user Message.
+     *
      * @return bool
      */
-    public function handle(): bool
+    public function handle() : bool
     {
         $userMessages = UserMessages::find([
             'conditions' => 'messages_id = :message_id: AND is_deleted = 0',

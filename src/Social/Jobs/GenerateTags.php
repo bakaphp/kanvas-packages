@@ -20,7 +20,7 @@ class GenerateTags extends Job implements QueueableJobInterface
     protected $message;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param UsersInteractions $user
      * @param Messages $message
@@ -38,7 +38,7 @@ class GenerateTags extends Job implements QueueableJobInterface
      *
      * @return bool
      */
-    public function handle(): bool
+    public function handle() : bool
     {
         $tags = StringFormatter::getHashtagToString($this->message->message);
 

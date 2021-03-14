@@ -3,8 +3,8 @@
 namespace Kanvas\Packages\Social\Providers;
 
 use function Baka\envValue;
-use Phalcon\Di\ServiceProviderInterface;
 use Phalcon\Di\DiInterface;
+use Phalcon\Di\ServiceProviderInterface;
 use Redis;
 
 class RedisProvider implements ServiceProviderInterface
@@ -12,7 +12,7 @@ class RedisProvider implements ServiceProviderInterface
     /**
      * @param DiInterface $container
      */
-    public function register(DiInterface $container): void
+    public function register(DiInterface $container) : void
     {
         if (!$container->has('events')) {
             $app = envValue('GEWAER_APP_ID', 1);

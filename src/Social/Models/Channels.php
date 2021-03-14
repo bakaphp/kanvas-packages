@@ -35,16 +35,17 @@ class Channels extends BaseModel
     }
 
     /**
-     * Get Channel by name
+     * Get Channel by name.
      *
      * @param string $channelName
+     *
      * @return self
      */
-    public static function getByName(string $channelName): self
+    public static function getByName(string $channelName) : self
     {
         return self::findFirstOrFail([
             'conditions' => 'name = :channelName: AND is_deleted = 0',
-            'bind'=> [
+            'bind' => [
                 'channelName' => $channelName
             ]
         ]);

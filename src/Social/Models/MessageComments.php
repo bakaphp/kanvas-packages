@@ -2,10 +2,10 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Canvas\Models\Users;
 use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contract\Interactions\MultiInteractionsTrait;
 use Phalcon\Di;
-use Canvas\Models\Users;
 
 class MessageComments extends BaseModel
 {
@@ -105,13 +105,14 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * Create a comment for a message
+     * Create a comment for a message.
      *
      * @param string $messageId
      * @param string $message
+     *
      * @return MessageComments
      */
-    public function reply(string $message): MessageComments
+    public function reply(string $message) : MessageComments
     {
         $comment = new MessageComments();
         $comment->message_id = $this->message_id;
@@ -126,11 +127,11 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * Return the id of the parent in case that comment is a reply
+     * Return the id of the parent in case that comment is a reply.
      *
-     * @return integer
+     * @return int
      */
-    public function getParentId(): int
+    public function getParentId() : int
     {
         return $this->parent_id == 0 ? $this->getId() : $this->parent_id;
     }
@@ -146,12 +147,13 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * Verify if this comment has message
+     * Verify if this comment has message.
      *
      * @param Messages $message
-     * @return boolean
+     *
+     * @return bool
      */
-    public function hasMessage(Messages $message): bool
+    public function hasMessage(Messages $message) : bool
     {
         return $this->message_id == $message->getId();
     }

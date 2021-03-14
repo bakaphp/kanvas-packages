@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Providers;
 
 use Exception;
-use Phalcon\Db\Adapter\Pdo\Mysql;
-use Phalcon\Di\ServiceProviderInterface;
-use Phalcon\Di\DiInterface;
-use PDOException;
 use PDO;
+use PDOException;
+use Phalcon\Db\Adapter\Pdo\Mysql;
+use Phalcon\Di\DiInterface;
+use Phalcon\Di\ServiceProviderInterface;
 
 class DatabaseProvider implements ServiceProviderInterface
 {
     /**
      * @param DiInterface $container
      */
-    public function register(DiInterface $container): void
+    public function register(DiInterface $container) : void
     {
         $container->setShared(
             'dbSocial',
@@ -27,7 +27,7 @@ class DatabaseProvider implements ServiceProviderInterface
                     'password' => getenv('DATA_API_SOCIAL_MYSQL_PASS'),
                     'dbname' => getenv('DATA_API_SOCIAL_MYSQL_NAME'),
                     'charset' => 'utf8',
-                    "options" => [ PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING ]
+                    'options' => [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]
                 ];
 
                 try {

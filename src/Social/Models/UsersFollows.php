@@ -16,7 +16,6 @@ class UsersFollows extends BaseModel
     public ?int $companies_branches_id = null;
     public string $entity_namespace;
 
-
     /**
      * Initialize relationshit after fetch
      * since we need entity_namespace info.
@@ -41,7 +40,7 @@ class UsersFollows extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('users_follows');
     }
 

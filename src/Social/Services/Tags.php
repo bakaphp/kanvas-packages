@@ -13,12 +13,13 @@ use Phalcon\Utils\Slug;
 class Tags
 {
     /**
-     * Get a Tag by its ID
+     * Get a Tag by its ID.
      *
      * @param string $uuid
+     *
      * @return TagsModel
      */
-    public static function get(string $uuid): TagsModel
+    public static function get(string $uuid) : TagsModel
     {
         $tag = TagsModel::getByIdOrFail($uuid);
 
@@ -26,10 +27,11 @@ class Tags
     }
 
     /**
-     * To be describe
+     * To be describe.
      *
      * @param UserMessages $feed
      * @param string $message
+     *
      * @return void
      */
     public static function process(UserMessages $feed, string $message)
@@ -37,13 +39,14 @@ class Tags
     }
 
     /**
-     * Create a new Tag
+     * Create a new Tag.
      *
      * @param UserInterface $user
      * @param string $message
+     *
      * @return TagsModel
      */
-    public static function create(UserInterface $user, string $message): TagsModel
+    public static function create(UserInterface $user, string $message) : TagsModel
     {
         $newTag = new TagsModel();
         $newTag->name = $message;
@@ -57,13 +60,14 @@ class Tags
     }
 
     /**
-     * Update an existing Tag
+     * Update an existing Tag.
      *
      * @param TagsModel $tag
      * @param string $message
+     *
      * @return TagsModel
      */
-    public static function update(TagsModel $tag, string $message): TagsModel
+    public static function update(TagsModel $tag, string $message) : TagsModel
     {
         $tag->name = $message;
         $tag->slug = Slug::generate($message);
@@ -73,23 +77,25 @@ class Tags
     }
 
     /**
-     * Delete an existing Tag
+     * Delete an existing Tag.
      *
      * @param UserInterface $user
+     *
      * @return bool
      */
-    public static function delete(TagsModel $tag): bool
+    public static function delete(TagsModel $tag) : bool
     {
         return $tag->deleteOrFail();
     }
 
     /**
-     * SoftDelete an existing tag
+     * SoftDelete an existing tag.
      *
      * @param TagsModel $tag
-     * @return boolean
+     *
+     * @return bool
      */
-    public static function softDelete(TagsModel $tag): bool
+    public static function softDelete(TagsModel $tag) : bool
     {
         $tag->softDelete();
 

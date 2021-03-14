@@ -4,10 +4,7 @@ namespace Kanvas\Packages\Social\ElasticDocuments;
 
 use Baka\Elasticsearch\Objects\Documents;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
-use Kanvas\Packages\Social\Models\ChannelMessages as ChannelMessagesModel;
-use Kanvas\Packages\Social\Models\MessageComments as MessageCommentsModel;
 use Phalcon\Mvc\Model\Resultset\Simple;
-use Canvas\Models\Users;
 
 class Messages extends Documents
 {
@@ -27,9 +24,9 @@ class Messages extends Documents
         $this->addRelation('comments', ['alias' => 'comments', 'elasticAlias' => 'msgcm', 'elasticIndex' => 1]);
         $this->addRelation('message_type', ['alias' => 'message_type', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
     }
-    
+
     /**
-     * structure
+     * structure.
      *
      * @return array
      */
@@ -140,7 +137,7 @@ class Messages extends Documents
     }
 
     /**
-     * Format message comments data
+     * Format message comments data.
      */
     private function formatComments(Simple $comments) : array
     {

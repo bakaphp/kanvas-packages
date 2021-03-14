@@ -9,7 +9,6 @@ class UsersReactions extends BaseModel
     public int $entity_id;
     public string $entity_namespace;
 
-
     /**
      * Initialize relationship after fetch
      * since we need entity_namespace info.
@@ -27,14 +26,14 @@ class UsersReactions extends BaseModel
             ]
         );
     }
-    
+
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('users_reactions');
     }
 }

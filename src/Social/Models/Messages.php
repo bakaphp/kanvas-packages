@@ -2,17 +2,15 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
-use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
-use Canvas\Traits\FileSystemModelTrait;
+use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
-use Phalcon\Security\Random;
-use Canvas\Models\Behaviors\Uuid;
+use Canvas\Traits\FileSystemModelTrait;
+use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
+use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
+use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
+use Kanvas\Packages\Social\Contract\Users\UserInterface;
 use Phalcon\Di;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
@@ -137,7 +135,6 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             ]
         );
 
-
         $this->hasOne(
             'id',
             UsersInteractions::class,
@@ -202,13 +199,14 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
-     * Create a comment for a message
+     * Create a comment for a message.
      *
      * @param string $messageId
      * @param string $message
+     *
      * @return MessageComments
      */
-    public function comment(string $message, UserInterface $user): MessageComments
+    public function comment(string $message, UserInterface $user) : MessageComments
     {
         $comment = new MessageComments();
         $comment->message_id = $this->getId();
@@ -222,12 +220,13 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
-     * Verify if the $userId owns this message
+     * Verify if the $userId owns this message.
      *
-     * @param integer $userId
-     * @return boolean
+     * @param int $userId
+     *
+     * @return bool
      */
-    public function hasUser(int $userId): bool
+    public function hasUser(int $userId) : bool
     {
         return $userId == $this->users_id;
     }
