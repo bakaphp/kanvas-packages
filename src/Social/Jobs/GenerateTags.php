@@ -16,8 +16,8 @@ use Phalcon\Utils\Slug;
 
 class GenerateTags extends Job implements QueueableJobInterface
 {
-    protected $user;
-    protected $message;
+    protected UserInterface $user;
+    protected Messages $message;
 
     /**
      * Construct.

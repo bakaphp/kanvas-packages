@@ -2,6 +2,7 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Baka\Contracts\Auth\UserInterface;
 use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
@@ -10,7 +11,6 @@ use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
-use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Kanvas\Packages\Social\Jobs\ElasticMessages;
 use Phalcon\Di;
 

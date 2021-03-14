@@ -11,7 +11,8 @@ use Phalcon\Di;
 
 class ElasticMessages extends Job implements QueueableJobInterface
 {
-    protected ElasticDocumentsMessages $message;
+    protected ElasticDocumentsMessages $elasticMessage;
+    protected Messages $message;
 
     /**
      * Construct.
@@ -23,7 +24,8 @@ class ElasticMessages extends Job implements QueueableJobInterface
         $elasticMessage = new ElasticDocumentsMessages();
         $elasticMessage->setData($message->getId(), [$message]);
 
-        $this->message = $elasticMessage;
+        $this->elasticMessage = $elasticMessage;
+        $this->message = $message;
     }
 
     /**
@@ -33,10 +35,17 @@ class ElasticMessages extends Job implements QueueableJobInterface
      */
     public function handle() : bool
     {
-        Indices::createIfNotExist($this->message);
-        $this->message->add();
+        Indices::createIfNotExist($this->elasticMessage);
+        $log = null;
+        if (!$this->message->is_deleted) {
+            $this->elasticMessage->add();
+            $log = 'Add';
+        } else {
+            $this->elasticMessage->delete();
+            $log = 'Remove';
+        }
 
-        Di::getDefault()->get('log')->info('Delete message from users feeds: ' . $this->message->getId());
+        Di::getDefault()->get('log')->info($log . ' message to elastic ' . $this->elasticMessage->getId());
 
         return true;
     }

@@ -8,6 +8,7 @@ use Canvas\Providers\AppProvider;
 use Canvas\Providers\CacheDataProvider;
 use Canvas\Providers\DatabaseProvider as KanvasDatabaseProvider;
 use Canvas\Providers\ModelsCacheProvider;
+use Canvas\Providers\RegistryProvider;
 use Canvas\Providers\UserProvider;
 use Kanvas\Packages\Payments\Providers\PlaidProvider;
 use Kanvas\Packages\Social\Providers\DatabaseProvider;
@@ -20,6 +21,7 @@ return [
     ConfigProvider::class,
     KanvasDatabaseProvider::class,
     DatabaseProvider::class,
+    RegistryProvider::class,
     QueueProvider::class,
     RedisProvider::class,
     PlaidProvider::class,

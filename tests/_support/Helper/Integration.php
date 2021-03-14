@@ -4,11 +4,11 @@ namespace Helper;
 
 // use Canvas\Bootstrap\IntegrationTests;
 
+use Canvas\Models\Apps;
+use Canvas\Models\Users;
 use Codeception\Module;
 use Codeception\TestInterface;
 use Kanvas\Packages\Test\Support\Helper\Phinx;
-use Kanvas\Packages\Test\Support\Models\App;
-use Kanvas\Packages\Test\Support\Models\Users;
 use Phalcon\Config as PhConfig;
 use Phalcon\Di;
 use Phalcon\DI\FactoryDefault as PhDI;
@@ -38,7 +38,7 @@ class Integration extends Module
 
         $this->diContainer->setShared('userData', new Users());
         $this->diContainer->setShared('userProvider', new Users());
-        $this->diContainer->setShared('app', new App());
+        $this->diContainer->setShared('app', new Apps());
 
         $this->savedModels = [];
         $this->savedRecords = [];
