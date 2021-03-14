@@ -6,7 +6,8 @@ namespace Kanvas\Packages\Social\Contracts\Interactions;
 
 use Baka\Contracts\Database\ModelInterface;
 use Kanvas\Packages\Social\Contracts\Events\EventManagerAwareTrait;
-use Kanvas\Packages\Social\Contracts\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
+use Kanvas\Packages\Social\Models\UsersInteractions;
 use Kanvas\Packages\Social\Services\Interactions;
 
 trait InteractionsTrait
@@ -52,5 +53,29 @@ trait InteractionsTrait
      */
     public function getInteractionByType(InteractionTypesInterface $type, UserInterface $user)
     {
+    }
+
+    /**
+     * Get the current user interaction
+     *
+     * @param integer $interactionId
+     * @param UserInterface $user
+     * @return UsersInteractions|null
+     */
+    public function getInteractionByUser(int $interactionId, UserInterface $user) : ?UsersInteractions
+    {
+        return UsersInteractions::findFirst([
+            'conditions' => '
+                entity_id = :entity_id: 
+                AND entity_namespace = :entity_namespace: 
+                AND interactions_id  = :interactions_id:
+                AND users_id = :users_id:',
+            'bind' => [
+                'entity_id' => $this->getId(),
+                'entity_namespace' => get_class($this),
+                'interactions_id' =>$interactionId,
+                'users_id' => $user->getId()
+            ]
+        ]);
     }
 }

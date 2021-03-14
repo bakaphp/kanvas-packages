@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Kanvas\Packages\Social\Contracts\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Models\Tags as TagsModel;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;

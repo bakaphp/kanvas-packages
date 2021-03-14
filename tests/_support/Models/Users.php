@@ -2,24 +2,12 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-use Baka\Contracts\Auth\UserInterface as AuthUserInterface;
 use Kanvas\Packages\Social\Contracts\Interactions\FollowableInterface;
 use Kanvas\Packages\Social\Contracts\Interactions\FollowersTrait;
-use Kanvas\Packages\Social\Contracts\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
+use Canvas\Models\Users as ModelsUsers;
 
-class Users extends BaseModel implements UserInterface, AuthUserInterface, FollowableInterface
+class Users extends ModelsUsers implements FollowableInterface
 {
     use FollowersTrait;
-
-    public $id = 1;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getDefaultCompany(): Companies
-    {
-        return new Companies();
-    }
 }

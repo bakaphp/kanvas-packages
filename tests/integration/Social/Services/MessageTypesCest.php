@@ -18,7 +18,7 @@ class MessageTypesCest
      */
     protected function createMessageType() : void
     {
-        $this->messageType = MessageTypes::create(new Users(), 'test', 'For Testing');
+        $this->messageType = MessageTypes::create(Users::findFirst(1), 'test', 'For Testing');
     }
 
     /**
@@ -30,7 +30,7 @@ class MessageTypesCest
      */
     public function addMessageType(IntegrationTester $I) : void
     {
-        $messageType = MessageTypes::create(new Users(), 'tweet', 'Para probar');
+        $messageType = MessageTypes::create(Users::findFirst(1), 'tweet', 'Para probar');
 
         $I->assertEquals('tweet', $messageType->verb);
     }

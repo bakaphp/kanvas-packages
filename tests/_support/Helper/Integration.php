@@ -36,7 +36,7 @@ class Integration extends Module
         $this->diContainer = new Di();
         $this->setDi($this->diContainer);
 
-        $this->diContainer->setShared('userData', new Users());
+        $this->diContainer->setShared('userData', Users::findFirst(1));
         $this->diContainer->setShared('userProvider', new Users());
         $this->diContainer->setShared('app', new Apps());
 

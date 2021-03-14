@@ -3,7 +3,7 @@
 namespace Kanvas\Packages\Social\Models;
 
 use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contracts\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
 
 class UsersFollows extends BaseModel
 {

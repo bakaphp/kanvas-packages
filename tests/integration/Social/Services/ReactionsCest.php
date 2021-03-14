@@ -18,7 +18,7 @@ class ReactionsCest
      */
     protected function reactionCreation() : void
     {
-        $this->reaction = Reactions::createReaction('test-reaction', new Users, '💀');
+        $this->reaction = Reactions::createReaction('test-reaction', Users::findFirst(1), '💀');
     }
 
     /**
@@ -30,7 +30,7 @@ class ReactionsCest
      */
     public function createReaction(IntegrationTester $I) : void
     {
-        $reaction = Reactions::createReaction('test', new Users, '😎');
+        $reaction = Reactions::createReaction('test', Users::findFirst(1), '😎');
 
         $I->assertEquals('test', $reaction->name);
     }
@@ -45,7 +45,7 @@ class ReactionsCest
      */
     public function getReactionByName(IntegrationTester $I) : void
     {
-        $reaction = Reactions::getReactionByName('test-reaction', new Users());
+        $reaction = Reactions::getReactionByName('test-reaction', Users::findFirst(1));
 
         $I->assertEquals('test-reaction', $reaction->name);
     }
@@ -60,7 +60,7 @@ class ReactionsCest
      */
     public function getReactionByEmoji(IntegrationTester $I) : void
     {
-        $reaction = Reactions::getReactionByEmoji('💀', new Users());
+        $reaction = Reactions::getReactionByEmoji('💀', Users::findFirst(1));
 
         $I->assertEquals('💀', $reaction->icon);
     }

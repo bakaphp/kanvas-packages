@@ -37,7 +37,7 @@ class CommentsCest
      */
     public function addComment(IntegrationTester $I) : void
     {
-        $user = new Users();
+        $user = Users::findFirst(1);
 
         //Add new SystemModule for Messages
         $systemModule = SystemModules::findFirstOrCreate([
@@ -141,11 +141,12 @@ class CommentsCest
      */
     public function commentReaction(IntegrationTester $I) : void
     {
-        $I->assertFalse(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
-        $I->assertFalse(Reactions::addMessageReaction('☺', new Users(), $this->comment));
+        $user = Users::findFirst(1);
+        $I->assertFalse(Reactions::addMessageReaction('confuse', $user, $this->comment));
+        $I->assertFalse(Reactions::addMessageReaction('☺', $user, $this->comment));
 
-        $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
-        $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->comment));
+        $I->assertTrue(Reactions::addMessageReaction('confuse', $user, $this->comment));
+        $I->assertTrue(Reactions::addMessageReaction('☺', $user, $this->comment));
     }
 
     /**

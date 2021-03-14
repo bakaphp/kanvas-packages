@@ -27,7 +27,7 @@ class MessagesCest
      */
     protected function createMessageType() : void
     {
-        MessageTypes::create(new Users(), 'memo', 'Test Type');
+        MessageTypes::create(Users::findFirst(1), 'memo', 'Test Type');
     }
 
     /**
@@ -41,7 +41,7 @@ class MessagesCest
             'text' => 'Test some messages'
         ];
 
-        $this->message = MessagesService::create(new Users(), 'memo', $text);
+        $this->message = MessagesService::create(Users::findFirst(1), 'memo', $text);
     }
 
     /**
@@ -81,7 +81,7 @@ class MessagesCest
             'text' => 'This is test text for testing'
         ];
 
-        $feed = MessagesService::create(new Users(), 'memo', $text, new MessageObject());
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
 
         $I->assertNotNull($feed->getId());
     }
@@ -103,7 +103,7 @@ class MessagesCest
         $newMessage = new Messages();
         $newMessage->message = json_encode($text);
 
-        $feed = MessagesService::createByObject(new Users(), 'memo', $newMessage, new Messages());
+        $feed = MessagesService::createByObject(Users::findFirst(1), 'memo', $newMessage, new Messages());
 
         $I->assertNotNull($feed->getId());
     }
@@ -135,13 +135,13 @@ class MessagesCest
      */
     public function messageReaction(IntegrationTester $I) : void
     {
-        $I->assertFalse(Reactions::addMessageReaction('confuse', new Users(), $this->message));
+        $I->assertFalse(Reactions::addMessageReaction('confuse', Users::findFirst(1), $this->message));
 
-        $I->assertFalse(Reactions::addMessageReaction('☺', new Users(), $this->message));
+        $I->assertFalse(Reactions::addMessageReaction('☺', Users::findFirst(1), $this->message));
 
-        $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->message));
+        $I->assertTrue(Reactions::addMessageReaction('confuse', Users::findFirst(1), $this->message));
 
-        $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->message));
+        $I->assertTrue(Reactions::addMessageReaction('☺', Users::findFirst(1), $this->message));
     }
 
     /**
@@ -155,7 +155,7 @@ class MessagesCest
     public function messageInteraction(IntegrationTester $I) : void
     {
         $I->assertFalse(
-            Interactions::add(new Users(), $this->message, ModelsInteractions::REACT)
+            Interactions::add(Users::findFirst(1), $this->message, ModelsInteractions::REACT)
         );
     }
 
@@ -169,7 +169,7 @@ class MessagesCest
     public function deleteMessage(IntegrationTester $I) : void
     {
         $I->assertTrue(
-            MessagesService::delete(Messages::findFirst(['order' => 'id desc'])->getId(), new Users())
+            MessagesService::delete(Messages::findFirst(['order' => 'id desc'])->getId(), Users::findFirst(1))
         );
     }
 }

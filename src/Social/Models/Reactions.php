@@ -8,7 +8,6 @@ class Reactions extends BaseModel
 {
     use CustomTotalInteractionsTrait;
 
-    public $id;
     public string $name;
     public int $apps_id;
     public int $companies_id;

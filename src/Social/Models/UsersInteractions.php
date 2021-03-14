@@ -10,7 +10,6 @@ class UsersInteractions extends BaseModel
         getInteractionStorageKey as protected parentGetInteractionStorageKey;
     }
 
-    public $id;
     public int $users_id;
     public int $entity_id;
     public string $entity_namespace;
@@ -23,7 +22,7 @@ class UsersInteractions extends BaseModel
     const FOLLOWING = 'follow';
 
     /**
-     * Initialize relationshit after fetch
+     * Initialize relationship after fetch
      * since we need entity_namespace info.
      *
      * @return void

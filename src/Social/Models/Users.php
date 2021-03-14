@@ -3,7 +3,7 @@
 namespace Kanvas\Packages\Social\Models;
 
 use Canvas\Models\Users as KanvasUsers;
-use Kanvas\Packages\Social\Contracts\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
 
 class Users extends KanvasUsers implements UserInterface
 {

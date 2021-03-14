@@ -20,7 +20,7 @@ class TagsCest
      */
     protected function createTagTest() : void
     {
-        $this->tag = Tags::create(new Users, 'Tag for test');
+        $this->tag = Tags::create(Users::findFirst(1), 'Tag for test');
     }
 
     /**
@@ -32,7 +32,7 @@ class TagsCest
      */
     public function createTag(IntegrationTester $I) : void
     {
-        $tag = Tags::create(new Users, 'Test Tag');
+        $tag = Tags::create(Users::findFirst(1), 'Test Tag');
 
         $I->assertEquals('Test Tag', $tag->name);
     }
@@ -93,7 +93,7 @@ class TagsCest
     public function tagsInteraction(IntegrationTester $I) : void
     {
         $I->assertFalse(
-            Interactions::add(new Users(), $this->tag, ModelsInteractions::FOLLOWING)
+            Interactions::add(Users::findFirst(1), $this->tag, ModelsInteractions::FOLLOWING)
         );
     }
 }

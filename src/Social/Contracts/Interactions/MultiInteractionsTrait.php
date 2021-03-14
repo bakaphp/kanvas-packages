@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contracts\Interactions;
 
-use Kanvas\Packages\Social\Contracts\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
 
 trait MultiInteractionsTrait
 {

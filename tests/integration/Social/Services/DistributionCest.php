@@ -33,7 +33,7 @@ class DistributionCest
             ]
         );
 
-        $user = new Users();
+        $user = Users::findFirst(1);
         $app = new App();
 
         $this->message = Messages::findFirstOrCreate([

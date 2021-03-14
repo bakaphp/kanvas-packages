@@ -20,7 +20,7 @@ class FollowsCest
             $tag1 = new Tag();
             $tag1->id = $i;
 
-            Follow::userFollow(new Users(), $tag1);
+            Follow::userFollow(Users::findFirst(1), $tag1);
         }
     }
 
@@ -34,10 +34,10 @@ class FollowsCest
     public function follow(IntegrationTester $I) : void
     {
         for ($i = 0; $i < 10; $i++) {
-            $user = new Users();
+            $user = Users::findFirst(1);
             $user->id = $i;
 
-            $userFollow = new Users();
+            $userFollow = Users::findFirst(1);
             $userFollow->id = $i;
 
             $follow = Follow::userFollow($user, $userFollow);
@@ -56,7 +56,7 @@ class FollowsCest
      */
     public function getUserFollows(IntegrationTester $I) : void
     {
-        $user = new Users();
+        $user = Users::findFirst(1);
         $user->id = 1;
 
         $tag1 = new Tag();
