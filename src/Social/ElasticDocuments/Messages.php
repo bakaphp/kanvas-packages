@@ -8,6 +8,8 @@ use Phalcon\Mvc\Model\Resultset\Simple;
 
 class Messages extends Documents
 {
+    protected int $commentsLimit = 3;
+
     /**
      * initialize.
      *
@@ -128,7 +130,12 @@ class Messages extends Documents
                 'created_at' => $message->channels->getFirst()->created_at,
                 'is_deleted' => $message->channels->getFirst()->is_deleted,
             ],
-            'comments' => $this->formatComments($message->comments),
+            'comments' => $this->formatComments(
+                $message->getComments([
+                    'limit' => $this->commentsLimit,
+                    'order' => 'id DESC'
+                ])
+            ),
             'created_at' => $message->created_at,
             'updated_at' => $message->updated_at,
             'is_deleted' => $message->is_deleted
@@ -138,6 +145,10 @@ class Messages extends Documents
 
     /**
      * Format message comments data.
+     *
+     * @param Simple $comments
+     *
+     * @return array
      */
     private function formatComments(Simple $comments) : array
     {

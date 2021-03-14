@@ -25,14 +25,16 @@ trait CommentsTrait
      */
     public function getAllComments(int $messageId) : Response
     {
-        return $this->response($this->processOutput(MessageComments::findOrFail([
+        $comments = MessageComments::findOrFail([
             'conditions' => 'message_id = :message_id: and apps_id = :apps_id: and companies_id = :companies_id: and is_deleted = 0',
             'bind' => [
                 'message_id' => $messageId,
                 'apps_id' => $this->app->getId(),
                 'companies_id' => $this->userData->getCurrentCompany()->getId(),
             ]
-        ])));
+        ]);
+
+        return $this->response($this->processOutput($comments));
     }
 
     /**
