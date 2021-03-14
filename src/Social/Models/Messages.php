@@ -2,10 +2,10 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
-use Canvas\Traits\FileSystemModelTrait;
 use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
@@ -19,15 +19,14 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use InteractionsTrait;
     use FileSystemModelTrait;
 
-    public $id;
     public string $uuid;
     public int $apps_id;
     public int $companies_id;
     public int $users_id;
     public int $message_types_id;
     public string $message;
-    public ?int $reactions_count = null;
-    public ?int $comments_count = null;
+    public ?int $reactions_count = 0;
+    public ?int $comments_count = 0;
 
     /**
      * Initialize method for model.
@@ -38,10 +37,6 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
 
         $this->setSource('messages');
         $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
-
-        $this->addBehavior(
-            new Uuid()
-        );
 
         $this->addBehavior(
             new Uuid()
