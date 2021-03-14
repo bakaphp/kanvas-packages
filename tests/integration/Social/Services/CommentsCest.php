@@ -25,7 +25,7 @@ class CommentsCest
      */
     protected function getCommentData() : void
     {
-        $this->comment = MessageComments::findFirst();
+        $this->comment = MessageComments::findFirst('is_deleted = 0');
     }
 
     /**

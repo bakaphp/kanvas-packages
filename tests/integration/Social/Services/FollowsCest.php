@@ -16,14 +16,12 @@ class FollowsCest
      */
     protected function testFollow() : void
     {
-        $tag1 = new Tag();
-        $tag1->id = 1;
+        for ($i = 0; $i < 10; $i++) {
+            $tag1 = new Tag();
+            $tag1->id = $i;
 
-        $tag2 = new Tag();
-        $tag2->id = 2;
-
-        Follow::userFollow(new Users(), $tag1);
-        Follow::userFollow(new Users(), $tag2);
+            Follow::userFollow(new Users(), $tag1);
+        }
     }
 
     /**
@@ -35,17 +33,21 @@ class FollowsCest
      */
     public function follow(IntegrationTester $I) : void
     {
-        $user = new Users();
-        $userFollow = new Users();
-        $userFollow->id = 2;
+        for ($i = 0; $i < 10; $i++) {
+            $user = new Users();
+            $user->id = $i;
 
-        $follow = Follow::userFollow($user, $userFollow);
+            $userFollow = new Users();
+            $userFollow->id = $i;
 
-        $I->assertFalse($follow);
+            $follow = Follow::userFollow($user, $userFollow);
+
+            $I->assertFalse($follow);
+        }
     }
 
     /**
-     * Test Users follows by entitie.
+     * Test Users follows by entities.
      *
      * @param IntegrationTester $I
      * @before testFollow
@@ -54,8 +56,12 @@ class FollowsCest
      */
     public function getUserFollows(IntegrationTester $I) : void
     {
-        $follows = Follow::getFollowsByUser(new Users(), new Tag())->toArray();
+        $user = new Users();
+        $user->id = 1;
 
+        $tag1 = new Tag();
+        $tag1->id = 1;
+        $follows = Follow::getFollowsByUser($user, $tag1)->toArray();
         $I->assertNotNull($follows[0]['id']);
 
         $I->assertEquals($follows[0]['entity_namespace'], get_class(new Tag()));
