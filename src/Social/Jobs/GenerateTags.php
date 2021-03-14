@@ -5,7 +5,7 @@ namespace Kanvas\Packages\Social\Jobs;
 use Baka\Contracts\Queue\QueueableJobInterface;
 use Baka\Jobs\Job;
 use Baka\Queue\Queue;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\MessageTags;
 use Kanvas\Packages\Social\Models\Tags;

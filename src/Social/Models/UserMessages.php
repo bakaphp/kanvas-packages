@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
 use Phalcon\Paginator\Adapter\Model;

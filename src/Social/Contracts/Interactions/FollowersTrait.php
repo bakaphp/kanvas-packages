@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Interactions;
+namespace Kanvas\Packages\Social\Contracts\Interactions;
 
 use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\UsersFollows;

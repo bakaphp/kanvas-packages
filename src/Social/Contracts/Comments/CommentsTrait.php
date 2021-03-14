@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanvas\Packages\Social\Contract\Comments;
+namespace Kanvas\Packages\Social\Contracts\Comments;
 
 use Baka\Validation as CanvasValidation;
 use Gewaer\Models\MessageComments;

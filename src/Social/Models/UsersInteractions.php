@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
 
 class UsersInteractions extends BaseModel
 {

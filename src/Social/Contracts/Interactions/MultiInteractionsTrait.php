@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Interactions;
+namespace Kanvas\Packages\Social\Contracts\Interactions;
 
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 
 trait MultiInteractionsTrait
 {

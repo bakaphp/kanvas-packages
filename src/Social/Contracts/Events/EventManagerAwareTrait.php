@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Events;
+namespace Kanvas\Packages\Social\Contracts\Events;
 
 use Phalcon\Di;
 use Phalcon\Events\ManagerInterface as EventsManager;

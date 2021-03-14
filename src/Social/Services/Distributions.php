@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Baka\Queue\Queue;
-use Kanvas\Packages\Social\Contract\Interactions\FollowableInterface;
+use Kanvas\Packages\Social\Contracts\Interactions\FollowableInterface;
 use Kanvas\Packages\Social\Models\ChannelMessages;
 use Kanvas\Packages\Social\Models\Channels;
 use Kanvas\Packages\Social\Models\Messages;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Interactions;
+namespace Kanvas\Packages\Social\Contracts\Interactions;
 
 use Baka\Contracts\Database\ModelInterface;
-use Kanvas\Packages\Social\Contract\Events\EventManagerAwareTrait;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Events\EventManagerAwareTrait;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Kanvas\Packages\Social\Services\Interactions;
 
 trait InteractionsTrait

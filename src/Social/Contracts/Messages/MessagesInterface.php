@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Messages;
+namespace Kanvas\Packages\Social\Contracts\Messages;
 
 interface MessagesInterface
 {

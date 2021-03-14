@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Channels;
+namespace Kanvas\Packages\Social\Contracts\Channels;
 
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Channels as ChannelsModel;
 use Kanvas\Packages\Social\Models\ChannelUsers;
 use Phalcon\Utils\Slug;

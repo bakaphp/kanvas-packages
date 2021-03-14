@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Exception;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Interactions as InteractionsModel;
 use Kanvas\Packages\Social\Models\UsersInteractions;
 use Phalcon\Mvc\ModelInterface;

@@ -2,8 +2,8 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-use Kanvas\Packages\Social\Contract\Channels\ChannelsInterface;
-use Kanvas\Packages\Social\Contract\Channels\ChannelsTrait;
+use Kanvas\Packages\Social\Contracts\Channels\ChannelsInterface;
+use Kanvas\Packages\Social\Contracts\Channels\ChannelsTrait;
 
 class Lead extends BaseModel implements ChannelsInterface
 {

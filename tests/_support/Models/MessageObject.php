@@ -2,8 +2,8 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
-use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
+use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
+use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
 
 class MessageObject implements MessagesInterface, MessageableEntityInterface
 {

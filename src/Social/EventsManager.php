@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social;
 
 use Baka\Queue\Queue;
-use Kanvas\Packages\Social\Contract\Traits\EventManagerAwareTrait;
+use Kanvas\Packages\Social\Contracts\Traits\EventManagerAwareTrait;
 use Phalcon\Di;
 
 /**

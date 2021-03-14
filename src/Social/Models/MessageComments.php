@@ -3,8 +3,8 @@
 namespace Kanvas\Packages\Social\Models;
 
 use Canvas\Models\Users;
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\MultiInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\MultiInteractionsTrait;
 use Phalcon\Di;
 
 class MessageComments extends BaseModel

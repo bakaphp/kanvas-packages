@@ -6,11 +6,11 @@ use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
 use Canvas\Traits\FileSystemModelTrait;
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
-use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
-use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\InteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
+use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Phalcon\Di;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface

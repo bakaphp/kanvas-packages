@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;

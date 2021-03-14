@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
-use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
+use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
 use Kanvas\Packages\Social\Models\AppModuleMessage;

@@ -2,8 +2,8 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Users\UserInterface;
 
 class UsersFollows extends BaseModel
 {
