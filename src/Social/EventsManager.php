@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social;
 
 use Baka\Queue\Queue;
-use Kanvas\Packages\Social\Contracts\Traits\EventManagerAwareTrait;
+use Canvas\Contracts\EventManagerAwareTrait;
 use Phalcon\Di;
 
 /**
@@ -27,7 +27,7 @@ class EventsManager
     public function fireToQueue($event, $source, $data = null, $cancelable = true)
     {
         if ($this->getEventsManager()) {
-            //specific data structure for canvas core queus
+            //specific data structure for canvas core queues
             $queueData = [
                 'event' => $event,
                 'source' => $source,

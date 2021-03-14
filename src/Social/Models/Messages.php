@@ -11,6 +11,7 @@ use Kanvas\Packages\Social\Contracts\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Contracts\Users\UserInterface;
+use Kanvas\Packages\Social\Jobs\ElasticMessages;
 use Phalcon\Di;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
@@ -236,5 +237,6 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function afterSave()
     {
         $this->associateFileSystem();
+        ElasticMessages::dispatch($this);
     }
 }

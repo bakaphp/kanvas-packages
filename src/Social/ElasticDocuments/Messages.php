@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Social\ElasticDocuments;
 use Baka\Elasticsearch\Objects\Documents;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use RuntimeException;
 
 class Messages extends Documents
 {
@@ -96,8 +97,13 @@ class Messages extends Documents
      */
     public function setData($id, array $data) : Documents
     {
+        if (!$data[0] instanceof MessagesModel) {
+            throw new RuntimeException('Params 0 of data should be the message');
+        }
+
         parent::setData($id, $data);
-        $message = MessagesModel::findFirstOrFail($id);
+        $message = $data[0]; //MessagesModel::findFirstOrFail($id);
+
         $this->data = [
             'id' => (int)$message->id,
             'apps_id' => $message->apps_id,
@@ -107,7 +113,7 @@ class Messages extends Documents
                 'id' => $message->users->id,
                 'firstname' => $message->users->firstname,
                 'lastname' => $message->users->lastname,
-                'photo' => $message->users->getPhoto()->url
+                'photo' => !defined('API_TESTS') ? $message->users->getPhoto()->url : null,
             ],
             'message_types_id' => $message->message_types_id,
             'message_types' => [
@@ -121,7 +127,7 @@ class Messages extends Documents
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->comments_count,
             'files' => $message->files->toArray(),
-            'channels' => [
+            'channels' => $message->channels->getFirst() ? [
                 'id' => $message->channels->getFirst()->id,
                 'name' => $message->channels->getFirst()->name,
                 'description' => $message->channels->getFirst()->description,
@@ -129,7 +135,7 @@ class Messages extends Documents
                 'slug' => $message->channels->getFirst()->slug,
                 'created_at' => $message->channels->getFirst()->created_at,
                 'is_deleted' => $message->channels->getFirst()->is_deleted,
-            ],
+            ] : null,
             'comments' => $this->formatComments(
                 $message->getComments([
                     'limit' => $this->commentsLimit,
