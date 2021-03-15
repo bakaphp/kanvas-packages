@@ -35,6 +35,7 @@ class Tags extends BaseModel implements FollowableInterface
             Messages::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'messages'
             ]
         );
@@ -44,6 +45,7 @@ class Tags extends BaseModel implements FollowableInterface
             UsersFollows::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'follows',
                 'params' => 'is_deleted = 0'
             ]
@@ -54,6 +56,7 @@ class Tags extends BaseModel implements FollowableInterface
             UsersFollows::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'follow',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -69,6 +72,7 @@ class Tags extends BaseModel implements FollowableInterface
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -84,6 +88,7 @@ class Tags extends BaseModel implements FollowableInterface
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',

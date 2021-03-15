@@ -169,7 +169,7 @@ class Messages extends Documents
             $element['users']['id'] = (int)$comment->users->id;
             $element['users']['firstname'] = $comment->users->firstname;
             $element['users']['lastname'] = $comment->users->lastname;
-            $element['users']['photo'] = $comment->users->getPhoto()->url;
+            $element['users']['photo'] = $comment->users->getPhoto() ? $comment->users->getPhoto()->url : null;
             $element['message'] = $comment->message;
             $data[] = $element;
         }

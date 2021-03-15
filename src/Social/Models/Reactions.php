@@ -26,6 +26,7 @@ class Reactions extends BaseModel
             'reactions_id',
             [
                 'params' => 'is_deleted = 0',
+                'reusable' => true,
                 'alias' => 'usersReactions'
             ]
         );

@@ -48,6 +48,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             AppModuleMessage::class,
             'message_id',
             [
+                'reusable' => true,
                 'alias' => 'appModuleMessage'
             ]
         );
@@ -57,6 +58,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageVariables::class,
             'message_id',
             [
+                'reusable' => true,
                 'alias' => 'messageVariables'
             ]
         );
@@ -66,6 +68,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageComments::class,
             'message_id',
             [
+                'reusable' => true,
                 'alias' => 'comments'
             ]
         );
@@ -75,6 +78,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -90,6 +94,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_id = :entityId: AND entity_namespace = :namespace:',
@@ -106,6 +111,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -121,6 +127,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -136,6 +143,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -151,6 +159,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageTypes::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'message_type'
             ]
         );
@@ -163,6 +172,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             Tags::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'tags'
             ]
         );
@@ -175,6 +185,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             Channels::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'channels'
             ]
         );
@@ -185,6 +196,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             'Canvas\Models\FileSystemEntities',
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'files',
                 'params' => [
                     'conditions' => 'system_modules_id = ?0',

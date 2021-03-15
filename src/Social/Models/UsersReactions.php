@@ -22,6 +22,7 @@ class UsersReactions extends BaseModel
             $this->entity_namespace,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'entityData'
             ]
         );

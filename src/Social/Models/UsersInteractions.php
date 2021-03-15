@@ -34,6 +34,7 @@ class UsersInteractions extends BaseModel
             $this->entity_namespace,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'entityData',
                 'params' => [
                     'conditions' => 'is_deleted = 0'

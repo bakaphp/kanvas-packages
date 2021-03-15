@@ -30,7 +30,9 @@ class Interactions extends BaseModel
             UsersInteractions::class,
             'interactions_id',
             [
-                'alias' => 'usersInteractions'
+                'alias' => 'usersInteractions',
+                'reusable' => true,
+
             ]
         );
     }

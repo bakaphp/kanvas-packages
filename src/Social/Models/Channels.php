@@ -29,7 +29,8 @@ class Channels extends BaseModel
             Messages::class,
             'id',
             [
-                'alias' => 'messages'
+                'alias' => 'messages',
+                'reusable' => true
             ]
         );
     }

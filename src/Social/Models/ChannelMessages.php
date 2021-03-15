@@ -20,8 +20,8 @@ class ChannelMessages extends BaseModel
 
         $this->setSource('channel_messages');
 
-        $this->belongsTo('channel_id', Channels::class, 'id', ['alias' => 'channels']);
-        $this->belongsTo('messages_id', Messages::class, 'id', ['alias' => 'messages']);
+        $this->belongsTo('channel_id', Channels::class, 'id', ['alias' => 'channels', 'reusable' => true]);
+        $this->belongsTo('messages_id', Messages::class, 'id', ['alias' => 'messages', 'reusable' => true]);
     }
 
     /**
@@ -59,5 +59,16 @@ class ChannelMessages extends BaseModel
         );
 
         return $channelMessages;
+    }
+
+    /**
+     * After save
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        //so we can update the elastic document
+        $this->messages->save();
     }
 }

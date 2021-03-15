@@ -29,13 +29,14 @@ class MessageComments extends BaseModel
         parent::initialize();
 
         $this->setSource('message_comments');
-        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
+        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users', 'reusable' => true,]);
 
         $this->hasMany(
             'id',
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -51,6 +52,7 @@ class MessageComments extends BaseModel
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -66,6 +68,7 @@ class MessageComments extends BaseModel
             Messages::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'message',
                 'params' => [
                     'conditions' => 'is_deleted = 0'
@@ -78,6 +81,7 @@ class MessageComments extends BaseModel
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -93,6 +97,7 @@ class MessageComments extends BaseModel
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
