@@ -4,6 +4,7 @@ namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
 use Baka\Contracts\Elasticsearch\ElasticIndexModelTrait;
+use Canvas\Contracts\CustomFields\CustomFieldsTrait;
 use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
@@ -21,6 +22,11 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use InteractionsTrait;
     use FileSystemModelTrait;
     use ElasticIndexModelTrait;
+    use CustomFieldsTrait;
+
+    use ElasticIndexModelTrait, CustomFieldsTrait{
+        CustomFieldsTrait::afterDelete insteadof ElasticIndexModelTrait;
+    }
 
     public string $uuid;
     public int $apps_id;

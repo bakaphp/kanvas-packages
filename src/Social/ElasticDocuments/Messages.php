@@ -60,6 +60,7 @@ class Messages extends Documents
             'reactions_count' => $this->integer,
             'comments_count' => $this->integer,
             'files' => [],
+            'custom_fields' => [],
             'channels' => [
                 'id' => $this->integer,
                 'name' => $this->text,
