@@ -75,8 +75,29 @@ class QueryParser
         foreach (explode(',', $filters) as $filter) {
             $this->parser($filter);
         }
+        
+        $this->searchParams['filters'] = $this->rearrangeFilters();
+    }
 
-        $this->searchParams['filters'] = $this->filters;
+    /**
+     * If there are any or none parameters we configure the array
+     * @return array
+     */
+    public function rearrangeFilters() : array
+    {
+        if (!isset($this->filters['any']) && !isset($this->filters['none'])) {
+            return $this->filters;
+        }
+        $filters = [];
+        foreach ($this->filters as $key => $value) {
+            if (in_array($key, ['any','none'])) {
+                $filters[$key] = $value;
+                continue;
+            }
+            $filters['all'][$key] = $value;
+        }
+        $this->filters = $filters;
+        return $this->filters;
     }
 
     /**
