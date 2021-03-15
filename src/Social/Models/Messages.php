@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
+use Baka\Contracts\Elasticsearch\ElasticIndexModelTrait;
 use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
@@ -19,6 +20,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use CustomTotalInteractionsTrait;
     use InteractionsTrait;
     use FileSystemModelTrait;
+    use ElasticIndexModelTrait;
 
     public string $uuid;
     public int $apps_id;
@@ -35,6 +37,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function initialize()
     {
         parent::initialize();
+        $this->setElasticRawData();
 
         $this->setSource('messages');
         $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
@@ -225,6 +228,27 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         $comment->saveOrFail();
 
         return $comment;
+    }
+
+    /**
+     * Attach a System Module to this message.
+     *
+     * @param MessageableEntityInterface $entity
+     *
+     * @return AppModuleMessage
+     */
+    public function addSystemModules(MessageableEntityInterface $entity) : AppModuleMessage
+    {
+        $newAppModule = new AppModuleMessage();
+        $newAppModule->message_id = $this->getId();
+        $newAppModule->message_types_id = $this->message_types_id;
+        $newAppModule->apps_id = $this->apps_id; //Duplicate data?
+        $newAppModule->companies_id = $this->companies_id; //Duplicate data?
+        $newAppModule->system_modules = get_class($entity);
+        $newAppModule->entity_id = $entity->getId();
+        $newAppModule->saveOrFail();
+
+        return $newAppModule;
     }
 
     /**

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
+use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
-use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
 use Kanvas\Packages\Social\Models\AppModuleMessage;
@@ -77,7 +77,7 @@ class Messages
     }
 
     /**
-     * To be describe.
+     * Create a new Msg.
      *
      * @param UserInterface $user
      * @param string $verb
@@ -98,14 +98,9 @@ class Messages
         $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 
-        $newAppModule = new AppModuleMessage();
-        $newAppModule->message_id = $newMessage->getId();
-        $newAppModule->message_types_id = $newMessage->message_types_id;
-        $newAppModule->apps_id = $newMessage->apps_id; //Duplicate data?
-        $newAppModule->companies_id = $newMessage->companies_id; //Duplicate data?
-        $newAppModule->system_modules = $object ? get_class($object) : null;
-        $newAppModule->entity_id = $object ? $object->getId() : null;
-        $newAppModule->saveOrFail();
+        if ($object) {
+            $newMessage->addSystemModules($object);
+        }
 
         Distributions::sendToUsersFeeds($newMessage, $user);
         GenerateTags::dispatch($user, $newMessage);
@@ -114,7 +109,7 @@ class Messages
     }
 
     /**
-     * To be describe.
+     * Create a new msg from a Object.
      *
      * @param UserInterface $user
      * @param string $verb
@@ -133,14 +128,7 @@ class Messages
         $newMessage->created_at = date('Y-m-d H:i:s');
         $newMessage->saveOrFail();
 
-        $newAppModule = new AppModuleMessage();
-        $newAppModule->message_id = $newMessage->getId();
-        $newAppModule->message_types_id = $newMessage->message_types_id;
-        $newAppModule->apps_id = $newMessage->apps_id; //Duplicate data?
-        $newAppModule->companies_id = $newMessage->companies_id; //Duplicate data?
-        $newAppModule->system_modules = $object ? get_class($object) : null;
-        $newAppModule->entity_id = $object ? $object->getId() : null;
-        $newAppModule->saveOrFail();
+        $newMessage->addSystemModules($object);
 
         Distributions::sendToUsersFeeds($newMessage, $user);
         GenerateTags::dispatch($user, $newMessage);
@@ -173,7 +161,7 @@ class Messages
 
         RemoveMessagesFeed::dispatch($message);
 
-        return $message->softDelete();
+        return (bool) $message->softDelete();
     }
 
     /**
@@ -187,7 +175,7 @@ class Messages
     {
         $module = AppModuleMessage::findFirstOrFail([
             'conditions' => 'system_modules = :objectNamespace: AND entity_id = :entityId: AND
-                             apps_id = :appId: AND is_deleted = 0',
+                            apps_id = :appId: AND is_deleted = 0',
             'bind' => [
                 'objectNamespace' => get_class($object),
                 'entityId' => $object->getId(),

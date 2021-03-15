@@ -37,6 +37,7 @@ class Messages extends Documents
     {
         return [
             'id' => $this->integer,
+            'uuid' => $this->keyword,
             'apps_id' => $this->integer,
             'companies_id' => $this->integer,
             'users_id' => $this->integer,
@@ -44,6 +45,7 @@ class Messages extends Documents
                 'id' => $this->integer,
                 'firstname' => $this->text,
                 'lastname' => $this->text,
+                'displayname' => $this->text,
                 'photo' => $this->text
             ],
             'message_types_id' => $this->integer,
@@ -77,6 +79,7 @@ class Messages extends Documents
                     'id' => $this->integer,
                     'firstname' => $this->text,
                     'lastname' => $this->text,
+                    'displayname' => $this->text,
                     'photo' => $this->text
                 ],
                 'message' => $this->text,
@@ -106,6 +109,7 @@ class Messages extends Documents
 
         $this->data = [
             'id' => (int)$message->id,
+            'uuid' => $message->uuid,
             'apps_id' => $message->apps_id,
             'companies_id' => $message->companies_id,
             'users_id' => $message->users_id,
