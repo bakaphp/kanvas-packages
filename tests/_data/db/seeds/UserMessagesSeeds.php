@@ -1,6 +1,5 @@
 <?php
 
-
 use Phinx\Seed\AbstractSeed;
 
 class UserMessagesSeeds extends AbstractSeed
@@ -15,23 +14,26 @@ class UserMessagesSeeds extends AbstractSeed
      */
     public function run()
     {
-        $data = [
-            [
-                'messages_id' => 1,
-                'users_id' => 1,
-                'is_deleted' => 0,
-                'created_at' => date('Y-m-d H:i:s'),
-            ],
-            [
-                'messages_id' => 1,
-                'users_id' => 2,
-                'is_deleted' => 0,
-                'created_at' => date('Y-m-d H:i:s'),
-            ]
-        ];
+        try {
+            $data = [
+                [
+                    'messages_id' => 1,
+                    'users_id' => 1,
+                    'is_deleted' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ],
+                [
+                    'messages_id' => 1,
+                    'users_id' => 2,
+                    'is_deleted' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]
+            ];
 
-        $posts = $this->table('user_messages');
-        $posts->insert($data)
+            $posts = $this->table('user_messages');
+            $posts->insert($data)
               ->save();
+        } catch (Exception $e) {
+        }
     }
 }

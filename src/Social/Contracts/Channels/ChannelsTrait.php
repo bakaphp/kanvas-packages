@@ -1,25 +1,27 @@
 <?php
 
 declare(strict_types=1);
-namespace Kanvas\Packages\Social\Contract\Channels;
 
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+namespace Kanvas\Packages\Social\Contracts\Channels;
+
+use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Models\Channels as ChannelsModel;
 use Kanvas\Packages\Social\Models\ChannelUsers;
 use Phalcon\Utils\Slug;
 
 /**
- * Channels Trait
+ * Channels Trait.
  */
 trait ChannelsTrait
 {
     /**
-     * Get Channel by its name
+     * Get Channel by its name.
      *
      * @param string $channelName
+     *
      * @return ChannelsModel
      */
-    public function getChannelByName(string $channelName): ChannelsModel
+    public function getChannelByName(string $channelName) : ChannelsModel
     {
         $channel = ChannelsModel::findFirstOrFail([
             'conditions' => 'slug = :slug: AND is_deleted = 0',
@@ -32,14 +34,15 @@ trait ChannelsTrait
     }
 
     /**
-     * Create a new Channel and assign his creator a rol
+     * Create a new Channel and assign his creator a rol.
      *
      * @param UserInterface $user
      * @param string $name
      * @param string $description
+     *
      * @return ChannelsModel
      */
-    public function createChannel(UserInterface $user, string $name, string $description = ''): ChannelsModel
+    public function createChannel(UserInterface $user, string $name, string $description = '') : ChannelsModel
     {
         $channel = new ChannelsModel();
         $channel->name = $name;
@@ -55,21 +58,22 @@ trait ChannelsTrait
     }
 
     /**
-     * Add a new user to the channel
+     * Add a new user to the channel.
      *
      * @param ChannelsModel $channel
      * @param UserInterface $newUser
-     * @param integer $rolId
+     * @param int $rolId
+     *
      * @return ChannelUsers
      */
-    public static function addUser(ChannelsModel $channel, UserInterface $newUser, int $rolId = 1): ChannelUsers
+    public static function addUser(ChannelsModel $channel, UserInterface $newUser, int $rolId = 1) : ChannelUsers
     {
         $channelUser = ChannelUsers::findFirstOrCreate(
             [
-            'conditions' => 'users_id = :user_id: AND channel_id = :channel_id: AND is_deleted = 0',
-            'bind' => [
-                'user_id' => $newUser->getId(),
-                'channel_id' => $channel->getId(),
+                'conditions' => 'users_id = :user_id: AND channel_id = :channel_id: AND is_deleted = 0',
+                'bind' => [
+                    'user_id' => $newUser->getId(),
+                    'channel_id' => $channel->getId(),
                 ]
             ],
             [

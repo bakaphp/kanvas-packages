@@ -8,9 +8,7 @@ use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterface
 class Action implements ActionInterfaces
 {
     protected ?string $message = null;
-
     protected ?array $data = [];
-
     protected int $status = 1;
 
     /**

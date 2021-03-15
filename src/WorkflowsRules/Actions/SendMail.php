@@ -12,9 +12,7 @@ use Throwable ;
 class SendMail implements ActionInterfaces
 {
     protected ?string $message = null;
-
     protected ?array $data = [];
-
     protected int $status = 1;
 
     /**

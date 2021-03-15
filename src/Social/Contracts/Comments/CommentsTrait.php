@@ -1,46 +1,52 @@
 <?php
 
-namespace Kanvas\Packages\Social\Contract\Comments;
+declare(strict_types=1);
 
-use Phalcon\Http\Response;
-use Kanvas\Packages\Social\Services\Comments;
-use Gewaer\Models\MessageComments;
+namespace Kanvas\Packages\Social\Contracts\Comments;
+
 use Baka\Validation as CanvasValidation;
-use Phalcon\Validation\Validator\PresenceOf;
+use Gewaer\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Users;
+use Kanvas\Packages\Social\Services\Comments;
+use Phalcon\Http\Response;
+use Phalcon\Validation\Validator\PresenceOf;
 
 /**
- * Channels Trait
+ * Channels Trait.
  */
 trait CommentsTrait
 {
     /**
-     * Get all the comments
+     * Get all the comments.
      *
      * @param int $messageId
+     *
      * @throws Exception
      *
      * @return Response
      */
     public function getAllComments(int $messageId) : Response
     {
-        return $this->response($this->processOutput(MessageComments::findOrFail([
-            "conditions" => "message_id = :message_id: and apps_id = :apps_id: and companies_id = :companies_id: and is_deleted = 0",
-            "bind" => [
-                "message_id" => $messageId,
-                "apps_id" => $this->app->getId(),
-                "companies_id" =>$this->userData->getCurrentCompany()->getId(),
+        $comments = MessageComments::findOrFail([
+            'conditions' => 'message_id = :message_id: and apps_id = :apps_id: and companies_id = :companies_id: and is_deleted = 0',
+            'bind' => [
+                'message_id' => $messageId,
+                'apps_id' => $this->app->getId(),
+                'companies_id' => $this->userData->getCurrentCompany()->getId(),
             ]
-        ])));
+        ]);
+
+        return $this->response($this->processOutput($comments));
     }
 
     /**
-     * Get comment by its id
+     * Get comment by its id.
      *
      * @param int $commentId
+     *
      * @return Response
      */
-    public function getComment(int $commentId): Response
+    public function getComment(int $commentId) : Response
     {
         return $this->response(Comments::getById((string)$commentId));
     }
@@ -49,9 +55,10 @@ trait CommentsTrait
      * processInput function.
      *
      * @param array $request
+     *
      * @return array
      */
-    protected function processInput(array $request): array
+    protected function processInput(array $request) : array
     {
         $validation = new CanvasValidation();
         $validation->add('message', new PresenceOf(['message' => _('message is required.')]));
@@ -61,12 +68,13 @@ trait CommentsTrait
     }
 
     /**
-     * Add a new comment to a message
+     * Add a new comment to a message.
      *
      * @param int $messageId
+     *
      * @return Response
      */
-    public function addComment(int $messageId): Response
+    public function addComment(int $messageId) : Response
     {
         $request = $this->processInput($this->request->getPostData());
 
@@ -83,12 +91,13 @@ trait CommentsTrait
     }
 
     /**
-     * Add a new comment to a message
+     * Add a new comment to a message.
      *
      * @param int $messageId
+     *
      * @return Response
      */
-    public function editComment(int $commentId): Response
+    public function editComment(int $commentId) : Response
     {
         $request = $this->processInput($this->request->getPutData());
 
@@ -98,12 +107,13 @@ trait CommentsTrait
     }
 
     /**
-     * Add a new comment to a message
+     * Add a new comment to a message.
      *
      * @param int $commentId
+     *
      * @return Response
      */
-    public function deleteComment(int $commentId): Response
+    public function deleteComment(int $commentId) : Response
     {
         return $this->response(Comments::delete($commentId, $this->userData));
     }

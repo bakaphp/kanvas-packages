@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\AppSearch\Contracts;
 
-use Phalcon\Http\Response;
 use Kanvas\Packages\AppSearch\Http\QueryParser\QueryParser;
+use Phalcon\Http\Response;
 
 trait SearchableControllerTrait
 {

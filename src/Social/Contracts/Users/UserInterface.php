@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Users;
+namespace Kanvas\Packages\Social\Contracts\Users;
 
 interface UserInterface
 {

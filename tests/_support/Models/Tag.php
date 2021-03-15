@@ -2,8 +2,8 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\FollowableInterface;
-use Kanvas\Packages\Social\Contract\Interactions\FollowersTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\FollowableInterface;
+use Kanvas\Packages\Social\Contracts\Interactions\FollowersTrait;
 
 class Tag extends BaseModel implements FollowableInterface
 {

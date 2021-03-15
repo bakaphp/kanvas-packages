@@ -45,6 +45,7 @@
         "odan/phinx-migrations-generator": "^5",
         "squizlabs/php_codesniffer": "3.2",
         "symfony/var-dumper": "^4.3@dev",
+        "phpstan/phpstan": "^0.9.2",
         "phpunit/phpunit": "^9.1"
     },
     "autoload": {

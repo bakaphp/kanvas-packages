@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\AppSearch\Contracts;
 
-use Baka\Constants\Flags;
 use Baka\getShortClassName;
 use function Baka\getShortClassName;
 use Kanvas\Packages\AppSearch\Jobs\IndexAppSearchModels;
-use Phalcon\Di;
 
 trait SearchableModelsTrait
 {

@@ -14,7 +14,7 @@ class DistributionChannels extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('distribution_channels');
     }
 }

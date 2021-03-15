@@ -2,12 +2,10 @@
 
 namespace Kanvas\Packages\Social\Tasks;
 
-use Baka\Contracts\Elasticsearch\IndexBuilderTaskTrait;
+use Baka\Elasticsearch\Objects\Indices;
 use Canvas\Cli\Tasks\ElasticTask as KanvasElasticTask;
 use Kanvas\Packages\Social\ElasticDocuments\Messages as MessageDocument;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
-use Kanvas\Packages\Social\Models\Channels as ChannelsModel;
-use Baka\Elasticsearch\Objects\Indices;
 use Phalcon\Di;
 
 class ElasticTask extends KanvasElasticTask
@@ -22,9 +20,9 @@ class ElasticTask extends KanvasElasticTask
         //if the index doesn't exist create it
         $messages = new MessageDocument();
         $messagesRecords = MessagesModel::findOrFail([
-            'conditions' => "apps_id = :apps_id: and is_deleted = 0",
+            'conditions' => 'apps_id = :apps_id: and is_deleted = 0',
             'bind' => [
-                "apps_id" => Di::getDefault()->get('app')->getId(),
+                'apps_id' => Di::getDefault()->get('app')->getId(),
             ]
         ]);
         // $messagesRecords = MessagesModel::findOrFail(['limit' => 1]);
@@ -38,7 +36,7 @@ class ElasticTask extends KanvasElasticTask
             $result = $messages->add();
             Di::getDefault()->get('log')->info('Messages added to Messages Index', [$result]);
         }
-        
+
         return true;
     }
 }

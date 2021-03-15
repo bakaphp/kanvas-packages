@@ -30,18 +30,21 @@ class Interactions extends BaseModel
             UsersInteractions::class,
             'interactions_id',
             [
-                'alias' => 'usersInteractions'
+                'alias' => 'usersInteractions',
+                'reusable' => true,
+
             ]
         );
     }
 
     /**
-     * Verify if the interaction is a comment/reply
+     * Verify if the interaction is a comment/reply.
      *
-     * @param integer $interactionId
-     * @return boolean
+     * @param int $interactionId
+     *
+     * @return bool
      */
-    public static function isComment(int $interactionId): bool
+    public static function isComment(int $interactionId) : bool
     {
         return $interactionId == self::COMMENT || $interactionId == self::REPLIED;
     }

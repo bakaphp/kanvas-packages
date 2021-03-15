@@ -23,6 +23,7 @@ class MessageVariables extends BaseModel
             Messages::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'message',
                 'params' => [
                     'conditions' => 'is_deleted = 0'

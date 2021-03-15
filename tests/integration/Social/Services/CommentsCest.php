@@ -2,42 +2,42 @@
 
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
+use Canvas\Models\SystemModules;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Services\Comments;
 use Kanvas\Packages\Social\Services\Interactions;
-use Kanvas\Packages\Social\Services\Reactions;
-use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Services\Messages as MessagesService;
 use Kanvas\Packages\Social\Services\MessageTypes;
-use Canvas\Models\SystemModules;
-use Phalcon\Di;
+use Kanvas\Packages\Social\Services\Reactions;
+use Kanvas\Packages\Test\Support\Models\Users;
 
 class CommentsCest
 {
     public MessageComments $comment;
 
     /**
-     * Get the first comment
+     * Get the first comment.
      *
      * @return void
      */
-    protected function getCommentData(): void
+    protected function getCommentData() : void
     {
-        $this->comment = MessageComments::findFirst();
+        $this->comment = MessageComments::findFirst('is_deleted = 0');
     }
-    
+
     /**
-     * Test add comment
+     * Test add comment.
      *
      * @param UnitTester $I
+     *
      * @return void
      */
-    public function addComment(IntegrationTester $I): void
+    public function addComment(IntegrationTester $I) : void
     {
-        $user = new Users();
+        $user = Users::findFirst(1);
 
         //Add new SystemModule for Messages
         $systemModule = SystemModules::findFirstOrCreate([
@@ -59,22 +59,23 @@ class CommentsCest
         $text = [
             'text' => 'Test some messages'
         ];
-        
+
         //Create a new Message for the comment
         $feed = MessagesService::create($user, 'comments', $text);
-        $comment = Comments::add($feed->getId(), 'test-text',$user);
+        $comment = Comments::add($feed->getId(), 'test-text', $user);
 
         $I->assertEquals('test-text', $comment->message);
     }
 
     /**
-     * Test comment edit
+     * Test comment edit.
      *
      * @param IntegrationTester $I
      * @before getCommentData
+     *
      * @return void
      */
-    public function editComment(IntegrationTester $I): void
+    public function editComment(IntegrationTester $I) : void
     {
         $comment = Comments::edit((string) $this->comment->getId(), 'edited-test-text');
 
@@ -82,13 +83,14 @@ class CommentsCest
     }
 
     /**
-     * Test get Comment
+     * Test get Comment.
      *
      * @param IntegrationTester $I
      * @before getCommentData
+     *
      * @return void
      */
-    public function getComment(IntegrationTester $I): void
+    public function getComment(IntegrationTester $I) : void
     {
         $comment = Comments::getById($this->comment->getId());
 
@@ -96,13 +98,14 @@ class CommentsCest
     }
 
     /**
-     * Test reply comment
+     * Test reply comment.
      *
      * @param IntegrationTester $I
      * @before getCommentData
+     *
      * @return void
      */
-    public function replyComment(IntegrationTester $I): void
+    public function replyComment(IntegrationTester $I) : void
     {
         $reply = Comments::reply($this->comment->getId(), 'reply-test');
 
@@ -111,13 +114,14 @@ class CommentsCest
     }
 
     /**
-     * Test edit comment
+     * Test edit comment.
      *
      * @param IntegrationTester $I
      * @before getCommentData
+     *
      * @return void
      */
-    public function deleteComment(IntegrationTester $I): void
+    public function deleteComment(IntegrationTester $I) : void
     {
         $I->assertTrue(
             Comments::delete(
@@ -128,30 +132,32 @@ class CommentsCest
     }
 
     /**
-     * Test comments Reactions
+     * Test comments Reactions.
      *
      * @param IntegrationTester $I
      * @before getCommentData
+     *
      * @return void
      */
-    public function commentReaction(IntegrationTester $I): void
+    public function commentReaction(IntegrationTester $I) : void
     {
-        $I->assertFalse(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
-        $I->assertFalse(Reactions::addMessageReaction('☺', new Users(), $this->comment));
+        $user = Users::findFirst(1);
+        $I->assertFalse(Reactions::addMessageReaction('confuse', $user, $this->comment));
+        $I->assertFalse(Reactions::addMessageReaction('☺', $user, $this->comment));
 
-        $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->comment));
-        $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->comment));
-
+        $I->assertTrue(Reactions::addMessageReaction('confuse', $user, $this->comment));
+        $I->assertTrue(Reactions::addMessageReaction('☺', $user, $this->comment));
     }
 
     /**
-     * Test Users Comments Interaction
+     * Test Users Comments Interaction.
      *
      * @param IntegrationTester $I
      * @before getCommentData
+     *
      * @return void
      */
-    public function messageInteraction(IntegrationTester $I): void
+    public function messageInteraction(IntegrationTester $I) : void
     {
         $I->assertFalse(
             Interactions::add(new Users(), $this->comment, ModelsInteractions::REACT)
@@ -159,13 +165,14 @@ class CommentsCest
     }
 
     /**
-     * Test method to get comments from a message
+     * Test method to get comments from a message.
      *
      * @param IntegrationTester $I
      * @before getCommentData
+     *
      * @return void
      */
-    public function getCommentsFromMessage(IntegrationTester $I): void
+    public function getCommentsFromMessage(IntegrationTester $I) : void
     {
         $message = $this->comment->getMessage();
         $comments = Comments::getCommentsFromMessage($message);

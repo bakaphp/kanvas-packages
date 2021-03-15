@@ -34,6 +34,7 @@ class MessageTypes extends BaseModel
             Messages::class,
             'message_types_id',
             [
+                'reusable' => true,
                 'alias' => 'messages',
                 'params' => [
                     'conditions' => 'is_deleted = 0'
@@ -46,18 +47,20 @@ class MessageTypes extends BaseModel
             AppModuleMessage::class,
             'message_types_id',
             [
+                'reusable' => true,
                 'alias' => 'appModules'
             ]
         );
     }
 
     /**
-     * Return a Message object by its id
+     * Return a Message object by its id.
      *
      * @param string $uuid
+     *
      * @return self
      */
-    public static function getByUuid(string $uuid): self
+    public static function getByUuid(string $uuid) : self
     {
         return MessageTypes::findFirstOrFail([
             'conditions' => 'uuid = :uuid: and is_deleted = 0',
@@ -68,12 +71,13 @@ class MessageTypes extends BaseModel
     }
 
     /**
-    * Get the message type by its verb
-    *
-    * @param string $verb
-    * @param UserInterface $user
-    * @return self | null
-    */
+     * Get the message type by its verb.
+     *
+     * @param string $verb
+     * @param UserInterface $user
+     *
+     * @return self | null
+     */
     public static function getTypeByVerb(string $verb) : ?self
     {
         return MessageTypes::findFirst([

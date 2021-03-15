@@ -2,10 +2,10 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\MultiInteractionsTrait;
-use Phalcon\Di;
 use Canvas\Models\Users;
+use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\MultiInteractionsTrait;
+use Phalcon\Di;
 
 class MessageComments extends BaseModel
 {
@@ -29,13 +29,14 @@ class MessageComments extends BaseModel
         parent::initialize();
 
         $this->setSource('message_comments');
-        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
+        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users', 'reusable' => true,]);
 
         $this->hasMany(
             'id',
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -51,6 +52,7 @@ class MessageComments extends BaseModel
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -66,6 +68,7 @@ class MessageComments extends BaseModel
             Messages::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'message',
                 'params' => [
                     'conditions' => 'is_deleted = 0'
@@ -78,6 +81,7 @@ class MessageComments extends BaseModel
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -93,6 +97,7 @@ class MessageComments extends BaseModel
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -105,13 +110,14 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * Create a comment for a message
+     * Create a comment for a message.
      *
      * @param string $messageId
      * @param string $message
+     *
      * @return MessageComments
      */
-    public function reply(string $message): MessageComments
+    public function reply(string $message) : MessageComments
     {
         $comment = new MessageComments();
         $comment->message_id = $this->message_id;
@@ -126,11 +132,11 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * Return the id of the parent in case that comment is a reply
+     * Return the id of the parent in case that comment is a reply.
      *
-     * @return integer
+     * @return int
      */
-    public function getParentId(): int
+    public function getParentId() : int
     {
         return $this->parent_id == 0 ? $this->getId() : $this->parent_id;
     }
@@ -146,12 +152,13 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * Verify if this comment has message
+     * Verify if this comment has message.
      *
      * @param Messages $message
-     * @return boolean
+     *
+     * @return bool
      */
-    public function hasMessage(Messages $message): bool
+    public function hasMessage(Messages $message) : bool
     {
         return $this->message_id == $message->getId();
     }

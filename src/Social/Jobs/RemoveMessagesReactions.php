@@ -13,7 +13,7 @@ class RemoveMessagesReactions extends Job implements QueueableJobInterface
     protected $reaction;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param ReactionsModels $reaction
      */
@@ -24,10 +24,11 @@ class RemoveMessagesReactions extends Job implements QueueableJobInterface
 
     /**
      * Handle that delete the reactions contains in any entity.
-     * Todo: Remove reaction count for the entity
+     * Todo: Remove reaction count for the entity.
+     *
      * @return bool
      */
-    public function handle(): bool
+    public function handle() : bool
     {
         $messagesReaction = UsersReactions::find([
             'conditions' => 'reactions_id = :reaction_id: AND is_deleted = 0',

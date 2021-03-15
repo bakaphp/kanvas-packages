@@ -4,7 +4,6 @@ namespace Kanvas\Packages\Social\Models;
 
 class AppModuleMessage extends BaseModel
 {
-    public $id;
     public int $message_id;
     public int $message_types_id;
     public int $apps_id;
@@ -26,6 +25,7 @@ class AppModuleMessage extends BaseModel
             MessageTypes::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'messageType',
                 'params' => [
                     'conditions' => 'is_deleted = 0'
@@ -38,6 +38,7 @@ class AppModuleMessage extends BaseModel
             Messages::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'message'
             ]
         );

@@ -14,7 +14,7 @@ class MessageTags extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('message_tags');
     }
 }

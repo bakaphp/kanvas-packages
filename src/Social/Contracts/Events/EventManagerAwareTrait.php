@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Events;
+namespace Kanvas\Packages\Social\Contracts\Events;
 
 use Phalcon\Di;
 use Phalcon\Events\ManagerInterface as EventsManager;
@@ -37,7 +37,7 @@ trait EventManagerAwareTrait
      *
      * @return EventsManager | null
      */
-    public function getEventsManager(): EventsManager
+    public function getEventsManager() : EventsManager
     {
         $di = Di::getDefault();
 
@@ -60,7 +60,7 @@ trait EventManagerAwareTrait
      * @param string $event
      * @param object $source
      * @param mixed $data
-     * @param boolean $cancelable
+     * @param bool $cancelable
      *
      */
     public function fire($event, $source, $data = null, $cancelable = true)

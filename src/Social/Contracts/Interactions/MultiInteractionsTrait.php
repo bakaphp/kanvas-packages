@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Contract\Interactions;
+namespace Kanvas\Packages\Social\Contracts\Interactions;
 
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
 
 trait MultiInteractionsTrait
 {
@@ -13,13 +13,14 @@ trait MultiInteractionsTrait
     }
 
     /**
-     * Remove the user interaction if the user not have more actions
+     * Remove the user interaction if the user not have more actions.
      *
      * @param string $action
      * @param UserInterface $user
+     *
      * @return void
      */
-    public function deleteInteraction(int $interactionId, UserInterface $user): void
+    public function deleteInteraction(int $interactionId, UserInterface $user) : void
     {
         if (!$this->hasInteraction($user)) {
             $this->parentDeleteInteraction($interactionId, $user);
@@ -27,12 +28,13 @@ trait MultiInteractionsTrait
     }
 
     /**
-     * Verify if the user have an interaction to the same message
+     * Verify if the user have an interaction to the same message.
      *
      * @param UserInterface $user
-     * @return boolean
+     *
+     * @return bool
      */
-    protected function hasInteraction(UserInterface $user): bool
+    protected function hasInteraction(UserInterface $user) : bool
     {
         return (bool) $this->count(
             [

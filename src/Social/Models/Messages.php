@@ -2,17 +2,18 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\InteractionsTrait;
-use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Messages\MessagesInterface;
-use Kanvas\Packages\Social\Contract\Messages\MessageableEntityInterface;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
-use Canvas\Traits\FileSystemModelTrait;
+use Baka\Contracts\Auth\UserInterface;
+use Baka\Contracts\Elasticsearch\ElasticIndexModelTrait;
+use Canvas\Contracts\CustomFields\CustomFieldsTrait;
+use Canvas\Contracts\FileSystemModelTrait;
+use Canvas\Models\Behaviors\Uuid;
 use Canvas\Models\SystemModules;
 use Canvas\Models\Users;
-use Phalcon\Security\Random;
-use Canvas\Models\Behaviors\Uuid;
+use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\InteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
+use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
+use Kanvas\Packages\Social\Jobs\ElasticMessages;
 use Phalcon\Di;
 
 class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
@@ -20,16 +21,21 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     use CustomTotalInteractionsTrait;
     use InteractionsTrait;
     use FileSystemModelTrait;
+    use ElasticIndexModelTrait;
+    use CustomFieldsTrait;
 
-    public $id;
+    use ElasticIndexModelTrait, CustomFieldsTrait{
+        CustomFieldsTrait::afterDelete insteadof ElasticIndexModelTrait;
+    }
+
     public string $uuid;
     public int $apps_id;
     public int $companies_id;
     public int $users_id;
     public int $message_types_id;
     public string $message;
-    public ?int $reactions_count = null;
-    public ?int $comments_count = null;
+    public ?int $reactions_count = 0;
+    public ?int $comments_count = 0;
 
     /**
      * Initialize method for model.
@@ -37,13 +43,10 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function initialize()
     {
         parent::initialize();
+        $this->setElasticRawData();
 
         $this->setSource('messages');
         $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
-
-        $this->addBehavior(
-            new Uuid()
-        );
 
         $this->addBehavior(
             new Uuid()
@@ -54,6 +57,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             AppModuleMessage::class,
             'message_id',
             [
+                'reusable' => true,
                 'alias' => 'appModuleMessage'
             ]
         );
@@ -63,6 +67,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageVariables::class,
             'message_id',
             [
+                'reusable' => true,
                 'alias' => 'messageVariables'
             ]
         );
@@ -72,6 +77,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageComments::class,
             'message_id',
             [
+                'reusable' => true,
                 'alias' => 'comments'
             ]
         );
@@ -81,6 +87,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -96,6 +103,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_id = :entityId: AND entity_namespace = :namespace:',
@@ -112,6 +120,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -127,6 +136,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             UsersReactions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'reaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace: AND is_deleted = 0',
@@ -137,12 +147,12 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             ]
         );
 
-
         $this->hasOne(
             'id',
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -158,6 +168,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             MessageTypes::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'message_type'
             ]
         );
@@ -170,6 +181,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             Tags::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'tags'
             ]
         );
@@ -182,16 +194,18 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             Channels::class,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'channels'
             ]
         );
 
-        $systemModule = SystemModules::getSystemModuleByModelName(self::class, false);
+        $systemModule = SystemModules::getByModelName(self::class, false);
         $this->hasMany(
             'id',
             'Canvas\Models\FileSystemEntities',
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'files',
                 'params' => [
                     'conditions' => 'system_modules_id = ?0',
@@ -202,13 +216,14 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
-     * Create a comment for a message
+     * Create a comment for a message.
      *
      * @param string $messageId
      * @param string $message
+     *
      * @return MessageComments
      */
-    public function comment(string $message, UserInterface $user): MessageComments
+    public function comment(string $message, UserInterface $user) : MessageComments
     {
         $comment = new MessageComments();
         $comment->message_id = $this->getId();
@@ -222,12 +237,34 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
-     * Verify if the $userId owns this message
+     * Attach a System Module to this message.
      *
-     * @param integer $userId
-     * @return boolean
+     * @param MessageableEntityInterface $entity
+     *
+     * @return AppModuleMessage
      */
-    public function hasUser(int $userId): bool
+    public function addSystemModules(MessageableEntityInterface $entity) : AppModuleMessage
+    {
+        $newAppModule = new AppModuleMessage();
+        $newAppModule->message_id = $this->getId();
+        $newAppModule->message_types_id = $this->message_types_id;
+        $newAppModule->apps_id = $this->apps_id; //Duplicate data?
+        $newAppModule->companies_id = $this->companies_id; //Duplicate data?
+        $newAppModule->system_modules = get_class($entity);
+        $newAppModule->entity_id = $entity->getId();
+        $newAppModule->saveOrFail();
+
+        return $newAppModule;
+    }
+
+    /**
+     * Verify if the $userId owns this message.
+     *
+     * @param int $userId
+     *
+     * @return bool
+     */
+    public function hasUser(int $userId) : bool
     {
         return $userId == $this->users_id;
     }
@@ -242,5 +279,6 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public function afterSave()
     {
         $this->associateFileSystem();
+        ElasticMessages::dispatch($this);
     }
 }

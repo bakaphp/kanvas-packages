@@ -2,7 +2,6 @@
 
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
-use Codeception\Lib\Di;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Reactions as ModelsReactions;
 use Kanvas\Packages\Social\Services\Reactions;
@@ -13,63 +12,67 @@ class ReactionsCest
     public ModelsReactions $reaction;
 
     /**
-     * Create a reaction for testing
+     * Create a reaction for testing.
      *
      * @return void
      */
-    protected function reactionCreation(): void
+    protected function reactionCreation() : void
     {
-        $this->reaction = Reactions::createReaction('test-reaction', new Users, "💀");
+        $this->reaction = Reactions::createReaction('test-reaction', Users::findFirst(1), '💀');
     }
-        
+
     /**
-     * Test create Reactions
+     * Test create Reactions.
      *
      * @param UnitTester $I
+     *
      * @return void
      */
-    public function createReaction(IntegrationTester $I): void
+    public function createReaction(IntegrationTester $I) : void
     {
-        $reaction = Reactions::createReaction('test', new Users, "😎");
+        $reaction = Reactions::createReaction('test', Users::findFirst(1), '😎');
 
         $I->assertEquals('test', $reaction->name);
     }
 
     /**
-     * Test get Reaction by its name
+     * Test get Reaction by its name.
      *
      * @param IntegrationTester $I
      * @before reactionCreation
+     *
      * @return void
      */
-    public function getReactionByName(IntegrationTester $I): void
+    public function getReactionByName(IntegrationTester $I) : void
     {
-        $reaction = Reactions::getReactionByName('test-reaction', new Users());
+        $reaction = Reactions::getReactionByName('test-reaction', Users::findFirst(1));
 
         $I->assertEquals('test-reaction', $reaction->name);
     }
 
     /**
-     * Test get Reaction by Emoji
+     * Test get Reaction by Emoji.
      *
      * @param IntegrationTester $I
      * @before reactionCreation
+     *
      * @return void
      */
-    public function getReactionByEmoji(IntegrationTester $I): void
+    public function getReactionByEmoji(IntegrationTester $I) : void
     {
-        $reaction = Reactions::getReactionByEmoji("💀", new Users());
+        $reaction = Reactions::getReactionByEmoji('💀', Users::findFirst(1));
 
-        $I->assertEquals("💀", $reaction->icon);
+        $I->assertEquals('💀', $reaction->icon);
     }
 
     /**
-     * Test get Reactions Emojies
+     * Test get Reactions Emojies.
      *
      * @param IntegrationTester $I
+     *
      * @return void
      */
-    public function getReactionsEmojis(IntegrationTester $I): void
+    public function getReactionsEmojis(IntegrationTester $I) : void
     {
         $reactionsEmojies = Reactions::getReactionsEmojis();
 
@@ -77,13 +80,14 @@ class ReactionsCest
     }
 
     /**
-     * Test edit Reactions Emojies
+     * Test edit Reactions Emojies.
      *
      * @param IntegrationTester $I
      * @before reactionCreation
+     *
      * @return void
      */
-    public function editReaction(IntegrationTester $I): void
+    public function editReaction(IntegrationTester $I) : void
     {
         $reaction = Reactions::editReaction($this->reaction, 'test-edited-reaction');
 
@@ -91,13 +95,14 @@ class ReactionsCest
     }
 
     /**
-     * Test reaction delete
+     * Test reaction delete.
      *
      * @param IntegrationTester $I
      * @before reactionCreation
+     *
      * @return void
      */
-    public function deleteReaction(IntegrationTester $I): void
+    public function deleteReaction(IntegrationTester $I) : void
     {
         $I->assertTrue(Reactions::deleteReaction($this->reaction));
     }

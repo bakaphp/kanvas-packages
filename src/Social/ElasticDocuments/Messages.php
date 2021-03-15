@@ -4,13 +4,13 @@ namespace Kanvas\Packages\Social\ElasticDocuments;
 
 use Baka\Elasticsearch\Objects\Documents;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
-use Kanvas\Packages\Social\Models\ChannelMessages as ChannelMessagesModel;
-use Kanvas\Packages\Social\Models\MessageComments as MessageCommentsModel;
 use Phalcon\Mvc\Model\Resultset\Simple;
-use Canvas\Models\Users;
+use RuntimeException;
 
 class Messages extends Documents
 {
+    protected int $commentsLimit = 3;
+
     /**
      * initialize.
      *
@@ -27,9 +27,9 @@ class Messages extends Documents
         $this->addRelation('comments', ['alias' => 'comments', 'elasticAlias' => 'msgcm', 'elasticIndex' => 1]);
         $this->addRelation('message_type', ['alias' => 'message_type', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
     }
-    
+
     /**
-     * structure
+     * structure.
      *
      * @return array
      */
@@ -37,6 +37,7 @@ class Messages extends Documents
     {
         return [
             'id' => $this->integer,
+            'uuid' => $this->keyword,
             'apps_id' => $this->integer,
             'companies_id' => $this->integer,
             'users_id' => $this->integer,
@@ -44,6 +45,7 @@ class Messages extends Documents
                 'id' => $this->integer,
                 'firstname' => $this->text,
                 'lastname' => $this->text,
+                'displayname' => $this->text,
                 'photo' => $this->text
             ],
             'message_types_id' => $this->integer,
@@ -58,6 +60,7 @@ class Messages extends Documents
             'reactions_count' => $this->integer,
             'comments_count' => $this->integer,
             'files' => [],
+            'custom_fields' => [],
             'channels' => [
                 'id' => $this->integer,
                 'name' => $this->text,
@@ -77,6 +80,7 @@ class Messages extends Documents
                     'id' => $this->integer,
                     'firstname' => $this->text,
                     'lastname' => $this->text,
+                    'displayname' => $this->text,
                     'photo' => $this->text
                 ],
                 'message' => $this->text,
@@ -97,10 +101,16 @@ class Messages extends Documents
      */
     public function setData($id, array $data) : Documents
     {
+        if (!$data[0] instanceof MessagesModel) {
+            throw new RuntimeException('Params 0 of data should be the message');
+        }
+
         parent::setData($id, $data);
-        $message = MessagesModel::findFirstOrFail($id);
+        $message = $data[0]; //MessagesModel::findFirstOrFail($id);
+
         $this->data = [
             'id' => (int)$message->id,
+            'uuid' => $message->uuid,
             'apps_id' => $message->apps_id,
             'companies_id' => $message->companies_id,
             'users_id' => $message->users_id,
@@ -108,7 +118,7 @@ class Messages extends Documents
                 'id' => $message->users->id,
                 'firstname' => $message->users->firstname,
                 'lastname' => $message->users->lastname,
-                'photo' => $message->users->getPhoto()->url
+                'photo' => !defined('API_TESTS') ? $message->users->getPhoto()->url : null,
             ],
             'message_types_id' => $message->message_types_id,
             'message_types' => [
@@ -122,7 +132,7 @@ class Messages extends Documents
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->comments_count,
             'files' => $message->files->toArray(),
-            'channels' => [
+            'channels' => $message->channels->getFirst() ? [
                 'id' => $message->channels->getFirst()->id,
                 'name' => $message->channels->getFirst()->name,
                 'description' => $message->channels->getFirst()->description,
@@ -130,8 +140,13 @@ class Messages extends Documents
                 'slug' => $message->channels->getFirst()->slug,
                 'created_at' => $message->channels->getFirst()->created_at,
                 'is_deleted' => $message->channels->getFirst()->is_deleted,
-            ],
-            'comments' => $this->formatComments($message->comments),
+            ] : null,
+            'comments' => $this->formatComments(
+                $message->getComments([
+                    'limit' => $this->commentsLimit,
+                    'order' => 'id DESC'
+                ])
+            ),
             'created_at' => $message->created_at,
             'updated_at' => $message->updated_at,
             'is_deleted' => $message->is_deleted
@@ -140,7 +155,11 @@ class Messages extends Documents
     }
 
     /**
-     * Format message comments data
+     * Format message comments data.
+     *
+     * @param Simple $comments
+     *
+     * @return array
      */
     private function formatComments(Simple $comments) : array
     {
@@ -155,7 +174,7 @@ class Messages extends Documents
             $element['users']['id'] = (int)$comment->users->id;
             $element['users']['firstname'] = $comment->users->firstname;
             $element['users']['lastname'] = $comment->users->lastname;
-            $element['users']['photo'] = $comment->users->getPhoto()->url;
+            $element['users']['photo'] = $comment->users->getPhoto() ? $comment->users->getPhoto()->url : null;
             $element['message'] = $comment->message;
             $data[] = $element;
         }

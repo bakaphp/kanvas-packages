@@ -17,44 +17,47 @@ class DistributionCest
     public Messages $message;
 
     /**
-     * Get the first channel
+     * Get the first channel.
      *
      * @return void
      */
-    protected function setDistributionsParams(): void
+    protected function setDistributionsParams() : void
     {
         $random = new Random();
-        $this->channel = ChannelsModel::findFirstOrCreate([
-            'conditions' => 'is_deleted = 0'
-        ],
-        [
-            'name' => 'Channel-Test',
-        ]);
+        $this->channel = ChannelsModel::findFirstOrCreate(
+            [
+                'conditions' => 'is_deleted = 0'
+            ],
+            [
+                'name' => 'Channel-Test',
+            ]
+        );
 
-        $user = new Users();
+        $user = Users::findFirst(1);
         $app = new App();
 
         $this->message = Messages::findFirstOrCreate([
             'conditions' => 'is_deleted = 0',
-            'order'=> 'id desc'
-        ],[
+            'order' => 'id desc'
+        ], [
             'uuid' => $random->uuid(),
             'apps_id' => $app->getId(),
             'companies_id' => $user->getDefaultCompany(),
             'users_id' => $user->getId(),
             'message_types_id' => 1,
-            'message' => "Test for distribution",
+            'message' => 'Test for distribution',
         ]);
     }
-    
+
     /**
-     * Test distribution of message to channel feed
+     * Test distribution of message to channel feed.
      *
      * @param IntegrationTester $I
      * @before setDistributionsParams
+     *
      * @return void
      */
-    public function sendMessageToChannelFeed(IntegrationTester $I): void
+    public function sendMessageToChannelFeed(IntegrationTester $I) : void
     {
         $channelFeeds = Distributions::sendToChannelFeed($this->channel, $this->message);
 
