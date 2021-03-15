@@ -61,8 +61,10 @@ class QueryParser
      */
     public function setSort(string $sort) : void
     {
-        $sort = explode('|', $sort);
-        $this->searchParams['sort'][$sort[0]] = $sort[1] ?? 'asc';
+        foreach (explode(",", $sort) as $s) {
+            $s = explode('|', $s);
+            $this->searchParams['sort'][][$s[0]] = $s[1] ?? 'asc';
+        }
     }
 
     /**
