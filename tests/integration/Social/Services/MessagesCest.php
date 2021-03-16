@@ -86,6 +86,33 @@ class MessagesCest
         $I->assertNotNull($feed->getId());
     }
 
+    public function createMessageWithCustomField(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+        $feed->set('people', 'max');
+        $feed->set('organization', [1, 2, 3]);
+        $feed->set('entity', ['nose' => 'abd']);
+        $feed->update();
+
+        $I->assertNotNull($feed->getId());
+    }
+
+    public function createMessageWithImage(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+        // $feed->attach
+
+        $I->assertNotNull($feed->getId());
+    }
+
     /**
      * Create Message by Message Object Test.
      *
