@@ -7,6 +7,7 @@
 use Canvas\Providers\AppProvider;
 use Canvas\Providers\CacheDataProvider;
 use Canvas\Providers\DatabaseProvider as KanvasDatabaseProvider;
+use Canvas\Providers\MapperProvider;
 use Canvas\Providers\ModelsCacheProvider;
 use Canvas\Providers\RegistryProvider;
 use Canvas\Providers\UserProvider;
@@ -30,4 +31,5 @@ return [
     WorkflowDatabaseProvider::class,
     CacheDataProvider::class,
     ModelsCacheProvider::class,
+    MapperProvider::class
 ];
