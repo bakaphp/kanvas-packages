@@ -85,7 +85,7 @@ trait CommentsTrait
 
         //Fetch the user and throw exception when not found
         $user = Users::findFirstOrFail($request['users_id']);
-        $newComment = Comments::add($messageId, $request['message'], $user);
+        $newComment = Comments::add((string)$messageId, $request['message'], $user);
 
         return $this->response($newComment);
     }
