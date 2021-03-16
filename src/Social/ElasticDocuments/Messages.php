@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\Social\ElasticDocuments;
 
 use Baka\Elasticsearch\Objects\Documents;
+use function Baka\isJson;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
 use Phalcon\Mvc\Model\Resultset\Simple;
 use RuntimeException;
@@ -56,7 +57,7 @@ class Messages extends Documents
                 'name' => $this->text,
                 'verb' => $this->text,
             ],
-            'message' => $this->text,
+            'message' => [],
             'reactions_count' => $this->integer,
             'comments_count' => $this->integer,
             'files' => [],
@@ -128,10 +129,11 @@ class Messages extends Documents
                 'name' => $message->message_type->name,
                 'verb' => $message->message_type->verb,
             ],
-            'message' => $message->message,
+            'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->comments_count,
-            'files' => $message->files->toArray(),
+            'files' => $message->getFiles(),
+            'custom_fields' => $message->getAllCustomFields(),
             'channels' => $message->channels->getFirst() ? [
                 'id' => $message->channels->getFirst()->id,
                 'name' => $message->channels->getFirst()->name,
@@ -151,6 +153,7 @@ class Messages extends Documents
             'updated_at' => $message->updated_at,
             'is_deleted' => $message->is_deleted
         ];
+
         return $this;
     }
 
@@ -161,7 +164,7 @@ class Messages extends Documents
      *
      * @return array
      */
-    private function formatComments(Simple $comments) : array
+    protected function formatComments(Simple $comments) : array
     {
         $element = [];
         $data = [];

@@ -2,6 +2,7 @@
 
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
+use Canvas\Models\FileSystem;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Channels;
 use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
@@ -83,6 +84,77 @@ class MessagesCest
 
         $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
 
+        $I->assertNotNull($feed->getId());
+    }
+
+    public function createMessageWithCustomField(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+        $feed->set('people', 'max');
+        $feed->set('organization', [1, 2, 3]);
+        $feed->set('entity', ['nose' => 'abd', '3' => 1]);
+        $feed->update();
+
+        $I->assertNotNull($feed->getId());
+    }
+
+    public function createMessageWithImage(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+
+        if ($fileSystem = FileSystem::findFirst()) {
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $fileSystem->id = 3;
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $feed->update();
+        }
+        $I->assertNotNull($feed->getId());
+    }
+
+    public function createMessageWithImageAndCustomFields(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+        $feed->set('people', 'max');
+        $feed->set('organization', [1, 2, 3]);
+        $feed->set('entity', ['nose' => 'abd', '3' => 1]);
+        if ($fileSystem = FileSystem::findFirst()) {
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $fileSystem->id = 3;
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $feed->update();
+        }
         $I->assertNotNull($feed->getId());
     }
 
