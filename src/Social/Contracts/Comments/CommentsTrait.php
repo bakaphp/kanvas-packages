@@ -101,7 +101,7 @@ trait CommentsTrait
     {
         $request = $this->processInput($this->request->getPutData());
 
-        $newComment = Comments::edit($commentId, $request['message']);
+        $newComment = Comments::edit((string)$commentId, $request['message']);
 
         return $this->response($newComment);
     }
@@ -115,6 +115,6 @@ trait CommentsTrait
      */
     public function deleteComment(int $commentId) : Response
     {
-        return $this->response(Comments::delete($commentId, $this->userData));
+        return $this->response(Comments::delete((string)$commentId, $this->userData));
     }
 }
