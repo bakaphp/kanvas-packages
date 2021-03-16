@@ -15,6 +15,8 @@ use Kanvas\Packages\Social\Models\MessageTypes as MessageTypesModel;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
+use Kanvas\Packages\Social\Models\Channels;
+use Kanvas\Packages\Social\Models\ChannelMessages;
 
 class Messages
 {
