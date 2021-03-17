@@ -15,7 +15,7 @@ class ElasticTask extends KanvasElasticTask
      *
      * @return void
      */
-    public function indexMessages()
+    public function indexMessagesAction()
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
@@ -28,7 +28,7 @@ class ElasticTask extends KanvasElasticTask
         // $messagesRecords = MessagesModel::findOrFail(['limit' => 1]);
 
         foreach ($messagesRecords as $message) {
-            $messages->setData($message->id, []);
+            $messages->setData($message->id, [$message]);
 
             if (!Indices::exist($messages->getIndices())) {
                 Indices::create($messages, 3, 1000);
