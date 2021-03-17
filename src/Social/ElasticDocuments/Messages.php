@@ -26,7 +26,7 @@ class Messages extends Documents
         $this->addRelation('apps', ['alias' => 'apps', 'elasticAlias' => 'apps', 'elasticIndex' => 1]);
         $this->addRelation('users', ['alias' => 'users', 'elasticAlias' => 'usrs', 'elasticIndex' => 1]);
         $this->addRelation('comments', ['alias' => 'comments', 'elasticAlias' => 'msgcm', 'elasticIndex' => 1]);
-        $this->addRelation('message_type', ['alias' => 'message_type', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
+        $this->addRelation('message_types', ['alias' => 'message_types', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
     }
 
     /**
