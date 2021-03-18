@@ -19,8 +19,9 @@ class Messages extends CustomMapper
      */
     public function mapToObject($message, $messageDto, array $context = [])
     {
+        $message = $message->getData();
         //no need to convert , we will interact directly with the elastic document
-        $message->custom_fields = $message->custom_fields ? $this->formatCustomFields($message->custom_fields) : [];
+        $message['custom_fields'] = $message['custom_fields'] ? $this->formatCustomFields($message['custom_fields']) : [];
         return $message;
     }
 
