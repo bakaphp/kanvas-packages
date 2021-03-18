@@ -8,7 +8,7 @@ use Phalcon\Di;
 class MessageTypes extends BaseModel
 {
     public $id;
-    public string $uuid;
+    public ?string $uuid = null;
     public $apps_id;
     public $languages_id;
     public $name;
