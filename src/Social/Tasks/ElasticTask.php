@@ -25,9 +25,13 @@ class ElasticTask extends KanvasElasticTask
                 'apps_id' => Di::getDefault()->get('app')->getId(),
             ]
         ]);
-        // $messagesRecords = MessagesModel::findOrFail(['limit' => 1]);
 
         foreach ($messagesRecords as $message) {
+            if (!is_object($message->users)) {
+                continue;
+            }
+               
+            $this->di->set('userData', $message->users);
             $messages->setData($message->id, [$message]);
 
             if (!Indices::exist($messages->getIndices())) {
