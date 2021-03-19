@@ -21,7 +21,7 @@ class Messages extends CustomMapper
     {
         //when its empty , its from the message list
         $message = !empty($message->getData()) ? (object) $message->getData() : $message;
-        if (empty($message->data)) {
+        if (empty($message->getData())) {
             unset($message->data);
         }
 
