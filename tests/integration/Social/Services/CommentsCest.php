@@ -174,7 +174,7 @@ class CommentsCest
      */
     public function getCommentsFromMessage(IntegrationTester $I) : void
     {
-        $message = $this->comment->getMessage();
+        $message = $this->comment->messages;
         $comments = Comments::getCommentsFromMessage($message);
 
         $I->assertNotEmpty($comments->toArray());

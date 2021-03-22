@@ -64,6 +64,8 @@ trait CommentsTrait
         $validation->add('message', new PresenceOf(['message' => _('message is required.')]));
         $validation->validate($request);
 
+        $request['users_id'] = $request['users_id'] ?? $this->userData->getId();
+
         return $request;
     }
 
