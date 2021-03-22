@@ -2,15 +2,18 @@
 
 namespace Kanvas\Packages\Social\Models;
 
+use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Users;
 use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Interactions\MultiInteractionsTrait;
+use Kanvas\Packages\Social\Jobs\ElasticMessages;
 use Phalcon\Di;
 
 class MessageComments extends BaseModel
 {
     use CustomTotalInteractionsTrait;
     use MultiInteractionsTrait;
+    use FileSystemModelTrait;
 
     public $id;
     public int $message_id;
@@ -29,7 +32,7 @@ class MessageComments extends BaseModel
         parent::initialize();
 
         $this->setSource('message_comments');
-        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users', 'reusable' => true,]);
+        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users', 'reusable' => true, ]);
 
         $this->hasMany(
             'id',
@@ -69,7 +72,7 @@ class MessageComments extends BaseModel
             'id',
             [
                 'reusable' => true,
-                'alias' => 'message',
+                'alias' => 'messages',
                 'params' => [
                     'conditions' => 'is_deleted = 0'
                 ]
@@ -161,5 +164,16 @@ class MessageComments extends BaseModel
     public function hasMessage(Messages $message) : bool
     {
         return $this->message_id == $message->getId();
+    }
+
+    /**
+     * After uupdate.
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        $this->associateFileSystem();
+        ElasticMessages::dispatch($this->messages);
     }
 }
