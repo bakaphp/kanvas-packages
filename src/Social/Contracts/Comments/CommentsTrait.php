@@ -65,7 +65,6 @@ trait CommentsTrait
         $this->model->message_id = $this->parentId;
         $this->model->companies_id = $this->userData->getDefaultCompany()->getId();
         $this->model->apps_id = $this->app->getId();
-        $this->model->users_id = $this->userData->getId();
         $this->additionalSearchFields = [
             ['apps_id', ':', $this->app->getId()],
             ['companies_id', ':', $this->userData->getDefaultCompany()->getId()],
@@ -83,29 +82,6 @@ trait CommentsTrait
     protected function processOutput($results)
     {
         return  $this->mapperProcessOutput($results);
-    }
-
-    /**
-     * Get all the comments.
-     *
-     * @param int $messageId
-     *
-     * @throws Exception
-     *
-     * @return Response
-     */
-    public function getAllComments(int $messageId) : Response
-    {
-        $comments = MessageComments::findOrFail([
-            'conditions' => 'message_id = :message_id: and apps_id = :apps_id: and companies_id = :companies_id: and is_deleted = 0',
-            'bind' => [
-                'message_id' => $messageId,
-                'apps_id' => $this->app->getId(),
-                'companies_id' => $this->userData->getCurrentCompany()->getId(),
-            ]
-        ]);
-
-        return $this->response($this->processOutput($comments));
     }
 
     /**
@@ -168,10 +144,9 @@ trait CommentsTrait
      *
      * @return Response
      */
-    public function editComment(int $commentId) : Response
+    public function editComment(int $messageId, int $commentId) : Response
     {
         $request = $this->processInput($this->request->getPutData());
-
         $newComment = Comments::edit((string)$commentId, $request['message']);
 
         return $this->response($newComment);
@@ -184,7 +159,7 @@ trait CommentsTrait
      *
      * @return Response
      */
-    public function deleteComment(int $commentId) : Response
+    public function deleteComment(int $messageId, int $commentId) : Response
     {
         return $this->response(Comments::delete((string)$commentId, $this->userData));
     }
