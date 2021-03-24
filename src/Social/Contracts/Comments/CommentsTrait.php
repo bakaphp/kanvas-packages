@@ -5,38 +5,83 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Contracts\Comments;
 
 use Baka\Validation as CanvasValidation;
-use Gewaer\Models\MessageComments;
+use Kanvas\Packages\Social\Models\MessageComments;
+use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\Users;
 use Kanvas\Packages\Social\Services\Comments;
 use Phalcon\Http\Response;
 use Phalcon\Validation\Validator\PresenceOf;
+use Kanvas\Packages\Social\Dto\Comments as CommentsDto;
+use Kanvas\Packages\Social\Mappers\Comments as CommentsMapper;
+use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
+use Baka\Contracts\Http\Api\CrudBehaviorRelationshipsTrait;
 
 /**
  * Channels Trait.
  */
 trait CommentsTrait
 {
+    use ProcessOutputMapperTrait {
+        processOutput as public mapperProcessOutput;
+    }
+    use CrudBehaviorRelationshipsTrait{
+        processOutput as public crudProcessOutput;
+    }
+
     /**
-     * Get all the comments.
-     *
-     * @param int $messageId
-     *
-     * @throws Exception
-     *
-     * @return Response
+     *  Lead variable.
      */
-    public function getAllComments(int $messageId) : Response
+    protected Messages $message;
+
+    /**
+     * set objects.
+     *
+     * @return void
+     */
+    public function onConstruct()
     {
-        $comments = MessageComments::findOrFail([
-            'conditions' => 'message_id = :message_id: and apps_id = :apps_id: and companies_id = :companies_id: and is_deleted = 0',
+        $this->model = new MessageComments();
+        $this->dto = CommentsDto::class;
+        $this->dtoMapper = new CommentsMapper();
+
+        $this->parentId = (int) $this->router->getParams()['messageId'];
+
+        $this->message = Messages::findFirstOrFail([
+            'conditions' => 'id = :messages_id: 
+                            AND apps_id = :apps_id:
+                            AND companies_id = :companies_id:
+                            AND is_deleted = 0',
             'bind' => [
-                'message_id' => $messageId,
+                'messages_id' => $this->parentId,
                 'apps_id' => $this->app->getId(),
-                'companies_id' => $this->userData->getCurrentCompany()->getId(),
+                'companies_id' => $this->userData->getDefaultCompany()->getId(),
             ]
         ]);
 
-        return $this->response($this->processOutput($comments));
+        if (!$this->parentId) {
+            throw new RuntimeException('Not Found');
+        }
+
+        $this->model->message_id = $this->parentId;
+        $this->model->companies_id = $this->userData->getDefaultCompany()->getId();
+        $this->model->apps_id = $this->app->getId();
+        $this->additionalSearchFields = [
+            ['apps_id', ':', $this->app->getId()],
+            ['companies_id', ':', $this->userData->getDefaultCompany()->getId()],
+            ['is_deleted', ':', 0],
+        ];
+    }
+
+    /**
+     * Format Controller Result base on a Mapper.
+     *
+     * @param mixed $results
+     *
+     * @return void
+     */
+    protected function processOutput($results)
+    {
+        return  $this->mapperProcessOutput($results);
     }
 
     /**
@@ -99,10 +144,9 @@ trait CommentsTrait
      *
      * @return Response
      */
-    public function editComment(int $commentId) : Response
+    public function editComment(int $messageId, int $commentId) : Response
     {
         $request = $this->processInput($this->request->getPutData());
-
         $newComment = Comments::edit((string)$commentId, $request['message']);
 
         return $this->response($newComment);
@@ -115,7 +159,7 @@ trait CommentsTrait
      *
      * @return Response
      */
-    public function deleteComment(int $commentId) : Response
+    public function deleteComment(int $messageId, int $commentId) : Response
     {
         return $this->response(Comments::delete((string)$commentId, $this->userData));
     }

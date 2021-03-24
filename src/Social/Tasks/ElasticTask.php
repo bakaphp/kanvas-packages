@@ -15,7 +15,7 @@ class ElasticTask extends KanvasElasticTask
      *
      * @return void
      */
-    public function indexMessagesAction()
+    public function indexMessagesAction() : void
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
@@ -40,7 +40,24 @@ class ElasticTask extends KanvasElasticTask
             $result = $messages->add();
             Di::getDefault()->get('log')->info('Messages added to Messages Index', [$result]);
         }
+    }
 
-        return true;
+    /**
+     * Erase messages index
+     *
+     * @return void
+     */
+    public function eraseMessagesAction() : void
+    {
+        echo("Deleting Messages Index...\n");
+
+        $output = [];
+        system("curl -XDELETE elasticsearch:9200/messages", $output);
+
+        if ($output == 7) {
+            echo("\n ***Error ocurred while trying to connect to  Elasticsearch container*** \n\n");
+            echo("Trying localhost..\n\n");
+            system("curl -XDELETE localhost:9200/messages");
+        }
     }
 }

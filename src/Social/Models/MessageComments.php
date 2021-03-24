@@ -19,8 +19,8 @@ class MessageComments extends BaseModel
     public int $message_id;
     public int $apps_id;
     public int $companies_id;
-    public int $users_id;
-    public string $message;
+    public int $users_id = 0;
+    public string $message = '';
     public int $reactions_count = 0;
     public int $parent_id = 0;
 
