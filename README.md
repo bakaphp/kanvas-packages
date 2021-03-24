@@ -52,15 +52,15 @@ To create a new index for messages use the following command:
     php cli/cli.php social indexMessages
 ```
 
-Notice: This command should only be used when Kanvas Packages in combination with a project already using Kanvas.
-
 ## Erasing the messages index
 
 In case you want you want to erase the messages index, in your terminal, execute the following:
 
 ``` bash
-    curl -XDELETE localhost:9200/messages
+    php cli/cli.php social eraseMessages
 ```
+
+Notice: The previous commands should only be used when Kanvas Packages in combination with a project already using Kanvas.
 
 
 
