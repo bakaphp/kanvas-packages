@@ -20,7 +20,7 @@ class Comments extends CustomMapper
     public function mapToObject($comment, $commentDto, array $context = [])
     {
         $currentUsers = $comment->users;
-        $commentDto->id = $comment->id;
+        $commentDto->id = (int)$comment->id;
         $commentDto->apps_id = $comment->apps_id;
         $commentDto->companies_id = $comment->companies_id;
         $commentDto->users = [
