@@ -43,6 +43,26 @@ Running Tests:
  
     composer test
 
+# Social Package
+
+## Indexing Elastic Messages
+
+To create a new index for messages use the following command:
+
+``` bash
+    php cli/cli.php social indexMessages
+```
+
+Notice: This command should only be used when Kanvas Packages in combination with a Kanvas-using project
+
+In case you want you want to erase the messages index, in your terminal, execute the following:
+
+``` bash
+    curl -XDELETE localhost:9200/messages
+```
+
+
+
 Changelog
 =========
 
