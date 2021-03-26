@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Models;
 
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+
 class WorkflowsLogs extends BaseModel
 {
     public ?int $rules_id = null;
     public ?int $actions_id = null;
+    public ?string $entity_id = null;
     public string $start_at;
     public ?string $end_at = null;
     public int $did_succeed = 1;
@@ -30,16 +33,20 @@ class WorkflowsLogs extends BaseModel
     }
 
     /**
-     * start.
+     * Start a workflow.
+     *
+     * @param mixed $rulesId
+     * @param WorkflowsEntityInterfaces $entity
      *
      * @return WorkflowsLogs
      */
-    public static function start($rulesId) : WorkflowsLogs
+    public static function start(Rules $rule, WorkflowsEntityInterfaces $entity) : WorkflowsLogs
     {
         $log = new WorkflowsLogs;
 
         $log->assign([
-            'rules_id' => $rulesId,
+            'rules_id' => $rule->getId(),
+            'entity_id' => $entity->getId(),
             'start_at' => date('Y-m-d H:i:s'),
         ]);
         $log->saveOrFail();

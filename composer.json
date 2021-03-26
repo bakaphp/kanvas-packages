@@ -32,7 +32,9 @@
         "symfony/expression-language": "^5.1",
         "mctekk/zohocrm": "^0.1",
         "fzaninotto/faker": "^1.9",
-        "mark-gerarts/auto-mapper-plus": "2.0.0-alpha1"
+        "mark-gerarts/auto-mapper-plus": "2.0.0-alpha1",
+        "webleit/zohocrmapi": "^4.0",
+        "symfony/cache": "^5.2"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
