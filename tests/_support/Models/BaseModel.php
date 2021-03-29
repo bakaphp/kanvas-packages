@@ -2,9 +2,9 @@
 
 namespace Kanvas\Packages\Test\Support\Models;
 
-use Phalcon\Mvc\Model as PhalconModel;
+use Baka\Database\Model;
 
-class BaseModel extends PhalconModel
+class BaseModel extends Model
 {
     /**
      * Initialize method for model and specify local db connection.

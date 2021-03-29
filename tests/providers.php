@@ -7,6 +7,7 @@
 use Canvas\Providers\AppProvider;
 use Canvas\Providers\CacheDataProvider;
 use Canvas\Providers\DatabaseProvider as KanvasDatabaseProvider;
+use Canvas\Providers\LoggerProvider;
 use Canvas\Providers\MapperProvider;
 use Canvas\Providers\ModelsCacheProvider;
 use Canvas\Providers\RegistryProvider;
@@ -23,6 +24,7 @@ return [
     KanvasDatabaseProvider::class,
     DatabaseProvider::class,
     RegistryProvider::class,
+    LoggerProvider::class,
     QueueProvider::class,
     RedisProvider::class,
     PlaidProvider::class,

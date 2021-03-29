@@ -35,13 +35,13 @@ class Rules
      */
     public function validate(WorkflowsEntityInterfaces $entity) : bool
     {
-        Di::getDefault()->get('log')->info('Rule validate');
+        //Di::getDefault()->get('log')->info('Rule validate');
 
         $expression = $this->getStringConditions();
         $values = $this->getArrayValueConditions();
         $values = array_merge($values, $entity->toArray());
 
-        Di::getDefault()->get('log')->info('condition ' . $this->getStringConditions());
+        //Di::getDefault()->get('log')->info('condition ' . $this->getStringConditions());
 
         $expressionLanguage = new ExpressionLanguage();
         $result = $expressionLanguage->evaluate(
@@ -51,7 +51,7 @@ class Rules
         if ($result) {
             $actions = $this->rule->getRulesActions();
             foreach ($actions as $action) {
-                $workflowLog = WorkflowsLogs::start($this->rule->id);
+                $workflowLog = WorkflowsLogs::start($this->rule, $entity);
                 $workFlow = $action->getRulesWorkflowActions();
                 $objectAction = new $workFlow->actions->model_name;
                 try {

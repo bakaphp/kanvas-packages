@@ -11,14 +11,14 @@ class RulesJob extends Job
 {
     public Rules $rule;
     public string $event;
-    public object $entity;
+    public WorkflowsEntityInterfaces $entity;
 
     /**
      * __construct.
      *
      * @param  Rules $rules
      * @param  string $event
-     * @param  object $entity
+     * @param  WorkflowsEntityInterfaces $entity
      *
      * @return void
      */
