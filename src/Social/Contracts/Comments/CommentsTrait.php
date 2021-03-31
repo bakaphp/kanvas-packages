@@ -66,6 +66,7 @@ trait CommentsTrait
         $this->model->companies_id = $this->userData->getDefaultCompany()->getId();
         $this->model->apps_id = $this->app->getId();
         $this->additionalSearchFields = [
+            ['message_id', ':', $this->parentId],
             ['apps_id', ':', $this->app->getId()],
             ['companies_id', ':', $this->userData->getDefaultCompany()->getId()],
             ['is_deleted', ':', 0],
