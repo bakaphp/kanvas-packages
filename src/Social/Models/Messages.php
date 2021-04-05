@@ -194,7 +194,6 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             Channels::class,
             'id',
             [
-                'reusable' => true,
                 'alias' => 'channels'
             ]
         );
