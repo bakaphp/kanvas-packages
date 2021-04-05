@@ -27,7 +27,7 @@ class Comments extends CustomMapper
             "id" => $currentUsers->id,
             "firstname" => $currentUsers->firstname,
             "lastname" => $currentUsers->lastname,
-            "photo" => $currentUsers->getPhoto()
+            "photo" => $currentUsers->getPhoto() ?? null
         ];
         $commentDto->message_id = $comment->message_id;
         $commentDto->message = $comment->message;

@@ -82,9 +82,12 @@ class Messages extends Documents
                     'firstname' => $this->text,
                     'lastname' => $this->text,
                     'displayname' => $this->text,
-                    'photo' => $this->text
+                    'photo' => []
                 ],
                 'message' => $this->text,
+                'created_at' => $this->text,
+                'updated_at' => $this->text,
+                'is_deleted' => $this->integer
             ],
             'created_at' => $this->text,
             'updated_at' => $this->text,
@@ -176,8 +179,11 @@ class Messages extends Documents
             $element['users']['id'] = (int)$comment->users->id;
             $element['users']['firstname'] = $comment->users->firstname;
             $element['users']['lastname'] = $comment->users->lastname;
-            $element['users']['photo'] = $comment->users->getPhoto() ? $comment->users->getPhoto()->url : null;
+            $element['users']['photo'] = $comment->users->getPhoto() ?? null;
             $element['message'] = $comment->message;
+            $element['created_at'] = $comment->created_at;
+            $element['updated_at'] = $comment->updated_at;
+            $element['is_deleted'] = $comment->is_deleted;
             $data[] = $element;
         }
 
