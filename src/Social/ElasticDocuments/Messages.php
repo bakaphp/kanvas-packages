@@ -82,9 +82,12 @@ class Messages extends Documents
                     'firstname' => $this->text,
                     'lastname' => $this->text,
                     'displayname' => $this->text,
-                    'photo' => $this->text
+                    'photo' => []
                 ],
                 'message' => $this->text,
+                'created_at' => $this->text,
+                'updated_at' => $this->text,
+                'is_deleted' => $this->integer
             ],
             'created_at' => $this->text,
             'updated_at' => $this->text,
@@ -107,7 +110,7 @@ class Messages extends Documents
         }
 
         parent::setData($id, $data);
-        $message = $data[0]; //MessagesModel::findFirstOrFail($id);
+        $message = $data[0];
 
         $this->data = [
             'id' => (int)$message->id,
@@ -131,7 +134,7 @@ class Messages extends Documents
             ],
             'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
-            'comments_count' => $message->comments_count,
+            'comments_count' => $message->comments->count(),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
             'channels' => $message->channels->getFirst() ? [
@@ -143,12 +146,10 @@ class Messages extends Documents
                 'created_at' => $message->channels->getFirst()->created_at,
                 'is_deleted' => $message->channels->getFirst()->is_deleted,
             ] : null,
-            'comments' => $this->formatComments(
-                $message->getComments([
+            'comments' => $this->formatComments($message->getComments([
                     'limit' => $this->commentsLimit,
                     'order' => 'id DESC'
-                ])
-            ),
+            ])),
             'created_at' => $message->created_at,
             'updated_at' => $message->updated_at,
             'is_deleted' => $message->is_deleted
@@ -177,8 +178,11 @@ class Messages extends Documents
             $element['users']['id'] = (int)$comment->users->id;
             $element['users']['firstname'] = $comment->users->firstname;
             $element['users']['lastname'] = $comment->users->lastname;
-            $element['users']['photo'] = $comment->users->getPhoto() ? $comment->users->getPhoto()->url : null;
+            $element['users']['photo'] = $comment->users->getPhoto() ?? null;
             $element['message'] = $comment->message;
+            $element['created_at'] = $comment->created_at;
+            $element['updated_at'] = $comment->updated_at;
+            $element['is_deleted'] = $comment->is_deleted;
             $data[] = $element;
         }
 

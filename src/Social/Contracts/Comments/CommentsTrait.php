@@ -66,6 +66,7 @@ trait CommentsTrait
         $this->model->companies_id = $this->userData->getDefaultCompany()->getId();
         $this->model->apps_id = $this->app->getId();
         $this->additionalSearchFields = [
+            ['message_id', ':', $this->parentId],
             ['apps_id', ':', $this->app->getId()],
             ['companies_id', ':', $this->userData->getDefaultCompany()->getId()],
             ['is_deleted', ':', 0],
@@ -134,7 +135,7 @@ trait CommentsTrait
         $user = Users::findFirstOrFail($request['users_id']);
         $newComment = Comments::add((string)$messageId, $request['message'], $user);
 
-        return $this->response($newComment);
+        return $this->response($this->processOutput($newComment));
     }
 
     /**
@@ -149,7 +150,7 @@ trait CommentsTrait
         $request = $this->processInput($this->request->getPutData());
         $newComment = Comments::edit((string)$commentId, $request['message']);
 
-        return $this->response($newComment);
+        return $this->response($this->processOutput($newComment));
     }
 
     /**
