@@ -111,11 +111,6 @@ class Messages extends Documents
 
         parent::setData($id, $data);
         $message = $data[0];
-        $comments = $this->formatComments($message->getComments([
-                    "conditions" => 'is_deleted = 0',
-                    'limit' => $this->commentsLimit,
-                    'order' => 'id DESC'
-            ]));
 
         $this->data = [
             'id' => (int)$message->id,
@@ -139,7 +134,7 @@ class Messages extends Documents
             ],
             'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
-            'comments_count' => count($comments),
+            'comments_count' => $message->comments->count('is_deleted = 0'),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
             'channels' => $message->channels->getFirst() ? [
@@ -151,7 +146,11 @@ class Messages extends Documents
                 'created_at' => $message->channels->getFirst()->created_at,
                 'is_deleted' => $message->channels->getFirst()->is_deleted,
             ] : null,
-            'comments' => $comments,
+            'comments' => $this->formatComments($message->getComments([
+                    "conditions" => 'is_deleted = 0',
+                    'limit' => $this->commentsLimit,
+                    'order' => 'id DESC'
+            ])),
             'created_at' => $message->created_at,
             'updated_at' => $message->updated_at,
             'is_deleted' => $message->is_deleted
