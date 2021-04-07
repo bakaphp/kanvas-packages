@@ -50,9 +50,7 @@ class ElasticTask extends KanvasElasticTask
     public function eraseMessagesAction() : void
     {
         echo("Deleting Messages Index...\n");
-
-        $host = getenv('ELASTIC_HOST');
-        $output = [];
-        system("curl -XDELETE {$host}/messages", $output);
+        Indices::delete('messages');
+        echo("Done\n");
     }
 }
