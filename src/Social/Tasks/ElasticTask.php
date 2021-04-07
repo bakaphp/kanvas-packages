@@ -51,13 +51,8 @@ class ElasticTask extends KanvasElasticTask
     {
         echo("Deleting Messages Index...\n");
 
+        $host = getenv('ELASTIC_HOST');
         $output = [];
-        system("curl -XDELETE elasticsearch:9200/messages", $output);
-
-        if ($output == 7) {
-            echo("\n ***Error ocurred while trying to connect to  Elasticsearch container*** \n\n");
-            echo("Trying localhost..\n\n");
-            system("curl -XDELETE localhost:9200/messages");
-        }
+        system("curl -XDELETE {$host}/messages", $output);
     }
 }
