@@ -10,7 +10,6 @@ use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
-use Kanvas\Packages\Social\ElasticDocuments\Messages as ElasticMessages;
 
 class Comments
 {
@@ -77,11 +76,7 @@ class Comments
     {
         $comment = MessageComments::getByIdOrFail($commentId);
         $comment->deleteInteraction(Interactions::COMMENT, $user);
-        $response = $comment->softDelete();
-        $elasticMessage = new ElasticMessages();
-        $elasticMessage->updateCommentsCount($comment->messages);
-
-        return (bool) $response;
+        return (bool) $comment->softDelete();
     }
 
     /**

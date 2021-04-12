@@ -7,6 +7,7 @@ use Canvas\Models\Users;
 use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Interactions\MultiInteractionsTrait;
 use Kanvas\Packages\Social\Jobs\ElasticMessages;
+use Kanvas\Packages\Social\ElasticDocuments\Messages as ElasticMessagesDocument;
 use Phalcon\Di;
 
 class MessageComments extends BaseModel
@@ -174,6 +175,8 @@ class MessageComments extends BaseModel
     public function afterSave()
     {
         $this->associateFileSystem();
+        $elasticMessage = new ElasticMessagesDocument();
+        $elasticMessage->updateCommentsCount($this->messages);
         ElasticMessages::dispatch($this->messages);
     }
 }
