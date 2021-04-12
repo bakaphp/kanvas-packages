@@ -134,7 +134,7 @@ class Messages extends Documents
             ],
             'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
-            'comments_count' => $message->comments->count('is_deleted = 0'),
+            'comments_count' => $message->countComments('is_deleted = 0'),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
             'channels' => $message->channels->getFirst() ? [
@@ -188,5 +188,21 @@ class Messages extends Documents
         }
 
         return $data;
+    }
+
+    /**
+     * Update message's comment count
+     * 
+     * @param MessagesModel $message
+     * 
+     * @return bool
+     */
+    public function updateCommentsCount(MessagesModel $message): bool
+    {
+        $this->comments_count = $message->countComments('is_deleted = 0');
+        $this->setData($message->getId(), [$message]);
+        $this->add();
+
+        return true;
     }
 }
