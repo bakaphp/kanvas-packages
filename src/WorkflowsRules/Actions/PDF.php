@@ -33,6 +33,8 @@ class PDF extends Action
                 $di->get('log')->error('Error processing pdf', $error);
                 $this->status = 0;
             }
+            $this->message = $template;
+            $this->data = array_merge($entity->toArray(), $params);
             $this->status = 1 ;
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
