@@ -24,21 +24,27 @@ class PDF extends Action
 
         try {
             $pdf = new PDFLibrary($params['config']);
-            $template = get_class($di->get('templates'))::generate($params['template_name'], ['entity' => $entity]);
+            $templateServiceClass = get_class($di->get('templates'));
+            $template = $templateServiceClass::generate($params['template_name'], ['entity' => $entity]);
             $pdf->addPage($template);
             $rand = uniqid();
             $path = $di->get('config')->filesystem->local->path . "/{$rand}.pdf";
             if (!$pdf->saveAs($path)) {
                 $error = $pdf->getError();
-                $di->get('log')->error('Error processing pdf', $error);
+                if (!$di->get('config')->production) {
+                    $di->get('log')->error('Error processing pdf', $error);
+                }
                 $this->status = 0;
+                $this->message = $error;
             }
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
             $this->status = 1 ;
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
-            $di->get('log')->error('Error processing PDF - ' . $e->getMessage(), [$e->getTraceAsString()]);
+            if (!$di->get('config')->production) {
+                $di->get('log')->error('Error processing PDF - ' . $e->getMessage(), [$e->getTraceAsString()]);
+            }
             $this->status = 0;
             $response = $e->getTraceAsString();
         }
