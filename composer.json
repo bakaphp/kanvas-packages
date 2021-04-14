@@ -22,7 +22,7 @@
         "vlucas/phpdotenv": "^4.1",
         "phalcon/incubator": "4.0.x-dev",
         "phalcon/incubator-acl": "^1.0.0-alpha.1",
-        "phalcon/incubator-test": "^1.0.0-alpha.1",    
+        "phalcon/incubator-test": "^1.0.0-alpha.1",
         "robmorgan/phinx": "^0.12",
         "baka/baka": "^0.7@dev",
         "php-amqplib/php-amqplib": "^2.9",
@@ -32,7 +32,8 @@
         "symfony/expression-language": "^5.1",
         "mctekk/zohocrm": "^0.1",
         "fzaninotto/faker": "^1.9",
-        "mark-gerarts/auto-mapper-plus": "2.0.0-alpha1"
+        "mark-gerarts/auto-mapper-plus": "2.0.0-alpha1",
+        "mikehaertl/phpwkhtmltopdf": "2.5.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
