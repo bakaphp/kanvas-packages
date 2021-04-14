@@ -13,6 +13,10 @@ class Action implements ActionInterfaces
 
     protected int $status = 1;
 
+    const SUCCESSFUL = 1;
+
+    const FAIL = 0;
+
     /**
      * handle.
      *

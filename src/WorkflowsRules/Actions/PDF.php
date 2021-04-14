@@ -21,31 +21,31 @@ class PDF extends Action
     {
         $response = null;
         $di = Di::getDefault();
-
+        $appMode = $di->get('config')->production;
         try {
-            $pdf = new PDFLibrary($params['config']);
+            $pdf = new PDFLibrary($params['config']); // Set config for pdf settings (example deleted floating)
             $templateServiceClass = get_class($di->get('templates'));
-            $template = $templateServiceClass::generate($params['template_name'], ['entity' => $entity]);
+            $template = $templateServiceClass::generate($params['template_name'], ['entity' => $entity]); // Generate html from emails_templates table
             $pdf->addPage($template);
             $rand = uniqid();
             $path = $di->get('config')->filesystem->local->path . "/{$rand}.pdf";
             if (!$pdf->saveAs($path)) {
                 $error = $pdf->getError();
-                if (!$di->get('config')->production) {
+                if (!$appMode) {
                     $di->get('log')->error('Error processing pdf', $error);
                 }
-                $this->status = 0;
+                $this->status = FAIL;
                 $this->message = $error;
             }
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
-            $this->status = 1 ;
+            $this->status = Action::SUCCESSFUL;
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
-            if (!$di->get('config')->production) {
+            if (!$appMode) {
                 $di->get('log')->error('Error processing PDF - ' . $e->getMessage(), [$e->getTraceAsString()]);
             }
-            $this->status = 0;
+            $this->status = Action::FAIL;
             $response = $e->getTraceAsString();
         }
 
