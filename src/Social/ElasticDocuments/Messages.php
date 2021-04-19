@@ -117,55 +117,7 @@ class Messages extends Documents
         parent::setData($id, $data);
         $message = $data[0];
 
-        $this->data = [
-            'id' => (int)$message->id,
-            'uuid' => $message->uuid,
-            'parent_id' => $message->parent_id,
-            'parent_unique_id' => $message->parent_unique_id,
-            'apps_id' => $message->apps_id,
-            'companies_id' => $message->companies_id,
-            'users_id' => $message->users_id,
-            'users' => [
-                'id' => $message->users->id,
-                'firstname' => $message->users->firstname,
-                'lastname' => $message->users->lastname,
-                'photo' => !defined('API_TESTS') ? $message->users->getPhoto()->url : null,
-            ],
-            'message_types_id' => $message->message_types_id,
-            'message_types' => [
-                'id' => $message->message_type->id,
-                'apps_id' => $message->message_type->apps_id,
-                'languages_id' => $message->message_type->languages_id,
-                'name' => $message->message_type->name,
-                'verb' => $message->message_type->verb,
-            ],
-            'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
-            'reactions_count' => $message->reactions_count,
-            'comments_count' => $message->countComments('is_deleted = 0'),
-            'files' => $message->getFiles(),
-            'custom_fields' => $message->getAllCustomFields(),
-            'related_messages' => $message->getRelatedMessages([
-                'limit' => $this->$relatedMessagesLimit,
-                'order' => 'id DESC'
-            ]),
-            'channels' => $message->channels->getFirst() ? [
-                'id' => $message->channels->getFirst()->id,
-                'name' => $message->channels->getFirst()->name,
-                'description' => $message->channels->getFirst()->description,
-                'last_message_id' => $message->channels->getFirst()->last_message_id,
-                'slug' => $message->channels->getFirst()->slug,
-                'created_at' => $message->channels->getFirst()->created_at,
-                'is_deleted' => $message->channels->getFirst()->is_deleted,
-            ] : null,
-            'comments' => $this->formatComments($message->getComments([
-                    "conditions" => 'is_deleted = 0',
-                    'limit' => $this->commentsLimit,
-                    'order' => 'id DESC'
-            ])),
-            'created_at' => $message->created_at,
-            'updated_at' => $message->updated_at,
-            'is_deleted' => $message->is_deleted
-        ];
+        $this->data = $this->formatMessage($message);
 
         return $this;
     }
@@ -215,5 +167,87 @@ class Messages extends Documents
         $this->add();
 
         return true;
+    }
+
+    /**
+     * Update message's comment count
+     * 
+     * @param MessagesModel $message
+     * 
+     * @return bool
+     */
+    public function formatMessage(MessagesModel $message): array
+    {
+        return [
+            'id' => (int)$message->id,
+            'uuid' => $message->uuid,
+            'parent_id' => $message->parent_id,
+            'parent_unique_id' => $message->parent_unique_id,
+            'apps_id' => $message->apps_id,
+            'companies_id' => $message->companies_id,
+            'users_id' => $message->users_id,
+            'users' => [
+                'id' => $message->users->id,
+                'firstname' => $message->users->firstname,
+                'lastname' => $message->users->lastname,
+                'photo' => !defined('API_TESTS') ? $message->users->getPhoto()->url : null,
+            ],
+            'message_types_id' => $message->message_types_id,
+            'message_types' => [
+                'id' => $message->message_type->id,
+                'apps_id' => $message->message_type->apps_id,
+                'languages_id' => $message->message_type->languages_id,
+                'name' => $message->message_type->name,
+                'verb' => $message->message_type->verb,
+            ],
+            'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
+            'reactions_count' => $message->reactions_count,
+            'comments_count' => $message->countComments('is_deleted = 0'),
+            'files' => $message->getFiles(),
+            'custom_fields' => $message->getAllCustomFields(),
+            'related_messages' => $this->formatRelatedMessages($message),
+            'channels' => $message->channels->getFirst() ? [
+                'id' => $message->channels->getFirst()->id,
+                'name' => $message->channels->getFirst()->name,
+                'description' => $message->channels->getFirst()->description,
+                'last_message_id' => $message->channels->getFirst()->last_message_id,
+                'slug' => $message->channels->getFirst()->slug,
+                'created_at' => $message->channels->getFirst()->created_at,
+                'is_deleted' => $message->channels->getFirst()->is_deleted,
+            ] : null,
+            'comments' => $this->formatComments($message->getComments([
+                    "conditions" => 'is_deleted = 0',
+                    'limit' => $this->commentsLimit,
+                    'order' => 'id DESC'
+            ])),
+            'created_at' => $message->created_at,
+            'updated_at' => $message->updated_at,
+            'is_deleted' => $message->is_deleted
+        ];
+    }
+
+    /**
+     * Get all the message related messages
+     * 
+     * @param MessagesModel $message
+     * 
+     * @return array
+     */
+    public function formatRelatedMessages(MessagesModel $message) : array
+    {
+        $relatedMessagesArray = [];
+
+        $relatedMessages = $message->getRelatedMessages([
+                'limit' => $this->relatedMessagesLimit,
+                'order' => 'id DESC'
+        ]);
+
+        if ($relatedMessages->count()) {
+            foreach ($relatedMessages as $relatedMessage) {
+                $relatedMessagesArray[] = $this->formatMessage($relatedMessage);
+            }
+        }
+
+        return $relatedMessagesArray;
     }
 }

@@ -31,11 +31,11 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     public int $parent_id = 0;
     public ?string $parent_unique_id = null;
     public ?string $uuid  =  null;
-    public int $apps_id;
-    public int $companies_id;
-    public int $users_id;
-    public int $message_types_id;
-    public string $message;
+    public int $apps_id = 0;
+    public int $companies_id = 0;
+    public int $users_id = 0;
+    public int $message_types_id = 0;
+    public ?string $message = null;
     public ?int $reactions_count = 0;
     public ?int $comments_count = 0;
 
