@@ -11,6 +11,7 @@ use RuntimeException;
 class Messages extends Documents
 {
     protected int $commentsLimit = 3;
+    protected int $relatedMessagesLimit = 3;
 
     /**
      * initialize.
@@ -27,6 +28,7 @@ class Messages extends Documents
         $this->addRelation('users', ['alias' => 'users', 'elasticAlias' => 'usrs', 'elasticIndex' => 1]);
         $this->addRelation('comments', ['alias' => 'comments', 'elasticAlias' => 'msgcm', 'elasticIndex' => 1]);
         $this->addRelation('message_types', ['alias' => 'message_types', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
+        $this->addRelation('messages', ['alias' => 'messages', 'elasticAlias' => 'rlmsg', 'elasticIndex' => 1]);
     }
 
     /**
@@ -39,6 +41,8 @@ class Messages extends Documents
         return [
             'id' => $this->integer,
             'uuid' => $this->keyword,
+            'parent_id' => $this->integer,
+            'parent_unique_id' => $this->keyword,
             'apps_id' => $this->integer,
             'companies_id' => $this->integer,
             'users_id' => $this->integer,
@@ -62,6 +66,7 @@ class Messages extends Documents
             'comments_count' => $this->integer,
             'files' => [],
             'custom_fields' => [],
+            'related_messages' => [],
             'channels' => [
                 'id' => $this->integer,
                 'name' => $this->text,
@@ -115,6 +120,8 @@ class Messages extends Documents
         $this->data = [
             'id' => (int)$message->id,
             'uuid' => $message->uuid,
+            'parent_id' => $message->parent_id,
+            'parent_unique_id' => $message->parent_unique_id,
             'apps_id' => $message->apps_id,
             'companies_id' => $message->companies_id,
             'users_id' => $message->users_id,
@@ -137,6 +144,10 @@ class Messages extends Documents
             'comments_count' => $message->countComments('is_deleted = 0'),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
+            'related_messages' => $message->getRelatedMessages([
+                'limit' => $this->$relatedMessagesLimit,
+                'order' => 'id DESC'
+            ]),
             'channels' => $message->channels->getFirst() ? [
                 'id' => $message->channels->getFirst()->id,
                 'name' => $message->channels->getFirst()->name,

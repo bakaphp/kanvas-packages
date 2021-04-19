@@ -28,6 +28,8 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         CustomFieldsTrait::afterDelete insteadof ElasticIndexModelTrait;
     }
 
+    public int $parent_id = 0;
+    public ?string $parent_unique_id = null;
     public ?string $uuid  =  null;
     public int $apps_id;
     public int $companies_id;
@@ -47,9 +49,19 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
 
         $this->setSource('messages');
         $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users']);
+        $this->belongsTo('parent_id', self::class, 'id', ['alias' => 'parentMessage']);
 
         $this->addBehavior(
             new Uuid()
+        );
+
+        $this->hasMany(
+            'id',
+            self::class,
+            'parent_id',
+            [
+                'alias' => 'relatedMessages'
+            ]
         );
 
         $this->hasOne(
