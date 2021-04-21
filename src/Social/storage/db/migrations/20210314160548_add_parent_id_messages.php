@@ -19,7 +19,7 @@ class AddParentIdMessages extends Phinx\Migration\AbstractMigration
                 'null' => true,
                 'default' => 0,
                 'limit' => MysqlAdapter::INT_REGULAR,
-                'after' => 'entity_id',
+                'after' => 'id',
             ])
             ->addColumn('parent_unique_id', 'char', [
                 'null' => true,
@@ -27,7 +27,7 @@ class AddParentIdMessages extends Phinx\Migration\AbstractMigration
                 'limit' => 64,
                 'collation' => 'utf8mb4_general_ci',
                 'encoding' => 'utf8mb4',
-                'after' => 'id',
+                'after' => 'parent_id',
             ])
             ->save();
     }
