@@ -303,7 +303,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         ElasticMessages::dispatch($this);
 
         if ($this->hasParent()) {
-            ElasticMessages::dispatch($this->parentMessage());
+            ElasticMessages::dispatch($this->getParentMessage());
         }
     }
 }
