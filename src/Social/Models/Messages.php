@@ -281,6 +281,16 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
+     * Verify if message has a parent message
+     *
+     * @return bool
+     */
+    public function hasParent() : bool
+    {
+        return $this->parent_id > 0;
+    }
+
+    /**
      * Upload Files.
      *
      * @todo move this to the baka class
@@ -291,5 +301,9 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     {
         $this->associateFileSystem();
         ElasticMessages::dispatch($this);
+
+        if ($this->hasParent()) {
+            ElasticMessages::dispatch($this->parentMessage());
+        }
     }
 }
