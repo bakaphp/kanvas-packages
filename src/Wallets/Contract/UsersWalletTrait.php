@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Wallets\Contract;
 
 use Kanvas\Packages\Wallets\Models\Wallets;
-use Phalcon\Mvc\Model\ResultsetInterface;
 use Kanvas\Packages\Wallets\PaymentMethods\PaymentMethods;
+use Phalcon\Mvc\Model\ResultsetInterface;
 
 /**
- * Methods most used in Users wallet
+ * Methods most used in Users wallet.
  */
 trait UsersWalletTrait
 {
     public ?PaymentMethods $payment_methods = null;
 
     /**
-     * We get all the user's wallets
+     * We get all the user's wallets.
+     *
      * @return ResultsetInterface
      */
     public function getWallets() : ResultsetInterface
@@ -31,8 +32,10 @@ trait UsersWalletTrait
     }
 
     /**
-     * We get all the user's wallets by name
+     * We get all the user's wallets by name.
+     *
      * @param string $name
+     *
      * @return Wallets
      */
     public function getWalletsByName(string $name) : ?Wallets
@@ -47,14 +50,16 @@ trait UsersWalletTrait
     }
 
     /**
-     * We get the user's wallets by name
+     * We get the user's wallets by name.
+     *
      * @param string $name
+     *
      * @return Wallets
      */
     public function getOrCreateWallet(string $name) : Wallets
     {
         $wallet = $this->getWalletsByName($name);
-        if(!$wallet){
+        if (!$wallet) {
             $wallet = new Wallets();
             $wallet->name = $name;
             $wallet->users_id = $this->getId();
@@ -65,8 +70,10 @@ trait UsersWalletTrait
     }
 
     /**
-     * Set Payment Methods
+     * Set Payment Methods.
+     *
      * @param PaymentMethods $paymentMethods
+     *
      * @return void
      */
     public function setPaymentMethods(PaymentMethods $paymentMethods) : void
@@ -75,8 +82,10 @@ trait UsersWalletTrait
     }
 
     /**
-     * Get Payment Methods
+     * Get Payment Methods.
+     *
      * @param PaymentMethods $paymentMethods
+     *
      * @return PaymentMethods
      */
     public function getPaymentMethods() : PaymentMethods

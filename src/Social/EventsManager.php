@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social;
 
 use Baka\Queue\Queue;
-use Kanvas\Packages\Social\Contract\Traits\EventManagerAwareTrait;
+use Canvas\Contracts\EventManagerAwareTrait;
 use Phalcon\Di;
 
 /**
@@ -16,18 +16,18 @@ class EventsManager
     use EventManagerAwareTrait;
 
     /**
-    * Checking if event manager is defined - fire event to the event queue
-    *
-    * @param string $event
-    * @param object $source
-    * @param mixed $data
-    * @param boolean $cancelable
-    *
-    */
+     * Checking if event manager is defined - fire event to the event queue.
+     *
+     * @param string $event
+     * @param object $source
+     * @param mixed $data
+     * @param bool $cancelable
+     *
+     */
     public function fireToQueue($event, $source, $data = null, $cancelable = true)
     {
         if ($this->getEventsManager()) {
-            //specific data structure for canvas core queus
+            //specific data structure for canvas core queues
             $queueData = [
                 'event' => $event,
                 'source' => $source,

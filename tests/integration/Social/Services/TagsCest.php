@@ -2,7 +2,6 @@
 
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
-use Codeception\Lib\Di;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
 use Kanvas\Packages\Social\Models\Tags as ModelsTags;
@@ -12,41 +11,41 @@ use Kanvas\Packages\Test\Support\Models\Users;
 
 class TagsCest
 {
-
     public ModelsTags $tag;
 
     /**
-     * Create a tag for test use
+     * Create a tag for test use.
      *
      * @return void
      */
-    protected function createTagTest(): void
+    protected function createTagTest() : void
     {
-        $this->tag = Tags::create(new Users, 'Tag for test');
+        $this->tag = Tags::create(Users::findFirst(1), 'Tag for test');
     }
 
     /**
-     * Test create of tags service
+     * Test create of tags service.
      *
      * @param IntegrationTester $I
+     *
      * @return void
      */
-    public function createTag(IntegrationTester $I): void
+    public function createTag(IntegrationTester $I) : void
     {
-        $tag = Tags::create(new Users, 'Test Tag');
+        $tag = Tags::create(Users::findFirst(1), 'Test Tag');
 
         $I->assertEquals('Test Tag', $tag->name);
     }
 
-
     /**
-     * Test get Tag from Tag Service
+     * Test get Tag from Tag Service.
      *
      * @param IntegrationTester $I
      * @before createTagTest
+     *
      * @return void
      */
-    public function getTag(IntegrationTester $I): void
+    public function getTag(IntegrationTester $I) : void
     {
         $tag = Tags::get($this->tag->getId());
 
@@ -54,13 +53,14 @@ class TagsCest
     }
 
     /**
-     * Test update from Tags Service
+     * Test update from Tags Service.
      *
      * @param IntegrationTester $I
      * @before createTagTest
+     *
      * @return void
      */
-    public function updateTag(IntegrationTester $I): void
+    public function updateTag(IntegrationTester $I) : void
     {
         $tagUpdate = Tags::update($this->tag, 'Tag Update');
 
@@ -68,13 +68,14 @@ class TagsCest
     }
 
     /**
-     * Test delete of tag
+     * Test delete of tag.
      *
      * @param IntegrationTester $I
      * @before createTagTest
+     *
      * @return void
      */
-    public function deleteTag(IntegrationTester $I): void
+    public function deleteTag(IntegrationTester $I) : void
     {
         $I->assertTrue(
             Tags::delete($this->tag)
@@ -82,16 +83,17 @@ class TagsCest
     }
 
     /**
-     * Test Tags Interaction
+     * Test Tags Interaction.
      *
      * @param IntegrationTester $I
      * @before createTagTest
+     *
      * @return void
      */
-    public function tagsInteraction(IntegrationTester $I): void
+    public function tagsInteraction(IntegrationTester $I) : void
     {
         $I->assertFalse(
-            Interactions::add(new Users(), $this->tag, ModelsInteractions::FOLLOWING)
+            Interactions::add(Users::findFirst(1), $this->tag, ModelsInteractions::FOLLOWING)
         );
     }
 }

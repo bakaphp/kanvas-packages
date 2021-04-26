@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\TotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
 
 class UsersInteractions extends BaseModel
 {
@@ -10,7 +10,6 @@ class UsersInteractions extends BaseModel
         getInteractionStorageKey as protected parentGetInteractionStorageKey;
     }
 
-    public $id;
     public int $users_id;
     public int $entity_id;
     public string $entity_namespace;
@@ -23,7 +22,7 @@ class UsersInteractions extends BaseModel
     const FOLLOWING = 'follow';
 
     /**
-     * Initialize relationshit after fetch
+     * Initialize relationship after fetch
      * since we need entity_namespace info.
      *
      * @return void
@@ -35,6 +34,7 @@ class UsersInteractions extends BaseModel
             $this->entity_namespace,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'entityData',
                 'params' => [
                     'conditions' => 'is_deleted = 0'

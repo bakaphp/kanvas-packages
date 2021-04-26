@@ -2,15 +2,15 @@
 
 namespace Kanvas\Packages\MagicImports;
 
+use Exception;
 use Kanvas\Packages\MagicImports\Contracts\ColumnsInterface;
 use Phalcon\DI\Injectable;
-use ReflectionClass;
-use Exception;
 use Phalcon\Mvc\Model;
 use Phalcon\Mvc\ModelInterface;
+use ReflectionClass;
 
 /**
- * Class Structure
+ * Class Structure.
  */
 class Imports extends Injectable
 {
@@ -20,13 +20,15 @@ class Imports extends Injectable
     public $structure;
 
     /**
-     * Define if it is a test or is a real process
-     * @var Boolean
+     * Define if it is a test or is a real process.
+     *
+     * @var bool
      */
     public $commit;
 
     /**
-     * namespace for the model
+     * namespace for the model.
+     *
      * @var string
      */
     public $namespaceModel;
@@ -43,7 +45,8 @@ class Imports extends Injectable
     }
 
     /**
-     * process data from array
+     * process data from array.
+     *
      * @param array $data
      */
     public function processData(array $data) : array
@@ -53,8 +56,8 @@ class Imports extends Injectable
         $db = $this->di->get('dbLocal');
         $db->begin();
         $return = [
-            "errors" => [],
-            "success" => [],
+            'errors' => [],
+            'success' => [],
         ];
 
         foreach ($processData as $modelData) {
@@ -77,8 +80,10 @@ class Imports extends Injectable
     }
 
     /**
-     * Save model data
+     * Save model data.
+     *
      * @param array $modelData
+     *
      * @return array $models
      */
     public function save(array $modelData) : array
@@ -92,15 +97,17 @@ class Imports extends Injectable
             } else {
                 $obj->saveOrFail($data);
             }
-            
+
             $return[\Baka\getShortClassName($obj)] = $obj;
         }
         return $return;
     }
 
     /**
-     * we organize the data
+     * we organize the data.
+     *
      * @param array $data
+     *
      * @return array
      */
     public function structureData(array $data) : array
@@ -120,22 +127,24 @@ class Imports extends Injectable
     }
 
     /**
-     * Mapping data
+     * Mapping data.
+     *
      * @param array $raw
      * @param array $maps
+     *
      * @return array $processData
      */
-    public function getStructureData(array $raw, array $maps): array
+    public function getStructureData(array $raw, array $maps) : array
     {
         $processData = [];
 
         foreach ($maps as $order => $value) {
             /**
              * 0 => Model
-             * 1 => db tb name
+             * 1 => db tb name.
              */
             $map = explode('.', $value);
-            
+
             if (count($map) != 2) {
                 continue;
             }
@@ -147,14 +156,16 @@ class Imports extends Injectable
     }
 
     /**
-     * create relationships between all models
+     * create relationships between all models.
+     *
      * @param array $models
+     *
      * @return array $models
      */
     public function setRelationships(array $models) : array
     {
         /**
-         * Get the import structure
+         * Get the import structure.
          */
         $structures = $this->structure->getStructure();
         $returns = [];
@@ -166,7 +177,7 @@ class Imports extends Injectable
             if (!isset($models[$modelName])) {
                 continue;
             }
-            
+
             /**
              * @var all-models $models
              * @var PrincipalModel $models[$modelName]
@@ -180,10 +191,12 @@ class Imports extends Injectable
     }
 
     /**
-     * Save relationships
+     * Save relationships.
+     *
      * @param array $models
      * @param Model $model
      * @param array $relationships
+     *
      * @return array $returns
      */
     public function saveRelationships(array $models, ModelInterface $model, $relationships) : array
@@ -191,7 +204,7 @@ class Imports extends Injectable
         $returns = [];
         foreach ($models as $class => $obj) {
             $className = get_class($obj);
-           
+
             if (!isset($relationships[$className])) {
                 continue;
             }
@@ -222,7 +235,7 @@ class Imports extends Injectable
                     $returns[\Baka\getShortClassName($newObj)] = $newObj;
                 break;
                 default:
-                    throw new Exception("Error Processing Request", 1);
+                    throw new Exception('Error Processing Request', 1);
                 break;
             }
         }
@@ -231,8 +244,10 @@ class Imports extends Injectable
     }
 
     /**
-     * Format array from frontend
+     * Format array from frontend.
+     *
      * @param array $models
+     *
      * @return array
      */
     public function getReturn(array $models) : array

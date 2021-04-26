@@ -22,6 +22,7 @@ class Flags extends BaseModel
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interactions',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',
@@ -37,6 +38,7 @@ class Flags extends BaseModel
             UsersInteractions::class,
             'entity_id',
             [
+                'reusable' => true,
                 'alias' => 'interaction',
                 'params' => [
                     'conditions' => 'entity_namespace = :namespace:',

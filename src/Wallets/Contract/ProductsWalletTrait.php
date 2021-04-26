@@ -7,9 +7,8 @@ namespace Kanvas\Packages\Wallets\Contract;
 use Kanvas\Packages\Wallets\Models\Products;
 
 /**
- * Methods most used in products
+ * Methods most used in products.
  */
 trait ProductsWalletTrait
 {
-    
 }

@@ -2,8 +2,8 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contract\Interactions\CustomTotalInteractionsTrait;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Baka\Contracts\Auth\UserInterface;
 
 class UsersFollows extends BaseModel
 {
@@ -12,8 +12,9 @@ class UsersFollows extends BaseModel
     public $id;
     public int $users_id;
     public int $entity_id;
+    public ?int $companies_id = null;
+    public ?int $companies_branches_id = null;
     public string $entity_namespace;
-
 
     /**
      * Initialize relationshit after fetch
@@ -28,6 +29,7 @@ class UsersFollows extends BaseModel
             $this->entity_namespace,
             'id',
             [
+                'reusable' => true,
                 'alias' => 'entityData'
             ]
         );
@@ -39,7 +41,7 @@ class UsersFollows extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('users_follows');
     }
 

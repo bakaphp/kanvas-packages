@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\AppSearch\Contracts;
 
+use Kanvas\Packages\AppSearch\Http\QueryParser\QueryParser;
 use Phalcon\Http\Response;
 
 trait SearchableControllerTrait
@@ -15,12 +16,7 @@ trait SearchableControllerTrait
      */
     public function index() : Response
     {
-        $searchParams = [
-            'page' => [
-                'current' => $this->request->getQuery('page', 'int', 1),
-                'size' => $this->request->getQuery('limit', 'int', 25),
-            ]
-        ];
+        $searchParams = (new QueryParser($this->request))->getSearchParams();
 
         $engine = $this->request->getQuery('index', 'string', getenv('ELASTIC_APP_DEFAULT_ENGINE'));
         $searchString = $this->request->getQuery('q', 'string');

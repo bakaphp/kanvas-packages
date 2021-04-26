@@ -2,10 +2,10 @@
 
 namespace Kanvas\Packages\Social\Providers;
 
-use Phalcon\Di\ServiceProviderInterface;
-use Phalcon\Di\DiInterface;
-use PhpAmqpLib\Connection\AMQPStreamConnection;
 use function Baka\envValue;
+use Phalcon\Di\DiInterface;
+use Phalcon\Di\ServiceProviderInterface;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class QueueProvider implements ServiceProviderInterface
 {
@@ -26,7 +26,7 @@ class QueueProvider implements ServiceProviderInterface
                         envValue('RABBITMQ_DEFAULT_PASS', 'guest'),
                         envValue('RABBITMQ_DEFAULT_VHOST', '/')
                     );
-    
+
                     return $queue;
                 }
             );

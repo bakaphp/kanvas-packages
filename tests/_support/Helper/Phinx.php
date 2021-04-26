@@ -3,7 +3,6 @@
 namespace Kanvas\Packages\Test\Support\Helper;
 
 use Baka\TestCase\Phinx as TestCasePhinx;
-use Phinx\Wrapper\TextWrapper;
 
 class Phinx extends TestCasePhinx
 {

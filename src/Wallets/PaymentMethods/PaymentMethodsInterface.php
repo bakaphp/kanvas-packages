@@ -5,13 +5,14 @@ namespace Kanvas\Packages\Wallets\PaymentMethods;
 interface PaymentMethodsInterface
 {
     /**
-     * Can be charged to user
+     * Can be charged to user.
+     *
      * @return bool
      */
     public function canCharge() : bool;
 
     /**
-     * charge the user
+     * charge the user.
      */
     public function charge(float $amount) : bool;
 }

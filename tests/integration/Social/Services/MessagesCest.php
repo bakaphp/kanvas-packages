@@ -2,18 +2,19 @@
 
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
+use Canvas\Models\FileSystem;
 use IntegrationTester;
 use Kanvas\Packages\Social\Models\Channels;
 use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
-use Kanvas\Packages\Social\Services\Messages as MessagesService;
-use Kanvas\Packages\Social\Services\MessageTypes;
-use Kanvas\Packages\Social\Services\Reactions;
-use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Services\Distributions;
 use Kanvas\Packages\Social\Services\Interactions;
+use Kanvas\Packages\Social\Services\Messages as MessagesService;
+use Kanvas\Packages\Social\Services\MessageTypes;
+use Kanvas\Packages\Social\Services\Reactions;
 use Kanvas\Packages\Test\Support\Models\Lead;
 use Kanvas\Packages\Test\Support\Models\MessageObject;
+use Kanvas\Packages\Test\Support\Models\Users;
 
 class MessagesCest
 {
@@ -21,133 +22,226 @@ class MessagesCest
     public Channels $channel;
 
     /**
-     * Get the first comment
+     * Get the first comment.
      *
      * @return void
      */
-    protected function createMessageType(): void
+    protected function createMessageType() : void
     {
-        MessageTypes::create(new Users(), 'memo', 'Test Type');
+        MessageTypes::create(Users::findFirst(1), 'memo', 'Test Type');
     }
 
     /**
-     * Create a message for testing
+     * Create a message for testing.
      *
      * @return void
      */
-    protected function messageTestCreation(): void
+    protected function messageTestCreation() : void
     {
         $text = [
             'text' => 'Test some messages'
         ];
-        
-        $this->message = MessagesService::create(new Users(), 'memo', $text);
+
+        $this->message = MessagesService::create(Users::findFirst(1), 'memo', $text);
     }
 
     /**
-     * Create a channel messages for testing
+     * Create a channel messages for testing.
      *
      * @return void
      */
-    protected function channelMessagesDistribution(): void
+    protected function channelMessagesDistribution() : void
     {
         $lead = new Lead();
 
         $this->channel = Channels::findFirstOrCreate(
             [
-            'conditions' => 'is_deleted = 0'
-        ],
+                'conditions' => 'is_deleted = 0'
+            ],
             [
-            'name' => 'channel Test',
-            'entity_namespace' => new Lead(),
-            'entity_id' => $lead->getId()
-        ]
+                'name' => 'channel Test',
+                'entity_namespace' => new Lead(),
+                'entity_id' => $lead->getId()
+            ]
         );
 
         Distributions::sendToChannelFeed($this->channel, $this->message);
     }
-        
+
     /**
-     * Test add comment
+     * Test add comment.
      *
      * @param UnitTester $I
      * @before createMessageType
+     *
      * @return void
      */
-    public function createMessage(IntegrationTester $I): void
+    public function createMessage(IntegrationTester $I) : void
     {
         $text = [
             'text' => 'This is test text for testing'
         ];
-        
-        $feed = MessagesService::create(new Users(), 'memo', $text, new MessageObject());
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
 
         $I->assertNotNull($feed->getId());
     }
 
+    public function createMessageWithCustomField(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+        $feed->set('people', 'max');
+        $feed->set('organization', [1, 2, 3]);
+        $feed->set('entity', ['nose' => 'abd', '3' => 1]);
+        $feed->update();
+
+        $I->assertNotNull($feed->getId());
+    }
+
+    public function createMessageWithImage(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+
+        if ($fileSystem = FileSystem::findFirst()) {
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $fileSystem->id = 3;
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $feed->update();
+        }
+        $I->assertNotNull($feed->getId());
+    }
+
+    public function createMessageWithImageAndCustomFields(IntegrationTester $I) : void
+    {
+        $text = [
+            'text' => 'This is test custom'
+        ];
+
+        $feed = MessagesService::create(Users::findFirst(1), 'memo', $text, new MessageObject());
+        $feed->set('people', 'max');
+        $feed->set('organization', [1, 2, 3]);
+        $feed->set('entity', ['nose' => 'abd', '3' => 1]);
+        if ($fileSystem = FileSystem::findFirst()) {
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $fileSystem->id = 3;
+            $feed->attach([[
+                'id' => 0,
+                'file' => $fileSystem,
+                'field_name' => 'test',
+                'is_deleted' => 0
+            ]]);
+            $feed->update();
+        }
+        $I->assertNotNull($feed->getId());
+    }
+
     /**
-     * Create Message by Message Object Test
+     * Create Message by Message Object Test.
      *
      * @param UnitTester $I
      * @before createMessageType
+     *
      * @return void
      */
-    public function createMessageByObject(IntegrationTester $I): void
+    public function createMessageByObject(IntegrationTester $I) : void
     {
         $text = [
             'text' => 'This is test text for testing'
         ];
 
-        $newMessage =  new Messages();
+        $newMessage = new Messages();
         $newMessage->message = json_encode($text);
-        
-        $feed = MessagesService::createByObject(new Users(), 'memo', $newMessage, new Messages());
+
+        $feed = MessagesService::createByObject(Users::findFirst(1), 'memo', $newMessage, new Messages());
 
         $I->assertNotNull($feed->getId());
     }
 
     /**
-     * Test Message Reactions
+     * Create Message by Message Object Test.
      *
-     * @param IntegrationTester $I
-     * @before messageTestCreation
+     * @param UnitTester $I
+     * @before createMessageType
+     *
      * @return void
      */
-    public function messageReaction(IntegrationTester $I): void
+    public function getMessageByUuid(IntegrationTester $I) : void
     {
-        $I->assertFalse(Reactions::addMessageReaction('confuse', new Users(), $this->message));
+        $message = Messages::findFirst(['order' => 'id desc']);
 
-        $I->assertFalse(Reactions::addMessageReaction('☺', new Users(), $this->message));
+        $feed = MessagesService::getMessageByUuid($message->uuid);
 
-        $I->assertTrue(Reactions::addMessageReaction('confuse', new Users(), $this->message));
-
-        $I->assertTrue(Reactions::addMessageReaction('☺', new Users(), $this->message));
+        $I->assertNotNull($feed->getId());
     }
 
     /**
-     * Test Message Interaction
+     * Test Message Reactions.
      *
      * @param IntegrationTester $I
      * @before messageTestCreation
+     *
      * @return void
      */
-    public function messageInteraction(IntegrationTester $I): void
+    public function messageReaction(IntegrationTester $I) : void
+    {
+        $I->assertFalse(Reactions::addMessageReaction('confuse', Users::findFirst(1), $this->message));
+
+        $I->assertFalse(Reactions::addMessageReaction('☺', Users::findFirst(1), $this->message));
+
+        $I->assertTrue(Reactions::addMessageReaction('confuse', Users::findFirst(1), $this->message));
+
+        $I->assertTrue(Reactions::addMessageReaction('☺', Users::findFirst(1), $this->message));
+    }
+
+    /**
+     * Test Message Interaction.
+     *
+     * @param IntegrationTester $I
+     * @before messageTestCreation
+     *
+     * @return void
+     */
+    public function messageInteraction(IntegrationTester $I) : void
     {
         $I->assertFalse(
-            Interactions::add(new Users(), $this->message, ModelsInteractions::REACT)
+            Interactions::add(Users::findFirst(1), $this->message, ModelsInteractions::REACT)
         );
     }
 
     /**
-     * Test message and feed delete
+     * Test message and feed delete.
      *
      * @param IntegrationTester $I
+     *
      * @return void
      */
-    public function deleteMessage(IntegrationTester $I): void
+    public function deleteMessage(IntegrationTester $I) : void
     {
         $I->assertTrue(
-            MessagesService::delete(Messages::findFirst()->getId(), new Users())
+            MessagesService::delete(Messages::findFirst(['order' => 'id desc'])->getId(), Users::findFirst(1))
         );
     }
 }

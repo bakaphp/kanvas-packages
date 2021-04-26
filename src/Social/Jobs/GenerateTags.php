@@ -5,7 +5,7 @@ namespace Kanvas\Packages\Social\Jobs;
 use Baka\Contracts\Queue\QueueableJobInterface;
 use Baka\Jobs\Job;
 use Baka\Queue\Queue;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\MessageTags;
 use Kanvas\Packages\Social\Models\Tags;
@@ -16,11 +16,11 @@ use Phalcon\Utils\Slug;
 
 class GenerateTags extends Job implements QueueableJobInterface
 {
-    protected $user;
-    protected $message;
+    protected UserInterface $user;
+    protected Messages $message;
 
     /**
-     * Construct
+     * Construct.
      *
      * @param UsersInteractions $user
      * @param Messages $message
@@ -38,7 +38,7 @@ class GenerateTags extends Job implements QueueableJobInterface
      *
      * @return bool
      */
-    public function handle(): bool
+    public function handle() : bool
     {
         $tags = StringFormatter::getHashtagToString($this->message->message);
 

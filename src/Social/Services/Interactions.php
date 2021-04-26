@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Exception;
-use Kanvas\Packages\Social\Contract\Users\UserInterface;
+use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Models\Interactions as InteractionsModel;
 use Kanvas\Packages\Social\Models\UsersInteractions;
 use Phalcon\Mvc\ModelInterface;
@@ -16,22 +16,23 @@ class Interactions
      * Create an interaction of a user and a entity.
      *
      * @param ModelInterface $entity
-     * @param integer $interactionId
+     * @param int $interactionId
+     *
      * @return bool
      */
-    public static function add(UserInterface $user, ModelInterface $entity, int $interactionId): bool
+    public static function add(UserInterface $user, ModelInterface $entity, int $interactionId) : bool
     {
         $interaction = UsersInteractions::findFirst([
-                'conditions' => 'users_id = :userId: AND 
+            'conditions' => 'users_id = :userId: AND 
                                 interactions_id = :interactionId: AND 
                                 entity_namespace = :namespace: AND 
                                 entity_id = :entityId:',
-                'bind' => [
-                    'userId' => $user->getId(),
-                    'interactionId' => $interactionId,
-                    'namespace' => get_class($entity),
-                    'entityId' => $entity->getId(),
-                ]
+            'bind' => [
+                'userId' => $user->getId(),
+                'interactionId' => $interactionId,
+                'namespace' => get_class($entity),
+                'entityId' => $entity->getId(),
+            ]
         ]);
 
         if ($interaction && !InteractionsModel::isComment($interactionId)) {
@@ -51,12 +52,13 @@ class Interactions
     }
 
     /**
-     * Get interaction object by its name
+     * Get interaction object by its name.
      *
      * @param string $interactionName
+     *
      * @return InteractionsModel
      */
-    public static function getInteractionByName(string $interactionName): InteractionsModel
+    public static function getInteractionByName(string $interactionName) : InteractionsModel
     {
         return InteractionsModel::findFirstOrFail([
             'conditions' => 'name = :name: AND is_deleted = 0',
@@ -71,7 +73,7 @@ class Interactions
      *
      * @return void
      */
-    public static function removeInteraction(UsersInteractions $interaction): void
+    public static function removeInteraction(UsersInteractions $interaction) : void
     {
         if ($interaction->is_deleted) {
             $interaction->is_deleted = 0;
@@ -84,16 +86,17 @@ class Interactions
         }
     }
 
-
     /**
      * Return the ID correspondent to the interaction type and
      * throws and exception if doesnt exist.
      *
      * @param string $interactionName
+     *
      * @throws Exception
-     * @return integer
+     *
+     * @return int
      */
-    public static function getInteractionIdByName(string $interactionName): int
+    public static function getInteractionIdByName(string $interactionName) : int
     {
         switch ($interactionName) {
             case 'react':
@@ -115,7 +118,7 @@ class Interactions
             case 'followers':
                 return InteractionsModel::FOLLOWERS;
                 break;
-                
+
             default:
                 throw new Exception('Interaction name not found');
                 break;

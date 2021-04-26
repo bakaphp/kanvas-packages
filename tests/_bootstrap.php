@@ -1,5 +1,6 @@
 
 <?php
+define('API_TESTS', true);
 
 require 'autoload.php';
 require 'providers.php';

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Kanvas\Packages\MagicImports\Contracts;
 

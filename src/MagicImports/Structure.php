@@ -1,17 +1,17 @@
-<?php 
+<?php
 
 namespace Kanvas\Packages\MagicImports;
 
+use Kanvas\Packages\MagicImports\Contracts\ColumnsInterface;
 use Phalcon\DI\Injectable;
 use Phalcon\Mvc\Model;
-use Kanvas\Packages\MagicImports\Contracts\ColumnsInterface;
 use Phalcon\Mvc\Model\Relation;
 use Phalcon\Mvc\ModelInterface;
 
 /**
- * Class Structure
+ * Class Structure.
  */
-class Structure extends Injectable implements ColumnsInterface 
+class Structure extends Injectable implements ColumnsInterface
 {
     /**
      * @var Phalcon\Mvc\Model
@@ -53,16 +53,17 @@ class Structure extends Injectable implements ColumnsInterface
      * @param array $fields
      * @param array $relationship
      */
-    function __construct(ModelInterface $model, $fields = [], $relationship = [])
+    public function __construct(ModelInterface $model, $fields = [], $relationship = [])
     {
-        $this->model = $model; 
+        $this->model = $model;
         $this->fields = $fields;
         $this->relationship = $relationship;
-        $this->class_base = get_class($model); 
+        $this->class_base = get_class($model);
     }
 
     /**
-     * Get structure for import
+     * Get structure for import.
+     *
      * @return array $fields
      */
     public function getStructure() : array
@@ -72,27 +73,28 @@ class Structure extends Injectable implements ColumnsInterface
     }
 
     /**
-     * Get fields by models
+     * Get fields by models.
+     *
      * @return array $raw
      */
     public function getFieldsByModel() : array
     {
         $this->raw = [];
         /**
-         * Get namespace and class name
+         * Get namespace and class name.
          */
-        $class = explode("\\",$this->class_base);
+        $class = explode('\\', $this->class_base);
 
         /**
-         * Get Structure for the main class
+         * Get Structure for the main class.
          */
         $this->raw[end($class)] = $this->setStructure($this->model);
 
         /**
-         * Set relationship
+         * Set relationship.
          */
         $relationships = $this->setRelationships($this->class_base);
-        
+
         $externalRelationship = isset($this->relationship[end($class)]) ? $this->relationship[end($class)] : [];
 
         $this->raw[end($class)]['relationships'] = array_merge($relationships, $externalRelationship);
@@ -101,27 +103,29 @@ class Structure extends Injectable implements ColumnsInterface
     }
 
     /**
-     * Set model relationships
+     * Set model relationships.
+     *
      * @param string $classBase
-     * @param boolean 
+     * @param bool
      */
     public function setRelationships(string $classBase, $recursive = true) : array
     {
         $relationships = [];
         /**
-         * Get relations from the models
+         * Get relations from the models.
          */
         foreach ($this->modelsManager->getRelations($classBase) as $relations) {
             /**
-             * Name of relationship
+             * Name of relationship.
+             *
              * @var string
              */
             $relationshipName = $relations->getReferencedModel();
 
-            $relationshipClass = explode("\\",$relationshipName);
+            $relationshipClass = explode('\\', $relationshipName);
 
             /**
-             * Get Structure for the relationship class
+             * Get Structure for the relationship class.
              */
             $this->raw[end($relationshipClass)] = $this->setStructure(new $relationshipName);
 
@@ -130,7 +134,7 @@ class Structure extends Injectable implements ColumnsInterface
             /**
              * @todo fixed
              */
-            if($recursive && $classBase != $relationshipName){
+            if ($recursive && $classBase != $relationshipName) {
                 $relationshipFromRelationship = $this->setRelationships($relationshipName, false);
                 $externalRelationship = isset($this->relationship[end($relationshipClass)]) ? $this->relationship[end($relationshipClass)] : [];
 
@@ -141,31 +145,34 @@ class Structure extends Injectable implements ColumnsInterface
     }
 
     /**
-     * Format models data to arrays
+     * Format models data to arrays.
+     *
      * @param Phalcon\Mvc\Model $model
+     *
      * @return array $raw
      */
-    public function setStructure(ModelInterface $model): array
+    public function setStructure(ModelInterface $model) : array
     {
         $raw = [];
-        
+
         foreach ($model->toArray() as $tbname => $value) {
-            if(in_array($tbname, $this->exclude_fields)){
+            if (in_array($tbname, $this->exclude_fields)) {
                 continue;
             }
             $raw['columns'][] = [
-                "field" => $tbname,
-                "type" => gettype($tbname),
-                "validation" => false,
-                "label" => ucfirst(str_replace('_',' ', $tbname))
+                'field' => $tbname,
+                'type' => gettype($tbname),
+                'validation' => false,
+                'label' => ucfirst(str_replace('_', ' ', $tbname))
             ];
         }
-        
+
         return $raw;
     }
 
     /**
-     * get primary keys from Relationships
+     * get primary keys from Relationships.
+     *
      * @param $relationships
      */
     public function getRelationshipsKeys(Relation $relationships) : array
@@ -173,7 +180,8 @@ class Structure extends Injectable implements ColumnsInterface
         $keys = [];
 
         /**
-         * Name of relationship
+         * Name of relationship.
+         *
          * @var string
          */
         $keys['relationshipName'] = $relationships->getReferencedModel();
@@ -181,24 +189,26 @@ class Structure extends Injectable implements ColumnsInterface
         /**
          * Relationships Types
          * 1 => hasOne
-         * 2 => hasMany
+         * 2 => hasMany.
+         *
          * @var int
          */
         $keys['getType'] = $relationships->getType();
 
         /**
-         * Primary key from the models
+         * Primary key from the models.
+         *
          * @var string
          */
         $keys['primaryKey'] = $relationships->getFields();
 
         /**
-         * relationships
+         * relationships.
          */
         $keys['relationshipsKey'] = $relationships->getReferencedFields();
 
         /**
-         * Variable that defines if it is unique
+         * Variable that defines if it is unique.
          */
         //$model = new $keys['relationshipName'];
         //$pk = $model->getModelsMetaData()->getPrimaryKeyAttributes($model);
