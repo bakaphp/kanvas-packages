@@ -55,7 +55,7 @@ class Rules
                 $workFlow = $action->getRulesWorkflowActions();
                 $objectAction = new $workFlow->actions->model_name;
                 try {
-                    $workflowLog->actions_id = $action->id;
+                    $workflowLog->actions_id = $workFlow->actions->id;
                     $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
                     $workflowLog->setLog($objectAction->handle($entity, $params));
                     $workflowLog->end();
