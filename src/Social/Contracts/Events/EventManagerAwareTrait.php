@@ -37,7 +37,7 @@ trait EventManagerAwareTrait
      *
      * @return EventsManager | null
      */
-    public function getEventsManager() : EventsManager
+    public function getEventsManager() : ?EventsManager
     {
         $di = Di::getDefault();
 
