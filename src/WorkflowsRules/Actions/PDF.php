@@ -2,6 +2,7 @@
 
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
+use Canvas\Filesystem\Helper;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use mikehaertl\wkhtmlto\Pdf as PDFLibrary;
 use Phalcon\Di;
@@ -37,9 +38,16 @@ class PDF extends Action
                 $this->status = FAIL;
                 $this->message = $error;
             }
+            $filesystem = Helper::uploadToS3("{$rand}.pdf", $entity->users_id, $entity->companies_id);
+
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
             $this->status = Action::SUCCESSFUL;
+            $files = $filesystem->toArray();
+            $files['file'] = $filesystem;
+            $entity->attach([
+                $files
+            ]);
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
             if (!$appMode) {
