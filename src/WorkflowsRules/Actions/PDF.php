@@ -38,7 +38,7 @@ class PDF extends Action
                 $this->status = FAIL;
                 $this->message = $error;
             }
-            $filesystem = Helper::uploadToS3("{$rand}.pdf", $entity->users_id, $entity->companies_id);
+            $filesystem = Helper::upload(Helper::pathToFile($path));
 
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
