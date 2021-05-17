@@ -33,7 +33,7 @@ trait RulesTrait
             Di::getDefault()->get('log')->info("Rules trait company id  {$this->companies->getId()}");
 
             $rules = Rules::find([
-                'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND (companies_id = :companies_id: OR 0)',
+                'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id in (?2, 0)',
                 'bind' => [
                     'systems_module_id' => $systemModules->getId(),
                     'rules_types_id' => $rulesTypes->getId(),
