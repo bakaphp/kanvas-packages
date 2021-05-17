@@ -43,11 +43,10 @@ class PDF extends Action
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
             $this->status = Action::SUCCESSFUL;
-            $files = $filesystem->toArray();
-            $files['file'] = $filesystem;
-            $entity->attach([
-                $files
-            ]);
+            $entity->uploadedFiles[] = [
+                'filesystem_id' => $filesystem->getId()
+            ];
+            $entity->afterSave();
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
             if (!$appMode) {
