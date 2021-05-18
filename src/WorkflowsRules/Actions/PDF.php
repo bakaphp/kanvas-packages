@@ -38,16 +38,15 @@ class PDF extends Action
                 $this->status = FAIL;
                 $this->message = $error;
             }
-            $filesystem = Helper::uploadToS3("{$rand}.pdf", $entity->users_id, $entity->companies_id);
+            $filesystem = Helper::upload(Helper::pathToFile($path));
 
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
             $this->status = Action::SUCCESSFUL;
-            $files = $filesystem->toArray();
-            $files['file'] = $filesystem;
-            $entity->attach([
-                $files
-            ]);
+            $entity->uploadedFiles[] = [
+                'filesystem_id' => $filesystem->getId()
+            ];
+            $entity->saveOrFail();
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
             if (!$appMode) {

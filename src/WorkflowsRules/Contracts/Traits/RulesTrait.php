@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\WorkflowsRules\Contracts\Traits;
 
 use Baka\Database\SystemModules;
+use Canvas\Models\Companies;
 use Kanvas\Packages\WorkflowsRules\Jobs\RulesJob;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
@@ -33,11 +34,12 @@ trait RulesTrait
             Di::getDefault()->get('log')->info("Rules trait company id  {$this->companies->getId()}");
 
             $rules = Rules::find([
-                'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id = :companies_id:',
+                'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id in (:companies_id:, :global_companies:)',
                 'bind' => [
                     'systems_module_id' => $systemModules->getId(),
                     'rules_types_id' => $rulesTypes->getId(),
-                    'companies_id' => $this->companies->getId()
+                    'companies_id' => $this->companies->getId(),
+                    'global_companies' => Companies::GLOBAL_COMPANIES_ID
                 ]
             ]);
 
