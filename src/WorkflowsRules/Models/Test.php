@@ -49,7 +49,23 @@ class Test implements WorkflowsEntityInterfaces
         return new Companies();
     }
 
+    /**
+     * saveLinkedSources.
+     *
+     * @param  mixed $variable
+     *
+     * @return void
+     */
     public function saveLinkedSources($variable)
+    {
+    }
+
+    /**
+     * afterRules.
+     *
+     * @return void
+     */
+    public function afterRules() : void
     {
     }
 }
