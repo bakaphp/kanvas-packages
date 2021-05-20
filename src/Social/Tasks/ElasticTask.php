@@ -15,11 +15,12 @@ class ElasticTask extends KanvasElasticTask
      *
      * @return void
      */
-    public function indexMessagesAction() : void
+    public function indexMessagesAction(?string $model = null) : void
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
-        $messagesRecords = MessagesModel::findOrFail([
+        $model = $model ?? MessagesModel::class;
+        $messagesRecords = $model::findOrFail([
             'conditions' => 'apps_id = :apps_id: and is_deleted = 0',
             'bind' => [
                 'apps_id' => Di::getDefault()->get('app')->getId(),
@@ -30,7 +31,7 @@ class ElasticTask extends KanvasElasticTask
             if (!is_object($message->users)) {
                 continue;
             }
-               
+
             $this->di->set('userData', $message->users);
             $messages->setData($message->id, [$message]);
 
@@ -43,7 +44,7 @@ class ElasticTask extends KanvasElasticTask
     }
 
     /**
-     * Erase messages index
+     * Erase messages index.
      *
      * @return void
      */
