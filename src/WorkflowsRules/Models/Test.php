@@ -56,7 +56,7 @@ class Test implements WorkflowsEntityInterfaces
      *
      * @return void
      */
-    public function saveLinkedSources($variable)
+    public function saveLinkedSources($variable) : void
     {
     }
 
