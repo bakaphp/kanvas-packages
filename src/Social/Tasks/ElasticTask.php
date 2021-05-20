@@ -19,7 +19,7 @@ class ElasticTask extends KanvasElasticTask
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
-        $model = $model ? $model : MessagesModel::class;
+        $model = $model ?? MessagesModel::class;
         $messagesRecords = $model::findOrFail([
             'conditions' => 'apps_id = :apps_id: and is_deleted = 0',
             'bind' => [
