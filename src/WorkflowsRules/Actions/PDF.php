@@ -44,8 +44,7 @@ class PDF extends Action
             $this->data = array_merge($entity->toArray(), $params);
             $this->status = Action::SUCCESSFUL;
             $entity->uploadedFiles[] = [
-                'filesystem_id' => $filesystem->getId(),
-                'id' => null
+                'filesystem_id' => $filesystem->getId()
             ];
             $entity->saveOrFail();
             $entity->afterRules();
