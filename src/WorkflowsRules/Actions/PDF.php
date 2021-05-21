@@ -47,6 +47,7 @@ class PDF extends Action
                 'filesystem_id' => $filesystem->getId()
             ];
             $entity->saveOrFail();
+            $entity->afterRules();
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
             if (!$appMode) {
