@@ -6,6 +6,7 @@ use Baka\Database\SystemModules;
 use Kanvas\Packages\WorkflowsRules\Jobs\RulesJob;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
+use Kanvas\Packages\WorkflowsRules\Services\Rules as RulesServices;
 use Phalcon\Di;
 
 trait RulesTrait
@@ -21,16 +22,19 @@ trait RulesTrait
      */
     public function fireRules(string $event) : void
     {
-        $systemModules = $this->getSystemModules();
-        if ($systemModules) {
+        if ($systemModules = $this->getSystemModules()) {
             $rulesTypes = RulesTypes::findFirstByName($event);
+
             if (!$rulesTypes) {
                 return;
             }
-            Di::getDefault()->get('log')->info("Rules trait started, event {$event}");
-            Di::getDefault()->get('log')->info("Rules trait system module id {$systemModules->getId()}");
-            Di::getDefault()->get('log')->info("Rules trait rules type id  {$rulesTypes->getId()}");
-            Di::getDefault()->get('log')->info("Rules trait company id  {$this->companies->getId()}");
+
+            if (Di::getDefault()->has('log')) {
+                Di::getDefault()->get('log')->info("Rules trait started, event {$event}");
+                Di::getDefault()->get('log')->info("Rules trait system module id {$systemModules->getId()}");
+                Di::getDefault()->get('log')->info("Rules trait rules type id  {$rulesTypes->getId()}");
+                Di::getDefault()->get('log')->info("Rules trait company id  {$this->companies->getId()}");
+            }
 
             $rules = Rules::find([
                 'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id = :companies_id:',
@@ -42,8 +46,10 @@ trait RulesTrait
             ]);
 
             foreach ($rules as $rule) {
-                RulesJob::dispatch($rule, $event, $this);
-                Di::getDefault()->get('log')->info("Rules fire {$rule->name}");
+                //RulesJob::dispatch($rule, $event, $this);
+                $rule = RulesServices::set($rule);
+                $rule->validate($this);
+                //Di::getDefault()->get('log')->info("Rules fire {$rule->name}");
             }
         }
     }

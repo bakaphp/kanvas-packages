@@ -87,7 +87,7 @@ class Messages
      * @param array $object contains the entity object + its id.
      * @param string $distribution
      *
-     * @return UserMessages
+     * @return MessagesInterface
      */
     public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableEntityInterface $object = null) : MessagesInterface
     {
@@ -104,8 +104,8 @@ class Messages
             $newMessage->addSystemModules($object);
         }
 
-        Distributions::sendToUsersFeeds($newMessage, $user);
-        GenerateTags::dispatch($user, $newMessage);
+        //Distributions::sendToUsersFeeds($newMessage, $user);
+        //GenerateTags::dispatch($user, $newMessage);
 
         return $newMessage;
     }
@@ -119,7 +119,7 @@ class Messages
      * @param array $object contains the entity object + its id.
      * @param string $distribution
      *
-     * @return UserMessages
+     * @return MessagesInterface
      */
     public static function createByObject(UserInterface $user, string $verb, MessagesInterface $newMessage, MessageableEntityInterface $object) : MessagesInterface
     {
@@ -132,8 +132,8 @@ class Messages
 
         $newMessage->addSystemModules($object);
 
-        Distributions::sendToUsersFeeds($newMessage, $user);
-        GenerateTags::dispatch($user, $newMessage);
+        //Distributions::sendToUsersFeeds($newMessage, $user);
+        //GenerateTags::dispatch($user, $newMessage);
 
         return $newMessage;
     }

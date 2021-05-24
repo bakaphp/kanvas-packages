@@ -9,6 +9,7 @@ use Faker\Provider\en_US\Company;
 use Faker\Provider\en_US\Person;
 use Faker\Provider\en_US\PhoneNumber;
 use IntegrationTester;
+use Kanvas\Packages\Test\Support\Models\Lead;
 use Kanvas\Packages\WorkflowsRules\Jobs\RulesJob;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\Test;
@@ -49,5 +50,11 @@ class RulesCest
         $faker->addProvider(new Company($faker));
         $faker->addProvider(new DateTime($faker));
         return $faker;
+    }
+
+    public function triggerRule(IntegrationTester $I)
+    {
+        $lead = Lead::findFirst();
+        $lead->fireRules('created');
     }
 }

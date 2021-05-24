@@ -22,7 +22,8 @@ class ConfigProvider implements ServiceProviderInterface
                 /**
                  * @todo Find a better way to handle unit test file include
                  */
-                $data = require appPath('vendor/canvas/core/src/Core/config.php');
+                //$data = require appPath('vendor/canvas/core/src/Core/config.php');
+                $data = require '/canvas-core/src/Core/config.php';
 
                 return new Config($data);
             }
