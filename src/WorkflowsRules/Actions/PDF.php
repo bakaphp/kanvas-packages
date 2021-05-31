@@ -24,7 +24,19 @@ class PDF extends Action
         $di = Di::getDefault();
         $appMode = $di->get('config')->production;
         try {
-            $pdf = new PDFLibrary($params['config']); // Set config for pdf settings (example deleted floating)
+            $pdf = new PDFLibrary([
+                'encoding' => 'UTF-8',
+                'no-outline',
+                'margin-top' => 0,
+                'margin-right' => 0,
+                'margin-bottom' => 0,
+                'margin-left' => 0,
+                'disable-smart-shrinking',
+                'enable-local-file-access',
+                'page-width' => 200,
+                'page-height' => 265
+            ]);
+            // Set config for pdf settings (example deleted floating)
             $templateServiceClass = get_class($di->get('templates'));
             $template = $templateServiceClass::generate($params['template_name'], ['entity' => $entity]); // Generate html from emails_templates table
             $pdf->addPage($template);
@@ -43,10 +55,14 @@ class PDF extends Action
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
             $this->status = Action::SUCCESSFUL;
-            $entity->uploadedFiles[] = [
-                'filesystem_id' => $filesystem->getId()
+            $files = [
+                [
+                    'filesystem_id' => $filesystem->getId()
+                ]
             ];
-            $entity->saveOrFail();
+            $entity->saveOrFail([
+                'files' => $files
+            ]);
             $entity->afterRules();
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
