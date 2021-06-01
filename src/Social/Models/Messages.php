@@ -300,7 +300,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
      */
     public function setParent(MessagesInterface $parent, string $uniqueId) : void
     {
-        $this->parent_id = $parent->message_id;
+        $this->parent_id = $parent->getId();
         $this->parent_unique_id = $uniqueId;
 
         //update the parent so the msg update on the feeds list
