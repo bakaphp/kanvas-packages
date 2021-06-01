@@ -2,10 +2,10 @@
 
 namespace Kanvas\Packages\Social\Jobs;
 
+use Baka\Contracts\Auth\UserInterface;
 use Baka\Contracts\Queue\QueueableJobInterface;
 use Baka\Jobs\Job;
 use Baka\Queue\Queue;
-use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\MessageTags;
 use Kanvas\Packages\Social\Models\Tags;

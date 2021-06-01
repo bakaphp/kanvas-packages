@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Services;
 
-use Exception;
 use Baka\Contracts\Auth\UserInterface;
+use Exception;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesReactions;
 use Kanvas\Packages\Social\Models\Reactions as ReactionsModel;
 use Kanvas\Packages\Social\Models\UsersReactions;

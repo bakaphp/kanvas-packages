@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contracts\Comments;
 
+use Baka\Contracts\Http\Api\CrudBehaviorRelationshipsTrait;
 use Baka\Validation as CanvasValidation;
+use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
+use Kanvas\Packages\Social\Dto\Comments as CommentsDto;
+use Kanvas\Packages\Social\Mappers\Comments as CommentsMapper;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\Users;
 use Kanvas\Packages\Social\Services\Comments;
 use Phalcon\Http\Response;
 use Phalcon\Validation\Validator\PresenceOf;
-use Kanvas\Packages\Social\Dto\Comments as CommentsDto;
-use Kanvas\Packages\Social\Mappers\Comments as CommentsMapper;
-use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
-use Baka\Contracts\Http\Api\CrudBehaviorRelationshipsTrait;
 
 /**
  * Channels Trait.

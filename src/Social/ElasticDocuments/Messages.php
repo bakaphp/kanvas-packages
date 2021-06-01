@@ -154,13 +154,13 @@ class Messages extends Documents
     }
 
     /**
-     * Update message's comment count
-     * 
+     * Update message's comment count.
+     *
      * @param MessagesModel $message
-     * 
+     *
      * @return bool
      */
-    public function updateCommentsCount(MessagesModel $message): bool
+    public function updateCommentsCount(MessagesModel $message) : bool
     {
         $this->comments_count = $message->countComments('is_deleted = 0');
         $this->setData($message->getId(), [$message]);
@@ -170,13 +170,13 @@ class Messages extends Documents
     }
 
     /**
-     * Update message's comment count
-     * 
+     * Update message's comment count.
+     *
      * @param MessagesModel $message
-     * 
+     *
      * @return bool
      */
-    public function formatMessage(MessagesModel $message): array
+    public function formatMessage(MessagesModel $message) : array
     {
         return [
             'id' => (int)$message->id,
@@ -216,9 +216,9 @@ class Messages extends Documents
                 'is_deleted' => $message->channels->getFirst()->is_deleted,
             ] : null,
             'comments' => $this->formatComments($message->getComments([
-                    "conditions" => 'is_deleted = 0',
-                    'limit' => $this->commentsLimit,
-                    'order' => 'id DESC'
+                'conditions' => 'is_deleted = 0',
+                'limit' => $this->commentsLimit,
+                'order' => 'id DESC'
             ])),
             'created_at' => $message->created_at,
             'updated_at' => $message->updated_at,
@@ -227,10 +227,10 @@ class Messages extends Documents
     }
 
     /**
-     * Get all the message related messages
-     * 
+     * Get all the message related messages.
+     *
      * @param MessagesModel $message
-     * 
+     *
      * @return array
      */
     public function formatRelatedMessages(MessagesModel $message) : array
@@ -238,8 +238,8 @@ class Messages extends Documents
         $relatedMessagesArray = [];
 
         $relatedMessages = $message->getRelatedMessages([
-                'limit' => $this->relatedMessagesLimit,
-                'order' => 'id DESC'
+            'limit' => $this->relatedMessagesLimit,
+            'order' => 'id DESC'
         ]);
 
         if ($relatedMessages->count()) {
