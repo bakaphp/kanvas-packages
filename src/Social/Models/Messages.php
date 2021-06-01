@@ -298,7 +298,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
      *
      * @return void
      */
-    public function setParent(self $parent, string $uniqueId) : void
+    public function setParent(MessagesInterface $parent, string $uniqueId) : void
     {
         $this->parent_id = $parent->message_id;
         $this->parent_unique_id = $uniqueId;
