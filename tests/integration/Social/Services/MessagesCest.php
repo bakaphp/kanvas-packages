@@ -244,4 +244,23 @@ class MessagesCest
             MessagesService::delete(Messages::findFirst(['order' => 'id desc'])->getId(), Users::findFirst(1))
         );
     }
+
+    /**
+     * Create a message for testing.
+     *
+     * @return void
+     */
+    protected function messageTestCreationWithChild() : void
+    {
+        $text = [
+            'text' => 'Test some messages'
+        ];
+
+        $messageOne = MessagesService::create(Users::findFirst(1), 'memo', $text);
+        $messageOneClone = $messageOne;
+        $messageTwo = MessagesService::create(Users::findFirst(1), 'memo', $text);
+        $messageTwo->setParent($messageOne, 'message-one' . time());
+
+        $I->assertTrue($messageOneClone->updated_at != $messageOne->updated_at);
+    }
 }
