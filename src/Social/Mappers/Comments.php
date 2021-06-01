@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Mappers;
 
 use AutoMapperPlus\CustomMapper\CustomMapper;
-use Kanvas\Social\Models\Comments as SocialComments;
-use Gewaer\Api\Controllers\FeedsController;
-use Phalcon\Di;
 
 class Comments extends CustomMapper
 {
@@ -24,10 +21,10 @@ class Comments extends CustomMapper
         $commentDto->apps_id = $comment->apps_id;
         $commentDto->companies_id = $comment->companies_id;
         $commentDto->users = [
-            "id" => $currentUsers->id,
-            "firstname" => $currentUsers->firstname,
-            "lastname" => $currentUsers->lastname,
-            "photo" => $currentUsers->getPhoto() ?? null
+            'id' => $currentUsers->id,
+            'firstname' => $currentUsers->firstname,
+            'lastname' => $currentUsers->lastname,
+            'photo' => $currentUsers->getPhoto() ?? null
         ];
         $commentDto->message_id = $comment->message_id;
         $commentDto->message = $comment->message;

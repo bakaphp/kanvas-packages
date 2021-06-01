@@ -10,13 +10,13 @@ use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Jobs\GenerateTags;
 use Kanvas\Packages\Social\Jobs\RemoveMessagesFeed;
 use Kanvas\Packages\Social\Models\AppModuleMessage;
+use Kanvas\Packages\Social\Models\ChannelMessages;
+use Kanvas\Packages\Social\Models\Channels;
 use Kanvas\Packages\Social\Models\Messages as MessagesModel;
 use Kanvas\Packages\Social\Models\MessageTypes as MessageTypesModel;
 use Kanvas\Packages\Social\Models\UserMessages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
-use Kanvas\Packages\Social\Models\Channels;
-use Kanvas\Packages\Social\Models\ChannelMessages;
 
 class Messages
 {

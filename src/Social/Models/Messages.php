@@ -30,7 +30,7 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
 
     public int $parent_id = 0;
     public ?string $parent_unique_id = null;
-    public ?string $uuid  =  null;
+    public ?string $uuid = null;
     public int $apps_id = 0;
     public int $companies_id = 0;
     public int $users_id = 0;
@@ -281,13 +281,31 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
     }
 
     /**
-     * Verify if message has a parent message
+     * Verify if message has a parent message.
      *
      * @return bool
      */
     public function hasParent() : bool
     {
         return $this->parent_id > 0;
+    }
+
+    /**
+     * Set parent for this msg.
+     *
+     * @param self $parent
+     * @param string $uniqueId
+     *
+     * @return void
+     */
+    public function setParent(self $parent, string $uniqueId) : void
+    {
+        $this->parent_id = $parent->message_id;
+        $this->parent_unique_id = $uniqueId;
+
+        //update the parent so the msg update on the feeds list
+        $parent->updated_at = date('Y-m-H H:i:s');
+        $parent->updateOrFail();
     }
 
     /**
