@@ -179,6 +179,7 @@ class Messages extends Documents
      */
     public function formatMessage(MessagesModel $message) : array
     {
+        $userPhoto = $message->users->getPhoto();
         return [
             'id' => (int)$message->id,
             'uuid' => $message->uuid,
@@ -191,7 +192,7 @@ class Messages extends Documents
                 'id' => $message->users->id,
                 'firstname' => $message->users->firstname,
                 'lastname' => $message->users->lastname,
-                'photo' => !defined('API_TESTS') ? $message->users->getPhoto()->url : null,
+                'photo' => !defined('API_TESTS') && is_object($userPhoto) ? $userPhoto->url : null,
             ],
             'message_types_id' => $message->message_types_id,
             'message_types' => [
