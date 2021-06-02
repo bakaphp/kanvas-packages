@@ -28,7 +28,7 @@ class Messages extends Documents
         $this->addRelation('users', ['alias' => 'users', 'elasticAlias' => 'usrs', 'elasticIndex' => 1]);
         $this->addRelation('comments', ['alias' => 'comments', 'elasticAlias' => 'msgcm', 'elasticIndex' => 1]);
         $this->addRelation('message_types', ['alias' => 'message_types', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
-        $this->addRelation('messages', ['alias' => 'messages', 'elasticAlias' => 'rlmsg', 'elasticIndex' => 1]);
+        $this->addRelation('message', ['alias' => 'message', 'elasticAlias' => 'rlmsg', 'elasticIndex' => 1]);
     }
 
     /**
@@ -64,6 +64,7 @@ class Messages extends Documents
             'message' => [],
             'reactions_count' => $this->integer,
             'comments_count' => $this->integer,
+            'related_messages_count' => $this->integer,
             'files' => [],
             'custom_fields' => [],
             'related_messages' => [],
@@ -178,6 +179,8 @@ class Messages extends Documents
      */
     public function formatMessage(MessagesModel $message) : array
     {
+        $relatedMessage = $this->formatRelatedMessages($message);
+
         return [
             'id' => (int)$message->id,
             'uuid' => $message->uuid,
@@ -203,9 +206,10 @@ class Messages extends Documents
             'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->countComments('is_deleted = 0'),
+            'related_messages_count' => count($relatedMessage),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
-            'related_messages' => $this->formatRelatedMessages($message),
+            'related_messages' => $relatedMessage,
             'channels' => $message->channels->getFirst() ? [
                 'id' => $message->channels->getFirst()->id,
                 'name' => $message->channels->getFirst()->name,
