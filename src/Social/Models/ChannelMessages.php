@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
@@ -62,7 +63,7 @@ class ChannelMessages extends BaseModel
     }
 
     /**
-     * After save
+     * After save.
      *
      * @return void
      */

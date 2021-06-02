@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
@@ -32,7 +33,6 @@ class Interactions extends BaseModel
             [
                 'alias' => 'usersInteractions',
                 'reusable' => true,
-
             ]
         );
     }
