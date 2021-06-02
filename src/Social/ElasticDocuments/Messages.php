@@ -64,7 +64,6 @@ class Messages extends Documents
             'message' => [],
             'reactions_count' => $this->integer,
             'comments_count' => $this->integer,
-            'related_messages_count' => $this->integer,
             'files' => [],
             'custom_fields' => [],
             'related_messages' => [],
@@ -179,8 +178,6 @@ class Messages extends Documents
      */
     public function formatMessage(MessagesModel $message) : array
     {
-        $relatedMessage = $this->formatRelatedMessages($message);
-
         return [
             'id' => (int)$message->id,
             'uuid' => $message->uuid,
@@ -206,10 +203,10 @@ class Messages extends Documents
             'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->countComments('is_deleted = 0'),
-            'related_messages_count' => count($relatedMessage),
+            'related_messages_count' => $message->countRelatedMessages(),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
-            'related_messages' => $relatedMessage,
+            'related_messages' => $this->formatRelatedMessages($message),
             'channels' => $message->channels->getFirst() ? [
                 'id' => $message->channels->getFirst()->id,
                 'name' => $message->channels->getFirst()->name,
