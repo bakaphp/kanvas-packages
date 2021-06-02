@@ -2,8 +2,8 @@
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
 use Baka\Contracts\Auth\UserInterface;
+use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
 
 class UsersFollows extends BaseModel
 {
@@ -17,7 +17,7 @@ class UsersFollows extends BaseModel
     public string $entity_namespace;
 
     /**
-     * Initialize relationshit after fetch
+     * Initialize relationship after fetch
      * since we need entity_namespace info.
      *
      * @return void
