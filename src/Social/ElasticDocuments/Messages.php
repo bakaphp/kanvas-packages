@@ -204,7 +204,7 @@ class Messages extends Documents
             'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->countComments('is_deleted = 0'),
-            'related_messages_count' => $message->countRelatedMessages(),
+            'related_messages_count' => $message->countRelatedMessages('is_deleted = 0'),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
             'related_messages' => $this->formatRelatedMessages($message),
