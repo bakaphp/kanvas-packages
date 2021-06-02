@@ -324,4 +324,14 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             ElasticMessages::dispatch($this->getParentMessage());
         }
     }
+
+    /**
+     * Is this msg indexable in elastic.
+     *
+     * @return bool
+     */
+    public function isIndexable() : bool
+    {
+        return !$this->is_deleted;
+    }
 }

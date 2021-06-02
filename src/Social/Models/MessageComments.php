@@ -168,7 +168,7 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * After uupdate.
+     * After update.
      *
      * @return void
      */
