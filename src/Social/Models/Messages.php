@@ -317,13 +317,11 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
      */
     public function getMessage() : array
     {
-        $message = [];
-
         if (isJson($this->message)) {
             return json_decode($this->message, true);
         }
 
-        return $message;
+        return [];
     }
 
     /**
