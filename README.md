@@ -10,7 +10,7 @@ Requirements
 ------------
 
 * PHP >= 7.4;
-* PhalconPHP.
+* PhalconPHP >= 4
 * Kanvas Core >= 0.3
 
 Packages
