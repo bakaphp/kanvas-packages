@@ -1,10 +1,7 @@
 Kanvas Packages
 ============
 
-[![Latest Stable Version](https://poser.pugx.org/gino-pane/kanvas/packages/v/stable)](https://packagist.org/packages/kanvas/packages)
-[![License](https://poser.pugx.org/gino-pane/kanvas/packages/license)](https://packagist.org/packages/kanvas/packages)
-[![composer.lock](https://poser.pugx.org/gino-pane/kanvas/packages/composerlock)](https://packagist.org/packages/kanvas/packages)
-[![Total Downloads](https://poser.pugx.org/gino-pane/kanvas/packages/downloads)](https://packagist.org/packages/kanvas/packages)
+[![Latest Stable Version](https://poser.pugx.org/kanvas/packages/v)](//packagist.org/packages/kanvas/packages) [![Total Downloads](https://poser.pugx.org/kanvas/packages/downloads)](//packagist.org/packages/kanvas/packages) [![Latest Unstable Version](https://poser.pugx.org/kanvas/packages/v/unstable)](//packagist.org/packages/kanvas/packages) 
 [![Tests](https://github.com/bakaphp/kanvas-packages/workflows/Tests/badge.svg?branch=development)](https://github.com/bakaphp/kanvas-packages/actions?query=workflow%3ATests)
 
 kanvas Ecosystem Packages to expand your app specific use case
