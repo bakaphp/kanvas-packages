@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
@@ -168,7 +169,7 @@ class MessageComments extends BaseModel
     }
 
     /**
-     * After uupdate.
+     * After update.
      *
      * @return void
      */

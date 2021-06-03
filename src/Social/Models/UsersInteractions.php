@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
@@ -49,7 +50,7 @@ class UsersInteractions extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        
+
         $this->setSource('users_interactions');
     }
 
@@ -58,8 +59,8 @@ class UsersInteractions extends BaseModel
      *
      * @return string
      */
-    protected function getInteractionStorageKey(): string
+    protected function getInteractionStorageKey() : string
     {
-        return $this->entity_namespace . '-' . $this->entity_id .'-' . $this->interactions_id;
+        return $this->entity_namespace . '-' . $this->entity_id . '-' . $this->interactions_id;
     }
 }

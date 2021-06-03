@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
@@ -323,5 +324,15 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         if ($this->hasParent()) {
             ElasticMessages::dispatch($this->getParentMessage());
         }
+    }
+
+    /**
+     * Is this msg indexable in elastic.
+     *
+     * @return bool
+     */
+    public function isIndexable() : bool
+    {
+        return !$this->is_deleted;
     }
 }

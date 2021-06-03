@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\ElasticDocuments;
 
@@ -28,7 +29,7 @@ class Messages extends Documents
         $this->addRelation('users', ['alias' => 'users', 'elasticAlias' => 'usrs', 'elasticIndex' => 1]);
         $this->addRelation('comments', ['alias' => 'comments', 'elasticAlias' => 'msgcm', 'elasticIndex' => 1]);
         $this->addRelation('message_types', ['alias' => 'message_types', 'elasticAlias' => 'msgty', 'elasticIndex' => 1]);
-        $this->addRelation('messages', ['alias' => 'messages', 'elasticAlias' => 'rlmsg', 'elasticIndex' => 1]);
+        $this->addRelation('message', ['alias' => 'message', 'elasticAlias' => 'rlmsg', 'elasticIndex' => 1]);
     }
 
     /**
@@ -203,6 +204,7 @@ class Messages extends Documents
             'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->countComments('is_deleted = 0'),
+            'related_messages_count' => $message->countRelatedMessages(),
             'files' => $message->getFiles(),
             'custom_fields' => $message->getAllCustomFields(),
             'related_messages' => $this->formatRelatedMessages($message),
