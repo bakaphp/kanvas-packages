@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
 use Baka\Contracts\Elasticsearch\ElasticIndexModelTrait;
+use function Baka\isJson;
 use Canvas\Contracts\CustomFields\CustomFieldsTrait;
 use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Behaviors\Uuid;
@@ -307,6 +308,36 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
         //update the parent so the msg update on the feeds list
         $parent->updated_at = date('Y-m-H H:i:s');
         $parent->updateOrFail();
+    }
+
+    /**
+     * Get message as Array.
+     *
+     * @return array
+     */
+    public function getMessage() : array
+    {
+        if (isJson($this->message)) {
+            return json_decode($this->message, true);
+        }
+
+        return [];
+    }
+
+    /**
+     * Set a key value the message array.
+     *
+     * @param string $key
+     * @param mixed $value
+     *
+     * @return void
+     */
+    public function setMessage(string $key, $value) : void
+    {
+        $message = $this->getMessage();
+        $message[$key] = $value;
+
+        $this->message = json_encode($message);
     }
 
     /**
