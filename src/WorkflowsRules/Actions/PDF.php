@@ -55,11 +55,22 @@ class PDF extends Action
             $this->message = $template;
             $this->data = array_merge($entity->toArray(), $params);
             $this->status = Action::SUCCESSFUL;
-            $entity->uploadedFiles[] = [
-                'filesystem_id' => $filesystem->getId()
-            ];
-            $entity->saveOrFail();
-            $entity->afterRules();
+
+            //meanwhile, i going to check if entity is a messages for attach file to this filesystem
+            if (is_subclass_of($entity, Messages::class)) {
+                $messages = Messages::findFirstOrFail($entity->id);
+                $messages->uploadedFiles[] = [
+                    'filesystem_id' => $filesystem->getId()
+                ];
+                $messages->saveOrFail();
+                $entity->afterRules();
+            } else {
+                $entity->uploadedFiles[] = [
+                    'filesystem_id' => $filesystem->getId()
+                ];
+                $entity->saveOrFail();
+                $entity->afterRules();
+            }
         } catch (Throwable $e) {
             $this->message = 'Error processing PDF - ' . $e->getMessage();
             if (!$appMode) {
