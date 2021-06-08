@@ -64,6 +64,14 @@ class PDF extends Action
                     'filesystem_id' => $filesystem->getId()
                 ];
                 $messages->saveOrFail();
+                $files = [
+                    [
+                        'filesystem_id' => $filesystem->getId()
+                    ]
+                ];
+                $messages->parentMessage->saveOrFail([
+                    'files' => $files
+                ]);
                 $entity->afterRules();
             } else {
                 $entity->uploadedFiles[] = [
