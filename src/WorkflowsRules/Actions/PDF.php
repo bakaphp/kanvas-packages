@@ -3,6 +3,7 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Canvas\Filesystem\Helper;
+use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use mikehaertl\wkhtmlto\Pdf as PDFLibrary;
 use Phalcon\Di;
