@@ -89,7 +89,7 @@ class Messages
      *
      * @return UserMessages
      */
-    public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableEntityInterface $object = null, bool $sendToQueue = true) : MessagesInterface
+    public static function create(UserInterface $user, string $verb, array $message = [], ?MessageableEntityInterface $object = null, bool $sendToUserFeeds = true) : MessagesInterface
     {
         $newMessage = new MessagesModel();
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
@@ -104,7 +104,7 @@ class Messages
             $newMessage->addSystemModules($object);
         }
 
-        if ($sendToQueue) {
+        if ($sendToUserFeeds) {
             Distributions::sendToUsersFeeds($newMessage, $user);
         }
 
@@ -124,7 +124,7 @@ class Messages
      *
      * @return UserMessages
      */
-    public static function createByObject(UserInterface $user, string $verb, MessagesInterface $newMessage, MessageableEntityInterface $object, bool $sendToQueue = true) : MessagesInterface
+    public static function createByObject(UserInterface $user, string $verb, MessagesInterface $newMessage, MessageableEntityInterface $object, bool $sendToUserFeeds = true) : MessagesInterface
     {
         $newMessage->apps_id = Di::getDefault()->get('app')->getId();
         $newMessage->companies_id = $user->getDefaultCompany()->getId();
@@ -135,10 +135,10 @@ class Messages
 
         $newMessage->addSystemModules($object);
 
-        if ($sendToQueue) {
+        if ($sendToUserFeeds) {
             Distributions::sendToUsersFeeds($newMessage, $user);
         }
-        
+
         GenerateTags::dispatch($user, $newMessage);
 
         return $newMessage;
