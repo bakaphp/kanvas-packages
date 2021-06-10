@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Baka\Contracts\Queue\QueueableJobInterface;
 use Baka\Queue\Queue;
 use Phalcon\Cli\Task as PhTask;

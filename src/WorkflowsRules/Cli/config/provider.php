@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 /**
  * Enabled providers. Order does matter.
  */

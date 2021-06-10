@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kanvas\Packages\WorkflowsRules\Services;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
