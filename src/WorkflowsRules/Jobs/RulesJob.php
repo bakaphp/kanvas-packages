@@ -14,7 +14,7 @@ class RulesJob extends Job
 {
     public Rules $rule;
     public string $event;
-    public object $entity;
+    public WorkflowsEntityInterfaces $entity;
 
     /**
      * __construct.

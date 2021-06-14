@@ -55,15 +55,17 @@ class Rules
             foreach ($actions as $action) {
                 $workflowLog = WorkflowsLogs::start($this->rule->id);
                 $workFlow = $action->getRulesWorkflowActions();
-                $objectAction = new $workFlow->actions->model_name;
-                try {
-                    $workflowLog->actions_id = $workFlow->actions->id;
-                    $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
-                    $workflowLog->setLog($objectAction->handle($entity, $params));
-                    $workflowLog->end();
-                } catch (Throwable $e) {
-                    $workflowLog->message = $e->getMessage();
-                    $workflowLog->end();
+                if (class_exists($workFlow->actions->model_name)) {
+                    $objectAction = new $workFlow->actions->model_name;
+                    try {
+                        $workflowLog->actions_id = $workFlow->actions->id;
+                        $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
+                        $workflowLog->setLog($objectAction->handle($entity, $params));
+                        $workflowLog->end();
+                    } catch (Throwable $e) {
+                        $workflowLog->message = $e->getMessage();
+                        $workflowLog->end();
+                    }
                 }
             }
         }
