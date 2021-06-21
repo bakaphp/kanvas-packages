@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\WorkflowsRules\Models;
+namespace Kanvas\Packages\Test\Support\Models;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 
-class Test implements WorkflowsEntityInterfaces
+class TestRule implements WorkflowsEntityInterfaces
 {
     public ?string $name = null;
     public ?string $city = null;

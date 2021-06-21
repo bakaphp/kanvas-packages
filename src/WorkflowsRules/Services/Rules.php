@@ -7,7 +7,6 @@ namespace Kanvas\Packages\WorkflowsRules\Services;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
-use Phalcon\Di;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Throwable;
 
@@ -21,9 +20,9 @@ class Rules
      *
      * @param  RulesModel $rules
      *
-     * @return void
+     * @return Rules
      */
-    public static function set(RulesModel $rules)
+    public static function set(RulesModel $rules) : Rules
     {
         return (new static())->assignRule($rules);
     }
@@ -37,35 +36,44 @@ class Rules
      */
     public function validate(WorkflowsEntityInterfaces $entity) : bool
     {
-        //Di::getDefault()->get('log')->info('Rule validate');
-
         $expression = $this->getStringConditions();
         $values = $this->getArrayValueConditions();
-        $values = array_merge($values, $entity->toArray());
 
-        //Di::getDefault()->get('log')->info('condition ' . $this->getStringConditions());
+        $values = array_merge(
+            $values,
+            $entity->toArray()
+        );
 
+        //validate rule with symfony expression language
         $expressionLanguage = new ExpressionLanguage();
         $result = $expressionLanguage->evaluate(
             $expression,
             $values
         );
+
         if ($result) {
             $actions = $this->rule->getRulesActions();
             foreach ($actions as $action) {
-                $workflowLog = WorkflowsLogs::start($this->rule->id);
                 $workFlow = $action->getRulesWorkflowActions();
-                if (class_exists($workFlow->actions->model_name)) {
-                    $objectAction = new $workFlow->actions->model_name;
+                $actionClassName = $workFlow->actions->model_name;
+                $log = WorkflowsLogs::start($this->rule, $workFlow->actions);
+
+                if (class_exists($actionClassName)) {
+                    $objectAction = new $actionClassName();
+
                     try {
-                        $workflowLog->actions_id = $workFlow->actions->id;
                         $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
-                        $workflowLog->setLog($objectAction->handle($entity, $params));
-                        $workflowLog->end();
+                        $log->setLog(
+                            $objectAction->handle($entity, $params)
+                        );
+                        $log->end();
                     } catch (Throwable $e) {
-                        $workflowLog->message = $e->getMessage();
-                        $workflowLog->end();
+                        $log->failed();
+                        $log->end($e->getTraceAsString());
                     }
+                } else {
+                    $log->failed();
+                    $log->end('This action model doesn\'t exist ' . $actionClassName);
                 }
             }
         }

@@ -9,38 +9,42 @@ use Faker\Provider\en_US\Company;
 use Faker\Provider\en_US\Person;
 use Faker\Provider\en_US\PhoneNumber;
 use IntegrationTester;
+use Kanvas\Packages\Test\Support\Models\TestRule;
+use Kanvas\Packages\Test\Support\Models\Users;
 use Kanvas\Packages\WorkflowsRules\Jobs\RulesJob;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
-use Kanvas\Packages\WorkflowsRules\Models\Test;
+use Kanvas\Packages\WorkflowsRules\Services\Rules as RulesServices;
+use Phalcon\Di;
 
 class RulesCest
 {
-    public function rulesJob(IntegrationTester $I) : void
+    public function directRuleTest(IntegrationTester $I) : void
     {
-        $faker = $this->getFaker();
-
         $rules = Rules::findFirstOrFail([
             'conditions' => 'name = "test"'
         ]);
-        $test = new Test;
-        $test->name = $faker->name;
-        $test->city = $faker->city;
-        $test->firstname = $faker->firstName;
-        $test->lastname = $faker->lastName;
-        $test->phone = $faker->tollFreePhoneNumber;
-        $test->email = $faker->email;
-        $test->dob = $faker->dateTimeThisCentury($max = 'now', $timezone = null)->format('Y-m-d');
-        $test->companies_id = 1;
 
-        RulesJob::dispatch($rules, 'created', $test);
+        Di::getDefault()->set('userData', Users::findFirst());
+
+        $rule = RulesServices::set($rules);
+        $rule->validate($this->getTestRule());
+    }
+
+    public function rulesJob(IntegrationTester $I) : void
+    {
+        $rules = Rules::findFirstOrFail([
+            'conditions' => 'name = "test"'
+        ]);
+
+        RulesJob::dispatch($rules, 'created', $this->getTestRule());
     }
 
     /**
      * getFaker.
      *
-     * @return void
+     * @return TestRule
      */
-    public function getFaker()
+    public function getTestRule() : TestRule
     {
         $faker = Factory::create();
         $faker->addProvider(new Person($faker));
@@ -48,6 +52,17 @@ class RulesCest
         $faker->addProvider(new PhoneNumber($faker));
         $faker->addProvider(new Company($faker));
         $faker->addProvider(new DateTime($faker));
-        return $faker;
+
+        $test = new TestRule;
+        $test->name = $faker->name;
+        $test->city = $faker->city;
+        $test->firstname = $faker->firstName;
+        $test->lastname = 'Rosario'; //$faker->lastName;
+        $test->phone = $faker->tollFreePhoneNumber;
+        $test->email = $faker->email;
+        $test->dob = $faker->dateTimeThisCentury($max = 'now', $timezone = null)->format('Y-m-d');
+        $test->companies_id = 1;
+
+        return $test;
     }
 }

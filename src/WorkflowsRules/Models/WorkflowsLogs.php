@@ -34,12 +34,13 @@ class WorkflowsLogs extends BaseModel
      *
      * @return WorkflowsLogs
      */
-    public static function start($rulesId) : WorkflowsLogs
+    public static function start(Rules $rule, Actions $action) : WorkflowsLogs
     {
         $log = new WorkflowsLogs;
 
+        $log->setAction($action);
         $log->assign([
-            'rules_id' => $rulesId,
+            'rules_id' => $rule->getId(),
             'start_at' => date('Y-m-d H:i:s'),
         ]);
         $log->saveOrFail();
@@ -66,9 +67,32 @@ class WorkflowsLogs extends BaseModel
      *
      * @return void
      */
-    public function end() : void
+    public function end(?string $message = null) : void
     {
+        $this->message = $message;
         $this->end_at = date('Y-m-d H:i:s');
         $this->saveOrFail();
+    }
+
+    /**
+     * Set actions.
+     *
+     * @param Action $action
+     *
+     * @return void
+     */
+    public function setAction(Actions $action) : void
+    {
+        $this->actions_id = $action->getId();
+    }
+
+    /**
+     * This workload failed.
+     *
+     * @return void
+     */
+    public function failed() : void
+    {
+        $this->did_succeed = 0;
     }
 }

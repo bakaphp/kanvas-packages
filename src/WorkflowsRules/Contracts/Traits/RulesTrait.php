@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Contracts\Traits;
 
-use Baka\Database\SystemModules;
 use Canvas\Models\Companies;
+use Canvas\Models\SystemModules;
 use Kanvas\Packages\WorkflowsRules\Jobs\RulesJob;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
 use Phalcon\Di;
+use RuntimeException;
 
 trait RulesTrait
 {
@@ -24,20 +25,23 @@ trait RulesTrait
      */
     public function fireRules(string $event) : void
     {
-        $systemModules = $this->getSystemModules();
-        if ($systemModules) {
-            $rulesTypes = RulesTypes::findFirstByName($event);
-            if (!$rulesTypes) {
-                return;
-            }
+        $systemModules = SystemModules::getByModelName(get_class($this));
 
+        if ($rulesTypes = RulesTypes::findFirstByName($event)) {
             //Di::getDefault()->get('log')->info("Rules trait started, event {$event}");
             //Di::getDefault()->get('log')->info("Rules trait system module id {$systemModules->getId()}");
             //Di::getDefault()->get('log')->info("Rules trait rules type id  {$rulesTypes->getId()}");
             //Di::getDefault()->get('log')->info("Rules trait company id  {$this->companies->getId()}");
 
+            if (!$this->companies instanceof Companies) {
+                throw new RuntimeException('This model doesn\'t have any relationship to a company , cant run rules');
+            }
+
             $rules = Rules::find([
-                'conditions' => 'systems_modules_id = :systems_module_id: AND rules_types_id = :rules_types_id: AND companies_id in (:companies_id:, :global_companies:)',
+                'conditions' => 'systems_modules_id = :systems_module_id: 
+                                AND rules_types_id = :rules_types_id: 
+                                AND companies_id in (:companies_id:, :global_companies:)
+                ',
                 'bind' => [
                     'systems_module_id' => $systemModules->getId(),
                     'rules_types_id' => $rulesTypes->getId(),
@@ -48,27 +52,7 @@ trait RulesTrait
 
             foreach ($rules as $rule) {
                 RulesJob::dispatch($rule, $event, $this);
-                Di::getDefault()->get('log')->info("Rules fire {$rule->name}");
             }
         }
-    }
-
-    /**
-     * getSystemModules.
-     *
-     * @return SystemModules|null
-     */
-    public function getSystemModules() : ?SystemModules
-    {
-        $di = Di::getDefault();
-        $appId = $di->get('app')->getId();
-
-        return SystemModules::findFirst([
-            'conditions' => 'model_name = :model_name: AND apps_id = :apps_id:',
-            'bind' => [
-                'model_name' => get_class($this),
-                'apps_id' => $appId
-            ]
-        ]);
     }
 }
