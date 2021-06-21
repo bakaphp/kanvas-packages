@@ -39,11 +39,11 @@ class WorkflowsLogs extends BaseModel
         $log = new WorkflowsLogs;
 
         $log->setAction($action);
-        $log->assign([
+
+        $log->saveOrFail([
             'rules_id' => $rule->getId(),
             'start_at' => date('Y-m-d H:i:s'),
         ]);
-        $log->saveOrFail();
         return $log;
     }
 

@@ -63,13 +63,11 @@ class Rules
 
                     try {
                         $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
-                        $log->setLog(
-                            $objectAction->handle($entity, $params)
-                        );
+                        $log->setLog($objectAction->handle($entity, $params));
                         $log->end();
                     } catch (Throwable $e) {
                         $log->failed();
-                        $log->end($e->getTraceAsString());
+                        $log->end($e->getMessage() . PHP_EOL . PHP_EOL . $e->getTraceAsString());
                     }
                 } else {
                     $log->failed();
