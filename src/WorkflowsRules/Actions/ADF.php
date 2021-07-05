@@ -22,23 +22,42 @@ class ADF extends Action
         $response = null;
         $di = Di::getDefault();
         try {
-            $data = array_merge($entity->toArray(), $entity->getAll());
+            $message = $entity->getMessage();
+            $lead = $entity->entity();
+
+            $vehicle = $message['data']['form'];
             $request = [
-                'name' => $data['firstname'],
-                'lastname' => $data['lastname'],
-                'phone' => $data['phone'],
-                'message' => $data['message'] ?? ' ',
-                'email' => $data['email'],
-                'username' => $data['username'] ?? null,
-                'vehicleid' => $data['vehicleid'] ?? null,
-                'rooftopid' => $data['rooftopid'] ?? null,
-                'dealergroupid' => $data['dealergroupid'] ?? null
+                'vehicle' => [
+                    'year' => $vehicle['year'],
+                    'model' => $vehicle['model'],
+                    'make' => $vehicle['make'],
+                    'vin' => $vehicle['vin'],
+                    'trim' => $vehicle['trim'],
+                    'transmission' => $vehicle['trans'] == 'Automatic' ? 'A' : 'M',
+                    'bodystyle' => $vehicle['bodyStyle'],
+                    'mileage' => (int)$vehicle['mileage'] ?? 0,
+                    'interiorColor' => $vehicle['intColor'],
+                    'exteriorColor' => $vehicle['extColor'],
+                ],
+                'customer' => [
+                    'firstname' => $lead->firstname,
+                    'lastname' => $lead->lastname,
+                    'email' => $lead->email
+                ],
+                'vendor' => [
+                    'firstname' => $lead->firstname,
+                    'lastname' => $lead->lastname,
+                    'email' => $lead->email
+                ]
             ];
             $this->data = $request;
             $client = new Client();
-            $baseUrl = getenv('URL_DEALER_API');
-            $response = $client->request('POST', "{$baseUrl}/forms/vehicleinterest", [
-                'form_params' => $request
+            $url = getenv('URL_ADF_ENDPOINT');
+            $response = $client->request('POST', $url, [
+                'headers' => [
+                    'Companies-Id' => $lead->companies_id
+                ],
+                'json' => $request
             ]);
             $body = $response->getBody();
             if ($response->getStatusCode() != 200) {
