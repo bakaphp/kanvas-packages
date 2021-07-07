@@ -34,10 +34,10 @@ class ADF extends Action
                     'vin' => $vehicle['vin'],
                     'trim' => $vehicle['trim'],
                     'transmission' => $vehicle['trans'] == 'Automatic' ? 'A' : 'M',
-                    'bodystyle' => $vehicle['bodyStyle'],
+                    'bodystyle' => $vehicle['body_style'],
                     'mileage' => (int)$vehicle['mileage'] ?? 0,
-                    'interiorColor' => $vehicle['intColor'],
-                    'exteriorColor' => $vehicle['extColor'],
+                    'interiorColor' => $vehicle['int_color'],
+                    'exteriorColor' => $vehicle['ext_color'],
                 ],
                 'customer' => [
                     'firstname' => $lead->firstname,
