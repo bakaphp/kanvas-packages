@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Phalcon\Mvc\ModelInterface;
 
 class UsersFollows extends BaseModel
 {
@@ -64,6 +65,36 @@ class UsersFollows extends BaseModel
             $this->decrese();
             $userFollowing->decrese();
         }
+    }
+
+    /**
+     * Get the User following the entity.
+     *
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     *
+     * @return self|null
+     */
+    public static function getByUserAndEntity(UserInterface $user, ModelInterface $entity) : ?self
+    {
+        return UsersFollows::findFirst([
+            'conditions' => 'users_id = :user_id: AND entity_id = :entity_id: AND entity_namespace = :entity:',
+            'bind' => [
+                'user_id' => $user->getId(),
+                'entity' => get_class($entity),
+                'entity_id' => $entity->getId()
+            ]
+        ]);
+    }
+
+    /**
+     * Lets you know if the user is following the entity.
+     *
+     * @return bool
+     */
+    public function isFollowing() : bool
+    {
+        return !$this->is_deleted;
     }
 
     /**

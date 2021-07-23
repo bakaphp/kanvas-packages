@@ -42,19 +42,26 @@ class Follow
      */
     public static function userFollow(UserInterface $userFollowing, ModelInterface $entity) : bool
     {
-        $follow = UsersFollows::findFirst([
-            'conditions' => 'users_id = :user_id: AND entity_id = :entity_id: AND entity_namespace = :entity:',
-            'bind' => [
-                'user_id' => $userFollowing->getId(),
-                'entity' => get_class($entity),
-                'entity_id' => $entity->getId()
-            ]
-        ]);
+        return self::follow($userFollowing, $entity);
+    }
+
+    /**
+     * Allow a User to follow a entity.
+     *
+     * @param UserInterface $userFollowing
+     * @param ModelInterface $entity
+     *
+     * @return bool
+     */
+    public static function follow(UserInterface $userFollowing, ModelInterface $entity) : bool
+    {
+        $follow = UsersFollows::getByUserAndEntity($userFollowing, $entity);
 
         if ($follow) {
             $follow->unFollow($userFollowing);
-            return (bool) $follow->is_deleted;
+            return $follow->isFollowing();
         }
+
         $follow = new UsersFollows();
         $follow->users_id = $userFollowing->getId();
         $follow->entity_id = $entity->getId();
@@ -63,6 +70,47 @@ class Follow
         $follow->increment();
         $userFollowing->increment();
 
-        return (bool) $follow->is_deleted;
+        return $follow->isFollowing();
+    }
+
+    /**
+     * Unfollow an entity.
+     *
+     * @param UserInterface $userFollowing
+     * @param ModelInterface $entity
+     *
+     * @return bool
+     */
+    public static function unFollow(UserInterface $userFollowing, ModelInterface $entity) : bool
+    {
+        $follow = UsersFollows::getByUserAndEntity($userFollowing, $entity);
+
+
+        if ($follow) {
+            $follow->unFollow($userFollowing);
+            return $follow->isFollowing();
+        }
+
+        return false;
+    }
+
+    /**
+     * Is a user following an entity?
+     *
+     * @param UserInterface $userFollowing
+     * @param ModelInterface $entity
+     *
+     * @return bool
+     */
+    public static function following(UserInterface $userFollowing, ModelInterface $entity) : bool
+    {
+        return (bool) UsersFollows::count([
+            'conditions' => 'users_id = :userId: AND entity_id = :entityId: AND entity_namespace = :entityName: AND is_deleted = 0',
+            'bind' => [
+                'userId' => $userFollowing->getId(),
+                'entityId' => $entity->getId(),
+                'entityName' => get_class($entity)
+            ]
+        ]);
     }
 }

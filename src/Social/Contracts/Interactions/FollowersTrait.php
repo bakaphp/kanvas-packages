@@ -6,7 +6,9 @@ namespace Kanvas\Packages\Social\Contracts\Interactions;
 
 use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\UsersFollows;
+use Kanvas\Packages\Social\Services\Follow;
 use Phalcon\Di;
+use Phalcon\Mvc\ModelInterface;
 
 trait FollowersTrait
 {
@@ -35,6 +37,8 @@ trait FollowersTrait
     /**
      * Verify if the user follow the tag.
      *
+     * @deprecated version 4.0
+     *
      * @return bool
      */
     public function isFollow() : bool
@@ -47,5 +51,29 @@ trait FollowersTrait
                 'entityName' => get_class($this)
             ]
         ]);
+    }
+
+    /**
+     * Allow user o follow the entity.
+     *
+     * @param ModelInterface $entity
+     *
+     * @return bool
+     */
+    public function follow(ModelInterface $entity) : bool
+    {
+        return Follow::follow($this, $entity);
+    }
+
+    /**
+     * Is following the current entity.
+     *
+     * @param ModelInterface $entity
+     *
+     * @return bool
+     */
+    public function isFollowing(ModelInterface $entity) : bool
+    {
+        return Follow::isFollowing($this, $entity);
     }
 }
