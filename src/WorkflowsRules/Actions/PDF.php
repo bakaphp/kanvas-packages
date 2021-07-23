@@ -50,7 +50,7 @@ class PDF extends Action
                 if (!$appMode) {
                     $di->get('log')->error('Error processing pdf', $error);
                 }
-                $this->status = FAIL;
+                $this->status = Action::FAIL;
                 $this->message = $error;
             }
             $filesystem = Helper::upload(Helper::pathToFile($path));

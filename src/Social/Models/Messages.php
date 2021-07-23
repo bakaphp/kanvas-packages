@@ -16,10 +16,11 @@ use Kanvas\Packages\Social\Contracts\Interactions\InteractionsTrait;
 use Kanvas\Packages\Social\Contracts\Messages\MessageableEntityInterface;
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
 use Kanvas\Packages\Social\Jobs\ElasticMessages;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Contracts\Traits\RulesTrait;
 use Phalcon\Di;
 
-class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface
+class Messages extends BaseModel implements MessagesInterface, MessageableEntityInterface, WorkflowsEntityInterfaces
 {
     use CustomTotalInteractionsTrait;
     use InteractionsTrait;
