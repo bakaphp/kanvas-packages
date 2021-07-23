@@ -46,11 +46,11 @@ trait TotalInteractionsTrait
     }
 
     /**
-     * Decres the total of interaction.
+     * decrees the total of interaction.
      *
      * @return int
      */
-    public function decrese() : int
+    public function decrees() : int
     {
         return Di::getDefault()->get('redis')->decr($this->getInteractionStorageKey());
     }

@@ -82,13 +82,13 @@ class Interactions
         } else {
             $interaction->is_deleted = 1;
             $interaction->saveOrFail();
-            $interaction->decrese();
+            $interaction->decrees();
         }
     }
 
     /**
      * Return the ID correspondent to the interaction type and
-     * throws and exception if doesnt exist.
+     * throws and exception if doesn't exist.
      *
      * @param string $interactionName
      *

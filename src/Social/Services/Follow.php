@@ -6,6 +6,7 @@ namespace Kanvas\Packages\Social\Services;
 
 use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Models\UsersFollows;
+use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
 use Phalcon\Mvc\ModelInterface;
 
@@ -40,9 +41,9 @@ class Follow
      *
      * @return bool
      */
-    public static function userFollow(UserInterface $userFollowing, ModelInterface $entity) : bool
+    public static function userFollow(UserInterface $user, ModelInterface $entity) : bool
     {
-        return self::follow($userFollowing, $entity);
+        return self::follow($user, $entity);
     }
 
     /**
@@ -53,22 +54,28 @@ class Follow
      *
      * @return bool
      */
-    public static function follow(UserInterface $userFollowing, ModelInterface $entity) : bool
+    public static function follow(UserInterface $user, ModelInterface $entity) : bool
     {
-        $follow = UsersFollows::getByUserAndEntity($userFollowing, $entity);
+        $follow = UsersFollows::getByUserAndEntity($user, $entity);
 
         if ($follow) {
-            $follow->unFollow($userFollowing);
+            $follow->unFollow($user);
             return $follow->isFollowing();
         }
 
+        //global following means we don't take into account the current user company
+        $globalFollowing = Di::getDefault()->get('config')->social->global_following;
+
         $follow = new UsersFollows();
-        $follow->users_id = $userFollowing->getId();
+        $follow->users_id = $user->getId();
         $follow->entity_id = $entity->getId();
         $follow->entity_namespace = get_class($entity);
+        $follow->companies_id = $globalFollowing ? 0 : $user->getDefaultCompany()->getId();
+        $follow->companies_branches_id = $globalFollowing ? 0 : $user->currentBranchId();
         $follow->saveOrFail();
+
         $follow->increment();
-        $userFollowing->increment();
+        $user->increment();
 
         return $follow->isFollowing();
     }
@@ -81,17 +88,9 @@ class Follow
      *
      * @return bool
      */
-    public static function unFollow(UserInterface $userFollowing, ModelInterface $entity) : bool
+    public static function unFollow(UserInterface $user, ModelInterface $entity) : bool
     {
-        $follow = UsersFollows::getByUserAndEntity($userFollowing, $entity);
-
-
-        if ($follow) {
-            $follow->unFollow($userFollowing);
-            return $follow->isFollowing();
-        }
-
-        return false;
+        return self::follow($user, $entity);
     }
 
     /**
@@ -102,12 +101,12 @@ class Follow
      *
      * @return bool
      */
-    public static function following(UserInterface $userFollowing, ModelInterface $entity) : bool
+    public static function following(UserInterface $user, ModelInterface $entity) : bool
     {
         return (bool) UsersFollows::count([
             'conditions' => 'users_id = :userId: AND entity_id = :entityId: AND entity_namespace = :entityName: AND is_deleted = 0',
             'bind' => [
-                'userId' => $userFollowing->getId(),
+                'userId' => $user->getId(),
                 'entityId' => $entity->getId(),
                 'entityName' => get_class($entity)
             ]

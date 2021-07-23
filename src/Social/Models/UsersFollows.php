@@ -11,7 +11,6 @@ class UsersFollows extends BaseModel
 {
     use CustomTotalInteractionsTrait;
 
-    public $id;
     public int $users_id;
     public int $entity_id;
     public ?int $companies_id = null;
@@ -62,8 +61,8 @@ class UsersFollows extends BaseModel
         } elseif (!$this->is_deleted) {
             $this->is_deleted = 1;
             $this->saveOrFail();
-            $this->decrese();
-            $userFollowing->decrese();
+            $this->decrees();
+            $userFollowing->decrees();
         }
     }
 
