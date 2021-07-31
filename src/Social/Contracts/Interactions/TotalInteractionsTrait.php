@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contracts\Interactions;
 
-use Kanvas\Packages\Social\Models\Interactions;
+use Kanvas\Packages\Social\Models\UsersInteractions;
 use Phalcon\Di;
 
 trait TotalInteractionsTrait
 {
-    /**
-     * @var int
-     */
-    public $interaction_type_id;
-
     /**
      * Get the interaction key.
      *
@@ -29,10 +24,33 @@ trait TotalInteractionsTrait
      *
      * @return int
      */
-    public function getTotal(int $interaction) : int
+    public function getTotal(int $interaction, ?string $entityNamespace = null) : int
     {
-        $key = $this->getInteractionStorageKey() . '-' . $interaction;
-        return (int) Di::getDefault()->get('redis')->get($key);
+        //$redis = Di::getDefault()->get('redis');
+        //$key = $this->getInteractionStorageKey() . '-' . $interaction . '-' . $entityNamespace;
+        //$total = (int) $redis->get($key);
+
+        $conditions = 'users_id = :users_id: AND interactions_id = :interactions_id: AND is_deleted = 0';
+        $bind = [
+            'users_id' => $this->getId(),
+            'interactions_id' => $interaction,
+        ];
+
+        if (!is_null($entityNamespace)) {
+            $conditions .= ' AND entity_namespace = :entity_namespace:';
+            $bind['entity_namespace'] = $entityNamespace;
+        }
+
+
+        $total = UsersInteractions::count([
+            'conditions' => $conditions,
+            'bind' => $bind,
+        ]);
+
+        //$redis->set($key, $total);
+
+
+        return $total;
     }
 
     /**
@@ -56,36 +74,6 @@ trait TotalInteractionsTrait
     }
 
     /**
-     * Get total.
-     *
-     * @return int
-     */
-    public function getTotalReacted() : int
-    {
-        return $this->getTotal(Interactions::REACT);
-    }
-
-    /**
-     * Get total.
-     *
-     * @return int
-     */
-    public function getTotalComments() : int
-    {
-        return $this->getTotal(Interactions::COMMENT);
-    }
-
-    /**
-     * Get total.
-     *
-     * @return int
-     */
-    public function getTotalReplies() : int
-    {
-        return $this->getTotal(Interactions::REPLIED);
-    }
-
-    /**
      * Get the total by the Key.
      *
      * @param string $key
@@ -95,15 +83,5 @@ trait TotalInteractionsTrait
     public function getTotalByKey(string $key) : int
     {
         return (int) Di::getDefault()->get('redis')->get($key);
-    }
-
-    /**
-     * Get the total of following of the user.
-     *
-     * @return int
-     */
-    public function getTotalMessages() : int
-    {
-        return $this->getTotal(Interactions::MESSAGE);
     }
 }

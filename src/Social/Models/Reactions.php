@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
-use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
 
 class Reactions extends BaseModel
 {
-    use CustomTotalInteractionsTrait;
+    use TotalInteractionsTrait;
 
     public string $name;
     public int $apps_id;

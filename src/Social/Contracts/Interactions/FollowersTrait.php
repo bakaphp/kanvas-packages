@@ -19,9 +19,9 @@ trait FollowersTrait
      *
      * @return int
      */
-    public function getTotalFollowing() : int
+    public function getTotalFollowing(?string $entityNamespace = null) : int
     {
-        return $this->getTotal(Interactions::FOLLOWING);
+        return $this->getTotal(Interactions::FOLLOWING, $entityNamespace);
     }
 
     /**
@@ -29,9 +29,50 @@ trait FollowersTrait
      *
      * @return int
      */
-    public function getTotalFollowers() : int
+    public function getTotalFollowers(?string $entityNamespace = null) : int
     {
-        return $this->getTotal(Interactions::FOLLOWERS);
+        return $this->getTotal(Interactions::FOLLOWERS, $entityNamespace);
+    }
+
+
+    /**
+     * Get total.
+     *
+     * @return int
+     */
+    public function getTotalReactions(?string $entityNamespace = null) : int
+    {
+        return $this->getTotal(Interactions::REACT, $entityNamespace);
+    }
+
+    /**
+     * Get total.
+     *
+     * @return int
+     */
+    public function getTotalComments(?string $entityNamespace = null) : int
+    {
+        return $this->getTotal(Interactions::COMMENT, $entityNamespace);
+    }
+
+    /**
+     * Get total.
+     *
+     * @return int
+     */
+    public function getTotalReplies(?string $entityNamespace = null) : int
+    {
+        return $this->getTotal(Interactions::REPLIED, $entityNamespace);
+    }
+
+    /**
+     * Get the total of following of the user.
+     *
+     * @return int
+     */
+    public function getTotalMessages(?string $entityNamespace = null) : int
+    {
+        return $this->getTotal(Interactions::MESSAGE, $entityNamespace);
     }
 
     /**

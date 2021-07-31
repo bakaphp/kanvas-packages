@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
-use Kanvas\Packages\Social\Contracts\Interactions\CustomTotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
 use Phalcon\Mvc\ModelInterface;
 
 class UsersFollows extends BaseModel
 {
-    use CustomTotalInteractionsTrait;
+    use TotalInteractionsTrait;
 
     public int $users_id;
     public int $entity_id;
@@ -94,15 +94,5 @@ class UsersFollows extends BaseModel
     public function isFollowing() : bool
     {
         return !$this->is_deleted;
-    }
-
-    /**
-     * Get the interaction key.
-     *
-     * @return string
-     */
-    protected function getInteractionStorageKey() : string
-    {
-        return $this->entity_namespace . '-' . $this->entity_id . '-' . Interactions::FOLLOWERS;
     }
 }
