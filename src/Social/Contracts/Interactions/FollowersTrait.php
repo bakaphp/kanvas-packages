@@ -107,6 +107,18 @@ trait FollowersTrait
     }
 
     /**
+     * Un follow a entity.
+     *
+     * @param ModelInterface $entity
+     *
+     * @return bool
+     */
+    public function unFollow(ModelInterface $entity) : bool
+    {
+        return Follow::unFollow($this, $entity);
+    }
+
+    /**
      * Is following the current entity.
      *
      * @param ModelInterface $entity

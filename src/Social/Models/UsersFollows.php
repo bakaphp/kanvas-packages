@@ -4,18 +4,38 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
-use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
+use Canvas\Models\Users;
+use Kanvas\Packages\Social\Contracts\Interactions\TotalUsersTrait;
 use Phalcon\Mvc\ModelInterface;
 
 class UsersFollows extends BaseModel
 {
-    use TotalInteractionsTrait;
+    use TotalUsersTrait;
 
     public int $users_id;
     public int $entity_id;
     public ?int $companies_id = null;
     public ?int $companies_branches_id = null;
     public string $entity_namespace;
+
+    /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->setSource('users_follows');
+
+        $this->belongsTo(
+            'users_id',
+            Users::class,
+            'id',
+            [
+                'alias' => 'user',
+            ]
+        );
+    }
 
     /**
      * Initialize relationship after fetch
@@ -37,33 +57,23 @@ class UsersFollows extends BaseModel
     }
 
     /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        parent::initialize();
-
-        $this->setSource('users_follows');
-    }
-
-    /**
      * Remove the user interaction by update is_deleted.
      *
      * @return void
      */
-    public function unFollow(UserInterface $userFollowing) : void
+    public function unFollow() : bool
     {
         if ($this->is_deleted) {
             $this->is_deleted = 0;
             $this->saveOrFail();
-            $this->increment();
-            $userFollowing->increment();
+            $this->user->increment(Interactions::FOLLOWING, $this->entity_namespace);
         } elseif (!$this->is_deleted) {
             $this->is_deleted = 1;
             $this->saveOrFail();
-            $this->decrees();
-            $userFollowing->decrees();
+            $this->user->decrees(Interactions::FOLLOWING, $this->entity_namespace);
         }
+
+        return $this->isFollowing();
     }
 
     /**

@@ -6,7 +6,5 @@ namespace Kanvas\Packages\Social\Contracts\Interactions;
 
 interface FollowableInterface
 {
-    public function isFollow() : bool;
-
     public function getId();
 }

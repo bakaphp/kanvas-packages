@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Services;
 
 use Baka\Contracts\Auth\UserInterface;
+use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\UsersFollows;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
@@ -59,8 +60,7 @@ class Follow
         $follow = UsersFollows::getByUserAndEntity($user, $entity);
 
         if ($follow) {
-            $follow->unFollow($user);
-            return $follow->isFollowing();
+            return $follow->unFollow();
         }
 
         //global following means we don't take into account the current user company
@@ -74,8 +74,8 @@ class Follow
         $follow->companies_branches_id = $globalFollowing ? 0 : $user->currentBranchId();
         $follow->saveOrFail();
 
-        $follow->increment();
-        $user->increment();
+        $follow->increment(Interactions::FOLLOWING, get_class($entity));
+        $user->increment(Interactions::FOLLOWERS, get_class($entity));
 
         return $follow->isFollowing();
     }

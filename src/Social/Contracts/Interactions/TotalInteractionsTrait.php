@@ -16,7 +16,7 @@ trait TotalInteractionsTrait
      */
     protected function getInteractionStorageKey() : string
     {
-        return get_class($this) . '-' . $this->getId();
+        return 'entity-' . get_class($this) . '-' . $this->getId();
     }
 
     /**
@@ -30,9 +30,9 @@ trait TotalInteractionsTrait
         //$key = $this->getInteractionStorageKey() . '-' . $interaction . '-' . $entityNamespace;
         //$total = (int) $redis->get($key);
 
-        $conditions = 'users_id = :users_id: AND interactions_id = :interactions_id: AND is_deleted = 0';
+        $conditions = 'entity_id = :entity_id: AND interactions_id = :interactions_id: AND is_deleted = 0';
         $bind = [
-            'users_id' => $this->getId(),
+            'entity_id' => $this->getId(),
             'interactions_id' => $interaction,
         ];
 
@@ -54,13 +54,37 @@ trait TotalInteractionsTrait
     }
 
     /**
+     * Cache the total count.
+     *
+     * @param int $interaction
+     * @param string|null $entityNamespace
+     *
+     * @return int
+     */
+    public function getTotalCached(int $interaction, ?string $entityNamespace = null) : int
+    {
+        $redis = Di::getDefault()->get('redis');
+        $key = $this->getInteractionStorageKey() . '-' . $interaction . '-' . $entityNamespace;
+        $total = (int) $redis->get($key);
+
+        if ($total === 0) {
+            $total = $this->getTotal($interaction, $entityNamespace);
+            $redis->set($key, $total);
+        }
+
+        return $total;
+    }
+
+    /**
      * Increment the total of interaction.
      *
      * @return int
      */
-    public function increment() : int
+    public function increment(int $interaction, ?string $entityNamespace = null) : int
     {
-        return Di::getDefault()->get('redis')->incr($this->getInteractionStorageKey());
+        $total = $this->getTotal($interaction, $entityNamespace) + 1;
+        Di::getDefault()->get('redis')->set($total + 1);
+        return $total;
     }
 
     /**
@@ -68,20 +92,10 @@ trait TotalInteractionsTrait
      *
      * @return int
      */
-    public function decrees() : int
+    public function decrees(int $interaction, ?string $entityNamespace = null) : int
     {
-        return Di::getDefault()->get('redis')->decr($this->getInteractionStorageKey());
-    }
-
-    /**
-     * Get the total by the Key.
-     *
-     * @param string $key
-     *
-     * @return int
-     */
-    public function getTotalByKey(string $key) : int
-    {
-        return (int) Di::getDefault()->get('redis')->get($key);
+        $total = $this->getTotal($interaction, $entityNamespace) - 1;
+        Di::getDefault()->get('redis')->set($total);
+        return $total;
     }
 }
