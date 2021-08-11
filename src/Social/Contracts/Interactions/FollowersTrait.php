@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contracts\Interactions;
 
+use Canvas\Models\Users as CanvasUsers;
 use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\UsersFollows;
 use Kanvas\Packages\Social\Services\Follow;
@@ -19,9 +20,13 @@ trait FollowersTrait
      *
      * @return int
      */
-    public function getTotalFollowing(?string $entityNamespace = null) : int
+    public function getTotalFollowing(string $entityNamespace = null) : int
     {
-        return $this->getTotal(Interactions::FOLLOWING, $entityNamespace);
+        if (is_null($entityNamespace)) {
+            $entityNamespace = CanvasUsers::class;
+        }
+
+        return Follow::getTotalFollowing($this, $entityNamespace);
     }
 
     /**
@@ -29,9 +34,9 @@ trait FollowersTrait
      *
      * @return int
      */
-    public function getTotalFollowers(?string $entityNamespace = null) : int
+    public function getTotalFollowers() : int
     {
-        return $this->getTotal(Interactions::FOLLOWERS, $entityNamespace);
+        return Follow::getTotalFollowers($this);
     }
 
 

@@ -39,6 +39,10 @@ class FollowsCest
                 $I->assertTrue($user->follow($tag1));
             }
         }
+
+        if (!$userFollow->isFollowing($user)) {
+            $userFollow->follow($user);
+        }
     }
 
     /**
@@ -87,11 +91,34 @@ class FollowsCest
         }
     }
 
-    public function counters(IntegrationTester $I) : void
+    public function followingCount(IntegrationTester $I) : void
     {
         $user = Users::findFirst(1);
 
+        $I->assertGreaterThan(1, $user->getTotalFollowing(Users::class));
+    }
 
-        //$I->assertGreaterThan(1, $user->getTotalFollowing());
+    public function followersCount(IntegrationTester $I) : void
+    {
+        $user = Users::findFirst(1);
+
+        $I->assertGreaterThan(0, $user->getTotalFollowers());
+    }
+
+    public function followingCountOfEntity(IntegrationTester $I) : void
+    {
+        $user = Users::findFirst(1);
+
+        $I->assertGreaterThan(1, $user->getTotalFollowing(Tag::class));
+    }
+
+
+    public function followersCountOfEntity(IntegrationTester $I) : void
+    {
+        $user = Users::findFirst(1);
+        $tag = new Tag();
+        $tag->id = 1;
+
+        $I->assertGreaterThan(0, Follow::getTotalFollowers($tag));
     }
 }

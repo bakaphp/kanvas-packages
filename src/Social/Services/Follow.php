@@ -113,4 +113,41 @@ class Follow
             ]
         ]);
     }
+
+    /**
+     * Get total followers.
+     *
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     *
+     * @return int
+     */
+    public static function getTotalFollowing(UserInterface $user, string $entityNamespace) : int
+    {
+        return  UsersFollows::count([
+            'conditions' => 'users_id = :userId:  AND entity_namespace = :entityName: AND is_deleted = 0',
+            'bind' => [
+                'userId' => $user->getId(),
+                'entityName' => $entityNamespace
+            ]
+        ]);
+    }
+
+    /**
+     * Get total followers of this entity.
+     *
+     * @param ModelInterface $entity
+     *
+     * @return int
+     */
+    public static function getTotalFollowers(ModelInterface $entity) : int
+    {
+        return UsersFollows::count([
+            'conditions' => 'entity_id = :entityId: AND entity_namespace = :entityName: AND is_deleted = 0',
+            'bind' => [
+                'entityId' => $entity->getId(),
+                'entityName' => get_class($entity)
+            ]
+        ]);
+    }
 }
