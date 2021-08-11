@@ -64,7 +64,7 @@ class Follow
         }
 
         //global following means we don't take into account the current user company
-        $globalFollowing = Di::getDefault()->get('config')->social->global_following;
+        $globalFollowing = Di::getDefault()->get('config')->social->global_following ?? true;
 
         $follow = new UsersFollows();
         $follow->users_id = $user->getId();
@@ -90,7 +90,8 @@ class Follow
      */
     public static function unFollow(UserInterface $user, ModelInterface $entity) : bool
     {
-        return self::follow($user, $entity);
+        //follows return false when it unfollow, so we reverse it
+        return !self::follow($user, $entity);
     }
 
     /**
@@ -101,7 +102,7 @@ class Follow
      *
      * @return bool
      */
-    public static function following(UserInterface $user, ModelInterface $entity) : bool
+    public static function isFollowing(UserInterface $user, ModelInterface $entity) : bool
     {
         return (bool) UsersFollows::count([
             'conditions' => 'users_id = :userId: AND entity_id = :entityId: AND entity_namespace = :entityName: AND is_deleted = 0',

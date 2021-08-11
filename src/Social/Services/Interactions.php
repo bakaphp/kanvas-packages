@@ -47,7 +47,7 @@ class Interactions
             $interaction->created_at = date('Y-m-d H:i:s');
             $interaction->saveOrFail();
         }
-        $interaction->increment();
+
         return (bool) $interaction->is_deleted;
     }
 
@@ -78,11 +78,9 @@ class Interactions
         if ($interaction->is_deleted) {
             $interaction->is_deleted = 0;
             $interaction->saveOrFail();
-            $interaction->increment();
         } else {
             $interaction->is_deleted = 1;
             $interaction->saveOrFail();
-            $interaction->decrees();
         }
     }
 

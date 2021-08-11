@@ -83,7 +83,8 @@ trait TotalInteractionsTrait
     public function increment(int $interaction, ?string $entityNamespace = null) : int
     {
         $total = $this->getTotal($interaction, $entityNamespace) + 1;
-        Di::getDefault()->get('redis')->set($total + 1);
+        $key = $this->getInteractionStorageKey() . '-' . $interaction . '-' . $entityNamespace;
+        Di::getDefault()->get('redis')->set($key, $total + 1);
         return $total;
     }
 
@@ -95,7 +96,8 @@ trait TotalInteractionsTrait
     public function decrees(int $interaction, ?string $entityNamespace = null) : int
     {
         $total = $this->getTotal($interaction, $entityNamespace) - 1;
-        Di::getDefault()->get('redis')->set($total);
+        $key = $this->getInteractionStorageKey() . '-' . $interaction . '-' . $entityNamespace;
+        Di::getDefault()->get('redis')->set($key, $total);
         return $total;
     }
 }

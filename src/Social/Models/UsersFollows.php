@@ -66,11 +66,17 @@ class UsersFollows extends BaseModel
         if ($this->is_deleted) {
             $this->is_deleted = 0;
             $this->saveOrFail();
-            $this->user->increment(Interactions::FOLLOWING, $this->entity_namespace);
+
+            if (method_exists($this->user, 'increment')) {
+                $this->user->increment(Interactions::FOLLOWING, $this->entity_namespace);
+            }
         } elseif (!$this->is_deleted) {
             $this->is_deleted = 1;
             $this->saveOrFail();
-            $this->user->decrees(Interactions::FOLLOWING, $this->entity_namespace);
+
+            if (method_exists($this->user, 'decrees')) {
+                $this->user->decrees(Interactions::FOLLOWING, $this->entity_namespace);
+            }
         }
 
         return $this->isFollowing();

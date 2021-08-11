@@ -9,20 +9,7 @@ use Kanvas\Packages\Test\Support\Models\Users;
 
 class FollowsCest
 {
-    /**
-     * Create a two follows tags for testing.
-     *
-     * @return void
-     */
-    protected function testFollow() : void
-    {
-        for ($i = 0; $i < 10; $i++) {
-            $tag1 = new Tag();
-            $tag1->id = $i;
 
-            Follow::userFollow(Users::findFirst(1), $tag1);
-        }
-    }
 
     /**
      * Test follow service method user follow.
@@ -33,16 +20,24 @@ class FollowsCest
      */
     public function follow(IntegrationTester $I) : void
     {
-        for ($i = 0; $i < 10; $i++) {
-            $user = Users::findFirst(1);
-            $user->id = $i;
+        $user = Users::findFirst(1);
 
+        for ($i = 1; $i < 10; $i++) {
             $userFollow = Users::findFirst(1);
-            $userFollow->id = $i;
+            $userFollow->id = $i + 1;
 
-            $follow = Follow::userFollow($user, $userFollow);
+            if (!$user->isFollowing($userFollow)) {
+                $I->assertTrue($user->follow($userFollow));
+            }
+        }
 
-            $I->assertFalse($follow);
+        for ($i = 1; $i < 10; $i++) {
+            $tag1 = new Tag();
+            $tag1->id = $i;
+
+            if (!$user->isFollowing($tag1)) {
+                $I->assertTrue($user->follow($tag1));
+            }
         }
     }
 
@@ -50,7 +45,6 @@ class FollowsCest
      * Test Users follows by entities.
      *
      * @param IntegrationTester $I
-     * @before testFollow
      *
      * @return void
      */
@@ -65,5 +59,39 @@ class FollowsCest
         $I->assertNotNull($follows[0]['id']);
 
         $I->assertEquals($follows[0]['entity_namespace'], get_class(new Tag()));
+    }
+
+    public function unfollow(IntegrationTester $I) : void
+    {
+        $user = Users::findFirst(1);
+
+        for ($i = 1; $i < 5; $i++) {
+            $userFollow = Users::findFirst(1);
+            $userFollow->id = $i + 1;
+
+            if ($user->isFollowing($userFollow)) {
+                $I->assertTrue($user->unFollow($userFollow));
+            }
+        }
+    }
+
+    public function isFollowing(IntegrationTester $I) : void
+    {
+        $user = Users::findFirst(1);
+
+        for ($i = 1; $i < 5; $i++) {
+            $userFollow = Users::findFirst(1);
+            $userFollow->id = $i + 1;
+
+            $I->assertIsBool($user->isFollowing($userFollow));
+        }
+    }
+
+    public function counters(IntegrationTester $I) : void
+    {
+        $user = Users::findFirst(1);
+
+
+        //$I->assertGreaterThan(1, $user->getTotalFollowing());
     }
 }
