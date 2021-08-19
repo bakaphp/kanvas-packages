@@ -29,11 +29,12 @@ class Rules
     /**
      * validate.
      *
-     * @param  bool $entity
+     * @param  WorkflowsEntityInterfaces $entity
+     * @param mixed ...$args
      *
      * @return bool
      */
-    public function validate(WorkflowsEntityInterfaces $entity) : bool
+    public function validate(WorkflowsEntityInterfaces $entity, ...$args) : bool
     {
         Di::getDefault()->get('log')->info('Rule validate');
 
@@ -57,7 +58,7 @@ class Rules
                 try {
                     $workflowLog->actions_id = $workFlow->actions->id;
                     $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
-                    $workflowLog->setLog($objectAction->handle($entity, $params));
+                    $workflowLog->setLog($objectAction->handle($entity, $params, ...$args));
                     $workflowLog->end();
                 } catch (Throwable $e) {
                     $workflowLog->message = $e->getMessage();
