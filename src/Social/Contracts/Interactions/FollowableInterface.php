@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Contracts\Interactions;
 
-interface FollowableInterface
+use Kanvas\Packages\Social\Contracts\Follows\FollowableInterface as FollowsFollowableInterface;
+
+/**
+ * @deprecated version 0.4
+ */
+interface FollowableInterface extends FollowsFollowableInterface
 {
-    public function getId();
 }

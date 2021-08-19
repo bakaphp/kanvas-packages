@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Models;
 
+use Baka\Contracts\Auth\UserInterface;
 use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
+use Phalcon\Mvc\ModelInterface;
 
 class UsersInteractions extends BaseModel
 {
@@ -52,6 +54,31 @@ class UsersInteractions extends BaseModel
         parent::initialize();
 
         $this->setSource('users_interactions');
+    }
+
+    /**
+     * Given the entity and its interaction check if user interact with it.
+     *
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     * @param Interactions $interaction
+     *
+     * @return self|null
+     */
+    public static function getByEntityInteraction(UserInterface $user, ModelInterface $entity, Interactions $interaction) : ?self
+    {
+        return self::findFirst([
+            'conditions' => 'users_id = :userId: AND 
+                                interactions_id = :interactionId: AND 
+                                entity_namespace = :namespace: AND 
+                                entity_id = :entityId:',
+            'bind' => [
+                'userId' => $user->getId(),
+                'interactionId' => $interaction->getId(),
+                'namespace' => get_class($entity),
+                'entityId' => $entity->getId(),
+            ]
+        ]);
     }
 
     /**

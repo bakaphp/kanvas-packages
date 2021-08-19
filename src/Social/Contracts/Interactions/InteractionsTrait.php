@@ -6,14 +6,12 @@ namespace Kanvas\Packages\Social\Contracts\Interactions;
 
 use Baka\Contracts\Auth\UserInterface;
 use Baka\Contracts\Database\ModelInterface;
-use Kanvas\Packages\Social\Contracts\Events\EventManagerAwareTrait;
+use Kanvas\Packages\Social\Interactions as SocialInteractions;
 use Kanvas\Packages\Social\Models\UsersInteractions;
 use Kanvas\Packages\Social\Services\Interactions;
 
 trait InteractionsTrait
 {
-    use EventManagerAwareTrait;
-
     /**
      * Interact with the object based on the action.
      *
@@ -22,9 +20,10 @@ trait InteractionsTrait
      *
      * @return void
      */
-    public function interact(string $action, ModelInterface $data, ?string $reactionName = null) : void
+    public function interact(ModelInterface $entity, string $interactionName) : bool
     {
-        $this->fire("socialUser:{$action}", $data, $reactionName);
+        //$this->fire("socialUser:{$action}", $data, $reactionName);
+        return SocialInteractions::add($this, $entity, $interactionName);
     }
 
     /**

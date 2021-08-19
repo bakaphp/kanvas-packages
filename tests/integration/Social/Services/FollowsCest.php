@@ -3,7 +3,7 @@
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use IntegrationTester;
-use Kanvas\Packages\Social\Services\Follow;
+use Kanvas\Packages\Social\Follow;
 use Kanvas\Packages\Test\Support\Models\Tag;
 use Kanvas\Packages\Test\Support\Models\Users;
 
@@ -111,7 +111,6 @@ class FollowsCest
 
         $I->assertGreaterThan(1, $user->getTotalFollowing(Tag::class));
     }
-
 
     public function followersCountOfEntity(IntegrationTester $I) : void
     {

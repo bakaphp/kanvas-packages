@@ -3,8 +3,8 @@
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use IntegrationTester;
+use Kanvas\Packages\Social\Interactions;
 use Kanvas\Packages\Social\Models\Interactions as ModelsInteractions;
-use Kanvas\Packages\Social\Services\Interactions;
 
 class InteractionsCest
 {
