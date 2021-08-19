@@ -13,4 +13,5 @@ class Interactions
     const REPLY = 'replY';
     const FOLLOW = 'follow';
     const BUY = 'buy';
+    const RATE = 'buy';
 }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
+use Canvas\Contracts\EventManagerAwareTrait;
 use Canvas\Models\Users;
 use Kanvas\Packages\Social\Contracts\Interactions\TotalUsersTrait;
 use Phalcon\Mvc\ModelInterface;
 
 class UsersFollows extends BaseModel
 {
+    use EventManagerAwareTrait;
     use TotalUsersTrait;
 
     public int $users_id;
@@ -110,5 +112,31 @@ class UsersFollows extends BaseModel
     public function isFollowing() : bool
     {
         return !$this->is_deleted;
+    }
+
+    /**
+     * After create.
+     *
+     * @return void
+     */
+    public function afterCreate()
+    {
+        if (method_exists(get_parent_class($this), 'afterCreate')) {
+            parent::afterCreate();
+        }
+        $this->fire('kanvas.social.follow:afterCreate', $this);
+    }
+
+    /**
+     * After create.
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        if (method_exists(get_parent_class($this), 'afterSave')) {
+            parent::afterSave();
+        }
+        $this->fire('kanvas.social.follow:afterSave', $this);
     }
 }

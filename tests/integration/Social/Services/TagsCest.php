@@ -3,8 +3,6 @@
 namespace Kanvas\Packages\Tests\Integration\Social\Service;
 
 use IntegrationTester;
-use Kanvas\Packages\Social\Enums\Interactions as EnumsInteractions;
-use Kanvas\Packages\Social\Interactions;
 use Kanvas\Packages\Social\Models\Tags as ModelsTags;
 use Kanvas\Packages\Social\Tags;
 use Kanvas\Packages\Test\Support\Models\Users;
@@ -79,21 +77,6 @@ class TagsCest
     {
         $I->assertTrue(
             Tags::delete($this->tag)
-        );
-    }
-
-    /**
-     * Test Tags Interaction.
-     *
-     * @param IntegrationTester $I
-     * @before createTagTest
-     *
-     * @return void
-     */
-    public function tagsInteraction(IntegrationTester $I) : void
-    {
-        $I->assertFalse(
-            Interactions::add(Users::findFirst(1), $this->tag, EnumsInteractions::LIKE)
         );
     }
 }

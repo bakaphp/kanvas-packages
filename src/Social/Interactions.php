@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social;
 
 use Baka\Contracts\Auth\UserInterface;
-use Exception;
 use Kanvas\Packages\Social\Models\Interactions as InteractionsModel;
 use Kanvas\Packages\Social\Models\UsersInteractions;
 use Phalcon\Mvc\ModelInterface;
@@ -28,16 +27,63 @@ class Interactions
 
         if ($userInteraction && !InteractionsModel::isComment($interaction->getId())) {
             self::removeInteraction($userInteraction);
-            return (bool) $userInteraction->is_deleted;
         } elseif (!$userInteraction) {
             $userInteraction = new UsersInteractions();
             $userInteraction->users_id = $user->getId();
             $userInteraction->entity_namespace = get_class($entity);
             $userInteraction->entity_id = $entity->getId();
             $userInteraction->interactions_id = $interaction->getId();
-            $userInteraction->created_at = date('Y-m-d H:i:s');
             $userInteraction->saveOrFail();
         }
+
+        //if is_deleted = 0 means it was added
+        return (bool) !$userInteraction->is_deleted;
+    }
+
+    /**
+     * Determine if the user has a interaction of this type with the entity.
+     *
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     * @param string $interactionName
+     *
+     * @return bool
+     */
+    public static function has(UserInterface $user, ModelInterface $entity, string $interactionName) : bool
+    {
+        $interaction = InteractionsModel::getByName($interactionName);
+
+        return  (bool) UsersInteractions::count([
+            'conditions' => 'users_id = :userId:  
+                            AND interactions_id = :interactionId:  
+                            AND entity_namespace = :namespace: 
+                            AND entity_id = :entityId:
+                            AND is_deleted = 0',
+            'bind' => [
+                'userId' => $user->getId(),
+                'interactionId' => $interaction->getId(),
+                'namespace' => get_class($entity),
+                'entityId' => $entity->getId(),
+            ]
+        ]);
+    }
+
+    /**
+     * Remove user interaction.
+     *
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     * @param string $interactionName
+     *
+     * @return bool
+     */
+    public static function remove(UserInterface $user, ModelInterface $entity, string $interactionName) : bool
+    {
+        $interaction = InteractionsModel::getByName($interactionName);
+
+        $userInteraction = UsersInteractions::getByEntityInteraction($user, $entity, $interaction);
+
+        self::removeInteraction($userInteraction);
 
         return (bool) $userInteraction->is_deleted;
     }
@@ -68,51 +114,10 @@ class Interactions
     {
         if ($interaction->is_deleted) {
             $interaction->is_deleted = 0;
-            $interaction->saveOrFail();
         } else {
             $interaction->is_deleted = 1;
-            $interaction->saveOrFail();
         }
-    }
 
-    /**
-     * Return the ID correspondent to the interaction type and
-     * throws and exception if doesn't exist.
-     *
-     * @param string $interactionName
-     *
-     * @throws Exception
-     *
-     * @deprecated version 0.4
-     *
-     * @return int
-     */
-    public static function getInteractionIdByName(string $interactionName) : int
-    {
-        switch ($interactionName) {
-            case 'react':
-                return InteractionsModel::REACT;
-                break;
-
-            case 'save':
-                return InteractionsModel::SAVE;
-                break;
-
-            case 'comment':
-                return InteractionsModel::COMMENT;
-                break;
-
-            case 'following':
-                return InteractionsModel::FOLLOWING;
-                break;
-
-            case 'followers':
-                return InteractionsModel::FOLLOWERS;
-                break;
-
-            default:
-                throw new Exception('Interaction name not found');
-                break;
-        }
+        $interaction->saveOrFail();
     }
 }

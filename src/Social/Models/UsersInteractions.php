@@ -4,11 +4,13 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
+use Canvas\Contracts\EventManagerAwareTrait;
 use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
 use Phalcon\Mvc\ModelInterface;
 
 class UsersInteractions extends BaseModel
 {
+    use EventManagerAwareTrait;
     use TotalInteractionsTrait {
         getInteractionStorageKey as protected parentGetInteractionStorageKey;
     }
@@ -68,10 +70,10 @@ class UsersInteractions extends BaseModel
     public static function getByEntityInteraction(UserInterface $user, ModelInterface $entity, Interactions $interaction) : ?self
     {
         return self::findFirst([
-            'conditions' => 'users_id = :userId: AND 
-                                interactions_id = :interactionId: AND 
-                                entity_namespace = :namespace: AND 
-                                entity_id = :entityId:',
+            'conditions' => 'users_id = :userId: 
+                                AND interactions_id = :interactionId: 
+                                AND entity_namespace = :namespace: 
+                                AND entity_id = :entityId:',
             'bind' => [
                 'userId' => $user->getId(),
                 'interactionId' => $interaction->getId(),
@@ -79,6 +81,32 @@ class UsersInteractions extends BaseModel
                 'entityId' => $entity->getId(),
             ]
         ]);
+    }
+
+    /**
+     * After create.
+     *
+     * @return void
+     */
+    public function afterCreate()
+    {
+        if (method_exists(get_parent_class($this), 'afterCreate')) {
+            parent::afterCreate();
+        }
+        $this->fire('kanvas.social.interactions:afterCreate', $this);
+    }
+
+    /**
+     * After create.
+     *
+     * @return void
+     */
+    public function afterSave()
+    {
+        if (method_exists(get_parent_class($this), 'afterSave')) {
+            parent::afterSave();
+        }
+        $this->fire('kanvas.social.interactions:afterSave', $this);
     }
 
     /**
