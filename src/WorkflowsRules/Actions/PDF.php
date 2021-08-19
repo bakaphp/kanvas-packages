@@ -19,7 +19,7 @@ class PDF extends Action
      *
      * @return array
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = []) : array
+    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array
     {
         $response = null;
         $di = Di::getDefault();
@@ -37,6 +37,7 @@ class PDF extends Action
                 'page-width' => 200,
                 'page-height' => 265
             ]);
+            $entity = $args[0];
             // Set config for pdf settings (example deleted floating)
             $templateServiceClass = get_class($di->get('templates'));
             $template = $templateServiceClass::generate($params['template_name'], ['entity' => $entity]); // Generate html from emails_templates table

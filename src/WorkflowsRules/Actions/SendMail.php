@@ -23,7 +23,7 @@ class SendMail implements ActionInterfaces
      *
      * @return array
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = []) : array
+    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array
     {
         $response = null;
         $di = Di::getDefault();

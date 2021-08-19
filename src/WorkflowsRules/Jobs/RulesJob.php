@@ -13,6 +13,7 @@ class RulesJob extends Job
     public Rules $rule;
     public string $event;
     public object $entity;
+    public array $args;
 
     /**
      * __construct.
@@ -23,11 +24,12 @@ class RulesJob extends Job
      *
      * @return void
      */
-    public function __construct(Rules $rules, string $event, WorkflowsEntityInterfaces $entity)
+    public function __construct(Rules $rules, string $event, WorkflowsEntityInterfaces $entity, ...$args)
     {
         $this->rule = $rules;
         $this->onQueue('workflows');
         $this->entity = $entity;
+        $this->args = $args;
     }
 
     /**
@@ -39,6 +41,6 @@ class RulesJob extends Job
     {
         Di::getDefault()->set('userData', $this->entity->getUsers());
         $rule = RulesServices::set($this->rule);
-        $rule->validate($this->entity);
+        $rule->validate($this->entity, ...$this->args);
     }
 }
