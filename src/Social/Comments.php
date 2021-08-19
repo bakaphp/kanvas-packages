@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social;
 
 use Baka\Contracts\Auth\UserInterface;
-use Kanvas\Packages\Social\Models\Interactions;
 use Kanvas\Packages\Social\Models\MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Phalcon\Di;
@@ -25,7 +24,7 @@ class Comments
         $comment = MessageComments::findFirstOrFail([
             'conditions' => 'id = :id: and apps_id = :apps_id: and is_deleted = 0',
             'bind' => [
-                'id' => (int)$id,
+                'id' => (int) $id,
                 'apps_id' => Di::getDefault()->get('app')->getId(),
             ]
         ]);
@@ -75,7 +74,6 @@ class Comments
     public static function delete(string $commentId, UserInterface $user) : bool
     {
         $comment = MessageComments::getByIdOrFail($commentId);
-        $comment->deleteInteraction(Interactions::COMMENT, $user);
         return (bool) $comment->softDelete();
     }
 

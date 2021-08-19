@@ -5,16 +5,14 @@ namespace Kanvas\Packages\Social\Models;
 
 use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Users;
-use Kanvas\Packages\Social\Contracts\Interactions\MultiInteractionsTrait;
-use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
+use Kanvas\Packages\Social\Contracts\Interactions\EntityInteractionsTrait;
 use Kanvas\Packages\Social\ElasticDocuments\Messages as ElasticMessagesDocument;
 use Kanvas\Packages\Social\Jobs\ElasticMessages;
 use Phalcon\Di;
 
 class MessageComments extends BaseModel
 {
-    use TotalInteractionsTrait;
-    use MultiInteractionsTrait;
+    use EntityInteractionsTrait;
     use FileSystemModelTrait;
 
     public $id;

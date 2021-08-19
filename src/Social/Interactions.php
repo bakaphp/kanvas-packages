@@ -120,4 +120,54 @@ class Interactions
 
         $interaction->saveOrFail();
     }
+
+    /**
+     * Get total followers.
+     *
+     * @param UserInterface $user
+     * @param ModelInterface $entity
+     *
+     * @return int
+     */
+    public static function getTotalByUser(UserInterface $user, string $entityNamespace, string $interactionName) : int
+    {
+        $interaction = InteractionsModel::getByName($interactionName);
+
+        return  UsersInteractions::count([
+            'conditions' => 'users_id = :userId:  
+                            AND interactions_id = :interactionId:  
+                            AND entity_namespace = :namespace: 
+                            AND is_deleted = 0',
+            'bind' => [
+                'userId' => $user->getId(),
+                'interactionId' => $interaction->getId(),
+                'namespace' => $entityNamespace,
+            ]
+        ]);
+    }
+
+    /**
+     * Get the total interaction for a specific entity.
+     *
+     * @param string $entity
+     * @param string $interactionName
+     *
+     * @return int
+     */
+    public static function getTotalByEntity(ModelInterface $entity, string $interactionName) : int
+    {
+        $interaction = InteractionsModel::getByName($interactionName);
+
+        return  UsersInteractions::count([
+            'conditions' => 'interactions_id = :interactionId:  
+                            AND entity_namespace = :namespace: 
+                            AND entity_id = :entityId:
+                            AND is_deleted = 0',
+            'bind' => [
+                'interactionId' => $interaction->getId(),
+                'namespace' => get_class($entity),
+                'entityId' => $entity->getId(),
+            ]
+        ]);
+    }
 }

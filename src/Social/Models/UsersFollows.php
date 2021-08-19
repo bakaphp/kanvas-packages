@@ -6,13 +6,11 @@ namespace Kanvas\Packages\Social\Models;
 use Baka\Contracts\Auth\UserInterface;
 use Canvas\Contracts\EventManagerAwareTrait;
 use Canvas\Models\Users;
-use Kanvas\Packages\Social\Contracts\Interactions\TotalUsersTrait;
 use Phalcon\Mvc\ModelInterface;
 
 class UsersFollows extends BaseModel
 {
     use EventManagerAwareTrait;
-    use TotalUsersTrait;
 
     public int $users_id;
     public int $entity_id;

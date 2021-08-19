@@ -5,15 +5,12 @@ namespace Kanvas\Packages\Social\Models;
 
 use Baka\Contracts\Auth\UserInterface;
 use Canvas\Contracts\EventManagerAwareTrait;
-use Kanvas\Packages\Social\Contracts\Interactions\TotalInteractionsTrait;
 use Phalcon\Mvc\ModelInterface;
 
 class UsersInteractions extends BaseModel
 {
     use EventManagerAwareTrait;
-    use TotalInteractionsTrait {
-        getInteractionStorageKey as protected parentGetInteractionStorageKey;
-    }
+
 
     public int $users_id;
     public int $entity_id;
@@ -107,15 +104,5 @@ class UsersInteractions extends BaseModel
             parent::afterSave();
         }
         $this->fire('kanvas.social.interactions:afterSave', $this);
-    }
-
-    /**
-     * Get the interaction key.
-     *
-     * @return string
-     */
-    protected function getInteractionStorageKey() : string
-    {
-        return $this->entity_namespace . '-' . $this->entity_id . '-' . $this->interactions_id;
     }
 }

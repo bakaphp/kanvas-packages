@@ -61,6 +61,27 @@ class InteractionsCest
         $I->assertTrue($likeTag);
     }
 
+    public function getTotalInteractionsByUser(IntegrationTester $I) : void
+    {
+        $user = Users::findFirst(1);
+        $tag = Tags::findFirst(1);
+
+        $user->interact($tag, EnumsInteractions::RATE);
+        $totalInteractions = $user->getTotalInteractions(Tags::class, EnumsInteractions::RATE);
+
+        $I->assertGreaterOrEquals(1, $totalInteractions);
+    }
+
+    public function getTotalInteractionsByEntity(IntegrationTester $I) : void
+    {
+        $tag = Tags::findFirst(1);
+
+        $totalInteractions = Interactions::getTotalByEntity($tag, EnumsInteractions::RATE);
+
+        $I->assertGreaterOrEquals(1, $totalInteractions);
+        $I->assertGreaterOrEquals(1, $tag->getTotalInteractions(EnumsInteractions::RATE));
+    }
+
     /**
      * Test get Reaction by its name.
      *
