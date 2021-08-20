@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Social;
 
 use Baka\Contracts\Auth\UserInterface;
-use Kanvas\Packages\Social\Models\MessageComments;
+use Kanvas\Packages\Social\Comments\Models\Messages as  MessageComments;
 use Kanvas\Packages\Social\Models\Messages;
 use Phalcon\Di;
 use Phalcon\Mvc\Model\Resultset\Simple;
