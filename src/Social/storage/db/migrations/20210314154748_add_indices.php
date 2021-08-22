@@ -162,7 +162,7 @@ class AddIndices extends Phinx\Migration\AbstractMigration
                 'unique' => false,
             ])
             ->addIndex(['slug'], [
-                'name' => 'slug',
+                'name' => 'slugs',
                 'unique' => false,
             ])
             ->addIndex(['weight'], [
@@ -334,7 +334,7 @@ class AddIndices extends Phinx\Migration\AbstractMigration
                 'after' => 'entity_id',
             ])
             ->addIndex(['slug'], [
-                'name' => 'slug',
+                'name' => 'slugss',
                 'unique' => false,
             ])
             ->addIndex(['last_message_id'], [
