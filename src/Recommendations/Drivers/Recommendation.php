@@ -1,8 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Recommendation\Drivers;
 
-use Kanvas\Packages\Recommendation\Contracts\Database;
 use Kanvas\Packages\Recommendation\Contracts\Engine;
 use Recombee\RecommApi\Client;
 
@@ -10,7 +10,7 @@ class Recommendation implements Engine
 {
     private static array $instances = [];
 
-    public static function connect(Recomend $database)
+    public static function connect(Engine $database)
     {
         $source = $database->getSource();
         if (!isset(self::$instances[$source])) {
@@ -18,7 +18,5 @@ class Recommendation implements Engine
         }
 
         return self::$instances[$source];
-
     }
-
 }

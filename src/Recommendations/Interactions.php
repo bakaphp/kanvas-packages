@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Recommendation;
 
@@ -14,8 +15,16 @@ class Interactions implements ContractsInteractions
         $this->recommendation = $recommendation;
     }
 
-    public function like(ModelInterface $model) {}
-    public function view(ModelInterface $model) {}
-    public function purchase(ModelInterface $model) {}
-    public function bookmark(ModelInterface $model) {}
+    public function like(ModelInterface $model)
+    {
+    }
+    public function view(ModelInterface $model)
+    {
+    }
+    public function purchase(ModelInterface $model)
+    {
+    }
+    public function bookmark(ModelInterface $model)
+    {
+    }
 }

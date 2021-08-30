@@ -1,23 +1,29 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Recommendation;
 
-use Kanvas\Packages\Recommendation\Contracts\Recomendation;
 use Kanvas\Packages\Recommendation\Contracts\Items as ContractsItems;
-use Recombee\RecommApi\Client;
 
 class Items implements ContractsItems
 {
-    protected Recomendation $recomendation;
+    protected Recommendation $recomendation;
 
-    public function __construct(Recomendation $recomendation)
+    public function __construct(Recommendation $recomendation)
     {
         $this->recomendation = $recomendation;
     }
 
-    public function add() {}
-    public function addMultiple() {}
-    public function delete() {}
-    public function list() {}
-
+    public function add()
+    {
+    }
+    public function addMultiple()
+    {
+    }
+    public function delete()
+    {
+    }
+    public function list()
+    {
+    }
 }

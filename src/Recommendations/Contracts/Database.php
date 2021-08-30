@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Recommendation\Contracts;
 
-interface Recomendation
+interface Database
 {
-    public function create();
-    public function delete();
-    public function getSource();
+    public function create() : bool;
+    public function delete() : bool;
+    public function getSource() : string;
 }
