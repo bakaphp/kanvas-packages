@@ -8,9 +8,12 @@ interface Engine
     /**
      * Return a instance of the engine connection.
      *
-     * @param Engine $recommendation
+     * @param Engine $database
      *
      * @return mixed
      */
-    public static function connect(Engine $recommendation);
+    public static function connect(Database $database);
+    public function interactions() : Interactions;
+    public function items() : Items;
+    public function recommendation() : Recommendation;
 }
