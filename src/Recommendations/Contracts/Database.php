@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\Recommendation\Contracts;
 
-interface Database
+interface Recomendation
 {
     public function create();
     public function delete();

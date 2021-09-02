@@ -1,16 +1,16 @@
 <?php
 
-namespace Kanvas\Packages\Recommendation\Src;
+namespace Kanvas\Packages\Recommendation;
 
 use Exception;
-use Kanvas\Packages\Recommendation\Contracts\Database as DatabaseInterface;
+use Kanvas\Packages\Recommendation\Contracts\Recomendation as RecomendationInterface;
 use Kanvas\Packages\Recommendation\Contracts\Engine;
-use Kanvas\Packages\Recommendation\Contracts\Interactions;
-use Kanvas\Packages\Recommendation\Contracts\Items;
+use Kanvas\Packages\Recommendation\Interactions;
+use Kanvas\Packages\Recommendation\Items;
 use Phalcon\Di\DiInterface;
 
 
-class Database implements DatabaseInterface
+class Recomendation implements RecomendationInterface
 {
     protected Engine $client;
 
@@ -31,6 +31,7 @@ class Database implements DatabaseInterface
     }
 
     public function create() : self {
+
         return $this;
     }
 
@@ -39,10 +40,10 @@ class Database implements DatabaseInterface
     }
     
     public function interactions(): Interactions {
-        return new Interactions();
+        return new Interactions($this);
     }
     public function items() : Items {
-        return new Items();
+        return new Items($this);
     }
 
     public function getSource() {

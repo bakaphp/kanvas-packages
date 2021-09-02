@@ -1,19 +1,17 @@
 <?php
 
-namespace Kanvas\Packages\Recommendation\Drivers;
+namespace Kanvas\Packages\Recommendation;
 
-use Kanvas\Packages\Recommendation\Contracts\Database;
 use Kanvas\Packages\Recommendation\Contracts\Interactions as ContractsInteractions;
 use Phalcon\Mvc\ModelInterface;
-use Recombee\RecommApi\Client;
 
 class Interactions implements ContractsInteractions
 {
-    protected Database $database;
+    protected Recomendation $recomendation;
 
-    public function __construct(Database $database)
+    public function __construct(Recomendation $recommendation)
     {
-        $this->database = $database;
+        $this->recommendation = $recommendation;
     }
 
     public function like(ModelInterface $model) {}

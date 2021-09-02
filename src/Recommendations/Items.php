@@ -1,18 +1,18 @@
 <?php
 
-namespace Kanvas\Packages\Recommendation\Drivers;
+namespace Kanvas\Packages\Recommendation;
 
-use Kanvas\Packages\Recommendation\Contracts\Database;
+use Kanvas\Packages\Recommendation\Contracts\Recomendation;
 use Kanvas\Packages\Recommendation\Contracts\Items as ContractsItems;
 use Recombee\RecommApi\Client;
 
 class Items implements ContractsItems
 {
-    protected Database $database;
+    protected Recomendation $recomendation;
 
-    public function __construct(Database $database)
+    public function __construct(Recomendation $recomendation)
     {
-        $this->database = $database;
+        $this->recomendation = $recomendation;
     }
 
     public function add() {}

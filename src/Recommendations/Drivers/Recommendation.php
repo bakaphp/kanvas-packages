@@ -10,7 +10,7 @@ class Recommendation implements Engine
 {
     private static array $instances = [];
 
-    public static function connect(Database $database)
+    public static function connect(Recomend $database)
     {
         $source = $database->getSource();
         if (!isset(self::$instances[$source])) {
