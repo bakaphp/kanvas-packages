@@ -33,7 +33,11 @@ class Recommendation implements Recommendations
      *
      * @return array|null
      */
-    public function itemsToUser(UserInterface $user, int $total, array $options) : ?array
+    public function itemsToUser(
+        UserInterface $user,
+        int $total,
+        array $options
+    ) : ?array
     {
         return $this->engine::connect()->send(
             new Reqs\RecommendItemsToUser(
