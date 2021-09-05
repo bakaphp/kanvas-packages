@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
 use Baka\Contracts\Auth\UserInterface;
-use Baka\Contracts\ModelInterface;
+use Baka\Contracts\Database\ModelInterface;
 use Kanvas\Packages\Recommendations\Contracts\Engine;
 use Kanvas\Packages\Recommendations\Contracts\Interactions as ContractsInteractions;
 use Phalcon\Utils\Slug;
