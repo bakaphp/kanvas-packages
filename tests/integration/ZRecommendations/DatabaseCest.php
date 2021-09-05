@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Tests\Integration\Payments\Plaid;
+namespace Kanvas\Packages\Tests\Integration\ZRecommendations;
 
 use IntegrationTester;
 use Kanvas\Packages\Recommendations\Drivers\Recombee\Engine;
