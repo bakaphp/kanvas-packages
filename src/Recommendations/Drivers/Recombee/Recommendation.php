@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
 use Baka\Contracts\Auth\UserInterface;
-use Baka\Contracts\ModelInterface;
+use Baka\Contracts\Database\ModelInterface;
 use Kanvas\Packages\Recommendations\Contracts\Engine;
 use Kanvas\Packages\Recommendations\Contracts\Recommendation as ContractRecommendations;
 use Recombee\RecommApi\Requests as Reqs;
