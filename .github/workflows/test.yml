@@ -46,6 +46,7 @@ jobs:
       PHINX_CONFIG_DIR: storage
       ITUNES_RECEIPT_EXAMPLE: ${{ secrets.ITUNES_RECEIPT_EXAMPLE }}
       ITUNES_STORE_PASS: ${{ secrets.ITUNES_STORE_PASS }}
+      RECOMBEE_PRIVATE_TOKEN: ${{ secrets.RECOMBEE_PRIVATE_TOKEN }}
       CANVAS_PHINX_CONFIG_DIR: vendor/canvas/core/storage
     services:
       mysql:
