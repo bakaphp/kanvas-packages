@@ -1,37 +1,68 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Recommendation\Drivers\Recombee;
+namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
-use Kanvas\Packages\Recommendation\Contracts\Database;
-use Kanvas\Packages\Recommendation\Contracts\Engine as ContractsEngine;
-use Kanvas\Packages\Recommendation\Contracts\Interactions as ContractsInteractions;
-use Kanvas\Packages\Recommendation\Contracts\Items as ContractsItems;
-use Kanvas\Packages\Recommendation\Contracts\Recommendation as ContractsRecommendations;
+use Kanvas\Packages\Recommendations\Contracts\Database;
+use Kanvas\Packages\Recommendations\Contracts\Engine as ContractsEngine;
+use Kanvas\Packages\Recommendations\Contracts\Interactions as ContractsInteractions;
+use Kanvas\Packages\Recommendations\Contracts\Items as ContractsItems;
+use Kanvas\Packages\Recommendations\Contracts\Recommendation as ContractsRecommendations;
 use Recombee\RecommApi\Client;
 
 class Engine implements ContractsEngine
 {
-    private static array $instances = [];
+    protected Database $database;
+    protected static array $instances = [];
+    protected ?Client $client = null;
+    protected int $i = 0;
+
+    /**
+     * Constructor.
+     *
+     * @param Database $database
+     */
+    private function __construct(Database $database)
+    {
+        $this->database = $database;
+    }
+
+    /**
+     * Singleton.
+     *
+     * @param Database $database
+     *
+     * @return Engine
+     */
+    public static function getInstance(Database $database) : Engine
+    {
+        $source = $database->getSource();
+        if (!isset(self::$instances[$source])) {
+            self::$instances[$source] = new Engine($database);
+        }
+
+        return self::$instances[$source];
+    }
 
     /**
      * Connect to a recommendation DB.
      *
      * @param Database $database
      *
-     * @return mixed
+     * @return Client
      */
-    public static function connect(Database $database) : Client
+    public function connect() : Client
     {
-        $source = $database->getSource();
-        if (!isset(self::$instances[$source])) {
-            self::$instances[$source] = new Client(
+        $source = $this->database->getSource();
+        if ($this->client === null) {
+            $this->i++;
+            $this->client = new Client(
                 $source,
-                $database->getPassword()
+                $this->database->getPassword()
             );
         }
 
-        return self::$instances[$source];
+        return $this->client;
     }
 
     /**
@@ -41,7 +72,7 @@ class Engine implements ContractsEngine
      */
     public function interactions() : ContractsInteractions
     {
-        return new Interactions(new self());
+        return new Interactions($this);
     }
 
     /**
@@ -51,7 +82,7 @@ class Engine implements ContractsEngine
      */
     public function items() : ContractsItems
     {
-        return new Items(new self());
+        return new Items($this);
     }
 
     /**
@@ -61,6 +92,6 @@ class Engine implements ContractsEngine
      */
     public function recommendation() : ContractsRecommendations
     {
-        return new Recommendation(new self());
+        return new Recommendation($this);
     }
 }

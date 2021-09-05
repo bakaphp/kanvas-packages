@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Test\Support\Models;
 
@@ -11,7 +12,7 @@ class Tag extends BaseModel implements FollowableInterface
 
     public int $id = 1;
 
-    public function getId(): int
+    public function getId() : int
     {
         return $this->id;
     }

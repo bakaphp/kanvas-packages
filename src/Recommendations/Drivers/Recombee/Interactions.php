@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Recommendation\Drivers\Recombee;
+namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
 use Baka\Contracts\Auth\UserInterface;
 use Baka\Contracts\ModelInterface;
-use Kanvas\Packages\Recommendation\Contracts\Engine;
-use Kanvas\Packages\Recommendation\Contracts\Interactions as ContractsInteractions;
+use Kanvas\Packages\Recommendations\Contracts\Engine;
+use Kanvas\Packages\Recommendations\Contracts\Interactions as ContractsInteractions;
 use Phalcon\Utils\Slug;
 use Recombee\RecommApi\Requests as Reqs;
 
@@ -51,7 +51,7 @@ class Interactions implements ContractsInteractions
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine::connect()->send(
+        $this->engine->connect()->send(
             new Reqs\AddRating(
                 $user->getId(),
                 $key . $model->getId(),
@@ -78,7 +78,7 @@ class Interactions implements ContractsInteractions
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine->send(
+        $this->engine->connect()->send(
             new Reqs\AddDetailView(
                 $user->getId(),
                 $key . $model->getId(),
@@ -105,7 +105,7 @@ class Interactions implements ContractsInteractions
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine->send(
+        $this->engine->connect()->send(
             new Reqs\AddPurchase(
                 $user->getId(),
                 $key . $model->getId(),
@@ -133,7 +133,7 @@ class Interactions implements ContractsInteractions
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine->send(
+        $this->engine->connect()->send(
             new Reqs\AddPurchase(
                 $user->getId(),
                 $key . $model->getId(),
@@ -161,7 +161,7 @@ class Interactions implements ContractsInteractions
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine->send(
+        $this->engine->connect()->send(
             new Reqs\AddBookmark(
                 $user->getId(),
                 $key . $model->getId(),

@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Recommendation;
+namespace Kanvas\Packages\Recommendations;
 
 use Exception;
-use Kanvas\Packages\Recommendation\Contracts\Database;
-use Kanvas\Packages\Recommendation\Contracts\Engine;
-use Kanvas\Packages\Recommendation\Contracts\Interactions;
-use Kanvas\Packages\Recommendation\Contracts\Items;
-use Kanvas\Packages\Recommendation\Contracts\Recommendation as ContractsRecommendation;
+use Kanvas\Packages\Recommendations\Contracts\Database;
+use Kanvas\Packages\Recommendations\Contracts\Engine;
+use Kanvas\Packages\Recommendations\Contracts\Interactions;
+use Kanvas\Packages\Recommendations\Contracts\Items;
+use Kanvas\Packages\Recommendations\Contracts\Recommendation as ContractsRecommendation;
 use Phalcon\Di\Injectable;
 
 class Recommendation extends Injectable
@@ -34,7 +34,7 @@ class Recommendation extends Injectable
             }
         }
 
-        $this->client = $engine::connect($this->database);
+        $this->client = $engine;
     }
 
     /**

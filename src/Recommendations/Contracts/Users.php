@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Recommendation\Contracts;
+namespace Kanvas\Packages\Recommendations\Contracts;
 
 use Baka\Contracts\Auth\UserInterface;
 

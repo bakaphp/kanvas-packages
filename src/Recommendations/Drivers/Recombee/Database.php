@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Recommendation\Drivers\Recombee;
+namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
-use Kanvas\Packages\Recommendation\Contracts\Database as ContractsDatabase;
-use Kanvas\Packages\Recommendation\Contracts\Engine;
+use Kanvas\Packages\Recommendations\Contracts\Database as ContractsDatabase;
+use Kanvas\Packages\Recommendations\Contracts\Engine;
 use Recombee\RecommApi\Requests as Reqs;
 
 class Database implements ContractsDatabase
@@ -21,11 +21,11 @@ class Database implements ContractsDatabase
      */
     public function create(Engine $engine, callable $fn) : bool
     {
-        $engine::connect()->send(
+        $engine->connect()->send(
             new Reqs\ResetDatabase()
         ); // Clear everything from the database
 
-        $fn($engine::connect());
+        $fn($engine->connect());
 
         return true;
     }
@@ -39,7 +39,7 @@ class Database implements ContractsDatabase
      */
     public function delete(Engine $engine) : bool
     {
-        $engine::connect()->send(
+        $engine->connect()->send(
             new Reqs\ResetDatabase()
         ); // Clear everything from the database
 

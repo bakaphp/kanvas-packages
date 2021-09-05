@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Recommendation\Drivers\Recombee;
+namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
 use Baka\Contracts\Auth\UserInterface;
 use Baka\Contracts\ModelInterface;
-use Kanvas\Packages\Recommendation\Contracts\Engine;
-use Kanvas\Packages\Recommendation\Contracts\Recommendations;
+use Kanvas\Packages\Recommendations\Contracts\Engine;
+use Kanvas\Packages\Recommendations\Contracts\Recommendation as ContractRecommendations;
 use Recombee\RecommApi\Requests as Reqs;
 
-class Recommendation implements Recommendations
+class Recommendation implements ContractRecommendations
 {
     protected Engine $engine;
 
@@ -37,9 +37,8 @@ class Recommendation implements Recommendations
         UserInterface $user,
         int $total,
         array $options
-    ) : ?array
-    {
-        return $this->engine::connect()->send(
+    ) : ?array {
+        return $this->engine->connect()->send(
             new Reqs\RecommendItemsToUser(
                 $user->getId(),
                 $total,
@@ -64,7 +63,7 @@ class Recommendation implements Recommendations
         int $total,
         array $options
     ) : ?array {
-        return $this->engine::connect()->send(
+        return $this->engine->connect()->send(
             new Reqs\RecommendItemsToItem(
                 $model->getId(),
                 $user->getId(),

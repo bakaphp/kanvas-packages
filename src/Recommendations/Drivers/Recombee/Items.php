@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Recommendation\Drivers\Recombee;
+namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
 use Baka\Contracts\ModelInterface;
-use Kanvas\Packages\Recommendation\Contracts\Engine;
-use Kanvas\Packages\Recommendation\Contracts\Items as ContractsItems;
+use Kanvas\Packages\Recommendations\Contracts\Engine;
+use Kanvas\Packages\Recommendations\Contracts\Items as ContractsItems;
 use Phalcon\Utils\Slug;
 use Recombee\RecommApi\Requests\DeleteItem;
 use Recombee\RecommApi\Requests\SetItemValues;
@@ -44,7 +44,7 @@ class Items implements ContractsItems
 
         $key = Slug::generate($model->getSource());
 
-        $this->engine::connect()->send(new SetItemValues(
+        $this->engine->connect()->send(new SetItemValues(
             $key . $model->getId(),
             $options,
             [
@@ -83,7 +83,7 @@ class Items implements ContractsItems
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine::connect()->send(
+        $this->engine->connect()->send(
             new DeleteItem($key . $model->getId())
         );
 
@@ -99,7 +99,7 @@ class Items implements ContractsItems
      */
     public function list(array $options)
     {
-        return $this->engine::connect()->send(
+        return $this->engine->connect()->send(
             new ListItems($options)
         );
     }
