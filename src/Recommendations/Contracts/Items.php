@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Recommendations\Contracts;
 
-use Baka\Contracts\ModelInterface;
+use Baka\Contracts\Database\ModelInterface;
 
 interface Items
 {

@@ -5,7 +5,6 @@ namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
 use Kanvas\Packages\Recommendations\Contracts\Database as ContractsDatabase;
 use Kanvas\Packages\Recommendations\Contracts\Engine;
-use Recombee\RecommApi\Requests as Reqs;
 
 class Database implements ContractsDatabase
 {
@@ -21,13 +20,8 @@ class Database implements ContractsDatabase
      */
     public function create(Engine $engine, callable $fn) : bool
     {
-        $engine->connect()->send(
-            new Reqs\ResetDatabase()
-        ); // Clear everything from the database
-
-        $fn($engine->connect());
-
-        return true;
+        //same function
+        return $this->execute($engine, $fn);
     }
 
     /**
@@ -37,11 +31,23 @@ class Database implements ContractsDatabase
      *
      * @return bool
      */
-    public function delete(Engine $engine) : bool
+    public function delete(Engine $engine, callable $fn) : bool
     {
-        $engine->connect()->send(
-            new Reqs\ResetDatabase()
-        ); // Clear everything from the database
+        //same function
+        return $this->execute($engine, $fn);
+    }
+
+    /**
+     * Execute the function against recombee.
+     *
+     * @param Engine $engine
+     * @param callable $fn
+     *
+     * @return bool
+     */
+    protected function execute(Engine $engine, callable $fn) : bool
+    {
+        $fn($engine->connect());
 
         return true;
     }

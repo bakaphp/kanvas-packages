@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
-use Baka\Contracts\ModelInterface;
+use Baka\Contracts\Database\ModelInterface;
 use Kanvas\Packages\Recommendations\Contracts\Engine;
 use Kanvas\Packages\Recommendations\Contracts\Items as ContractsItems;
 use Phalcon\Utils\Slug;
 use Recombee\RecommApi\Requests\DeleteItem;
+use Recombee\RecommApi\Requests\ListItems;
 use Recombee\RecommApi\Requests\SetItemValues;
 use RuntimeException;
 
