@@ -15,7 +15,6 @@ class Engine implements ContractsEngine
     protected Database $database;
     protected static array $instances = [];
     protected ?Client $client = null;
-    protected int $i = 0;
 
     /**
      * Constructor.
@@ -55,7 +54,6 @@ class Engine implements ContractsEngine
     {
         $source = $this->database->getSource();
         if ($this->client === null) {
-            $this->i++;
             $this->client = new Client(
                 $source,
                 $this->database->getPassword()
