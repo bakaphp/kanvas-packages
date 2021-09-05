@@ -26,7 +26,7 @@ class ItemsInteractionsCest
         $I->assertTrue($like);
     }
 
-    public function raging(IntegrationTester $I) : void
+    public function rating(IntegrationTester $I) : void
     {
         $topics = new Topics();
         $engine = Engine::getInstance($topics);

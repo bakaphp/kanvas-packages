@@ -5,9 +5,11 @@ namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
 use Baka\Contracts\Auth\UserInterface;
 use Baka\Contracts\Database\ModelInterface;
+use Baka\Support\Str;
 use Kanvas\Packages\Recommendations\Contracts\Engine;
 use Kanvas\Packages\Recommendations\Contracts\Interactions as ContractsInteractions;
 use Phalcon\Utils\Slug;
+use Recombee\RecommApi\Exceptions\ResponseException;
 use Recombee\RecommApi\Requests as Reqs;
 
 class Interactions implements ContractsInteractions
@@ -51,17 +53,23 @@ class Interactions implements ContractsInteractions
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine->connect()->send(
-            new Reqs\AddRating(
-                $user->getId(),
-                $key . $model->getId(),
-                $rating,
-                [
-                    'timestamp' => time(),
-                    'cascadeCreate' => true
-                ]
-            )
-        );
+        try {
+            $this->engine->connect()->send(
+                new Reqs\AddRating(
+                    $user->getId(),
+                    $key . $model->getId(),
+                    $rating,
+                    [
+                        'timestamp' => time(),
+                        'cascadeCreate' => true
+                    ]
+                )
+            );
+        } catch (ResponseException $e) {
+            if (Str::contains('already exists', $e->getMessage())) {
+                return true;
+            }
+        }
 
         return true;
     }
@@ -105,19 +113,24 @@ class Interactions implements ContractsInteractions
     {
         $key = Slug::generate($model->getSource());
 
-        $this->engine->connect()->send(
-            new Reqs\AddPurchase(
-                $user->getId(),
-                $key . $model->getId(),
-                [
-                    'price' => $purchase['price'],
-                    'amount' => $purchase['amount'],
-                    'timestamp' => time(),
-                    'cascadeCreate' => true
-                ]
-            )
-        );
-
+        try {
+            $this->engine->connect()->send(
+                new Reqs\AddPurchase(
+                    $user->getId(),
+                    $key . $model->getId(),
+                    [
+                        'price' => $purchase['price'],
+                        'amount' => $purchase['amount'],
+                        'timestamp' => time(),
+                        'cascadeCreate' => true
+                    ]
+                )
+            );
+        } catch (ResponseException $e) {
+            if (Str::contains('already exists', $e->getMessage())) {
+                return true;
+            }
+        }
         return true;
     }
 
