@@ -172,4 +172,24 @@ jobs:
       
       - name: Run test suites
         if: success()
-        run: vendor/bin/codecept run
+        run: vendor/bin/codecept run tests/integration/Payments/
+
+      - name: Run test suites
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Social/
+
+      - name: Run test suites
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Wallets/
+
+      - name: Run test suites
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Workflows/
+
+      - name: Run test suites
+        if: success()
+        run: vendor/bin/codecept run tests/integration/ZRecommendations/
+
+      - name: Run test suites
+        if: success()
+        run: vendor/bin/codecept run tests/unit
