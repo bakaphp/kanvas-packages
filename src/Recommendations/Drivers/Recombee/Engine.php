@@ -66,6 +66,16 @@ class Engine implements ContractsEngine
     }
 
     /**
+     * Database.
+     *
+     * @return Database
+     */
+    public function database() : Database
+    {
+        return $this->database;
+    }
+
+    /**
      * Engine Interactions.
      *
      * @return ContractsInteractions

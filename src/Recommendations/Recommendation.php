@@ -22,10 +22,8 @@ class Recommendation extends Injectable
      * @param Database $database
      * @param Engine|null $engine
      */
-    public function __construct(Database $database, ?Engine $engine = null)
+    public function __construct(?Engine $engine = null)
     {
-        $this->database = $database;
-
         if ($engine === null) {
             $engine = $this->getDI->get('recommendation');
 
@@ -34,6 +32,7 @@ class Recommendation extends Injectable
             }
         }
 
+        $this->database = $engine->database();
         $this->client = $engine;
     }
 
@@ -84,9 +83,9 @@ class Recommendation extends Injectable
      *
      * @return bool
      */
-    public function delete() : bool
+    public function delete(callable $fn) : bool
     {
-        return $this->database->delete($this->client);
+        return $this->database->delete($this->client, $fn);
     }
 
     /**
