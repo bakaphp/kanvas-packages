@@ -16,7 +16,7 @@ class ZDatabaseDeleteCest
         $topics = new Topics();
         $engine = Engine::getInstance($topics);
 
-        $delete = $topics->create(
+        $delete = $topics->delete(
             $engine,
             function (Client $client) : Client {
                 $client->send(new Reqs\DeleteItemProperty('created_at', 'timestamp'));
