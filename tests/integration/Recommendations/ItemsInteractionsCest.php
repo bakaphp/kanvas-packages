@@ -29,6 +29,7 @@ class ItemsInteractionsCest
     public function rating(IntegrationTester $I) : void
     {
         $topics = new Topics();
+        $I->grabDi()->get('db')->fetchAll('select 1 ');
         $engine = Engine::getInstance($topics);
         $interactions = new Interactions($engine);
 

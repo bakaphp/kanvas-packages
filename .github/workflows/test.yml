@@ -170,26 +170,26 @@ jobs:
       - name: Phinx Migrate Wallet
         run: vendor/bin/phinx migrate -c phinx-wallets.php -e development
       
-      - name: Run test suites
+      - name: Run test Payments
         if: success()
         run: vendor/bin/codecept run tests/integration/Payments/
 
-      - name: Run test suites
+      - name: Run test Social
         if: success()
         run: vendor/bin/codecept run tests/integration/Social/
 
-      - name: Run test suites
+      - name: Run test Wallets
         if: success()
         run: vendor/bin/codecept run tests/integration/Wallets/
 
-      - name: Run test suites
+      - name: Run test Workflows
         if: success()
         run: vendor/bin/codecept run tests/integration/Workflows/
 
-      - name: Run test suites
+      - name: Run test Recommendations
         if: success()
-        run: vendor/bin/codecept run tests/integration/ZRecommendations/
+        run: vendor/bin/codecept run tests/integration/Recommendations/
 
-      - name: Run test suites
+      - name: Run test unit
         if: success()
         run: vendor/bin/codecept run tests/unit
