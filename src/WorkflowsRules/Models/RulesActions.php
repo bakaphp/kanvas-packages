@@ -31,4 +31,24 @@ class RulesActions extends BaseModel
             ['alias' => 'rulesWorkflowActions']
         );
     }
+
+    /**
+     * getActionsClass.
+     *
+     * @return string
+     */
+    public function getActionsClass() : string
+    {
+        return $this->rulesWorkflowActions->actions->model_name;
+    }
+
+    /**
+     * getActionsName.
+     *
+     * @return string
+     */
+    public function getActionsName() : string
+    {
+        return $this->rulesWorkflowActions->actions->name;
+    }
 }

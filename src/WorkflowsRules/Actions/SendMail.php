@@ -23,32 +23,25 @@ class SendMail implements ActionInterfaces
      *
      * @return array
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array
+    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {
         $response = null;
         $di = Di::getDefault();
         try {
             $this->data = $entity->toArray();
-            $template = get_class($di->get('templates'))::generate($params['template_name'], ['entity' => $entity]);
+            $template = get_class($di->get('templates'))::generate($this->params['template_name'], ['entity' => $entity]);
             $mail = $this->mailService($entity);
-            $this->message = $template;
             $mail->to($params['toEmail'])
                 ->from($params['fromEmail'])
                 ->subject($params['subject'])
                 ->content($template)
                 ->sendNow();
+            $this->setStatus(Action::SUCCESSFUL);
+            $this->setResults(['mail' => $template]);
         } catch (Throwable  $e) {
-            $this->message = 'Error processing mail - ' . $e->getMessage();
-            $di->get('log')->error('Error processing mail - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            $this->status = 0;
-            $response = $e->getTraceAsString();
+            $this->setStatus(Action::FAIL);
+            $this->setError('Error processing Email - ' . $e->getMessage());
         }
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data,
-            'body' => $response
-        ];
     }
 
     /**

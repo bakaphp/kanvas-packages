@@ -4,10 +4,8 @@ namespace Kanvas\Packages\WorkflowsRules\Services;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
-use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
 use Phalcon\Di;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use Throwable;
 
 class Rules
 {
@@ -51,19 +49,14 @@ class Rules
         );
         if ($result) {
             $actions = $this->rule->getRulesActions();
+            $workflowLog = new Logs();
+            $workflowLog->start($this->rule);
+
             foreach ($actions as $action) {
-                $workflowLog = WorkflowsLogs::start($this->rule->id);
-                $workFlow = $action->getRulesWorkflowActions();
-                $objectAction = new $workFlow->actions->model_name;
-                try {
-                    $workflowLog->actions_id = $workFlow->actions->id;
-                    $params = $this->rule->params ? json_decode($this->rule->params, true) : [];
-                    $workflowLog->setLog($objectAction->handle($entity, $params, ...$args));
-                    $workflowLog->end();
-                } catch (Throwable $e) {
-                    $workflowLog->message = $e->getMessage();
-                    $workflowLog->end();
-                }
+                $class = $action->getActionsClass();
+                $actionObject = Actions::getAction($class, $this->rule, $workflowLog);
+                $actionObject->handle($entity, ...$args);
+                $workflowLog->addAction($actionObject, $action);
             }
         }
         return $result;

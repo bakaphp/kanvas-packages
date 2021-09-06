@@ -6,6 +6,7 @@ namespace Kanvas\Packages\WorkflowsRules\Models;
 class Actions extends BaseModel
 {
     public string $name;
+    public string $model_name;
 
     /**
      * Initialize method for model.

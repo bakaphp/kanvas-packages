@@ -17,7 +17,7 @@ class SendToZoho extends Action
      *
      * @return array
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array
+    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {
         $response = null;
         try {
@@ -54,7 +54,6 @@ class SendToZoho extends Action
             }
 
             $di->get('log')->info('Data lead', $request);
-            $this->data = $request;
 
             $response = $zohoClient->insertRecords(
                 $request,
@@ -65,22 +64,15 @@ class SendToZoho extends Action
                 $entity->saveLinkedSources($response);
             }
 
-            $this->data = $request;
-            $this->message = 'Process Leads For company ' . $companyId;
-            $this->status = 1;
+            $this->setResults([
+                'request' => $request,
+                'response' => $response
+            ]);
+            $this->setStatus(Action::SUCCESSFUL);
             $di->get('log')->info('Process Leads For company ' . $companyId, [$response]);
         } catch (Throwable $e) {
-            $this->message = 'Error processing lead - ' . $e->getMessage();
-            $di->get('log')->error('Error processing lead - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            $this->status = 0;
-            $response = $e->getTraceAsString();
+            $this->setStatus(Action::FAIL);
+            $this->setError('Error processing Email - ' . $e->getMessage());
         }
-
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data,
-            'body' => $response
-        ];
     }
 }
