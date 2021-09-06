@@ -46,6 +46,7 @@ jobs:
       PHINX_CONFIG_DIR: storage
       ITUNES_RECEIPT_EXAMPLE: ${{ secrets.ITUNES_RECEIPT_EXAMPLE }}
       ITUNES_STORE_PASS: ${{ secrets.ITUNES_STORE_PASS }}
+      RECOMBEE_PRIVATE_TOKEN: ${{ secrets.RECOMBEE_PRIVATE_TOKEN }}
       CANVAS_PHINX_CONFIG_DIR: vendor/canvas/core/storage
     services:
       mysql:
@@ -169,6 +170,26 @@ jobs:
       - name: Phinx Migrate Wallet
         run: vendor/bin/phinx migrate -c phinx-wallets.php -e development
       
-      - name: Run test suites
+      - name: Run test Payments
         if: success()
-        run: vendor/bin/codecept run
+        run: vendor/bin/codecept run tests/integration/Payments/
+
+      - name: Run test Social
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Social/
+
+      - name: Run test Wallets
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Wallets/
+
+      - name: Run test Workflows
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Workflows/
+
+      - name: Run test Recommendations
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Recommendations/
+
+      - name: Run test unit
+        if: success()
+        run: vendor/bin/codecept run tests/unit

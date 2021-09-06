@@ -1,11 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Kanvas\Packages\Test\Support\Models;
 
+use Canvas\Models\Users as ModelsUsers;
 use Kanvas\Packages\Social\Contracts\Interactions\FollowableInterface;
 use Kanvas\Packages\Social\Contracts\Interactions\FollowersTrait;
-use Baka\Contracts\Auth\UserInterface;
-use Canvas\Models\Users as ModelsUsers;
 
 class Users extends ModelsUsers implements FollowableInterface
 {
