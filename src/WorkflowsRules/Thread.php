@@ -30,6 +30,7 @@ class Thread
         $this->logs->start_at = date('Y-m-d H:i:s');
         $this->logs->save();
         $this->mountInView();
+
         return $this;
     }
 
@@ -72,6 +73,7 @@ class Thread
                 'workflows_logs_id' => $this->logs->id
             ]
         ]);
+
         return json_decode($log->result, true);
     }
 

@@ -19,14 +19,18 @@ class AttributesDataTypes extends BaseModel
             'id',
             Attributes::class,
             'attributes_data_types_id',
-            ['alias' => 'attributes']
+            [
+                'alias' => 'attributes'
+            ]
         );
 
         $this->hasMany(
             'id',
             AttributesOperators::class,
             'attributes_data_types_id',
-            ['alias' => 'attributes']
+            [
+                'alias' => 'attributes'
+            ]
         );
     }
 }

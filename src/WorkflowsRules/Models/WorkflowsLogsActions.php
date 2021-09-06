@@ -24,15 +24,18 @@ class WorkflowsLogsActions extends BaseModel
             'workflows_logs_id',
             WorkflowsLogs::class,
             'id',
-            ['alias' => 'workflows_logs']
+            [
+                'alias' => 'workflows_logs'
+            ]
         );
 
         $this->belongsTo(
             'actions_id',
             RulesWorkflowActions::class,
             'id',
-            ['alias' => 'actions']
+            [
+                'alias' => 'actions'
+            ]
         );
     }
-
 }

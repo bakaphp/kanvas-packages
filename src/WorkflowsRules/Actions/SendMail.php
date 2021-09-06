@@ -4,12 +4,11 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Baka\Mail\Manager as BakaMail;
 use Baka\Mail\Message;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Phalcon\Di;
-use Throwable ;
+use Throwable;
 
-class SendMail implements ActionInterfaces
+class SendMail extends Action
 {
     protected ?string $message = null;
     protected ?array $data = [];
@@ -29,13 +28,16 @@ class SendMail implements ActionInterfaces
         $di = Di::getDefault();
         try {
             $this->data = $entity->toArray();
-            $template = get_class($di->get('templates'))::generate($this->params['template_name'], ['entity' => $entity]);
+            $templateClass = get_class($di->get('templates'));
+            $template = $templateClass::generate($this->params['template_name'], ['entity' => $entity]);
+
             $mail = $this->mailService($entity);
             $mail->to($params['toEmail'])
                 ->from($params['fromEmail'])
                 ->subject($params['subject'])
                 ->content($template)
                 ->sendNow();
+
             $this->setStatus(Action::SUCCESSFUL);
             $this->setResults(['mail' => $template]);
         } catch (Throwable  $e) {

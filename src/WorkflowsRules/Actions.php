@@ -12,7 +12,6 @@ use Kanvas\Packages\WorkflowsRules\Models\Rules;
 
 class Actions
 {
-
     /**
      * getAction.
      *

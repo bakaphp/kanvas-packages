@@ -25,7 +25,9 @@ class WorkflowsLogs extends BaseModel
             'rules_id',
             Rules::class,
             'id',
-            ['alias' => 'rules']
+            [
+                'alias' => 'rules'
+            ]
         );
     }
 }

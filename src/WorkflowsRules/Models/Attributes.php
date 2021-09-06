@@ -21,14 +21,18 @@ class Attributes extends BaseModel
             'id',
             RulesConditions::class,
             'attributes_id',
-            ['alias' => 'rulesConditions']
+            [
+                'alias' => 'rulesConditions'
+            ]
         );
 
         $this->belongsTo(
             'attributes_data_types_id',
             AttributesDataTypes::class,
             'id',
-            ['alias' => 'dataTypes']
+            [
+                'alias' => 'dataTypes'
+            ]
         );
     }
 }

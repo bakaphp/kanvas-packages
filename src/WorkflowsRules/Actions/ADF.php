@@ -22,14 +22,30 @@ class ADF extends Action
     {
         $response = null;
         $di = Di::getDefault();
+
         try {
-            $transformer = Hengen::getTransformer('ADF', $entity, $this->params, ...$args);
-            $communicator = Hengen::getCommunication($transformer, $entity->companies);
+            $transformer = Hengen::getTransformer(
+                'ADF',
+                $entity,
+                $this->params,
+                ...$args
+            );
+
+            $communicator = Hengen::getCommunication(
+                $transformer,
+                $entity->companies
+            );
+
             $this->data = $transformer->getData();
             $this->status = 1;
             $this->message = $transformer->toFormat();
             $communicator->send();
-            $this->setResults(['html' => $transformer->toFormat(), 'data' => $transformer->getData()]);
+
+            $this->setResults([
+                'html' => $transformer->toFormat(),
+                'data' => $transformer->getData()
+            ]);
+
             $this->setStatus(Action::SUCCESSFUL);
         } catch (Throwable $e) {
             $this->setError($e->getMessage());

@@ -54,9 +54,22 @@ class Rules
 
             foreach ($actions as $action) {
                 $class = $action->getActionsClass();
-                $actionObject = Actions::getAction($class, $this->rule, $thread);
-                $actionObject->handle($entity, ...$args);
-                $thread->addAction($actionObject, $action);
+
+                $actionObject = Actions::getAction(
+                    $class,
+                    $this->rule,
+                    $thread
+                );
+
+                $actionObject->handle(
+                    $entity,
+                    ...$args
+                );
+
+                $thread->addAction(
+                    $actionObject,
+                    $action
+                );
             }
         }
         return $result;

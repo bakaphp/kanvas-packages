@@ -13,15 +13,12 @@ class Action implements ActionInterfaces
     protected ?array $results = null;
     protected ?string $error = null;
     protected int $status;
-
     protected Rules $rules;
     protected $logs;
-
     protected array $params;
 
-    const SUCCESSFUL = 1;
-
-    const FAIL = 0;
+    public const SUCCESSFUL = 1;
+    public const FAIL = 0;
 
     /**
      * __construct.

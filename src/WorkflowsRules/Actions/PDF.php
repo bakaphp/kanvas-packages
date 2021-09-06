@@ -24,6 +24,7 @@ class PDF extends Action
         $response = null;
         $di = Di::getDefault();
         $appMode = $di->get('config')->production;
+
         try {
             $pdf = new PDFLibrary([
                 'encoding' => 'UTF-8',
@@ -40,10 +41,15 @@ class PDF extends Action
             $entity = $args[0];
             // Set config for pdf settings (example deleted floating)
             $templateServiceClass = get_class($di->get('templates'));
-            $template = $templateServiceClass::generate($this->params['template_pdf'], ['entity' => $entity]); // Generate html from emails_templates table
+            $template = $templateServiceClass::generate(
+                $this->params['template_pdf'],
+                ['entity' => $entity]
+            ); // Generate html from emails_templates table
+
             $pdf->addPage($template);
             $rand = uniqid();
             $path = $di->get('config')->filesystem->local->path . "/{$rand}.pdf";
+
             if (!$pdf->saveAs($path)) {
                 $error = $pdf->getError();
                 if (!$appMode) {
@@ -52,6 +58,7 @@ class PDF extends Action
                 $this->status = FAIL;
                 $this->message = $error;
             }
+
             $filesystem = Helper::upload(Helper::pathToFile($path));
 
             //meanwhile, i going to check if entity is a messages for attach file to this filesystem

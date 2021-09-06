@@ -28,11 +28,20 @@ class SendToZoho extends Action
             $zohoClient = new ZohoClient();
 
             ///get from db
-            $zohoClient->setAuthRefreshToken($entity->getCompanies()->get('ZOHO_AUTH_REFRESH_TOKEN'));
-            $zohoClient->setZohoClientId($entity->getCompanies()->get('ZOHO_CLIENT_ID'));
-            $zohoClient->setZohoClientSecret($entity->getCompanies()->get('ZOHO_CLIENT_SECRET'));
+            $zohoClient->setAuthRefreshToken(
+                $entity->getCompanies()->get('ZOHO_AUTH_REFRESH_TOKEN')
+            );
+            $zohoClient->setZohoClientId(
+                $entity->getCompanies()->get('ZOHO_CLIENT_ID')
+            );
+            $zohoClient->setZohoClientSecret(
+                $entity->getCompanies()->get('ZOHO_CLIENT_SECRET')
+            );
 
-            $refresh = $zohoClient->manageAccessTokenRedis($di->get('redis'), 'zoho_client' . $companyId);
+            $refresh = $zohoClient->manageAccessTokenRedis(
+                $di->get('redis'),
+                'zoho_client' . $companyId
+            );
             $zohoClient->setModule('Leads');
 
             $request = [
@@ -42,6 +51,7 @@ class SendToZoho extends Action
                 'Phone' => $entity->phone,
                 'Email' => $entity->email,
             ];
+
             $customFields = $entity->getAll();
             $request = array_merge($customFields, $request);
 
@@ -68,6 +78,7 @@ class SendToZoho extends Action
                 'request' => $request,
                 'response' => $response
             ]);
+
             $this->setStatus(Action::SUCCESSFUL);
             $di->get('log')->info('Process Leads For company ' . $companyId, [$response]);
         } catch (Throwable $e) {
