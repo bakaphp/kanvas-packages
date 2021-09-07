@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules;
 
+use function Baka\isJson;
 use Kanvas\Packages\WorkflowsRules\Actions\Action;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesActions;
@@ -74,7 +75,7 @@ class Thread
             ]
         ]);
 
-        return json_decode($log->result, true);
+        return isJson($log->result) ? json_decode($log->result, true) : [];
     }
 
 
