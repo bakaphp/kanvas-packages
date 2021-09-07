@@ -7,6 +7,7 @@ use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterface
 
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogsActions;
+use Kanvas\Packages\WorkflowsRules\Thread;
 
 class Action implements ActionInterfaces
 {
@@ -14,7 +15,7 @@ class Action implements ActionInterfaces
     protected ?string $error = null;
     protected int $status;
     protected Rules $rules;
-    protected $logs;
+    protected Thread $logs;
     protected array $params;
 
     public const SUCCESSFUL = 1;
@@ -28,7 +29,7 @@ class Action implements ActionInterfaces
      *
      * @return void
      */
-    public function __construct(Rules $rules, $logs)
+    public function __construct(Rules $rules, Thread $logs)
     {
         $this->rules = $rules;
         $this->logs = $logs;
