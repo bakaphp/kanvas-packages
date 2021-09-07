@@ -6,7 +6,7 @@ namespace Kanvas\Packages\WorkflowsRules\Jobs;
 use Baka\Jobs\Job;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
-use Kanvas\Packages\WorkflowsRules\Services\Rules as RulesServices;
+use Kanvas\Packages\WorkflowsRules\Rules as RulesServices;
 use Phalcon\Di;
 
 class RulesJob extends Job

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanvas\Packages\WorkflowsRules\Services;
+namespace Kanvas\Packages\WorkflowsRules;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
@@ -49,14 +49,14 @@ class Rules
         );
         if ($result) {
             $actions = $this->rule->getRulesActions();
-            $workflowLog = new Logs();
-            $workflowLog->start($this->rule);
+            $thread = new Thread();
+            $thread->start($this->rule);
 
             foreach ($actions as $action) {
                 $class = $action->getActionsClass();
-                $actionObject = Actions::getAction($class, $this->rule, $workflowLog);
+                $actionObject = Actions::getAction($class, $this->rule, $thread);
                 $actionObject->handle($entity, ...$args);
-                $workflowLog->addAction($actionObject, $action);
+                $thread->addAction($actionObject, $action);
             }
         }
         return $result;

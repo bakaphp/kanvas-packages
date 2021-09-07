@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\WorkflowsRules\Services;
+namespace Kanvas\Packages\WorkflowsRules;
 
 use Kanvas\Packages\WorkflowsRules\Actions\Action;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
@@ -11,7 +11,7 @@ use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogsActions;
 use Phalcon\Di;
 
-class Logs
+class Thread
 {
     protected Rules $rule;
     protected WorkflowsLogs $logs;
