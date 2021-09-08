@@ -87,7 +87,7 @@ class Thread
     public function mountInView() : void
     {
         $view = Di::getDefault()->get('view');
-        $view->setVar('logs', $this);
+        $view->setVar('threads', $this);
         Di::getDefault()->set('view', $view);
     }
 }
