@@ -19,11 +19,12 @@ class PDF extends Action
      *
      * @return array
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array
+    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {
         $response = null;
         $di = Di::getDefault();
         $appMode = $di->get('config')->production;
+
         try {
             $pdf = new PDFLibrary([
                 'encoding' => 'UTF-8',
@@ -40,10 +41,15 @@ class PDF extends Action
             $entity = $args[0];
             // Set config for pdf settings (example deleted floating)
             $templateServiceClass = get_class($di->get('templates'));
-            $template = $templateServiceClass::generate($params['template_name'], ['entity' => $entity]); // Generate html from emails_templates table
+            $template = $templateServiceClass::generate(
+                $this->params['template_pdf'],
+                ['entity' => $entity]
+            ); // Generate html from emails_templates table
+
             $pdf->addPage($template);
             $rand = uniqid();
             $path = $di->get('config')->filesystem->local->path . "/{$rand}.pdf";
+
             if (!$pdf->saveAs($path)) {
                 $error = $pdf->getError();
                 if (!$appMode) {
@@ -52,11 +58,8 @@ class PDF extends Action
                 $this->status = FAIL;
                 $this->message = $error;
             }
-            $filesystem = Helper::upload(Helper::pathToFile($path));
 
-            $this->message = $template;
-            $this->data = array_merge($entity->toArray(), $params);
-            $this->status = Action::SUCCESSFUL;
+            $filesystem = Helper::upload(Helper::pathToFile($path));
 
             //meanwhile, i going to check if entity is a messages for attach file to this filesystem
             if (is_subclass_of($entity, Messages::class)) {
@@ -81,20 +84,12 @@ class PDF extends Action
                 $entity->saveOrFail();
                 $entity->afterRules();
             }
-        } catch (Throwable $e) {
-            $this->message = 'Error processing PDF - ' . $e->getMessage();
-            if (!$appMode) {
-                $di->get('log')->error('Error processing PDF - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            }
-            $this->status = Action::FAIL;
-            $response = $e->getTraceAsString();
-        }
 
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data,
-            'body' => $response
-        ];
+            $this->setStatus(Action::SUCCESSFUL);
+            $this->setResults($filesystem->toArray());
+        } catch (Throwable $e) {
+            $this->setStatus(Action::FAIL);
+            $this->setError('Error processing PDF - ' . $e->getMessage());
+        }
     }
 }

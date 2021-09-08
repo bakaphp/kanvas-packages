@@ -25,21 +25,27 @@ class Rules extends BaseModel
             'id',
             RulesConditions::class,
             'rules_id',
-            ['alias' => 'rulesConditions']
+            [
+                'alias' => 'rulesConditions'
+            ]
         );
 
         $this->hasMany(
             'id',
             RulesActions::class,
             'rules_id',
-            ['alias' => 'rulesActions']
+            [
+                'alias' => 'rulesActions'
+            ]
         );
 
         $this->belongsTo(
             'rules_types_id',
             RulesTypes::class,
             'id',
-            ['alias' => 'rulesTypes']
+            [
+                'alias' => 'rulesTypes'
+            ]
         );
     }
 }

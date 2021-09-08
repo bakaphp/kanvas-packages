@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Models;
 
-use Baka\Contracts\Database\HashTableTrait;
-
-class RulesWorkflowActions extends BaseModel
+class WorkflowsLogsActions extends BaseModel
 {
-    use HashTableTrait;
-    public int $system_modules_id;
+    public int $workflows_logs_id;
     public int $actions_id;
+    public string $action_name;
+    public int $status;
+    public ?string $result = null;
+    public ?string $error = null;
 
     /**
      * Initialize method for model.
@@ -17,20 +18,20 @@ class RulesWorkflowActions extends BaseModel
     public function initialize()
     {
         parent::initialize();
-        $this->setSource('rules_workflow_actions');
+        $this->setSource('workflows_logs_actions');
 
-        $this->hasMany(
+        $this->belongsTo(
+            'workflows_logs_id',
+            WorkflowsLogs::class,
             'id',
-            RulesActions::class,
-            'rules_workflow_actions_id',
             [
-                'alias' => 'rulesActions'
+                'alias' => 'workflows_logs'
             ]
         );
 
         $this->belongsTo(
             'actions_id',
-            Actions::class,
+            RulesWorkflowActions::class,
             'id',
             [
                 'alias' => 'actions'

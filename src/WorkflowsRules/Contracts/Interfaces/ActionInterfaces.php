@@ -4,11 +4,17 @@ namespace Kanvas\Packages\WorkflowsRules\Contracts\Interfaces;
 
 interface ActionInterfaces
 {
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array;
+    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void;
 
-    public function getMessage() : ?string;
-
-    public function getData() : ?array;
+    public function setStatus(int $status) : void;
 
     public function getStatus() : int;
+
+    public function setResults(array $result) : void;
+
+    public function getResults() : ?array;
+
+    public function setError(string $error) : void;
+
+    public function getError() : ?string;
 }

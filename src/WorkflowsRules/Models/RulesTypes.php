@@ -19,7 +19,9 @@ class RulesTypes extends BaseModel
             'id',
             Rules::class,
             'rules_types_id',
-            ['alias' => 'rules']
+            [
+                'alias' => 'rules'
+            ]
         );
     }
 }

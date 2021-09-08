@@ -23,21 +23,27 @@ class RulesConditions extends BaseModel
             'rules_id',
             Rules::class,
             'id',
-            ['alias' => 'rules']
+            [
+                'alias' => 'rules'
+            ]
         );
 
         $this->belongsTo(
             'attributes_id',
             Attributes::class,
             'id',
-            ['alias' => 'attributes']
+            [
+                'alias' => 'attributes'
+            ]
         );
 
         $this->belongsTo(
             'attributes_operators_id',
             AttributesOperators::class,
             'id',
-            ['alias' => 'attributesOperators']
+            [
+                'alias' => 'attributesOperators'
+            ]
         );
     }
 }

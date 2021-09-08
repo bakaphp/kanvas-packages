@@ -27,6 +27,10 @@ class Actions extends AbstractSeed
                 [
                     'name' => 'ADF',
                     'model_name' => 'Kanvas\Packages\WorkflowsRules\Actions\ADF'
+                ],
+                [
+                    'name' => 'PDF',
+                    'model_name' => 'Kanvas\Packages\WorkflowsRules\Actions\PDF'
                 ]
             ])
             ->saveData();

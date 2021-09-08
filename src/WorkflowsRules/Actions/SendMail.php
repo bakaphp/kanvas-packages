@@ -4,12 +4,11 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Baka\Mail\Manager as BakaMail;
 use Baka\Mail\Message;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Phalcon\Di;
-use Throwable ;
+use Throwable;
 
-class SendMail implements ActionInterfaces
+class SendMail extends Action
 {
     protected ?string $message = null;
     protected ?array $data = [];
@@ -23,32 +22,28 @@ class SendMail implements ActionInterfaces
      *
      * @return array
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array
+    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {
         $response = null;
         $di = Di::getDefault();
         try {
             $this->data = $entity->toArray();
-            $template = get_class($di->get('templates'))::generate($params['template_name'], ['entity' => $entity]);
+            $templateClass = get_class($di->get('templates'));
+            $template = $templateClass::generate($this->params['template_name'], ['entity' => $entity]);
+
             $mail = $this->mailService($entity);
-            $this->message = $template;
             $mail->to($params['toEmail'])
                 ->from($params['fromEmail'])
                 ->subject($params['subject'])
                 ->content($template)
                 ->sendNow();
+
+            $this->setStatus(Action::SUCCESSFUL);
+            $this->setResults(['mail' => $template]);
         } catch (Throwable  $e) {
-            $this->message = 'Error processing mail - ' . $e->getMessage();
-            $di->get('log')->error('Error processing mail - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            $this->status = 0;
-            $response = $e->getTraceAsString();
+            $this->setStatus(Action::FAIL);
+            $this->setError('Error processing Email - ' . $e->getMessage());
         }
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data,
-            'body' => $response
-        ];
     }
 
     /**

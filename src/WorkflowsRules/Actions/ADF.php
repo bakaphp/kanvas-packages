@@ -18,29 +18,38 @@ class ADF extends Action
      *
      * @return array
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = [], ...$args) : array
+    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {
         $response = null;
         $di = Di::getDefault();
+
         try {
-            $transformer = Hengen::getTransformer('ADF', $entity, $params, ...$args);
-            $communicator = Hengen::getCommunication($transformer, $entity->companies);
+            $transformer = Hengen::getTransformer(
+                'ADF',
+                $entity,
+                $this->params,
+                ...$args
+            );
+
+            $communicator = Hengen::getCommunication(
+                $transformer,
+                $entity->companies
+            );
+
             $this->data = $transformer->getData();
             $this->status = 1;
             $this->message = $transformer->toFormat();
             $communicator->send();
-        } catch (Throwable $e) {
-            $this->message = 'Error processing lead - ' . $e->getMessage();
-            $di->get('log')->error('Error processing lead - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            $this->status = 0;
-            $response = $e->getTraceAsString();
-        }
 
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data,
-            'body' => $response
-        ];
+            $this->setResults([
+                'html' => $transformer->toFormat(),
+                'data' => $transformer->getData()
+            ]);
+
+            $this->setStatus(Action::SUCCESSFUL);
+        } catch (Throwable $e) {
+            $this->setError($e->getMessage());
+            $this->setStatus(Action::FAIL);
+        }
     }
 }
