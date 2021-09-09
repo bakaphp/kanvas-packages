@@ -13,5 +13,6 @@ class Topics extends RecombeeDatabase
     public function __construct()
     {
         $this->setSource('kanvas-prod');
+        $this->setItemsType('topic');
     }
 }
