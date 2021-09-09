@@ -3,12 +3,17 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Recommendations\Drivers\Recombee;
 
+use Baka\Support\Str;
 use Kanvas\Packages\Recommendations\Contracts\Database as ContractsDatabase;
 use Kanvas\Packages\Recommendations\Contracts\Engine;
+use Recombee\RecommApi\Client;
+use Recombee\RecommApi\Exceptions\ResponseException;
+use Recombee\RecommApi\Requests as Reqs;
 
 class Database implements ContractsDatabase
 {
     protected string $source;
+    protected ?string $itemsType = null;
 
     /**
      * Create a database.
@@ -21,7 +26,15 @@ class Database implements ContractsDatabase
     public function create(Engine $engine, callable $fn) : bool
     {
         //same function
-        return $this->execute($engine, $fn);
+        try {
+            $client = $this->execute($engine, $fn);
+            $client->send(new Reqs\AddItemProperty('type', 'string'));
+        } catch (ResponseException $e) {
+            if (Str::contains('already exists', $e->getMessage())) {
+                return true;
+            }
+        }
+        return true;
     }
 
     /**
@@ -34,7 +47,16 @@ class Database implements ContractsDatabase
     public function delete(Engine $engine, callable $fn) : bool
     {
         //same function
-        return $this->execute($engine, $fn);
+        try {
+            $client = $this->execute($engine, $fn);
+            $client->send(new Reqs\DeleteItemProperty('type', 'string'));
+        } catch (ResponseException $e) {
+            if (Str::contains('does not exist', $e->getMessage())) {
+                return true;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -45,11 +67,32 @@ class Database implements ContractsDatabase
      *
      * @return bool
      */
-    protected function execute(Engine $engine, callable $fn) : bool
+    protected function execute(Engine $engine, callable $fn) : Client
     {
-        $fn($engine->connect());
+        return $fn($engine->connect());
+    }
 
-        return true;
+    /**
+     * Set the items type.
+     *
+     * @param string $itemsType
+     *
+     * @return void
+     */
+    public function setItemsType(string $itemsType) : void
+    {
+        $this->itemsType = $itemsType;
+    }
+
+    /**
+     * Get the items type so we can specify diff items in this db.
+     * https://stackoverflow.com/questions/53195137/how-do-i-structure-a-recombee-catalog-with-multiple-item-types.
+     *
+     * @return string
+     */
+    public function getItemsType() : string
+    {
+        return $this->itemsType === null ? $this->getSource() : $this->itemsType;
     }
 
     /**

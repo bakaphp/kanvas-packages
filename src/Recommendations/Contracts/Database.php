@@ -9,4 +9,5 @@ interface Database
     public function delete(Engine $engine, callable $fn) : bool;
     public function getSource() : string;
     public function getPassword() : string;
+    public function getItemsType() : string;
 }

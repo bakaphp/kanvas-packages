@@ -5,6 +5,7 @@ namespace Kanvas\Packages\Tests\Integration\ZRecommendations;
 
 use IntegrationTester;
 use Kanvas\Packages\Recommendations\Drivers\Recombee\Engine;
+use Kanvas\Packages\Test\Support\Recommendations\Database\Books;
 use Kanvas\Packages\Test\Support\Recommendations\Database\Topics;
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests as Reqs;
@@ -29,5 +30,22 @@ class ZDatabaseDeleteCest
         );
 
         $I->assertTrue($delete);
+    }
+
+    public function deleteFromAnotherType(IntegrationTester $I) : void
+    {
+        $books = new Books();
+        $engine = Engine::getInstance($books);
+
+        $createTable = $books->delete(
+            $engine,
+            function (Client $client) : Client {
+                $client->send(new Reqs\DeleteItemProperty('books_names', 'string'));
+
+                return $client;
+            }
+        );
+
+        $I->assertTrue($createTable);
     }
 }
