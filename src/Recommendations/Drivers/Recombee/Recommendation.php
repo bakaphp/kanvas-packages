@@ -47,6 +47,10 @@ class Recommendation implements ContractRecommendations
             ];
         }
 
+        if (!isset($options['filter'])) {
+            $options['filter'] = "'type' == \"{$this->engine->database()->getItemsType()}\"";
+        }
+
         return $this->engine->connect()->send(
             new Reqs\RecommendItemsToUser(
                 $user->getId(),
@@ -74,6 +78,10 @@ class Recommendation implements ContractRecommendations
         array $options = []
     ) : ?array {
         $key = Slug::generate($model->getSource());
+
+        if (!isset($options['filter'])) {
+            $options['filter'] = "'type' == \"{$this->engine->database()->getItemsType()}\"";
+        }
 
         return $this->engine->connect()->send(
             new Reqs\RecommendItemsToItem(

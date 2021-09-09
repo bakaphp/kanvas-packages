@@ -42,6 +42,7 @@ class Items implements ContractsItems
             throw new RuntimeException('Expected options results to be a array');
         }
         $options['created_at'] = strtotime($model->created_at);
+        $options['type'] = $this->engine->database()->getItemsType();
 
         $key = Slug::generate($model->getSource());
 

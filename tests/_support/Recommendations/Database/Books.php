@@ -5,7 +5,7 @@ namespace Kanvas\Packages\Test\Support\Recommendations\Database;
 
 use Kanvas\Packages\Recommendations\Drivers\Recombee\Database as RecombeeDatabase;
 
-class Topics extends RecombeeDatabase
+class Books extends RecombeeDatabase
 {
     /**
      * Set database source.
@@ -13,6 +13,6 @@ class Topics extends RecombeeDatabase
     public function __construct()
     {
         $this->setSource('kanvas-prod');
-        $this->setItemsType('topic');
+        $this->setItemsType('books');
     }
 }
