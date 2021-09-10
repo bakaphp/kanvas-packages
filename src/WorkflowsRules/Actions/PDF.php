@@ -38,12 +38,15 @@ class PDF extends Action
                 'page-width' => 200,
                 'page-height' => 265
             ]);
-            $entity = $args[0];
+
+            $data = $this->formatArgs(...$args);
+            $data['entity'] = $args[0];
+            $data['leads'] = $entity;
             // Set config for pdf settings (example deleted floating)
             $templateServiceClass = get_class($di->get('templates'));
             $template = $templateServiceClass::generate(
                 $this->params['template_pdf'],
-                ['entity' => $entity]
+                $data
             ); // Generate html from emails_templates table
 
             $pdf->addPage($template);

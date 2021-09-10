@@ -2,9 +2,10 @@
 
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
+use Canvas\Models\SystemModules;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogsActions;
 use Kanvas\Packages\WorkflowsRules\Thread;
@@ -135,5 +136,23 @@ class Action implements ActionInterfaces
     public function getError() : ?string
     {
         return $this->error;
+    }
+
+
+    /**
+     * formatArgs.
+     *
+     * @param  mixed $args
+     *
+     * @return array
+     */
+    public function formatArgs(...$args) : array
+    {
+        $data = [];
+        foreach ($args as $arg) {
+            $systemModules = SystemModules::getByModelName(get_class($arg));
+            $data[$systemModule->slug] = $arg;
+        }
+        return $data;
     }
 }
