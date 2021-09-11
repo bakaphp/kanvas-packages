@@ -27,7 +27,7 @@ class RulesCest
         $I->assertGreaterOrEquals(0, $rules->count());
     }
 
-    public function setArRuleInJobProcess(IntegrationTester $I) : void
+    public function setARuleInJobProcess(IntegrationTester $I) : void
     {
         $rule = Rules::findFirstOrFail();
 
