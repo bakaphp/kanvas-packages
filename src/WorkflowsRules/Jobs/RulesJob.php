@@ -7,13 +7,12 @@ use Baka\Jobs\Job;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Rules as RulesServices;
-use Phalcon\Di;
 
 class RulesJob extends Job
 {
     public Rules $rule;
     public string $event;
-    public object $entity;
+    public WorkflowsEntityInterfaces $entity;
     public array $args;
 
     /**
@@ -26,10 +25,13 @@ class RulesJob extends Job
      */
     public function __construct(Rules $rules, string $event, WorkflowsEntityInterfaces $entity, ...$args)
     {
-        $this->rule = $rules;
+        //set queue
         $this->onQueue('workflows');
+
+        $this->rule = $rules;
         $this->entity = $entity;
         $this->args = $args;
+        $this->event = $event;
     }
 
     /**
@@ -39,8 +41,12 @@ class RulesJob extends Job
      */
     public function handle()
     {
-        Di::getDefault()->set('userData', $this->entity->getUsers());
-        $rule = RulesServices::set($this->rule);
-        $rule->validate($this->entity, ...$this->args);
+        $rule = new RulesServices($this->rule);
+
+        //execute the rule
+        $rule->execute(
+            $this->entity,
+            ...$this->args
+        );
     }
 }

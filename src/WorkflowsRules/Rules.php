@@ -4,7 +4,6 @@ namespace Kanvas\Packages\WorkflowsRules;
 
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
-use Phalcon\Di;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class Rules
@@ -13,15 +12,14 @@ class Rules
     protected string $condition;
 
     /**
-     * set.
+     * Construct.
      *
-     * @param RulesModel $rules
-     *
-     * @return Rules
+     * @param RulesModel $rule
      */
-    public static function set(RulesModel $rules) : Rules
+    public function __construct(RulesModel $rule)
     {
-        return (new static())->assignRule($rules);
+        $this->rule = $rule;
+        $this->assignPattern($rule->pattern);
     }
 
     /**
@@ -30,27 +28,32 @@ class Rules
      * @param WorkflowsEntityInterfaces $entity
      * @param mixed ...$args
      *
-     * @return bool
+     * @return Thread|null
      */
-    public function validate(WorkflowsEntityInterfaces $entity, ...$args) : bool
+    public function execute(WorkflowsEntityInterfaces $entity, ...$args) : ?Thread
     {
-        Di::getDefault()->get('log')->info('Rule validate');
+        //current process rule expression and value
+        list('expression' => $expression, 'values' => $values) = $this->getExpressionCondition();
 
-        $expression = $this->getStringConditions();
-        $values = $this->getArrayValueConditions();
-        $values = array_merge($values, $entity->toArray());
-
-        Di::getDefault()->get('log')->info('condition ' . $this->getStringConditions());
+        $values = array_merge(
+            $values,
+            $entity->toArray()
+        );
 
         $expressionLanguage = new ExpressionLanguage();
+
+        //validate the expression and values with symfony expression language
         $result = $expressionLanguage->evaluate(
             $expression,
             $values
         );
+
+        $thread = null;
         if ($result) {
-            $actions = $this->rule->getRulesActions();
+            //start a thread to execute all rules actions
             $thread = new Thread();
             $thread->start($this->rule);
+            $actions = $this->rule->getRulesActions();
 
             foreach ($actions as $action) {
                 $class = $action->getActionsClass();
@@ -72,7 +75,8 @@ class Rules
                 );
             }
         }
-        return $result;
+
+        return $thread;
     }
 
     /**
@@ -89,70 +93,46 @@ class Rules
     }
 
     /**
-     * assignRule.
-     *
-     * @param RulesModel $rules
-     *
-     * @return Rules
-     */
-    private function assignRule(RulesModel $rules) : Rules
-    {
-        $this->rule = $rules;
-        $this->assignPattern($rules->pattern);
-        return $this;
-    }
-
-    /**
-     * setByName.
-     *
-     * @param string $name
-     *
-     * @return Rules
-     */
-    public static function setByName(string $name) : self
-    {
-        $rules = RulesModel::findFirstOrFail([
-            'conditions' => 'name = :name:',
-            'bind' => ['name' => $name]
-        ]);
-
-        return (new static())->assignRule($rules);
-    }
-
-    /**
-     * getStringConditions.
+     * Get pattern.
      *
      * @return string
      */
-    public function getStringConditions() : string
+    public function getPattern() : string
+    {
+        return $this->condition;
+    }
+
+    /**
+     * Get the expression conditional to run the rul.
+     *
+     * [expression] => created_at > created_at_Variable
+     * [value] => Array
+     *   (
+     *       [created_at_Variable] => 2020-01-01
+     *   )
+     *
+     * @return array
+     */
+    public function getExpressionCondition() : array
     {
         $conditions = $this->rule->getRulesConditions();
         $pattern = $this->condition;
+        $variableExpression = 'Variable';
+        $values = [];
 
         foreach ($conditions as $key => $conditionModel) {
-            $condition = "{$conditionModel->attribute_name}  {$conditionModel->operator}  {$conditionModel->attribute_name}Rule";
+            $condition = trim($conditionModel->attribute_name) . ' ' . trim($conditionModel->operator) . ' ' . trim($conditionModel->attribute_name) . $variableExpression;
+            $values[$conditionModel->attribute_name . $variableExpression] = $conditionModel->value;
+
             $index = ($key + 1);
             $pattern = str_replace($index, $condition, $pattern);
         }
         $pattern = str_replace('AND', 'and', $pattern);
         $pattern = str_replace('OR', 'or', $pattern);
 
-        return $pattern;
-    }
-
-    /**
-     * getArrayValueConditions.
-     *
-     * @return array
-     */
-    public function getArrayValueConditions() : array
-    {
-        $conditions = $this->rule->getRulesConditions();
-        $values = [];
-
-        foreach ($conditions as $key => $conditionModel) {
-            $values["{$conditionModel->attribute_name}Rule"] = $conditionModel->value;
-        }
-        return $values;
+        return [
+            'expression' => $pattern,
+            'values' => $values
+        ];
     }
 }

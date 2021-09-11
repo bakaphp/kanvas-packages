@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules;
 
+use function Baka\isJson;
 use Kanvas\Packages\WorkflowsRules\Actions\ADF;
 use Kanvas\Packages\WorkflowsRules\Actions\PDF;
 use Kanvas\Packages\WorkflowsRules\Actions\SendMail;
 use Kanvas\Packages\WorkflowsRules\Actions\SendToZoho;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
+
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 
 class Actions
@@ -22,7 +24,7 @@ class Actions
      */
     public static function getAction(string $actionClass, Rules $rule, Thread $thread) : ActionInterfaces
     {
-        $params = json_decode($rule->params, true);
+        $params = !empty($rule->params) && isJson($rule->params) ? json_decode($rule->params, true) : [];
         switch ($actionClass) {
             case PDF::class:
                 $action = new PDF($rule, $thread);

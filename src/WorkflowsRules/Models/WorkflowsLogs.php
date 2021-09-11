@@ -29,5 +29,14 @@ class WorkflowsLogs extends BaseModel
                 'alias' => 'rules'
             ]
         );
+
+        $this->hasMany(
+            'id',
+            WorkflowsLogsActions::class,
+            'workflows_logs_id',
+            [
+                'alias' => 'actionLogs'
+            ]
+        );
     }
 }

@@ -27,7 +27,7 @@ class Thread
     public function start(Rules $rule) : self
     {
         $this->logs = new WorkflowsLogs();
-        $this->logs->rules_id = (int)$rule->id;
+        $this->logs->rules_id = $rule->getId();
         $this->logs->start_at = date('Y-m-d H:i:s');
         $this->logs->save();
         $this->mountInView();
@@ -35,6 +35,15 @@ class Thread
         return $this;
     }
 
+    /**
+     * Get the thread logs.
+     *
+     * @return WorkflowsLogs
+     */
+    public function getLogs() : WorkflowsLogs
+    {
+        return $this->logs;
+    }
 
     /**
      * addAction.
