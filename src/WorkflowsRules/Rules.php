@@ -51,8 +51,8 @@ class Rules
         $thread = null;
         if ($result) {
             //start a thread to execute all rules actions
-            $thread = new Thread();
-            $thread->start($this->rule);
+            $thread = new Thread($this->rule);
+            $thread->start();
             $actions = $this->rule->getRulesActions();
 
             foreach ($actions as $action) {

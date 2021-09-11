@@ -18,16 +18,25 @@ class Thread
     protected WorkflowsLogs $logs;
 
     /**
-     * start.
+     * Constructor.
      *
      * @param Rules $rule
+     */
+    public function __construct(Rules $rule)
+    {
+        $this->rule = $rule;
+        $this->logs = new WorkflowsLogs();
+    }
+
+    /**
+     * start.
+     *
      *
      * @return self
      */
-    public function start(Rules $rule) : self
+    public function start() : self
     {
-        $this->logs = new WorkflowsLogs();
-        $this->logs->rules_id = $rule->getId();
+        $this->logs->rules_id = $this->rule->getId();
         $this->logs->start_at = date('Y-m-d H:i:s');
         $this->logs->save();
         $this->mountInView();
