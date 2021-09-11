@@ -12,7 +12,7 @@ interface ActionInterfaces
      *
      * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void;
+    public function handle(WorkflowsEntityInterfaces $entity) : void;
 
     public function setStatus(int $status) : void;
 

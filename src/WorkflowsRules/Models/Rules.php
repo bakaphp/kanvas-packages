@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace Kanvas\Packages\WorkflowsRules\Models;
 
 use Baka\Contracts\Database\ModelInterface;
+use function Baka\isJson;
 use Canvas\Models\Companies;
 use Canvas\Models\SystemModules;
+
 use Phalcon\Mvc\Model\ResultsetInterface;
 
 class Rules extends BaseModel
@@ -84,5 +86,15 @@ class Rules extends BaseModel
                                 AND companies_id in (:companies_id:, :global_companies:)',
             'bind' => $bind
         ]);
+    }
+
+    /**
+     * Get current rule params.
+     *
+     * @return array
+     */
+    public function getParams() : array
+    {
+        return !empty($this->params) && isJson($this->params) ? json_decode($this->params, true) : [];
     }
 }

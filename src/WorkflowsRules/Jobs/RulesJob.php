@@ -23,14 +23,13 @@ class RulesJob extends Job
      * @param WorkflowsEntityInterfaces $entity
      * @param mixed ...$args
      */
-    public function __construct(Rules $rules, string $event, WorkflowsEntityInterfaces $entity, ...$args)
+    public function __construct(Rules $rules, string $event, WorkflowsEntityInterfaces $entity)
     {
         //set queue
         $this->onQueue('workflows');
 
         $this->rule = $rules;
         $this->entity = $entity;
-        $this->args = $args;
         $this->event = $event;
     }
 
@@ -46,7 +45,6 @@ class RulesJob extends Job
         //execute the rule
         $rule->execute(
             $this->entity,
-            ...$this->args
         );
     }
 }

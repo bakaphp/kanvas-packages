@@ -4,11 +4,12 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Baka\Mail\Manager as BakaMail;
 use Baka\Mail\Message;
+use Kanvas\Packages\WorkflowsRules\Actions;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 
-class SendMail extends Action
+class SendMail extends Actions
 {
     protected ?string $message = null;
     protected ?array $data = [];
@@ -22,13 +23,15 @@ class SendMail extends Action
      *
      * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
         $response = null;
         $di = Di::getDefault();
+        $args = $entity->getRulesRelatedEntities();
+
         try {
             $params = $this->params;
-            $data = $this->formatArgs(...$args);
+            $data = $this->getModels(...$args);
             $data['entity'] = $entity;
             $templateClass = get_class($di->get('templates'));
             $template = $templateClass::generate($this->params['template_name'], $data);
@@ -40,10 +43,10 @@ class SendMail extends Action
                 ->content($template)
                 ->sendNow();
 
-            $this->setStatus(Action::SUCCESSFUL);
+            $this->setStatus(Actions::SUCCESSFUL);
             $this->setResults(['mail' => $template]);
         } catch (Throwable  $e) {
-            $this->setStatus(Action::FAIL);
+            $this->setStatus(Actions::FAIL);
             $this->setError('Error processing Email - ' . $e->getMessage());
         }
     }
@@ -101,7 +104,7 @@ class SendMail extends Action
     /**
      * getStatus.
      *
-     * @return bool
+     * @return int
      */
     public function getStatus() : int
     {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\WorkflowsRules;
 
 use function Baka\isJson;
-use Kanvas\Packages\WorkflowsRules\Actions\Action;
+use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesActions;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
@@ -57,11 +57,11 @@ class Thread
     /**
      * addAction.
      *
-     * @param Action $action
+     * @param ActionInterfaces $action
      *
      * @return self
      */
-    public function addAction(Action $action, RulesActions $actionModel) : self
+    public function addAction(ActionInterfaces $action, RulesActions $actionModel) : self
     {
         $actionLog = new WorkflowsLogsActions();
         $actionLog->saveOrFail([

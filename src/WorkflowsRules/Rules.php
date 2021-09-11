@@ -30,7 +30,7 @@ class Rules
      *
      * @return Thread|null
      */
-    public function execute(WorkflowsEntityInterfaces $entity, ...$args) : ?Thread
+    public function execute(WorkflowsEntityInterfaces $entity) : ?Thread
     {
         //current process rule expression and value
         list('expression' => $expression, 'values' => $values) = $this->getExpressionCondition();
@@ -53,26 +53,22 @@ class Rules
             //start a thread to execute all rules actions
             $thread = new Thread($this->rule);
             $thread->start();
+
             $actions = $this->rule->getRulesActions();
+
 
             foreach ($actions as $action) {
                 $class = $action->getActionsClass();
 
-                $actionObject = Actions::getAction(
-                    $class,
-                    $this->rule,
-                    $thread
-                );
+                if (class_exists($class) && is_subclass_of($class, Actions::class)) {
+                    $currentAction = new $class($this->rule, $thread);
+                    $currentAction->handle($entity);
 
-                $actionObject->handle(
-                    $entity,
-                    ...$args
-                );
-
-                $thread->addAction(
-                    $actionObject,
-                    $action
-                );
+                    $thread->addAction(
+                        $currentAction,
+                        $action
+                    );
+                }
             }
         }
 

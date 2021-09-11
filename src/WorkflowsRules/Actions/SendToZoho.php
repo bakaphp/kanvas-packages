@@ -2,12 +2,13 @@
 
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
+use Kanvas\Packages\WorkflowsRules\Actions;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 use Zoho\CRM\ZohoClient;
 
-class SendToZoho extends Action
+class SendToZoho extends Actions
 {
     /**
      * handle.
@@ -17,12 +18,14 @@ class SendToZoho extends Action
      *
      * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
         $response = null;
         try {
             $di = Di::getDefault();
             $companyId = $entity->companies_id;
+            $args = $entity->getRulesRelatedEntities();
+
             $di->get('log')->info('Start Process Leads For company ' . $companyId);
 
             $zohoClient = new ZohoClient();
@@ -79,10 +82,10 @@ class SendToZoho extends Action
                 'response' => $response
             ]);
 
-            $this->setStatus(Action::SUCCESSFUL);
+            $this->setStatus(Actions::SUCCESSFUL);
             $di->get('log')->info('Process Leads For company ' . $companyId, [$response]);
         } catch (Throwable $e) {
-            $this->setStatus(Action::FAIL);
+            $this->setStatus(Actions::FAIL);
             $this->setError('Error processing Email - ' . $e->getMessage());
         }
     }

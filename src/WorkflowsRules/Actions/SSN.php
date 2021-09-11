@@ -3,11 +3,14 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
+use Kanvas\Packages\WorkflowsRules\Actions;
+
+;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 
-class SSN extends Action
+class SSN extends Actions
 {
     public const NAME = 'SSN';
 
@@ -20,10 +23,11 @@ class SSN extends Action
      *
      * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
         $response = null;
         $di = Di::getDefault();
+        $args = $entity->getRulesRelatedEntities();
 
         try {
             foreach ($args as $feed) {
@@ -35,10 +39,10 @@ class SSN extends Action
                 }
             }
             $this->setResults($message);
-            $this->setStatus(Action::SUCCESSFUL);
+            $this->setStatus(Actions::SUCCESSFUL);
         } catch (Throwable $e) {
             $this->setError($e->getMessage());
-            $this->setStatus(Action::FAIL);
+            $this->setStatus(Actions::FAIL);
         }
     }
 }

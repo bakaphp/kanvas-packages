@@ -9,6 +9,7 @@ use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
 
 trait CanUseRules
 {
+    protected array $rulesRelatedEntities = [];
     /**
      * fireRules.
      *
@@ -30,5 +31,27 @@ trait CanUseRules
         foreach ($rules as $rule) {
             RulesJob::dispatch($rule, $event, $this);
         }
+    }
+
+    /**
+     * Set the rules related entities.
+     *
+     * @param array $rulesRelatedEntities
+     *
+     * @return void
+     */
+    public function setRulesRelatedEntities(...$rulesRelatedEntities) : void
+    {
+        $this->rulesRelatedEntities = $rulesRelatedEntities;
+    }
+
+    /**
+     * Set needed related entities to execute in each action.
+     *
+     * @return array<string, ModelInterface>
+     */
+    public function getRulesRelatedEntities() : array
+    {
+        return $this->rulesRelatedEntities;
     }
 }

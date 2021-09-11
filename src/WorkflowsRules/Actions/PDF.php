@@ -4,12 +4,13 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Canvas\Filesystem\Helper;
 use Kanvas\Packages\Social\Models\Messages;
+use Kanvas\Packages\WorkflowsRules\Actions;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use mikehaertl\wkhtmlto\Pdf as PDFLibrary;
 use Phalcon\Di;
 use Throwable;
 
-class PDF extends Action
+class PDF extends Actions
 {
     /**
      * handle.
@@ -19,11 +20,12 @@ class PDF extends Action
      *
      * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
         $response = null;
         $di = Di::getDefault();
         $appMode = $di->get('config')->production;
+        $args = $entity->getRulesRelatedEntities();
 
         try {
             $pdf = new PDFLibrary([
@@ -39,7 +41,7 @@ class PDF extends Action
                 'page-height' => 265
             ]);
 
-            $data = $this->formatArgs(...$args);
+            $data = $this->getModels(...$args);
             $data['entity'] = $args[0];
             $data['leads'] = $entity;
             // Set config for pdf settings (example deleted floating)
@@ -55,7 +57,7 @@ class PDF extends Action
 
             if (!$pdf->saveAs($path)) {
                 $error = $pdf->getError();
-                $this->setStatus(Action::FAIL);
+                $this->setStatus(Actions::FAIL);
                 $this->setError('Error processing PDF - ' . $e->getMessage());
             }
 
@@ -85,10 +87,10 @@ class PDF extends Action
                 $entity->afterRules();
             }
 
-            $this->setStatus(Action::SUCCESSFUL);
+            $this->setStatus(Actions::SUCCESSFUL);
             $this->setResults($filesystem->toArray());
         } catch (Throwable $e) {
-            $this->setStatus(Action::FAIL);
+            $this->setStatus(Actions::FAIL);
             $this->setError('Error processing PDF - ' . $e->getMessage());
         }
     }
