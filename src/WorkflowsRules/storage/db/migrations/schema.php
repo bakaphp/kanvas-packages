@@ -95,36 +95,12 @@ return array (
           'IS_GENERATED' => 'NEVER',
           'GENERATION_EXPRESSION' => NULL,
         ),
-        'entity_id' => 
-        array (
-          'TABLE_CATALOG' => 'def',
-          'TABLE_NAME' => 'workflows_logs',
-          'COLUMN_NAME' => 'entity_id',
-          'ORDINAL_POSITION' => '4',
-          'COLUMN_DEFAULT' => '\'\'',
-          'IS_NULLABLE' => 'NO',
-          'DATA_TYPE' => 'char',
-          'CHARACTER_MAXIMUM_LENGTH' => '50',
-          'CHARACTER_OCTET_LENGTH' => '150',
-          'NUMERIC_PRECISION' => NULL,
-          'NUMERIC_SCALE' => NULL,
-          'DATETIME_PRECISION' => NULL,
-          'CHARACTER_SET_NAME' => 'utf8',
-          'COLLATION_NAME' => 'utf8_general_ci',
-          'COLUMN_TYPE' => 'char(50)',
-          'COLUMN_KEY' => 'MUL',
-          'EXTRA' => '',
-          'PRIVILEGES' => 'select,insert,update,references',
-          'COLUMN_COMMENT' => '',
-          'IS_GENERATED' => 'NEVER',
-          'GENERATION_EXPRESSION' => NULL,
-        ),
         'start_at' => 
         array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'workflows_logs',
           'COLUMN_NAME' => 'start_at',
-          'ORDINAL_POSITION' => '5',
+          'ORDINAL_POSITION' => '4',
           'COLUMN_DEFAULT' => 'current_timestamp()',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
@@ -148,7 +124,7 @@ return array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'workflows_logs',
           'COLUMN_NAME' => 'end_at',
-          'ORDINAL_POSITION' => '6',
+          'ORDINAL_POSITION' => '5',
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
@@ -172,7 +148,7 @@ return array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'workflows_logs',
           'COLUMN_NAME' => 'did_succeed',
-          'ORDINAL_POSITION' => '7',
+          'ORDINAL_POSITION' => '6',
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'tinyint',
@@ -196,7 +172,7 @@ return array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'workflows_logs',
           'COLUMN_NAME' => 'created_at',
-          'ORDINAL_POSITION' => '8',
+          'ORDINAL_POSITION' => '7',
           'COLUMN_DEFAULT' => 'current_timestamp()',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
@@ -220,7 +196,7 @@ return array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'workflows_logs',
           'COLUMN_NAME' => 'updated_at',
-          'ORDINAL_POSITION' => '9',
+          'ORDINAL_POSITION' => '8',
           'COLUMN_DEFAULT' => 'NULL',
           'IS_NULLABLE' => 'YES',
           'DATA_TYPE' => 'datetime',
@@ -244,7 +220,7 @@ return array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'workflows_logs',
           'COLUMN_NAME' => 'is_deleted',
-          'ORDINAL_POSITION' => '10',
+          'ORDINAL_POSITION' => '9',
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'int',
@@ -297,24 +273,6 @@ return array (
             'Sub_part' => NULL,
             'Packed' => NULL,
             'Null' => 'YES',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
-        'entity_id' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'workflows_logs',
-            'Non_unique' => '1',
-            'Key_name' => 'entity_id',
-            'Seq_in_index' => '1',
-            'Column_name' => 'entity_id',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
             'Index_type' => 'BTREE',
             'Comment' => '',
             'Index_comment' => '',
@@ -913,7 +871,7 @@ return array (
           'CHARACTER_SET_NAME' => 'utf8',
           'COLLATION_NAME' => 'utf8_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => 'MUL',
+          'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
@@ -937,7 +895,7 @@ return array (
           'CHARACTER_SET_NAME' => 'utf8',
           'COLLATION_NAME' => 'utf8_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => 'MUL',
+          'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
@@ -968,11 +926,11 @@ return array (
           'IS_GENERATED' => 'NEVER',
           'GENERATION_EXPRESSION' => NULL,
         ),
-        'is_custom_attriube' => 
+        'is_custom_attributes' => 
         array (
           'TABLE_CATALOG' => 'def',
           'TABLE_NAME' => 'rules_conditions',
-          'COLUMN_NAME' => 'is_custom_attriube',
+          'COLUMN_NAME' => 'is_custom_attributes',
           'ORDINAL_POSITION' => '6',
           'COLUMN_DEFAULT' => '0',
           'IS_NULLABLE' => 'NO',
@@ -1103,42 +1061,6 @@ return array (
             'Index_comment' => '',
           ),
         ),
-        'attribute_name' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'rules_conditions',
-            'Non_unique' => '1',
-            'Key_name' => 'attribute_name',
-            'Seq_in_index' => '1',
-            'Column_name' => 'attribute_name',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
-        'operator' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'rules_conditions',
-            'Non_unique' => '1',
-            'Key_name' => 'operator',
-            'Seq_in_index' => '1',
-            'Column_name' => 'operator',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
         'created_at' => 
         array (
           1 => 
@@ -1157,15 +1079,15 @@ return array (
             'Index_comment' => '',
           ),
         ),
-        'is_custom_attriube' => 
+        'is_custom_attributes' => 
         array (
           1 => 
           array (
             'Table' => 'rules_conditions',
             'Non_unique' => '1',
-            'Key_name' => 'is_custom_attriube',
+            'Key_name' => 'is_custom_attributes',
             'Seq_in_index' => '1',
-            'Column_name' => 'is_custom_attriube',
+            'Column_name' => 'is_custom_attributes',
             'Collation' => 'A',
             'Sub_part' => NULL,
             'Packed' => NULL,
@@ -1395,7 +1317,7 @@ return array (
           'TABLE_NAME' => 'workflows_logs_actions',
           'COLUMN_NAME' => 'created_at',
           'ORDINAL_POSITION' => '8',
-          'COLUMN_DEFAULT' => NULL,
+          'COLUMN_DEFAULT' => 'current_timestamp()',
           'IS_NULLABLE' => 'NO',
           'DATA_TYPE' => 'datetime',
           'CHARACTER_MAXIMUM_LENGTH' => NULL,
@@ -1518,24 +1440,6 @@ return array (
             'Index_comment' => '',
           ),
         ),
-        'status' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'workflows_logs_actions',
-            'Non_unique' => '1',
-            'Key_name' => 'status',
-            'Seq_in_index' => '1',
-            'Column_name' => 'status',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
         'created_at' => 
         array (
           1 => 
@@ -1563,6 +1467,24 @@ return array (
             'Key_name' => 'is_deleted',
             'Seq_in_index' => '1',
             'Column_name' => 'is_deleted',
+            'Collation' => 'A',
+            'Sub_part' => NULL,
+            'Packed' => NULL,
+            'Null' => '',
+            'Index_type' => 'BTREE',
+            'Comment' => '',
+            'Index_comment' => '',
+          ),
+        ),
+        'status' => 
+        array (
+          1 => 
+          array (
+            'Table' => 'workflows_logs_actions',
+            'Non_unique' => '1',
+            'Key_name' => 'status',
+            'Seq_in_index' => '1',
+            'Column_name' => 'status',
             'Collation' => 'A',
             'Sub_part' => NULL,
             'Packed' => NULL,
@@ -2054,24 +1976,6 @@ return array (
             'Index_comment' => '',
           ),
         ),
-        'is_deleted' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'rules_actions',
-            'Non_unique' => '1',
-            'Key_name' => 'is_deleted',
-            'Seq_in_index' => '1',
-            'Column_name' => 'is_deleted',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
         'created_at' => 
         array (
           1 => 
@@ -2081,6 +1985,24 @@ return array (
             'Key_name' => 'created_at',
             'Seq_in_index' => '1',
             'Column_name' => 'created_at',
+            'Collation' => 'A',
+            'Sub_part' => NULL,
+            'Packed' => NULL,
+            'Null' => '',
+            'Index_type' => 'BTREE',
+            'Comment' => '',
+            'Index_comment' => '',
+          ),
+        ),
+        'is_deleted' => 
+        array (
+          1 => 
+          array (
+            'Table' => 'rules_actions',
+            'Non_unique' => '1',
+            'Key_name' => 'is_deleted',
+            'Seq_in_index' => '1',
+            'Column_name' => 'is_deleted',
             'Collation' => 'A',
             'Sub_part' => NULL,
             'Packed' => NULL,
@@ -2482,7 +2404,7 @@ return array (
           'CHARACTER_SET_NAME' => 'utf8',
           'COLLATION_NAME' => 'utf8_general_ci',
           'COLUMN_TYPE' => 'varchar(255)',
-          'COLUMN_KEY' => 'MUL',
+          'COLUMN_KEY' => '',
           'EXTRA' => '',
           'PRIVILEGES' => 'select,insert,update,references',
           'COLUMN_COMMENT' => '',
@@ -2687,24 +2609,6 @@ return array (
             'Key_name' => 'is_deleted',
             'Seq_in_index' => '1',
             'Column_name' => 'is_deleted',
-            'Collation' => 'A',
-            'Sub_part' => NULL,
-            'Packed' => NULL,
-            'Null' => '',
-            'Index_type' => 'BTREE',
-            'Comment' => '',
-            'Index_comment' => '',
-          ),
-        ),
-        'pattern' => 
-        array (
-          1 => 
-          array (
-            'Table' => 'rules',
-            'Non_unique' => '1',
-            'Key_name' => 'pattern',
-            'Seq_in_index' => '1',
-            'Column_name' => 'pattern',
             'Collation' => 'A',
             'Sub_part' => NULL,
             'Packed' => NULL,
