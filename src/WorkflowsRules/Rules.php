@@ -15,11 +15,11 @@ class Rules
     /**
      * set.
      *
-     * @param  RulesModel $rules
+     * @param RulesModel $rules
      *
-     * @return void
+     * @return Rules
      */
-    public static function set(RulesModel $rules)
+    public static function set(RulesModel $rules) : Rules
     {
         return (new static())->assignRule($rules);
     }
@@ -27,7 +27,7 @@ class Rules
     /**
      * validate.
      *
-     * @param  WorkflowsEntityInterfaces $entity
+     * @param WorkflowsEntityInterfaces $entity
      * @param mixed ...$args
      *
      * @return bool
@@ -78,9 +78,9 @@ class Rules
     /**
      * assignPattern.
      *
-     * @param  string $pattern
+     * @param string $pattern
      *
-     * @return void
+     * @return Rules
      */
     private function assignPattern(string $pattern) : Rules
     {
@@ -91,9 +91,9 @@ class Rules
     /**
      * assignRule.
      *
-     * @param  RulesModel $rules
+     * @param RulesModel $rules
      *
-     * @return void
+     * @return Rules
      */
     private function assignRule(RulesModel $rules) : Rules
     {
@@ -105,9 +105,9 @@ class Rules
     /**
      * setByName.
      *
-     * @param  string $name
+     * @param string $name
      *
-     * @return void
+     * @return Rules
      */
     public static function setByName(string $name) : self
     {

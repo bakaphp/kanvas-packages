@@ -12,11 +12,11 @@ class ADF extends Action
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param array $params
      * @param mixed ...$args
      *
-     * @return array
+     * @return void
      */
     public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {

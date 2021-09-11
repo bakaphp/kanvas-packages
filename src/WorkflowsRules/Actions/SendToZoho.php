@@ -12,10 +12,10 @@ class SendToZoho extends Action
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param array $params
      *
-     * @return array
+     * @return void
      */
     public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {

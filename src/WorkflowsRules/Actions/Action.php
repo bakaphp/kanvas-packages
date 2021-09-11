@@ -4,29 +4,27 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Canvas\Models\SystemModules;
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
-
 use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
-use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogsActions;
 use Kanvas\Packages\WorkflowsRules\Thread;
 
 class Action implements ActionInterfaces
 {
     protected ?array $results = null;
     protected ?string $error = null;
+    protected ?String $message = null;
     protected int $status;
     protected Rules $rules;
     protected Thread $logs;
     protected array $params;
-
     public const SUCCESSFUL = 1;
     public const FAIL = 0;
 
     /**
      * __construct.
      *
-     * @param  Rules $rules
-     * @param  WorkflowsLogsActions $logs
+     * @param Rules $rules
+     * @param Thread $logs
      *
      * @return void
      */
@@ -39,10 +37,10 @@ class Action implements ActionInterfaces
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param mixed ...$args
      *
-     * @return array
+     * @return void
      */
     public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {
@@ -51,7 +49,7 @@ class Action implements ActionInterfaces
     /**
      * getMessage.
      *
-     * @return string
+     * @return null|string
      */
     public function getMessage() : ?string
     {
@@ -61,7 +59,7 @@ class Action implements ActionInterfaces
     /**
      * setStatus.
      *
-     * @param  int $status
+     * @param int $status
      *
      * @return void
      */
@@ -73,7 +71,7 @@ class Action implements ActionInterfaces
     /**
      * getStatus.
      *
-     * @return bool
+     * @return int
      */
     public function getStatus() : int
     {
@@ -83,7 +81,7 @@ class Action implements ActionInterfaces
     /**
      * setParams.
      *
-     * @param  array $params
+     * @param array $params
      *
      * @return self
      */
@@ -96,7 +94,7 @@ class Action implements ActionInterfaces
     /**
      * setResults.
      *
-     * @param  mixed $result
+     * @param mixed $result
      *
      * @return void
      */
@@ -119,7 +117,7 @@ class Action implements ActionInterfaces
     /**
      * setError.
      *
-     * @param  string $error
+     * @param string $error
      *
      * @return void
      */
@@ -142,7 +140,7 @@ class Action implements ActionInterfaces
     /**
      * formatArgs.
      *
-     * @param  mixed $args
+     * @param mixed $args
      *
      * @return array
      */
@@ -151,7 +149,7 @@ class Action implements ActionInterfaces
         $data = [];
         foreach ($args as $arg) {
             $systemModules = SystemModules::getByModelName(get_class($arg));
-            $data[$systemModule->slug] = $arg;
+            $data[$systemModules->slug] = $arg;
         }
         return $data;
     }

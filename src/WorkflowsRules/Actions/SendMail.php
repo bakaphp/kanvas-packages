@@ -17,10 +17,10 @@ class SendMail extends Action
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param array $params
      *
-     * @return array
+     * @return void
      */
     public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
     {
@@ -51,9 +51,9 @@ class SendMail extends Action
     /**
      * mailService.
      *
-     * @param  WorkflowsEntityInterfaces $entity
+     * @param WorkflowsEntityInterfaces $entity
      *
-     * @return BakaMail
+     * @return Message
      */
     private function mailService(WorkflowsEntityInterfaces $entity) : Message
     {

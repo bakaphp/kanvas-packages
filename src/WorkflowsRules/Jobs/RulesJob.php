@@ -17,13 +17,12 @@ class RulesJob extends Job
     public array $args;
 
     /**
-     * __construct.
+     * Constructor the job.
      *
-     * @param  Rules $rules
-     * @param  string $event
-     * @param  object $entity
-     *
-     * @return void
+     * @param Rules $rules
+     * @param string $event
+     * @param WorkflowsEntityInterfaces $entity
+     * @param mixed ...$args
      */
     public function __construct(Rules $rules, string $event, WorkflowsEntityInterfaces $entity, ...$args)
     {

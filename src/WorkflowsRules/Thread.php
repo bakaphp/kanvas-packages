@@ -20,7 +20,7 @@ class Thread
     /**
      * start.
      *
-     * @param  Rules $rule
+     * @param Rules $rule
      *
      * @return self
      */
@@ -39,7 +39,7 @@ class Thread
     /**
      * addAction.
      *
-     * @param  Action $action
+     * @param Action $action
      *
      * @return self
      */
@@ -61,7 +61,7 @@ class Thread
     /**
      * getResults.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
@@ -75,7 +75,7 @@ class Thread
             ]
         ]);
 
-        return isJson($log->result) ? json_decode($log->result, true) : [];
+        return !empty($log->result) && isJson($log->result) ? json_decode($log->result, true) : [];
     }
 
 
