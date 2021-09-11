@@ -28,9 +28,10 @@ class SendMail extends Action
         $di = Di::getDefault();
         try {
             $params = $this->params;
-            $this->data = $entity->toArray();
+            $data = $this->formatArgs(...$args);
+            $data['entity'] = $entity;
             $templateClass = get_class($di->get('templates'));
-            $template = $templateClass::generate($this->params['template_name'], ['entity' => $entity]);
+            $template = $templateClass::generate($this->params['template_name'], $data);
 
             $mail = $this->mailService($entity);
             $mail->to($params['toEmail'])
