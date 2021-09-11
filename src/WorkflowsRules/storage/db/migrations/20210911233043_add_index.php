@@ -17,12 +17,10 @@ class AddIndex extends Phinx\Migration\AbstractMigration
         ])
             ->changeColumn('start_at', 'datetime', [
                 'null' => false,
-                'default' => 'current_timestamp()',
                 'after' => 'rules_id',
             ])
             ->changeColumn('end_at', 'datetime', [
                 'null' => true,
-                'default' => null,
                 'after' => 'start_at',
             ])
             ->changeColumn('did_succeed', 'boolean', [
@@ -33,12 +31,10 @@ class AddIndex extends Phinx\Migration\AbstractMigration
             ])
             ->changeColumn('created_at', 'datetime', [
                 'null' => false,
-                'default' => 'current_timestamp()',
                 'after' => 'did_succeed',
             ])
             ->changeColumn('updated_at', 'datetime', [
                 'null' => true,
-                'default' => null,
                 'after' => 'created_at',
             ])
             ->changeColumn('is_deleted', 'integer', [
@@ -47,8 +43,6 @@ class AddIndex extends Phinx\Migration\AbstractMigration
                 'limit' => MysqlAdapter::INT_REGULAR,
                 'after' => 'updated_at',
             ])
-            ->removeColumn('entity_id')
-            ->removeIndexByName('entity_id')
             ->save();
 
         $this->table('rules_conditions', [
@@ -71,9 +65,6 @@ class AddIndex extends Phinx\Migration\AbstractMigration
                 'name' => 'is_custom_attributes',
                 'unique' => false,
             ])
-            ->removeIndexByName('attribute_name')
-            ->removeIndexByName('operator')
-            ->removeIndexByName('is_custom_attriube')
             ->save();
 
         $this->table('workflows_logs_actions', [
@@ -87,21 +78,8 @@ class AddIndex extends Phinx\Migration\AbstractMigration
         ])
             ->changeColumn('created_at', 'datetime', [
                 'null' => false,
-                'default' => 'current_timestamp()',
                 'after' => 'error',
             ])
-            ->save();
-
-        $this->table('rules', [
-            'id' => false,
-            'primary_key' => ['id'],
-            'engine' => 'InnoDB',
-            'encoding' => 'utf8',
-            'collation' => 'utf8_general_ci',
-            'comment' => '',
-            'row_format' => 'DYNAMIC',
-        ])
-            ->removeIndexByName('pattern')
             ->save();
     }
 }

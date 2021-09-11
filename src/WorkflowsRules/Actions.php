@@ -13,7 +13,7 @@ abstract class Actions implements ActionInterfaces
     protected ?array $results = null;
     protected ?string $error = null;
     protected ?String $message = null;
-    protected int $status;
+    protected int $status = 0;
     protected Rules $rules;
     protected Thread $logs;
     protected array $params;
