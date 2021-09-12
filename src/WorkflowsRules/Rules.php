@@ -2,7 +2,7 @@
 
 namespace Kanvas\Packages\WorkflowsRules;
 
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -69,6 +69,8 @@ class Rules
                     );
                 }
             }
+
+            $thread->close();
         }
 
         return $thread;

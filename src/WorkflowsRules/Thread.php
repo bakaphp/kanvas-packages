@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kanvas\Packages\WorkflowsRules;
 
 use function Baka\isJson;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\ActionInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesActions;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
@@ -40,6 +40,20 @@ class Thread
         $this->logs->start_at = date('Y-m-d H:i:s');
         $this->logs->save();
         $this->mountInView();
+
+        return $this;
+    }
+
+    /**
+     * Close a thread.
+     *
+     * @return self
+     */
+    public function close() : self
+    {
+        $this->logs->end_at = date('Y-m-d H:i:s');
+        $this->logs->did_succeed = $this->logs->countActionLogs('status = 1') > 0 ? 1 : 0;
+        $this->logs->save();
 
         return $this;
     }

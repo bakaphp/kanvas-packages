@@ -4,9 +4,7 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
 use Kanvas\Packages\WorkflowsRules\Actions;
-
-;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 
@@ -41,7 +39,7 @@ class SSN extends Actions
             $this->setResults($message);
             $this->setStatus(Actions::SUCCESSFUL);
         } catch (Throwable $e) {
-            $this->setError($e->getMessage());
+            $this->setError($e->getTraceAsString());
             $this->setStatus(Actions::FAIL);
         }
     }

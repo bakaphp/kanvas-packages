@@ -4,7 +4,7 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Hengen\Hengen;
 use Kanvas\Packages\WorkflowsRules\Actions;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 
@@ -50,7 +50,7 @@ class ADF extends Actions
 
             $this->setStatus(Actions::SUCCESSFUL);
         } catch (Throwable $e) {
-            $this->setError($e->getMessage());
+            $this->setError($e->getTraceAsString());
             $this->setStatus(Actions::FAIL);
         }
     }

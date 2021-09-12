@@ -3,7 +3,7 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Packages\WorkflowsRules\Actions;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 use Zoho\CRM\ZohoClient;
@@ -22,6 +22,13 @@ class SendToZoho extends Actions
     {
         $response = null;
         try {
+            $this->setStatus(Actions::SUCCESSFUL);
+            $this->setResults([
+                'request' => [],
+                'response' => []
+            ]);
+            return;
+
             $di = Di::getDefault();
             $companyId = $entity->companies_id;
             $args = $entity->getRulesRelatedEntities();

@@ -4,8 +4,9 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Baka\Mail\Manager as BakaMail;
 use Baka\Mail\Message;
+use Canvas\Template;
 use Kanvas\Packages\WorkflowsRules\Actions;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 
@@ -29,12 +30,18 @@ class SendMail extends Actions
         $di = Di::getDefault();
         $args = $entity->getRulesRelatedEntities();
 
+        if (!isset($entity->companies)) {
+            $this->setStatus(Actions::FAIL);
+            $this->setResults([
+                'No company relationship or No SMTP configuration pass for the current company'
+            ]);
+        }
+
         try {
             $params = $this->params;
             $data = $this->getModels(...$args);
             $data['entity'] = $entity;
-            $templateClass = get_class($di->get('templates'));
-            $template = $templateClass::generate($this->params['template_name'], $data);
+            $template = Template::generate($this->params['template_name'], $data);
 
             $mail = $this->mailService($entity);
             $mail->to($params['toEmail'])
@@ -47,7 +54,7 @@ class SendMail extends Actions
             $this->setResults(['mail' => $template]);
         } catch (Throwable  $e) {
             $this->setStatus(Actions::FAIL);
-            $this->setError('Error processing Email - ' . $e->getMessage());
+            $this->setError('Error processing Email - ' . $e->getMessage() . ' - ' . $e->getTraceAsString());
         }
     }
 

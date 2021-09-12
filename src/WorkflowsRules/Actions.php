@@ -4,8 +4,8 @@ namespace Kanvas\Packages\WorkflowsRules;
 
 use Baka\Contracts\Database\ModelInterface;
 use Canvas\Models\SystemModules;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\ActionInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 
 abstract class Actions implements ActionInterfaces

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanvas\Packages\WorkflowsRules\Contracts\Interfaces;
+namespace Kanvas\Packages\WorkflowsRules\Contracts;
 
 interface WorkflowsEntityInterfaces
 {

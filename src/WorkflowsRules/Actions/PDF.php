@@ -3,9 +3,10 @@
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Canvas\Filesystem\Helper;
+use Canvas\Template;
 use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\WorkflowsRules\Actions;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use mikehaertl\wkhtmlto\Pdf as PDFLibrary;
 use Phalcon\Di;
 use Throwable;
@@ -45,8 +46,7 @@ class PDF extends Actions
             $data['entity'] = $args[0];
             $data['leads'] = $entity;
             // Set config for pdf settings (example deleted floating)
-            $templateServiceClass = get_class($di->get('templates'));
-            $template = $templateServiceClass::generate(
+            $template = Template::generate(
                 $this->params['template_pdf'],
                 $data
             ); // Generate html from emails_templates table
@@ -91,7 +91,7 @@ class PDF extends Actions
             $this->setResults($filesystem->toArray());
         } catch (Throwable $e) {
             $this->setStatus(Actions::FAIL);
-            $this->setError('Error processing PDF - ' . $e->getMessage());
+            $this->setError('Error processing PDF - ' . $e->getTraceAsString());
         }
     }
 }
