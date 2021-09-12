@@ -7,14 +7,14 @@ class AddWeight extends Phinx\Migration\AbstractMigration
     public function change()
     {
         $this->table('workflows_logs', [
-                'id' => false,
-                'primary_key' => ['id'],
-                'engine' => 'InnoDB',
-                'encoding' => 'utf8',
-                'collation' => 'utf8_general_ci',
-                'comment' => '',
-                'row_format' => 'DYNAMIC',
-            ])
+            'id' => false,
+            'primary_key' => ['id'],
+            'engine' => 'InnoDB',
+            'encoding' => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'comment' => '',
+            'row_format' => 'DYNAMIC',
+        ])
             ->changeColumn('uuid', 'string', [
                 'null' => false,
                 'limit' => 255,
@@ -36,7 +36,6 @@ class AddWeight extends Phinx\Migration\AbstractMigration
             ])
             ->changeColumn('end_at', 'datetime', [
                 'null' => true,
-                'default' => null,
                 'after' => 'start_at',
             ])
             ->changeColumn('did_succeed', 'boolean', [
@@ -51,7 +50,6 @@ class AddWeight extends Phinx\Migration\AbstractMigration
             ])
             ->changeColumn('updated_at', 'datetime', [
                 'null' => true,
-                'default' => null,
                 'after' => 'created_at',
             ])
             ->changeColumn('is_deleted', 'integer', [
@@ -62,14 +60,14 @@ class AddWeight extends Phinx\Migration\AbstractMigration
             ])
             ->save();
         $this->table('rules_actions', [
-                'id' => false,
-                'primary_key' => ['id'],
-                'engine' => 'InnoDB',
-                'encoding' => 'utf8',
-                'collation' => 'utf8_general_ci',
-                'comment' => '',
-                'row_format' => 'DYNAMIC',
-            ])
+            'id' => false,
+            'primary_key' => ['id'],
+            'engine' => 'InnoDB',
+            'encoding' => 'utf8',
+            'collation' => 'utf8_general_ci',
+            'comment' => '',
+            'row_format' => 'DYNAMIC',
+        ])
             ->addColumn('weight', 'decimal', [
                 'null' => false,
                 'default' => '0.00',
@@ -79,12 +77,10 @@ class AddWeight extends Phinx\Migration\AbstractMigration
             ])
             ->changeColumn('created_at', 'datetime', [
                 'null' => false,
-                'default' => 'current_timestamp()',
                 'after' => 'weight',
             ])
             ->changeColumn('updated_at', 'datetime', [
                 'null' => true,
-                'default' => null,
                 'after' => 'created_at',
             ])
             ->changeColumn('is_deleted', 'integer', [
