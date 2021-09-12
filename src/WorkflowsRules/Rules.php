@@ -56,7 +56,6 @@ class Rules
 
             $actions = $this->rule->getRulesActions();
 
-
             foreach ($actions as $action) {
                 $class = $action->getActionsClass();
 
