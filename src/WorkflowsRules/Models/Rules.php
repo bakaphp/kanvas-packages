@@ -5,15 +5,16 @@ namespace Kanvas\Packages\WorkflowsRules\Models;
 
 use Baka\Contracts\Database\ModelInterface;
 use function Baka\isJson;
+use Canvas\Models\Apps;
 use Canvas\Models\Companies;
 use Canvas\Models\SystemModules;
-
 use Phalcon\Mvc\Model\ResultsetInterface;
 
 class Rules extends BaseModel
 {
     public int $systems_modules_id;
-    public int $companies_id;
+    public int $companies_id = 0;
+    public int $apps_id = 1;
     public int $rules_types_id;
     public float $weight = 0;
     public string $name;
@@ -66,7 +67,7 @@ class Rules extends BaseModel
      *
      * @return ResultsetInterface
      */
-    public static function getByModelAndRuleType(ModelInterface $model, RulesTypes $rulesTypes) : ResultsetInterface
+    public static function getByModelAndRuleType(ModelInterface $model, RulesTypes $rulesTypes, Apps $apps) : ResultsetInterface
     {
         $systemModules = SystemModules::getByModelName(get_class($model));
 
@@ -74,7 +75,9 @@ class Rules extends BaseModel
             'systems_module_id' => $systemModules->getId(),
             'rules_types_id' => $rulesTypes->getId(),
             'companies_id' => Companies::GLOBAL_COMPANIES_ID,
-            'global_companies' => Companies::GLOBAL_COMPANIES_ID
+            'global_companies' => Companies::GLOBAL_COMPANIES_ID,
+            'global_apps_id' => Apps::CANVAS_DEFAULT_APP_ID,
+            'apps_id' => $apps->getId()
         ];
 
         //if it has a company reference
@@ -85,7 +88,8 @@ class Rules extends BaseModel
         return  Rules::find([
             'conditions' => 'systems_modules_id = :systems_module_id: 
                                 AND rules_types_id = :rules_types_id: 
-                                AND companies_id in (:companies_id:, :global_companies:)',
+                                AND companies_id in (:companies_id:, :global_companies:)
+                                AND apps_id in (:global_apps_id:, :apps_id:)',
             'bind' => $bind
         ]);
     }

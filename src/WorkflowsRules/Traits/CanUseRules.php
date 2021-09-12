@@ -8,6 +8,7 @@ use Canvas\Models\Companies;
 use Kanvas\Packages\WorkflowsRules\Jobs\RulesJob;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
+use Phalcon\Di;
 
 trait CanUseRules
 {
@@ -29,10 +30,16 @@ trait CanUseRules
             return;
         }
 
-        $rules = Rules::getByModelAndRuleType($this, $rulesTypes);
+        $rules = Rules::getByModelAndRuleType(
+            $this,
+            $rulesTypes,
+            Di::getDefault()->get('app')
+        );
 
-        foreach ($rules as $rule) {
-            RulesJob::dispatch($rule, $event, $this);
+        if ($rules->count()) {
+            foreach ($rules as $rule) {
+                RulesJob::dispatch($rule, $event, $this);
+            }
         }
     }
 
