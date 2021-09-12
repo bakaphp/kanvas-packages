@@ -10,6 +10,7 @@ use Kanvas\Packages\WorkflowsRules\Models\RulesTypes;
 trait CanUseRules
 {
     protected array $rulesRelatedEntities = [];
+
     /**
      * fireRules.
      *

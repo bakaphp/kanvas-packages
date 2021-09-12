@@ -45,6 +45,7 @@ class PDF extends Actions
             $data = $this->getModels(...$args);
             $data['entity'] = $args[0];
             $data['leads'] = $entity;
+
             // Set config for pdf settings (example deleted floating)
             $template = Template::generate(
                 $this->params['template_pdf'],
