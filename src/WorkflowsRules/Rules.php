@@ -53,7 +53,7 @@ class Rules
         $thread = null;
         if ($result) {
             //start a thread to execute all rules actions
-            $thread = new Thread($this->rule);
+            $thread = new Thread($this->rule, $entity);
             $thread->start();
 
             $actions = $this->rule->getRulesActions();
@@ -63,6 +63,7 @@ class Rules
 
                 if (class_exists($class) && is_subclass_of($class, Actions::class)) {
                     $currentAction = new $class($this->rule, $thread);
+
                     $currentAction->handle($entity);
 
                     $thread->addAction(

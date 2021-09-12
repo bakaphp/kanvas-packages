@@ -6,6 +6,7 @@ namespace Kanvas\Packages\WorkflowsRules;
 
 use function Baka\isJson;
 use Kanvas\Packages\WorkflowsRules\Contracts\ActionInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesActions;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
@@ -16,21 +17,22 @@ class Thread
 {
     protected Rules $rule;
     protected WorkflowsLogs $logs;
+    protected WorkflowsEntityInterfaces $entity;
 
     /**
      * Constructor.
      *
      * @param Rules $rule
      */
-    public function __construct(Rules $rule)
+    public function __construct(Rules $rule, WorkflowsEntityInterfaces $entity)
     {
         $this->rule = $rule;
         $this->logs = new WorkflowsLogs();
+        $this->entity = $entity;
     }
 
     /**
      * start.
-     *
      *
      * @return self
      */
@@ -38,6 +40,7 @@ class Thread
     {
         $this->logs->rules_id = $this->rule->getId();
         $this->logs->start_at = date('Y-m-d H:i:s');
+        $this->logs->entity_id = (string) $this->entity->getId();
         $this->logs->save();
         $this->mountInView();
 

@@ -8,6 +8,7 @@ use Canvas\Models\Behaviors\Uuid;
 class WorkflowsLogs extends BaseModel
 {
     public ?int $rules_id = null;
+    public string $entity_id;
     public string $start_at;
     public ?string $end_at = null;
     public int $did_succeed = 0;

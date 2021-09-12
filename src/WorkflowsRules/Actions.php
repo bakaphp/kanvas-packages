@@ -144,7 +144,7 @@ abstract class Actions implements ActionInterfaces
      *
      * @return array
      */
-    public function getModels(...$args) : array
+    public function getModelsInArray(...$args) : array
     {
         $data = [];
         foreach ($args as $arg) {

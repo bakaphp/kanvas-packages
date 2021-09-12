@@ -7,7 +7,6 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 use Kanvas\Hengen\Hengen;
 use Kanvas\Packages\WorkflowsRules\Actions;
 use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
-use Phalcon\Di;
 use Throwable;
 
 class ADF extends Actions
@@ -23,8 +22,6 @@ class ADF extends Actions
      */
     public function handle(WorkflowsEntityInterfaces $entity) : void
     {
-        $response = null;
-        $di = Di::getDefault();
         $args = $entity->getRulesRelatedEntities();
 
         try {

@@ -25,9 +25,7 @@ class PDF extends Actions
      */
     public function handle(WorkflowsEntityInterfaces $entity) : void
     {
-        $response = null;
         $di = Di::getDefault();
-        $appMode = $di->get('config')->production;
         $args = $entity->getRulesRelatedEntities();
 
         try {
@@ -44,7 +42,7 @@ class PDF extends Actions
                 'page-height' => 265
             ]);
 
-            $data = $this->getModels(...$args);
+            $data = $this->getModelsInArray(...$args);
             $data['entity'] = $args[0];
             $data['leads'] = $entity;
 

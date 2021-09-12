@@ -7,7 +7,6 @@ namespace Kanvas\Packages\WorkflowsRules\Actions;
 use Kanvas\Packages\Social\Contracts\Messages\MessagesInterface;
 use Kanvas\Packages\WorkflowsRules\Actions;
 use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
-use Phalcon\Di;
 use Throwable;
 
 class SSN extends Actions
@@ -25,8 +24,6 @@ class SSN extends Actions
      */
     public function handle(WorkflowsEntityInterfaces $entity) : void
     {
-        $response = null;
-        $di = Di::getDefault();
         $args = $entity->getRulesRelatedEntities();
 
         try {
