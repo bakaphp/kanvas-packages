@@ -2,6 +2,7 @@
 
 namespace Kanvas\Packages\Tests\Integration\Workflows;
 
+use Canvas\Models\Apps;
 use Canvas\Models\Companies;
 use Faker\Factory;
 use Faker\Provider\DateTime;
@@ -22,7 +23,7 @@ class RulesCest
 {
     public function getRulesForEntity(IntegrationTester $I) : void
     {
-        $rules = Rules::getByModelAndRuleType(Companies::findFirst(), ModelsRulesTypes::findFirst());
+        $rules = Rules::getByModelAndRuleType(Companies::findFirst(), ModelsRulesTypes::findFirst(), Apps::findFirst());
 
         $I->assertGreaterOrEquals(0, $rules->count());
     }
