@@ -17,7 +17,7 @@ abstract class Actions implements ActionInterfaces
     protected ?String $message = null;
     protected int $status = 0;
     protected Rules $rules;
-    protected Thread $logs;
+    protected Thread $thread;
     protected array $params;
     public const SUCCESSFUL = 1;
     public const FAIL = 0;
@@ -26,14 +26,14 @@ abstract class Actions implements ActionInterfaces
      * __construct.
      *
      * @param Rules $rules
-     * @param Thread $logs
+     * @param Thread $thread
      *
      * @return void
      */
-    public function __construct(Rules $rules, Thread $logs)
+    public function __construct(Rules $rules, Thread $thread)
     {
         $this->rules = $rules;
-        $this->logs = $logs;
+        $this->thread = $thread;
         $this->setParams($this->rules->getParams());
     }
 

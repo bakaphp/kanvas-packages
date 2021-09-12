@@ -82,7 +82,7 @@ class Thread
     {
         $actionLog = new WorkflowsLogsActions();
         $actionLog->saveOrFail([
-            'workflows_logs_id' => $this->logs->id,
+            'workflows_logs_id' => $this->logs->getId(),
             'actions_id' => $actionModel->rules_workflow_actions_id,
             'action_name' => $actionModel->getActionsName(),
             'status' => $action->getStatus(),
@@ -115,7 +115,7 @@ class Thread
 
 
     /**
-     * mountInView.
+     * Overwrite the view dependency in order to add the thread variable.
      *
      * @return void
      */

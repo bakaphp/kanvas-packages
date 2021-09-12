@@ -15,6 +15,7 @@ class Rules extends BaseModel
     public int $systems_modules_id;
     public int $companies_id;
     public int $rules_types_id;
+    public float $weight = 0;
     public string $name;
     public ?string $description = null;
     public string $pattern;
@@ -42,7 +43,8 @@ class Rules extends BaseModel
             RulesActions::class,
             'rules_id',
             [
-                'alias' => 'rulesActions'
+                'alias' => 'rulesActions',
+                'order' => 'weight|ASC'
             ]
         );
 
