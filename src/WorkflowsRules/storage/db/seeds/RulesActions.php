@@ -36,14 +36,17 @@ class RulesActions extends AbstractSeed
                  [
                      'rules_id' => '1',
                      'rules_workflow_actions_id' => '1',
+                     'created_at' => date('Y-m-d H:i:s'),
                  ],
                  [
                      'rules_id' => '1',
                      'rules_workflow_actions_id' => '2',
+                     'created_at' => date('Y-m-d H:i:s'),
                  ],
                  [
                      'rules_id' => '1',
                      'rules_workflow_actions_id' => '2',
+                     'created_at' => date('Y-m-d H:i:s'),
                  ]
              ])
              ->saveData();
