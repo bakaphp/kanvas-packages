@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Packages\WorkflowsRules\Actions;
