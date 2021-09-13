@@ -148,7 +148,7 @@ abstract class Actions implements ActionInterfaces
     {
         $data = [];
         foreach ($args as $arg) {
-            if (is_array($arg) && $arg instanceof ModelInterface) {
+            if (!is_array($arg) && $arg instanceof ModelInterface) {
                 $systemModules = SystemModules::getByModelName(get_class($arg));
                 $data[$systemModules->slug] = $arg;
             }
