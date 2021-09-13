@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules;
 
+use Baka\Contracts\EventsManager\EventManagerAwareTrait;
 use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -12,6 +13,8 @@ class Rules
 {
     public RulesModel $rule;
     protected string $condition;
+
+    use EventManagerAwareTrait;
 
     /**
      * Construct.
@@ -64,12 +67,17 @@ class Rules
                 if (class_exists($class) && is_subclass_of($class, Actions::class)) {
                     $currentAction = new $class($this->rule, $thread);
 
+                    $this->fire('workflow:beforeHandle', $currentAction);
+
                     $currentAction->handle($entity);
 
                     $thread->addAction(
                         $currentAction,
                         $action
                     );
+
+                    //fire a event ot execute after actions finished
+                    $this->fire('workflow:afterHandle', $currentAction);
                 }
             }
 

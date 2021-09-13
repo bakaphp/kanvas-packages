@@ -64,4 +64,20 @@ trait CanUseRules
     {
         return $this->rulesRelatedEntities;
     }
+
+    /**
+     * Add rulesRelatedEntities to toArray allowing us to pass values to the queue
+     * why? when serializing the object only db properties are unserialize based on toArray.
+     *
+     * @param [type] $columns
+     *
+     * @return array
+     */
+    public function toArray($columns = null) : array
+    {
+        $array = parent::toArray($columns);
+        $array['rulesRelatedEntities'] = $this->getRulesRelatedEntities();
+
+        return $array;
+    }
 }

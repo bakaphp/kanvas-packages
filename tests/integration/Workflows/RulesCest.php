@@ -79,6 +79,20 @@ class RulesCest
         $I->assertTrue($execute->getLogs()->actionLogs->count() > 0);
     }
 
+    public function rulesEntitySerialization(IntegrationTester $I) : void
+    {
+        $company = CompaniesWorkflow::findFirstOrFail();
+        $company->setRulesRelatedEntities(1, 2, 3);
+
+        $companySerialize = serialize($company);
+        $companyUnSerialize = unserialize($companySerialize);
+
+        $I->assertEquals(
+            $company->getRulesRelatedEntities(),
+            $companyUnSerialize->getRulesRelatedEntities()
+        );
+    }
+
     public function rulesJob(IntegrationTester $I) : void
     {
         $faker = $this->getFaker();
