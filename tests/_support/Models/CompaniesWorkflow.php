@@ -10,8 +10,4 @@ use Kanvas\Packages\WorkflowsRules\Traits\CanUseRules;
 class CompaniesWorkflow extends KanvasCompanies implements WorkflowsEntityInterfaces
 {
     use CanUseRules;
-
-    public function afterRules() : void
-    {
-    }
 }

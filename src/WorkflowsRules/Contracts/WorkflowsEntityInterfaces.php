@@ -6,8 +6,6 @@ namespace Kanvas\Packages\WorkflowsRules\Contracts;
 
 interface WorkflowsEntityInterfaces
 {
-    public function afterRules() : void;
-
     /**
      * Set related entities.
      *
