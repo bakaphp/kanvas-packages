@@ -1,29 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Canvas\Filesystem\Helper;
+use Canvas\Template;
 use Kanvas\Packages\Social\Models\Messages;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Actions;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use mikehaertl\wkhtmlto\Pdf as PDFLibrary;
 use Phalcon\Di;
 use Throwable;
 
-class PDF extends Action
+class PDF extends Actions
 {
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param array $params
      *
-     * @return array
+     * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
-        $response = null;
         $di = Di::getDefault();
-        $appMode = $di->get('config')->production;
+        $args = $entity->getRulesRelatedEntities();
 
         try {
             $pdf = new PDFLibrary([
@@ -39,12 +42,12 @@ class PDF extends Action
                 'page-height' => 265
             ]);
 
-            $data = $this->formatArgs(...$args);
+            $data = $this->getModelsInArray(...$args);
             $data['entity'] = $args[0];
             $data['leads'] = $entity;
+
             // Set config for pdf settings (example deleted floating)
-            $templateServiceClass = get_class($di->get('templates'));
-            $template = $templateServiceClass::generate(
+            $template = Template::generate(
                 $this->params['template_pdf'],
                 $data
             ); // Generate html from emails_templates table
@@ -55,7 +58,7 @@ class PDF extends Action
 
             if (!$pdf->saveAs($path)) {
                 $error = $pdf->getError();
-                $this->setStatus(Action::FAIL);
+                $this->setStatus(Actions::FAIL);
                 $this->setError('Error processing PDF - ' . $e->getMessage());
             }
 
@@ -85,11 +88,11 @@ class PDF extends Action
                 $entity->afterRules();
             }
 
-            $this->setStatus(Action::SUCCESSFUL);
+            $this->setStatus(Actions::SUCCESSFUL);
             $this->setResults($filesystem->toArray());
         } catch (Throwable $e) {
-            $this->setStatus(Action::FAIL);
-            $this->setError('Error processing PDF - ' . $e->getMessage());
+            $this->setStatus(Actions::FAIL);
+            $this->setError('Error processing PDF - ' . $e->getTraceAsString());
         }
     }
 }

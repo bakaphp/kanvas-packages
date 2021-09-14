@@ -34,5 +34,19 @@ class Actions extends AbstractSeed
                 ]
             ])
             ->saveData();
+
+        $this->table('rules_types')
+            ->insert([
+                [
+                    'name' => 'created'
+                ],
+                [
+                    'name' => 'updated'
+                ],
+                [
+                    'name' => 'deleted'
+                ]
+            ])
+            ->saveData();
     }
 }

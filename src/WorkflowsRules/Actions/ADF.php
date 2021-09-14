@@ -1,27 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Kanvas\Hengen\Hengen;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
-use Phalcon\Di;
+use Kanvas\Packages\WorkflowsRules\Actions;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Throwable;
 
-class ADF extends Action
+class ADF extends Actions
 {
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param array $params
      * @param mixed ...$args
      *
-     * @return array
+     * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
-        $response = null;
-        $di = Di::getDefault();
+        $args = $entity->getRulesRelatedEntities();
 
         try {
             $transformer = Hengen::getTransformer(
@@ -46,10 +47,10 @@ class ADF extends Action
                 'data' => $transformer->getData()
             ]);
 
-            $this->setStatus(Action::SUCCESSFUL);
+            $this->setStatus(Actions::SUCCESSFUL);
         } catch (Throwable $e) {
-            $this->setError($e->getMessage());
-            $this->setStatus(Action::FAIL);
+            $this->setError($e->getTraceAsString());
+            $this->setStatus(Actions::FAIL);
         }
     }
 }

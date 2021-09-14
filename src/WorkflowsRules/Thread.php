@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Kanvas\Packages\WorkflowsRules;
 
 use function Baka\isJson;
-use Kanvas\Packages\WorkflowsRules\Actions\Action;
+use Kanvas\Packages\WorkflowsRules\Contracts\ActionInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules;
 use Kanvas\Packages\WorkflowsRules\Models\RulesActions;
 use Kanvas\Packages\WorkflowsRules\Models\WorkflowsLogs;
@@ -16,38 +17,72 @@ class Thread
 {
     protected Rules $rule;
     protected WorkflowsLogs $logs;
+    protected WorkflowsEntityInterfaces $entity;
+
+    /**
+     * Constructor.
+     *
+     * @param Rules $rule
+     */
+    public function __construct(Rules $rule, WorkflowsEntityInterfaces $entity)
+    {
+        $this->rule = $rule;
+        $this->logs = new WorkflowsLogs();
+        $this->entity = $entity;
+    }
 
     /**
      * start.
      *
-     * @param  Rules $rule
-     *
      * @return self
      */
-    public function start(Rules $rule) : self
+    public function start() : self
     {
-        $this->logs = new WorkflowsLogs();
-        $this->logs->rules_id = (int)$rule->id;
+        $this->logs->rules_id = $this->rule->getId();
         $this->logs->start_at = date('Y-m-d H:i:s');
+        $this->logs->entity_id = (string) $this->entity->getId();
         $this->logs->save();
         $this->mountInView();
 
         return $this;
     }
 
+    /**
+     * Close a thread.
+     *
+     * @return self
+     */
+    public function close() : self
+    {
+        $this->logs->end_at = date('Y-m-d H:i:s');
+        $this->logs->did_succeed = $this->logs->countActionLogs('status = 1') > 0 ? 1 : 0;
+        $this->logs->save();
+
+        return $this;
+    }
+
+    /**
+     * Get the thread logs.
+     *
+     * @return WorkflowsLogs
+     */
+    public function getLogs() : WorkflowsLogs
+    {
+        return $this->logs;
+    }
 
     /**
      * addAction.
      *
-     * @param  Action $action
+     * @param ActionInterfaces $action
      *
      * @return self
      */
-    public function addAction(Action $action, RulesActions $actionModel) : self
+    public function addAction(ActionInterfaces $action, RulesActions $actionModel) : self
     {
         $actionLog = new WorkflowsLogsActions();
         $actionLog->saveOrFail([
-            'workflows_logs_id' => $this->logs->id,
+            'workflows_logs_id' => $this->logs->getId(),
             'actions_id' => $actionModel->rules_workflow_actions_id,
             'action_name' => $actionModel->getActionsName(),
             'status' => $action->getStatus(),
@@ -61,7 +96,7 @@ class Thread
     /**
      * getResults.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
@@ -75,12 +110,12 @@ class Thread
             ]
         ]);
 
-        return isJson($log->result) ? json_decode($log->result, true) : [];
+        return !empty($log->result) && isJson($log->result) ? json_decode($log->result, true) : [];
     }
 
 
     /**
-     * mountInView.
+     * Overwrite the view dependency in order to add the thread variable.
      *
      * @return void
      */

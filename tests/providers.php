@@ -12,6 +12,7 @@ use Canvas\Providers\ModelsCacheProvider;
 use Canvas\Providers\ModelsMetadataProvider;
 use Canvas\Providers\RegistryProvider;
 use Canvas\Providers\UserProvider;
+use Canvas\Providers\ViewProvider;
 use Kanvas\Packages\Payments\Providers\PlaidProvider;
 use Kanvas\Packages\Social\Providers\DatabaseProvider as SocialDatabaseProvider;
 use Kanvas\Packages\Social\Providers\QueueProvider;
@@ -33,5 +34,6 @@ return [
     WorkflowDatabaseProvider::class,
     CacheDataProvider::class,
     ModelsCacheProvider::class,
-    MapperProvider::class
+    MapperProvider::class,
+    ViewProvider::class,
 ];

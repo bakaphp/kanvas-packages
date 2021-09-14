@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Models;
 
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Traits\CanUseRules;
 
 class Test implements WorkflowsEntityInterfaces
 {
+    use CanUseRules;
+
     public ?string $name = null;
     public ?string $city = null;
     public string $firstname;

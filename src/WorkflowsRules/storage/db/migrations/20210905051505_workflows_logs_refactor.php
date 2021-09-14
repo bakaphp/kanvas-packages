@@ -19,7 +19,7 @@ final class WorkflowsLogsRefactor extends AbstractMigration
     public function change() : void
     {
         $this->table('workflows_logs')
-            ->addColumn('uuid', 'string', ['null' => false])
+            ->addColumn('uuid', 'string', ['null' => false, 'after' => 'rules_id'])
             ->removeColumn('actions_id')
             ->removeColumn('data')
             ->removeColumn('message')

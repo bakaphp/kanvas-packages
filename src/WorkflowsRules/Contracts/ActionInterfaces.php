@@ -1,10 +1,20 @@
 <?php
 
-namespace Kanvas\Packages\WorkflowsRules\Contracts\Interfaces;
+declare(strict_types=1);
+
+namespace Kanvas\Packages\WorkflowsRules\Contracts;
 
 interface ActionInterfaces
 {
-    public function handle(WorkflowsEntityInterfaces $entity, ...$args) : void;
+    /**
+     * handle function.
+     *
+     * @param WorkflowsEntityInterfaces $entity
+     * @param mixed ...$args
+     *
+     * @return void
+     */
+    public function handle(WorkflowsEntityInterfaces $entity) : void;
 
     public function setStatus(int $status) : void;
 
