@@ -202,7 +202,7 @@ class Messages extends Documents
                 'name' => $message->message_type->name,
                 'verb' => $message->message_type->verb,
             ],
-            'message' => isJson($message->message) ? json_decode($message->message, true) : ['text' => $message->message],
+            'message' => $this->formatMessageData($message->message),
             'reactions_count' => $message->reactions_count,
             'comments_count' => $message->countComments('is_deleted = 0'),
             'related_messages_count' => $message->countRelatedMessages('is_deleted = 0'),
@@ -252,5 +252,23 @@ class Messages extends Documents
         }
 
         return $relatedMessagesArray;
+    }
+
+    /**
+     * Format message data.
+     *
+     * @param string $message
+     *
+     * @return array
+     */
+    public function formatMessageData(string $message) : array
+    {
+        $messageData = isJson($message) ? json_decode($message, true) : ['text' => $message];
+
+        if (isset($messageData['data'])) {
+            $messageData['data'] = json_encode($messageData['data']);
+        }
+
+        return $messageData;
     }
 }
