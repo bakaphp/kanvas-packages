@@ -12,15 +12,19 @@ use Kanvas\Packages\Social\ElasticDocuments\Messages as ElasticDocumentsMessages
 class Messages extends CustomMapper
 {
     /**
-     * @param ElasticDocumentsMessages $message
-     * @param DtoMessages $messageDto
+     * @param ElasticDocumentsMessages $source
+     * @param DtoMessages $destination
      *
-     * @return ElasticDocumentsMessages
+     * @return \Kanvas\Packages\Social\ElasticDocuments\Messages|\stdClass
      */
-    public function mapToObject($message, $messageDto, array $context = [])
+    public function mapToObject($source, $destination, array $context = [])
     {
         //when its empty , its from the message list
-        $message = !empty($message->getData()) ? (object) $message->getData() : $message;
+        $message = !empty($source->getData()) ? (object) $source->getData() : $source;
+
+        if (isset($message->message['data'])) {
+            $message->message['data'] = is_string($message->message['data']) && isJson($message->message['data']) ? json_decode($message->message['data'], true) : [];
+        }
 
         //no need to convert , we will interact directly with the elastic document
         $message->custom_fields = $message->custom_fields ? $this->formatCustomFields($message->custom_fields) : [];
