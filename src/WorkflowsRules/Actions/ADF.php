@@ -25,7 +25,7 @@ class ADF extends Actions
         $args = $entity->getRulesRelatedEntities();
         try {
             $data = $this->getModelsInArray(...$args);
-
+            $data['entity'] = $entity;
             $transformer = Hengen::getTransformer(
                 'ADF',
                 $data['leads'],
@@ -49,7 +49,6 @@ class ADF extends Actions
 
             $this->setStatus(Actions::SUCCESSFUL);
         } catch (Throwable $e) {
-            dump($e->getMessage());
             $this->setError($e->getTraceAsString());
             $this->setStatus(Actions::FAIL);
         }
