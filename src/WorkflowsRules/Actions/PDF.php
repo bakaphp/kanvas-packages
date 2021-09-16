@@ -43,9 +43,7 @@ class PDF extends Actions
             ]);
 
             $data = $this->getModelsInArray(...$args);
-            $data['entity'] = $args[0];
-            $data['leads'] = $entity;
-
+            $data['entity'] = $entity;
             // Set config for pdf settings (example deleted floating)
             $template = Template::generate(
                 $this->params['template_pdf'],
@@ -79,7 +77,6 @@ class PDF extends Actions
                 $messages->parentMessage->saveOrFail([
                     'files' => $files
                 ]);
-                $entity->afterRules();
             } else {
                 $entity->uploadedFiles[] = [
                     'filesystem_id' => $filesystem->getId()
@@ -92,7 +89,8 @@ class PDF extends Actions
             $this->setResults($filesystem->toArray());
         } catch (Throwable $e) {
             $this->setStatus(Actions::FAIL);
-            $this->setError('Error processing PDF - ' . $e->getTraceAsString());
+
+            $this->setError('Error processing PDF - ' . $e->getMessage());
         }
     }
 }

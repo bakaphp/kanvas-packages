@@ -23,15 +23,15 @@ class ADF extends Actions
     public function handle(WorkflowsEntityInterfaces $entity) : void
     {
         $args = $entity->getRulesRelatedEntities();
-
         try {
+            $data = $this->getModelsInArray(...$args);
+
             $transformer = Hengen::getTransformer(
                 'ADF',
-                $entity,
+                $data['leads'],
                 $this->params,
-                ...$args
+                ...array_values($data)
             );
-
             $communicator = Hengen::getCommunication(
                 $transformer,
                 $entity->companies
@@ -49,6 +49,7 @@ class ADF extends Actions
 
             $this->setStatus(Actions::SUCCESSFUL);
         } catch (Throwable $e) {
+            dump($e->getMessage());
             $this->setError($e->getTraceAsString());
             $this->setStatus(Actions::FAIL);
         }
