@@ -57,7 +57,7 @@ class PDF extends Actions
             if (!$pdf->saveAs($path)) {
                 $error = $pdf->getError();
                 $this->setStatus(Actions::FAIL);
-                $this->setError('Error processing PDF - ' . $e->getMessage());
+                $this->setError('Error processing PDF - ' . $error);
             }
 
             $filesystem = Helper::upload(Helper::pathToFile($path));
