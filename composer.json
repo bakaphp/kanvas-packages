@@ -18,14 +18,16 @@
     "require": {
         "php": ">= 7.4",
         "ext-phalcon": ">=4",
-        "canvas/core": "^0.3@dev",
+        "canvas/core": "0.3.x-dev",
         "php-amqplib/php-amqplib": "^2.9",
         "elastic/app-search": "^7.5",
         "aporat/store-receipt-validator": "^4.0",
         "tomorrow-ideas/plaid-sdk-php": "^0.12.0",
         "symfony/expression-language": "^5.1",
         "mctekk/zohocrm": "^0.1",
-        "mikehaertl/phpwkhtmltopdf": "2.5.0"
+        "mikehaertl/phpwkhtmltopdf": "2.5.0",
+        "kanvas/hengen":"dev-main",
+        "recombee/php-api-client": "^3.2"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
@@ -46,8 +48,9 @@
         "mark-gerarts/auto-mapper-plus": "2.0.0-alpha1",
         "squizlabs/php_codesniffer": "3.2",
         "symfony/var-dumper": "^4.3@dev",
-        "phpstan/phpstan": "^0.9.2",
-        "phpunit/phpunit": "^9.1"
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9.1",
+        "phalcon/ide-stubs": "^4.0"
     },
     "autoload": {
         "psr-4": {

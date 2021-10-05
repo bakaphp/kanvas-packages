@@ -20,7 +20,9 @@ class AttributesOperators extends BaseModel
             'id',
             RulesConditions::class,
             'attributes_operators_id',
-            ['alias' => 'rulesConditions']
+            [
+                'alias' => 'rulesConditions'
+            ]
         );
     }
 }

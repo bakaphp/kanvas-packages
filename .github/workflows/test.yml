@@ -46,6 +46,7 @@ jobs:
       PHINX_CONFIG_DIR: storage
       ITUNES_RECEIPT_EXAMPLE: ${{ secrets.ITUNES_RECEIPT_EXAMPLE }}
       ITUNES_STORE_PASS: ${{ secrets.ITUNES_STORE_PASS }}
+      RECOMBEE_PRIVATE_TOKEN: ${{ secrets.RECOMBEE_PRIVATE_TOKEN }}
       CANVAS_PHINX_CONFIG_DIR: vendor/canvas/core/storage
     services:
       mysql:
@@ -158,17 +159,37 @@ jobs:
         run: vendor/bin/phinx migrate -c phinx-workflow.php
           
       - name: Phinx seeder Workflows
-        run: vendor/bin/phinx seed:run -s Actions -c phinx-workflow.php && vendor/bin/phinx seed:run -s RulesTypes -c phinx-workflow.php && vendor/bin/phinx seed:run -s RulesWorkflowActions -c phinx-workflow.php && vendor/bin/phinx seed:run -s Rules  -c phinx-workflow.php && vendor/bin/phinx seed:run -s RulesConditions -c phinx-workflow.php && vendor/bin/phinx seed:run -s RulesActions -c phinx-workflow.php
+        run: vendor/bin/phinx seed:run -c phinx-workflow.php
 
       - name: Phinx Migrate Social
         run: vendor/bin/phinx migrate -c phinx-social.php -e development
 
       - name: Phinx Seed:run Social
         run: vendor/bin/phinx seed:run -c phinx-social.php
-   
+
       - name: Phinx Migrate Wallet
         run: vendor/bin/phinx migrate -c phinx-wallets.php -e development
       
-      - name: Run test suites
+      - name: Run test Payments
         if: success()
-        run: vendor/bin/codecept run
+        run: vendor/bin/codecept run tests/integration/Payments/
+
+      - name: Run test Social
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Social/
+
+      - name: Run test Wallets
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Wallets/
+
+      - name: Run test Workflows
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Workflows/
+
+      - name: Run test Recommendations
+        if: success()
+        run: vendor/bin/codecept run tests/integration/Recommendations/
+
+      - name: Run test unit
+        if: success()
+        run: vendor/bin/codecept run tests/unit

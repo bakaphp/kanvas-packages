@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
 use Baka\Mail\Manager as BakaMail;
 use Baka\Mail\Message;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\ActionInterfaces;
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
-use Phalcon\Di;
-use Throwable ;
+use Canvas\Template;
+use Kanvas\Packages\WorkflowsRules\Actions;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
+use Throwable;
 
-class SendMail implements ActionInterfaces
+class SendMail extends Actions
 {
     protected ?string $message = null;
     protected ?array $data = [];
@@ -18,65 +20,75 @@ class SendMail implements ActionInterfaces
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param array $params
      *
-     * @return array
+     * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = []) : array
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
-        $response = null;
-        $di = Di::getDefault();
+        $args = $entity->getRulesRelatedEntities();
+
+        if (!isset($entity->companies)) {
+            $this->setStatus(Actions::FAIL);
+            $this->setError(
+                'No company relationship or No SMTP configuration pass for the current company'
+            );
+
+            return;
+        }
+
         try {
-            $this->data = $entity->toArray();
-            $template = get_class($di->get('templates'))::generate($params['template_name'], ['entity' => $entity]);
+            $params = $this->params;
+            $data = $this->getModelsInArray(...$args);
+            $data['entity'] = $entity;
+
+            $template = Template::generate($this->params['template_name'], $data);
+
             $mail = $this->mailService($entity);
-            $this->message = $template;
             $mail->to($params['toEmail'])
                 ->from($params['fromEmail'])
                 ->subject($params['subject'])
                 ->content($template)
                 ->sendNow();
+
+            $this->setStatus(Actions::SUCCESSFUL);
+            $this->setResults(['mail' => $template]);
         } catch (Throwable  $e) {
-            $this->message = 'Error processing mail - ' . $e->getMessage();
-            $di->get('log')->error('Error processing mail - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            $this->status = 0;
-            $response = $e->getTraceAsString();
+            $this->setStatus(Actions::FAIL);
+            $this->setError('Error processing Email - ' . $e->getMessage() . ' - ' . $e->getTraceAsString());
         }
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data,
-            'body' => $response
-        ];
     }
 
     /**
      * mailService.
      *
-     * @param  WorkflowsEntityInterfaces $entity
+     * @param WorkflowsEntityInterfaces $entity
      *
-     * @return BakaMail
+     * @return Message
      */
     private function mailService(WorkflowsEntityInterfaces $entity) : Message
     {
+        $company = $entity->getCompanies();
+
         $config = [
             'driver' => 'smtp',
-            'host' => $entity->getCompanies()->get('EMAIL_HOST'),
-            'port' => $entity->getCompanies()->get('EMAIL_PORT'),
-            'username' => $entity->getCompanies()->get('EMAIL_USER'),
-            'password' => $entity->getCompanies()->get('EMAIL_PASS'),
+            'host' => $company->get('EMAIL_HOST'),
+            'port' => $company->get('EMAIL_PORT'),
+            'username' => $company->get('EMAIL_USER'),
+            'password' => $company->get('EMAIL_PASS'),
             'from' => [
-                'email' => $entity->getCompanies()->get('EMAIL_FROM_PRODUCTION'),
-                'name' => $entity->getCompanies()->get('EMAIL_FROM_NAME_PRODUCTION'),
+                'email' => $company->get('EMAIL_FROM_PRODUCTION'),
+                'name' => $company->get('EMAIL_FROM_NAME_PRODUCTION'),
             ],
             'debug' => [
                 'from' => [
-                    'email' => $entity->getCompanies()->get('EMAIL_FROM_DEBUG'),
-                    'name' => $entity->getCompanies()->get('EMAIL_FROM_NAME_DEBUG'),
+                    'email' => $company->get('EMAIL_FROM_DEBUG'),
+                    'name' => $company->get('EMAIL_FROM_NAME_DEBUG'),
                 ],
             ],
         ];
+
         $mailer = new BakaMail($config);
         return $mailer->createMessage();
     }
@@ -104,7 +116,7 @@ class SendMail implements ActionInterfaces
     /**
      * getStatus.
      *
-     * @return bool
+     * @return int
      */
     public function getStatus() : int
     {

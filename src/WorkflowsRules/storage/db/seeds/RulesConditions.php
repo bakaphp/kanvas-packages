@@ -18,7 +18,7 @@ class RulesConditions extends AbstractSeed
              ->insert([
                  [
                      'rules_id' => '1',
-                     'attribute_name' => 'dob',
+                     'attribute_name' => 'created_at',
                      'operator' => '>',
                      'value' => '1900-01-01'
                  ]

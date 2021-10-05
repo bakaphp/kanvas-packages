@@ -1,38 +1,59 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kanvas\Packages\WorkflowsRules\Actions;
 
-use Kanvas\Packages\WorkflowsRules\Contracts\Interfaces\WorkflowsEntityInterfaces;
+use Kanvas\Packages\WorkflowsRules\Actions;
+use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Phalcon\Di;
 use Throwable;
 use Zoho\CRM\ZohoClient;
 
-class SendToZoho extends Action
+class SendToZoho extends Actions
 {
     /**
      * handle.
      *
-     * @param  WorkflowsEntityInterfaces $entity
-     * @param  array $params
+     * @param WorkflowsEntityInterfaces $entity
+     * @param array $params
      *
-     * @return array
+     * @return void
      */
-    public function handle(WorkflowsEntityInterfaces $entity, array $params = []) : array
+    public function handle(WorkflowsEntityInterfaces $entity) : void
     {
         $response = null;
         try {
+            $this->setStatus(Actions::SUCCESSFUL);
+            $this->setResults([
+                'request' => [],
+                'response' => []
+            ]);
+            return;
+
             $di = Di::getDefault();
             $companyId = $entity->companies_id;
+            $args = $entity->getRulesRelatedEntities();
+
             $di->get('log')->info('Start Process Leads For company ' . $companyId);
 
             $zohoClient = new ZohoClient();
 
             ///get from db
-            $zohoClient->setAuthRefreshToken($entity->getCompanies()->get('ZOHO_AUTH_REFRESH_TOKEN'));
-            $zohoClient->setZohoClientId($entity->getCompanies()->get('ZOHO_CLIENT_ID'));
-            $zohoClient->setZohoClientSecret($entity->getCompanies()->get('ZOHO_CLIENT_SECRET'));
+            $zohoClient->setAuthRefreshToken(
+                $entity->getCompanies()->get('ZOHO_AUTH_REFRESH_TOKEN')
+            );
+            $zohoClient->setZohoClientId(
+                $entity->getCompanies()->get('ZOHO_CLIENT_ID')
+            );
+            $zohoClient->setZohoClientSecret(
+                $entity->getCompanies()->get('ZOHO_CLIENT_SECRET')
+            );
 
-            $refresh = $zohoClient->manageAccessTokenRedis($di->get('redis'), 'zoho_client' . $companyId);
+            $refresh = $zohoClient->manageAccessTokenRedis(
+                $di->get('redis'),
+                'zoho_client' . $companyId
+            );
             $zohoClient->setModule('Leads');
 
             $request = [
@@ -42,6 +63,7 @@ class SendToZoho extends Action
                 'Phone' => $entity->phone,
                 'Email' => $entity->email,
             ];
+
             $customFields = $entity->getAll();
             $request = array_merge($customFields, $request);
 
@@ -54,7 +76,6 @@ class SendToZoho extends Action
             }
 
             $di->get('log')->info('Data lead', $request);
-            $this->data = $request;
 
             $response = $zohoClient->insertRecords(
                 $request,
@@ -65,22 +86,16 @@ class SendToZoho extends Action
                 $entity->saveLinkedSources($response);
             }
 
-            $this->data = $request;
-            $this->message = 'Process Leads For company ' . $companyId;
-            $this->status = 1;
+            $this->setResults([
+                'request' => $request,
+                'response' => $response
+            ]);
+
+            $this->setStatus(Actions::SUCCESSFUL);
             $di->get('log')->info('Process Leads For company ' . $companyId, [$response]);
         } catch (Throwable $e) {
-            $this->message = 'Error processing lead - ' . $e->getMessage();
-            $di->get('log')->error('Error processing lead - ' . $e->getMessage(), [$e->getTraceAsString()]);
-            $this->status = 0;
-            $response = $e->getTraceAsString();
+            $this->setStatus(Actions::FAIL);
+            $this->setError('Error processing Email - ' . $e->getMessage());
         }
-
-        return [
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data,
-            'body' => $response
-        ];
     }
 }

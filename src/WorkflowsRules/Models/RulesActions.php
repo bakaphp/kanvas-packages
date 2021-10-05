@@ -21,14 +21,38 @@ class RulesActions extends BaseModel
             'rules_id',
             Rules::class,
             'id',
-            ['alias' => 'rules']
+            [
+                'alias' => 'rules'
+            ]
         );
 
         $this->belongsTo(
             'rules_workflow_actions_id',
             RulesWorkflowActions::class,
             'id',
-            ['alias' => 'rulesWorkflowActions']
+            [
+                'alias' => 'rulesWorkflowActions'
+            ]
         );
+    }
+
+    /**
+     * getActionsClass.
+     *
+     * @return string
+     */
+    public function getActionsClass() : string
+    {
+        return $this->rulesWorkflowActions->actions->model_name;
+    }
+
+    /**
+     * getActionsName.
+     *
+     * @return string
+     */
+    public function getActionsName() : string
+    {
+        return $this->rulesWorkflowActions->actions->name;
     }
 }
