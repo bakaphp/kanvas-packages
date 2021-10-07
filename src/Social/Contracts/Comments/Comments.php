@@ -18,5 +18,5 @@ interface Comments
      *
      * @return bool
      */
-    public function isParent() : boo;
+    public function isParent() : bool;
 }

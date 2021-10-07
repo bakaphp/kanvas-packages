@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Kanvas\Packages\Social\Traits\Comments;
+namespace Kanvas\Packages\Social\Comments\Traits;
 
 use Baka\Contracts\Http\Api\CrudBehaviorRelationshipsTrait;
 use Baka\Validation as CanvasValidation;
 use Canvas\Contracts\Controllers\ProcessOutputMapperTrait;
+use Kanvas\Packages\Social\Comments\Models\Messages;
 use Kanvas\Packages\Social\Dto\Comments as CommentsDto;
 use Kanvas\Packages\Social\Mappers\Comments as CommentsMapper;
-use Kanvas\Packages\Social\Models\MessageComments;
-use Kanvas\Packages\Social\Models\Messages;
 use Kanvas\Packages\Social\Models\Users;
 use Kanvas\Packages\Social\Services\Comments;
 use Phalcon\Http\Response;
 use Phalcon\Validation\Validator\PresenceOf;
+use RuntimeException;
 
 /**
  * Channels Trait.
@@ -40,7 +40,7 @@ trait CommentableController
      */
     public function onConstruct()
     {
-        $this->model = new MessageComments();
+        $this->model = new Messages();
         $this->dto = CommentsDto::class;
         $this->dtoMapper = new CommentsMapper();
 

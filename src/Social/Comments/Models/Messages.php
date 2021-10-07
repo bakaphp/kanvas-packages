@@ -6,7 +6,6 @@ namespace Kanvas\Packages\Social\Comments\Models;
 use Kanvas\Packages\Social\Comments\Model;
 use Kanvas\Packages\Social\ElasticDocuments\Messages as ElasticMessagesDocument;
 use Kanvas\Packages\Social\Jobs\ElasticMessages;
-use Phalcon\Di;
 
 class Messages extends Model
 {
@@ -34,29 +33,6 @@ class Messages extends Model
             ]
         );
     }
-
-    /**
-     * Create a comment for a message.
-     *
-     * @param string $messageId
-     * @param string $message
-     *
-     * @return MessageComments
-     */
-    public function reply(string $message) : self
-    {
-        $comment = new self();
-        $comment->message_id = $this->message_id;
-        $comment->apps_id = Di::getDefault()->get('app')->getId();
-        $comment->companies_id = Di::getDefault()->get('userData')->getDefaultCompany()->getId();
-        $comment->users_id = Di::getDefault()->get('userData')->getId();
-        $comment->message = $message;
-        $comment->parent_id = $this->getParentId();
-        $comment->saveOrFail();
-
-        return $comment;
-    }
-
 
     /**
      * Verify if this comment has message.

@@ -3,12 +3,14 @@ declare(strict_types=1);
 
 namespace Kanvas\Packages\Social\Comments;
 
+use Baka\Contracts\Auth\UserInterface;
 use Canvas\Contracts\FileSystemModelTrait;
 use Canvas\Models\Users;
+use Kanvas\Packages\Social\Contracts\Comments\Comments;
 use Kanvas\Packages\Social\Contracts\Interactions\EntityInteractionsTrait;
 use Kanvas\Packages\Social\Models\BaseModel;
 
-class Model extends BaseModel
+class Model extends BaseModel implements Comments
 {
     use EntityInteractionsTrait;
     use FileSystemModelTrait;
@@ -28,7 +30,15 @@ class Model extends BaseModel
     {
         parent::initialize();
 
-        $this->belongsTo('users_id', Users::class, 'id', ['alias' => 'users', 'reusable' => true]);
+        $this->belongsTo(
+            'users_id',
+            Users::class,
+            'id',
+            [
+                'alias' => 'users',
+                'reusable' => true
+            ]
+        );
 
         $this->hasMany(
             'id',
@@ -113,6 +123,28 @@ class Model extends BaseModel
     public function isParent() : bool
     {
         return $this->parent_id == 0;
+    }
+
+    /**
+     * Create a comment for a message.
+     *
+     * @param string $messageId
+     * @param string $message
+     *
+     * @return self
+     */
+    public function reply(string $message, UserInterface $user) : self
+    {
+        $comment = new self();
+        $comment->message_id = $this->message_id;
+        $comment->apps_id = $this->apps_id;
+        $comment->companies_id = $this->companies_id;
+        $comment->users_id = $user->getId();
+        $comment->message = $message;
+        $comment->parent_id = $this->getParentId();
+        $comment->saveOrFail();
+
+        return $comment;
     }
 
 
