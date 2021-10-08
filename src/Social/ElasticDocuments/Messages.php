@@ -265,7 +265,7 @@ class Messages extends Documents
     {
         $messageData = isJson($message) ? json_decode($message, true) : ['text' => $message];
 
-        if (isset($messageData['data'])) {
+        if (isset($messageData['data']) && is_array($messageData['data'])) {
             $messageData['data'] = json_encode($messageData['data']);
         }
 
