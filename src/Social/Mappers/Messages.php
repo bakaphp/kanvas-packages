@@ -24,13 +24,11 @@ class Messages extends CustomMapper
 
         $message = $this->decodeMessage($message);
 
-        $relatedMessages = [];
         if ($message->related_messages_count) {
-            foreach ($message->related_messages as $message) {
-                $relatedMessages[] = $this->decodeMessage($message);
+            foreach ($message->related_messages as $key => $message) {
+                $message->related_messages[$key] = $this->decodeMessage($message);
             }
         }
-        $message->related_messages = $relatedMessages;
         //no need to convert , we will interact directly with the elastic document
         $message->custom_fields = $message->custom_fields ? $this->formatCustomFields($message->custom_fields) : [];
         return $message;
