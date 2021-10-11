@@ -22,10 +22,15 @@ class Messages extends CustomMapper
         //when its empty , its from the message list
         $message = !empty($source->getData()) ? (object) $source->getData() : $source;
 
-        if (isset($message->message['data'])) {
-            $message->message['data'] = is_string($message->message['data']) && isJson($message->message['data']) ? json_decode($message->message['data'], true) : [];
-        }
+        $message = $this->decodeMessage($message);
 
+        $relatedMessages = [];
+        if ($message->related_messages_count) {
+            foreach ($message->related_messages as $message) {
+                $relatedMessages[] = $this->decodeMessage($message);
+            }
+        }
+        $message->related_messages = $relatedMessages;
         //no need to convert , we will interact directly with the elastic document
         $message->custom_fields = $message->custom_fields ? $this->formatCustomFields($message->custom_fields) : [];
         return $message;
@@ -45,5 +50,20 @@ class Messages extends CustomMapper
         }
 
         return $customFields;
+    }
+
+    /**
+     * decodeMessage.
+     *
+     * @param  object $message
+     *
+     * @return object
+     */
+    public function decodeMessage(object $message) : object
+    {
+        if (isset($message->message['data'])) {
+            $message->message['data'] = is_string($message->message['data']) && isJson($message->message['data']) ? json_decode($message->message['data'], true) : [];
+        }
+        return $message;
     }
 }
