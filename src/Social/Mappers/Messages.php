@@ -26,7 +26,7 @@ class Messages extends CustomMapper
 
         if ($message->related_messages_count) {
             foreach ($message->related_messages as $key => $message) {
-                $message->related_messages[$key] = $this->decodeMessage($message);
+                $message->related_messages[$key] = $this->decodeMessage((object) $message);
             }
         }
         //no need to convert , we will interact directly with the elastic document
