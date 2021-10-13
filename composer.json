@@ -18,7 +18,7 @@
     "require": {
         "php": ">= 7.4",
         "ext-phalcon": ">=4",
-        "canvas/core": "0.3.x-dev",
+        "canvas/core": "^0.3",
         "php-amqplib/php-amqplib": "^2.9",
         "elastic/app-search": "^7.5",
         "aporat/store-receipt-validator": "^4.0",
@@ -40,7 +40,7 @@
         "phalcon/incubator": "4.0.x-dev",
         "phalcon/incubator-acl": "^1.0.0-alpha.1",
         "phalcon/incubator-test": "^1.0.0-alpha.1",
-        "baka/baka": "^0.7@dev",
+        "baka/baka": "^0.7",
         "robmorgan/phinx": "^0.12",
         "fzaninotto/faker": "^1.9",
         "vlucas/phpdotenv": "^4.1",
