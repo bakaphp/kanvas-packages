@@ -74,9 +74,11 @@ class PDF extends Actions
                         'filesystem_id' => $filesystem->getId()
                     ]
                 ];
-                $messages->getParentMessage()->saveOrFail([
-                    'files' => $files
-                ]);
+                if ($entity->hasParent()) {
+                    $messages->getParentMessage()->saveOrFail([
+                        'files' => $files
+                    ]);
+                }
                 $entity->saveOrFail([
                     'files' => $files
                 ]);
