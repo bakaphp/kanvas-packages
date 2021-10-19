@@ -149,7 +149,6 @@ class Thread
     protected function notificationLogs() : void
     {
         if (getenv('SENTRY_PROJECT')) {
-            Di::getDefault()->get('log')->info('SEND ERROR TO Sentry');
             foreach ($this->getErrors() as $error) {
                 Di::getDefault()->get('log')->error($error['error']);
             }
