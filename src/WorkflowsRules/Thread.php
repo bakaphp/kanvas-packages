@@ -57,7 +57,7 @@ class Thread
         $this->logs->end_at = date('Y-m-d H:i:s');
         $this->logs->did_succeed = $this->logs->countActionLogs('status = 1') > 0 ? 1 : 0;
         $this->logs->save();
-
+        $this->notificationLogs();
         return $this;
     }
 
@@ -124,5 +124,34 @@ class Thread
         $view = Di::getDefault()->get('view');
         $view->setVar('threads', $this);
         Di::getDefault()->set('view', $view);
+    }
+
+    /**
+     * getErrors.
+     *
+     * @return array
+     */
+    public function getErrors() : array
+    {
+        $logs = $this->logs->getActionLogs([
+            'condition' => 'status = 0'
+        ]);
+
+        return $logs->toArray();
+    }
+
+
+    /**
+     * notificationLogs.
+     *
+     * @return void
+     */
+    protected function notificationLogs() : void
+    {
+        if (getenv('SENTRY_PROJECT')) {
+            foreach ($this->getErrors() as $error) {
+                Di::getDefault()->get('log')->error($error['error']);
+            }
+        }
     }
 }
