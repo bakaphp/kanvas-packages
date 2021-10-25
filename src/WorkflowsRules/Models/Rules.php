@@ -81,7 +81,6 @@ class Rules extends BaseModel
             'apps_id' => $apps->getId()
         ];
 
-
         //if it has a company reference
         if (isset($model->companies)
             && is_object($model->companies)
