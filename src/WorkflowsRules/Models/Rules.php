@@ -8,6 +8,7 @@ use function Baka\isJson;
 use Canvas\Models\Apps;
 use Canvas\Models\Companies;
 use Canvas\Models\SystemModules;
+use Phalcon\Mvc\Model\Resultset\Simple;
 use Phalcon\Mvc\Model\ResultsetInterface;
 
 class Rules extends BaseModel
@@ -80,8 +81,12 @@ class Rules extends BaseModel
             'apps_id' => $apps->getId()
         ];
 
+
         //if it has a company reference
-        if (isset($model->companies) && is_object($model->companies)) {
+        if (isset($model->companies)
+            && is_object($model->companies)
+            && !$model->companies instanceof Simple
+        ) {
             $bind['companies_id'] = $model->companies->getId();
         }
 
