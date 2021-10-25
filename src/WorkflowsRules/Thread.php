@@ -149,8 +149,10 @@ class Thread
     protected function notificationLogs() : void
     {
         if (getenv('SENTRY_PROJECT')) {
-            foreach ($this->getErrors() as $error) {
-                Di::getDefault()->get('log')->error($error['error']);
+            if ($errors = $this->getErrors()) {
+                foreach ($errors as $error) {
+                    Di::getDefault()->get('log')->error($error['error']);
+                }
             }
         }
     }
