@@ -22,6 +22,7 @@ class Rules extends BaseModel
     public ?string $description = null;
     public string $pattern;
     public ?string $params = null;
+    public int $is_async = 1;
 
     /**
      * Initialize method for model.
@@ -106,5 +107,16 @@ class Rules extends BaseModel
     public function getParams() : array
     {
         return !empty($this->params) && isJson($this->params) ? json_decode($this->params, true) : [];
+    }
+
+    /**
+     * Is this rule async?
+     * should it be run with the queue?
+     *
+     * @return bool
+     */
+    public function isAsync() : bool
+    {
+        return (bool) $this->is_async;
     }
 }

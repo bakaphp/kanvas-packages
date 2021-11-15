@@ -38,7 +38,12 @@ trait CanUseRules
 
         if ($rules->count()) {
             foreach ($rules as $rule) {
-                RulesJob::dispatch($rule, $event, $this);
+                if ($rule->isAsync()) {
+                    RulesJob::dispatch($rule, $event, $this);
+                } else {
+                    $rulesJobs = new RulesJob($rule, $event, $this);
+                    $rulesJobs->handle();
+                }
             }
         }
     }
