@@ -1,7 +1,6 @@
 name: "Tests"
 
 # This is a basic workflow this are the triggered
-
 on: [push, pull_request]
 
 jobs:
