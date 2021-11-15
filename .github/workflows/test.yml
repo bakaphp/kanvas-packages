@@ -87,7 +87,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: ['7.4']
-        phalcon-versions: ['4.1.0', '4.1.2']
+        phalcon-versions: ['4.1.2']
     steps:
       - uses: actions/checkout@v1
 
