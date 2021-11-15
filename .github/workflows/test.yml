@@ -1,6 +1,5 @@
 name: "Tests"
 
-# This is a basic workflow this are the triggered
 on: [push, pull_request]
 
 jobs:
@@ -8,7 +7,7 @@ jobs:
     name: PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-18.04
     env:
-      extensions: mbstring, intl, json, phalcon4, redis
+      extensions: mbstring, intl, json, phalcon4, redis, swoole, xdebug
       key: cache-v0.0.2
       DATA_API_MYSQL_HOST: 127.0.0.1
       DATA_API_MYSQL_USER: root
