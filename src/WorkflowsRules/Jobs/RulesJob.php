@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Kanvas\Packages\WorkflowsRules\Jobs;
@@ -13,7 +14,7 @@ class RulesJob extends Job
     public Rules $rule;
     public string $event;
     public WorkflowsEntityInterfaces $entity;
-    public array $args;
+    public array $args = [];
 
     /**
      * Constructor the job.

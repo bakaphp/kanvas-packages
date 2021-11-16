@@ -1,15 +1,13 @@
 name: "Tests"
 
-# This is a basic workflow this are the triggered
-
 on: [push, pull_request]
 
 jobs:
   run-tests:
-    name: PHP ${{ matrix.php-versions }}
-    runs-on: ubuntu-latest
+    name: PHP ${{ matrix.php-versions }} with Phalcon ${{ matrix.phalcon-versions }}
+    runs-on: ubuntu-18.04
     env:
-      extensions: mbstring, intl, json, phalcon4, redis
+      extensions: mbstring, intl, json, phalcon-${{ matrix.phalcon-versions }}, redis, swoole, xdebug
       key: cache-v0.0.2
       DATA_API_MYSQL_HOST: 127.0.0.1
       DATA_API_MYSQL_USER: root
@@ -89,6 +87,7 @@ jobs:
       fail-fast: false
       matrix:
         php-versions: ['7.4']
+        phalcon-versions: ['4.1.2']
     steps:
       - uses: actions/checkout@v1
 

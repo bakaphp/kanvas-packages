@@ -8,6 +8,7 @@ use Baka\Contracts\EventsManager\EventManagerAwareTrait;
 use Kanvas\Packages\WorkflowsRules\Contracts\WorkflowsEntityInterfaces;
 use Kanvas\Packages\WorkflowsRules\Models\Rules as RulesModel;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Throwable;
 
 class Rules
 {
@@ -48,10 +49,14 @@ class Rules
         $expressionLanguage = new ExpressionLanguage();
 
         //validate the expression and values with symfony expression language
-        $result = $expressionLanguage->evaluate(
-            $expression,
-            $values
-        );
+        try {
+            $result = $expressionLanguage->evaluate(
+                $expression,
+                $values
+            );
+        } catch (Throwable $e) {
+            $result = false;
+        }
 
         $thread = null;
         if ($result) {
