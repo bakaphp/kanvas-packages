@@ -61,7 +61,7 @@ class QueryParser
      */
     public function setSort(string $sort) : void
     {
-        foreach (explode(",", $sort) as $s) {
+        foreach (explode(',', $sort) as $s) {
             $s = explode('|', $s);
             $this->searchParams['sort'][][$s[0]] = $s[1] ?? 'asc';
         }
@@ -78,26 +78,24 @@ class QueryParser
         foreach (explode(',', $filters) as $filter) {
             $this->parser($filter);
         }
-        
+
         $this->searchParams['filters'] = $this->rearrangeFilters();
     }
 
     /**
-     * If there are any or none parameters we configure the array
+     * If there are any or none parameters we configure the array.
+     *
      * @return array
      */
     public function rearrangeFilters() : array
     {
-        if (!isset($this->filters['any']) && !isset($this->filters['none'])) {
-            return $this->filters;
-        }
         $filters = [];
         foreach ($this->filters as $key => $value) {
-            if (in_array($key, ['any','none'])) {
+            if (in_array($key, ['any', 'none'])) {
                 $filters[$key] = $value;
                 continue;
             }
-            $filters['all'][$key] = $value;
+            $filters['all'][][$key] = $value;
         }
         $this->filters = $filters;
         return $this->filters;
