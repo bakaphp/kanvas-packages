@@ -60,7 +60,7 @@ class ElasticTask extends KanvasElasticTask
      *
      * @return void
      */
-    public function updateMessageAction(int $id) : void
+    public function updateMessageAction(int $id, ?string $model = null) : void
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
@@ -93,7 +93,7 @@ class ElasticTask extends KanvasElasticTask
      *
      * @return void
      */
-    public function deleteMessageAction(int $id) : void
+    public function deleteMessageAction(int $id, ?string $model = null) : void
     {
         //if the index doesn't exist create it
         $messages = new MessageDocument();
@@ -117,6 +117,7 @@ class ElasticTask extends KanvasElasticTask
             [$message]
         );
 
+        $messages->softDelete();
         $result = $messages->deleteFromElastic();
         Di::getDefault()->get('log')->info('Messages deleted to Messages Index', [$result]);
     }
