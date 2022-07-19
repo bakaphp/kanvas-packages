@@ -62,7 +62,10 @@ class Messages extends BaseModel implements MessagesInterface, MessageableEntity
             self::class,
             'parent_id',
             [
-                'alias' => 'relatedMessages'
+                'alias' => 'relatedMessages',
+                'params' => [
+                    'conditions' => 'is_deleted = 0',
+                ]
             ]
         );
 

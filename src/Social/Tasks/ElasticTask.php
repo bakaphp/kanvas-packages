@@ -54,4 +54,71 @@ class ElasticTask extends KanvasElasticTask
         Indices::delete('messages');
         echo("Done\n");
     }
+
+    /**
+     * Handle the index of the document.
+     *
+     * @return void
+     */
+    public function updateMessageAction(int $id, ?string $model = null) : void
+    {
+        //if the index doesn't exist create it
+        $messages = new MessageDocument();
+        $model = $model ?? MessagesModel::class;
+        $message = $model::findFirstOrFail([
+            'conditions' => 'apps_id = :apps_id: and is_deleted = 0 AND  id = :id:',
+            'bind' => [
+                'apps_id' => Di::getDefault()->get('app')->getId(),
+                'id' => $id,
+            ]
+        ]);
+
+        if (!is_object($message->users)) {
+            echo  'Fail not user';
+            return;
+        }
+
+        $this->di->set('userData', $message->users);
+        $messages->setData(
+            $message->getId(),
+            [$message]
+        );
+
+        $result = $messages->add();
+        Di::getDefault()->get('log')->info('Messages added to Messages Index', [$result]);
+    }
+
+    /**
+     * Handle the index of the document.
+     *
+     * @return void
+     */
+    public function deleteMessageAction(int $id, ?string $model = null) : void
+    {
+        //if the index doesn't exist create it
+        $messages = new MessageDocument();
+        $model = $model ?? MessagesModel::class;
+        $message = $model::findFirstOrFail([
+            'conditions' => 'apps_id = :apps_id: AND  id = :id:',
+            'bind' => [
+                'apps_id' => Di::getDefault()->get('app')->getId(),
+                'id' => $id,
+            ]
+        ]);
+
+        if (!is_object($message->users)) {
+            echo  'Fail not user';
+            return;
+        }
+
+        $this->di->set('userData', $message->users);
+        $messages->setData(
+            $message->getId(),
+            [$message]
+        );
+
+        $messages->softDelete();
+        $result = $messages->deleteFromElastic();
+        Di::getDefault()->get('log')->info('Messages deleted to Messages Index', [$result]);
+    }
 }
