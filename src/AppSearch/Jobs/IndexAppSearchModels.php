@@ -13,7 +13,7 @@ use Phalcon\Di;
 
 class IndexAppSearchModels extends Job implements QueueableJobInterface
 {
-    protected $entity;
+    protected SearchableModelsInterface $entity;
 
     /**
      * Constructor.
